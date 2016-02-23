@@ -1,0 +1,38 @@
+{
+    "name": "positibe/orm-content-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony PositibeOrmContentBundle",
+    "keywords": ["content","content management framework", "positibe", "positibelabs"],
+    "homepage": "http://positibelabs.blogspot.com/bundles/content",
+    "license": "Private",
+    "version": "0.3.0.0",
+    "authors": [
+        {
+            "name": "Pedro Carlos Abreu Jiménez",
+            "email": "pcabreus@gmail.com",
+            "homepage": "https://github.com/pcabreus"
+        },
+        {
+            "name": "PositibeLabs Cooperative",
+            "homepage": "https://github.com/positibelabs"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "~2.3",
+        "positibe/orm-block-bundle": "~0.0",
+        "positibe/orm-menu-bundle": "~0.0",
+        "positibe/orm-routing-bundle": "~0.0",
+        "positibe/orm-media-bundle": "~0.0",
+        "positibe/orm-seo-bundle": "~0.0",
+        "positibe/seo": "~0.1",
+        "gedmo/doctrine-extensions": "2.3.*"
+    },
+    "autoload": {
+        "psr-4": { "Positibe\\Bundle\\OrmContentBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.3.x-dev"
+        }
+    }
+}

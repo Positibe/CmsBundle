@@ -1,0 +1,7 @@
+{% extends '@PositibeOrmBlock/Block/block_base.html.twig' %}
+
+{% block block %}
+    {% set page = content %}
+    <h1>{{ page.title|raw }}</h1>
+    <p>{{ page.body|raw }}</p>
+{% endblock %}

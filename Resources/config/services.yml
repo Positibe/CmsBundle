@@ -1,0 +1,51 @@
+services:
+
+#### Forms Type ####
+    positibe_orm_content.abstract_page_form_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractPageType
+        arguments: [@positibe_orm_routing.route_builder, %locales%, %locale%]
+        tags:
+          - { name: form.type , alias: positibe_abstract_page }
+
+    positibe_orm_content.static_content_form_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentType
+        arguments: [@doctrine.orm.entity_manager, @positibe_orm_routing.route_builder, %locales%, %locale%]
+        tags:
+          - { name: form.type , alias: positibe_static_content }
+
+    positibe_orm_content.category_content_form_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\CategoryContentType
+        tags:
+          - { name: form.type , alias: positibe_category_content }
+
+    positibe_orm_block.form.static_content_media:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentBlockType
+        arguments: [%block_locations%]
+        tags:
+            - {name: form.type, alias: positibe_static_content_block }
+
+#### Block Services ####
+    positibe_orm_content.block_category:
+            class: Positibe\Bundle\OrmContentBundle\Block\CategoryBlockService
+            arguments: ['positibe_orm_content.block_category', @templating, @doctrine.orm.entity_manager]
+            tags:
+              - { name: sonata.block }
+
+    positibe_orm_content.block_static_content:
+        class: Positibe\Bundle\OrmContentBundle\Block\StaticContentBlockService
+        arguments: ['positibe_orm_content.block_static_content', @templating, @doctrine.orm.entity_manager]
+        tags:
+            - {name: sonata.block }
+
+    positibe_orm_content.block_featured_page:
+        class: Positibe\Bundle\OrmContentBundle\Block\FeaturedBlockService
+        arguments: ['positibe_orm_content.block_featured_page', @templating, @doctrine.orm.entity_manager]
+        tags:
+            - {name: sonata.block }
+
+#### Services and Utils ####
+    positibe_orm_content.page_builder:
+        class: Positibe\Bundle\OrmContentBundle\Builder\PageBuilder
+        arguments: [@positibe_orm_menu.menu_builder, @positibe_orm_routing.route_builder, @doctrine.orm.entity_manager, %locale%]
+
+

@@ -1,0 +1,11 @@
+{% extends '@PositibeOrmBlock/Block/block_base.html.twig' %}
+
+{% block block %}
+    <h3><a class="" href="{{ path(category) }}"> {{ category.title | trans | upper }}</a></h3>
+    {% for content in contents %}
+        {% set page = content %}
+        <a href="{{ path(page) }}" class="content-title">{{ page.title|raw }}</a>
+        <p class="content-body">{{ page.body | raw | striptags | truncate(150) }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}

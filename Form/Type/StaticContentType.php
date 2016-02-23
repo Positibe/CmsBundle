@@ -1,0 +1,230 @@
+<?php
+
+namespace Positibe\Bundle\OrmContentBundle\Form\Type;
+
+use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository;
+use Positibe\Bundle\OrmContentBundle\Model\ContentType;
+use Positibe\Bundle\OrmRoutingBundle\Builder\RouteBuilder;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+/**
+ * Class StaticContentType
+ * @package Positibe\Bundle\OrmContentBundle\Form\Type
+ *
+ * @author Pedro Carlos Abreu <pcabreus@gmail.com>
+ */
+class StaticContentType extends AbstractType
+{
+    private $locales;
+    private $defaultLocale;
+    private $routeBuilder;
+    /**
+     * @var EntityManager
+     */
+    private $em;
+    /** @var  StaticContentRepository */
+    private $repository;
+
+    public function __construct(EntityManager $entityManager, RouteBuilder $routeBuilder, $locales, $defaultLocale)
+    {
+        $this->locales = $locales;
+        $this->defaultLocale = $defaultLocale;
+        $this->routeBuilder = $routeBuilder;
+        $this->em = $entityManager;
+        $this->repository = $entityManager->getRepository('PositibeOrmContentBundle:CategoryContent');
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add(
+                'title',
+                null,
+                array(
+                    'label' => 'static_content.form.title_label',
+                    'required' => true
+                )
+            )
+            ->add(
+                'body',
+                null,
+                array(
+                    'label' => 'static_content.form.body_label',
+                    'attr' => array(
+                        'rows' => 12,
+                        'class' => 'inbox-editor inbox-wysihtml5'
+                    )
+                )
+            )
+            ->add(
+                'locale',
+                'choice',
+                array(
+                    'label' => 'static_content.form.locale_label',
+                    'choices' => array_combine($this->locales, $this->locales)
+                )
+            )
+            ->add(
+                'customController',
+                'choice',
+                array(
+                    'label' => 'static_content.form.custom_controller_label',
+                    'choices' => array_combine(
+                        array_keys($this->routeBuilder->getController()),
+                        array_keys($this->routeBuilder->getController())
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'publishable',
+                null,
+                array(
+                    'label' => 'static_content.form.publishable_label',
+                    'required' => false
+                )
+            )
+            ->add(
+                'publishStartDate',
+                'sonata_type_datetime_picker',
+                array(
+                    'dp_side_by_side' => true,
+                    'dp_use_seconds' => false,
+                    'required' => false,
+                    'label' => 'static_content.form.publish_start_label',
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_language' => 'es',
+                )
+            )
+            ->add(
+                'publishEndDate',
+                'sonata_type_datetime_picker',
+                array(
+                    'dp_side_by_side' => true,
+                    'dp_use_seconds' => false,
+                    'required' => false,
+                    'label' => 'static_content.form.publish_end_label',
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'dp_language' => 'es',
+                )
+            )
+            ->add(
+                'routes',
+                'positibe_route_permalink',
+                array(
+                    'label' => 'static_content.form.routes_label',
+                    'content_has_routes' => $options['data'],
+                    'current_locale' => $options['data']->getLocale()
+                )
+            )
+//            ->add(
+//                'menuNodes',
+//                'collection',
+//                array(
+//                    'type' => new MenuNodeType($this->locales),
+//                    'allow_add' => true,
+//                    'allow_delete' => true,
+//                    'options' => array(
+//                        'required' => false,
+//                        'attr' => array('class' => 'route')
+//                    ),
+//                    'required' => false,
+//                    'label' => 'static_content.form.menus_label',
+//                )
+//            )
+            ->add(
+                'seoMetadata',
+                new SeoMetadataType(),
+                array(
+                    'label' => 'static_content.form.seo_label',
+                )
+            )
+            ->add(
+                'image',
+                'sonata_media_type',
+                array(
+                    'provider' => 'sonata.media.provider.image',
+                    'context' => 'page',
+                    'attr' => array(
+                        'class' => 'fileupload-preview thumbnail',
+                        'style' => 'display:none'
+                    ),
+                    'required' => false
+                )
+            )
+            ->add(
+                'parent',
+                'entity',
+                array(
+                    'label' => 'static_content.form.parent_label',
+                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent',
+                    'choices' => $this->getCategoryTranslated($options)
+                )
+            )
+            ->add(
+                'featured',
+                null,
+                array(
+                    'label' => 'static_content.form.featured_label',
+                    'required' => false
+                )
+            )
+//            ->add(
+//                'contentType',
+//                'hidden',
+//                array(
+//                    'label' => 'static_content.form.content_type_label'
+//                )
+//            )
+        ;
+    }
+
+    /**
+     * @param $options
+     * @return mixed
+     */
+    private function getCategoryTranslated($options)
+    {
+        $locale = $options['data']->getLocale();
+        $categories = $this->repository->findByContentType(
+            ContentType::TYPE_CATEGORY,
+            $locale
+        );
+        if ($locale !== $this->defaultLocale) {
+            foreach ($categories as $category) {
+                $category->setLocale($locale);
+                $this->em->refresh($category);
+            }
+        }
+
+        return $categories;
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\StaticContent',
+                'translation_domain' => 'PositibeOrmContentBundle'
+            )
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'positibe_static_content';
+    }
+}

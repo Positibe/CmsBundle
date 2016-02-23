@@ -1,0 +1,23 @@
+cmf_core:
+    persistence:
+        orm: ~
+    multilang:
+        locales: %locales%
+
+positibe_orm_routing:
+    auto_routing:
+        Positibe\Bundle\OrmContentBundle\Entity\StaticContent:
+            uri_schema: /{category}/{title}
+            token_providers:
+                category: [content_method, { method: getCategoryName }]
+                title: [content_method, { method: getTitle }]
+        Positibe\Bundle\OrmContentBundle\Entity\CategoryContent:
+            uri_schema: /{title}
+            token_providers:
+                title: [content_method, { method: getTitle }]
+
+cmf_routing:
+    dynamic:
+        controllers_by_class:
+            Positibe\Bundle\OrmContentBundle\Entity\CategoryContent: PositibeOrmContentBundle:Default:categoryIndex
+#            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute:  cmf_routing.redirect_controller:redirectAction

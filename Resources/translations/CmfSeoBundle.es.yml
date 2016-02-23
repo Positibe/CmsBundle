@@ -1,0 +1,5 @@
+form:
+    label_title: Título:
+    label_originalUrl: Url original:
+    label_metaDescription: Meta descripción:
+    label_metaKeywords: Palabras claves:

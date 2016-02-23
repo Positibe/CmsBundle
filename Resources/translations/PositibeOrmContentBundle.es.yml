@@ -1,0 +1,41 @@
+es: Español
+en: Inglés
+fr: Frances
+static_content:
+    form:
+        name_label: Nombre:
+        title_label: Título:
+        body_label: Contenido:
+        routes_label: Rutas:
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+        seo_label: SEO
+        menus_label: Menus:
+        locale_label: Idioma:
+        parent_label: Categoría
+        content_type_label: Tipo de contenido:
+        content_type_category: Categoría
+        content_type_page: Página
+        custom_controller_label: Tipo de contenido:
+        featured_label: Destacado (Mostrar en la página principal)
+route:
+  form:
+      locale_label: Idioma:
+      controller_label: Controlador:
+      static_prefix_label: Link permanente:
+
+block:
+    form:
+        name_label: Nombre
+        block_location_label: Ubicación
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+
+static_content_block:
+    form:
+        static_content_label: Página:
+
+PositibeOrmContentBundle:Default:index: Página simple
+PositibeOrmContentBundle:Default:categoryIndex: Listado de páginas
