@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\OrmContentBundle\Entity\Traits;
 
 use Doctrine\ORM\Query;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
+use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
 
 
 /**
@@ -22,7 +22,7 @@ use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
  */
 trait AbstractPageRepositoryTrait
 {
-    public function findOneByMenuNodes(MenuNode $menuNode)
+    public function findOneByMenuNodes(MenuNodeInterface $menuNode)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('routes')
@@ -30,6 +30,20 @@ trait AbstractPageRepositoryTrait
             ->leftJoin('o.routes', 'routes')
             ->where('m = :menu')
             ->setParameter('menu', $menuNode);
+
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findOneByMenuNodesName($menuNodeName)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->addSelect('routes')
+            ->join('o.menuNodes', 'm')
+            ->leftJoin('o.routes', 'routes')
+            ->where('m.name = :menu')
+            ->setParameter('menu', $menuNodeName);
 
         $query = $qb->getQuery();
 
