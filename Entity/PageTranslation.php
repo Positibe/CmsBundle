@@ -15,16 +15,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Class StaticContentTranslation
+ * Class PageTranslation
  * @package Positibe\Bundle\OrmContentBundle\Entity
  *
- * @ORM\Table(name="positibe_static_content_translations", indexes={
- *      @ORM\Index(name="positibe_static_content_translation_idx", columns={"locale", "object_class", "field", "foreign_key"})
+ * @ORM\Table(name="positibe_page_translations", indexes={
+ *      @ORM\Index(name="positibe_page_translation_idx", columns={"locale", "object_class", "field", "foreign_key"})
  * })
  * @ORM\Entity(repositoryClass="Gedmo\Translatable\Entity\Repository\TranslationRepository")
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentTranslation extends AbstractTranslation {
+class PageTranslation extends AbstractTranslation {
 
 } 

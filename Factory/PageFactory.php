@@ -8,56 +8,52 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Builder;
+namespace Positibe\Bundle\OrmContentBundle\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
+use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContent;
-use Positibe\Bundle\OrmContentBundle\Model\ContentType;
-use Positibe\Bundle\OrmMenuBundle\Builder\MenuBuilder;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
-use Positibe\Bundle\OrmRoutingBundle\Builder\RouteBuilder;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
+use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 
 
 /**
- * Class PageBuilder
- * @package Positibe\Bundle\OrmContentBundle\Content
+ * Class PageFactory
+ * @package Positibe\Bundle\OrmContentBundle\Factory
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageBuilder
+class PageFactory
 {
     const DEFAULT_CONTROLLER = 'PositibeOrmContentBundle:Default:index';
-    private $menuBuilder;
-    private $routeBuilder;
+    private $menuFactory;
+    private $routeFactory;
     private $em;
     private $locale;
-    private $controllerConfiguration;
 
     /**
-     * @param MenuBuilder $menuBuilder
-     * @param RouteBuilder $routeBuilder
+     * @param MenuNodeFactory $menuFactory
+     * @param RouteFactory $routeFactory
      * @param EntityManager $entityManager
      * @param $locale
      */
     public function __construct(
-        MenuBuilder $menuBuilder,
-        RouteBuilder $routeBuilder,
+        MenuNodeFactory $menuFactory,
+        RouteFactory $routeFactory,
         EntityManager $entityManager,
         $locale
     ) {
-        $this->menuBuilder = $menuBuilder;
-        $this->routeBuilder = $routeBuilder;
+        $this->menuFactory = $menuFactory;
+        $this->routeFactory = $routeFactory;
         $this->em = $entityManager;
         $this->locale = $locale;
     }
 
     /**
-     * @param StaticContent $page
+     * @param Page $page
      */
     public function updateNodeMenus(Page $page)
     {
@@ -92,7 +88,7 @@ class PageBuilder
         }
 
         if ($auto && $needRoute) {
-            $route = $this->routeBuilder->createContentRoute(
+            $route = $this->routeFactory->createContentRoute(
                 $this->fixStaticPrefix(null, $page),
                 $page,
                 self::DEFAULT_CONTROLLER
@@ -146,7 +142,14 @@ class PageBuilder
 
     public function createPageCategory($title, $body, $path, $parentMenu, $locale = null)
     {
-        $page = $this->createPage($title, $body, $path, $parentMenu, $locale, 'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent');
+        $page = $this->createPage(
+            $title,
+            $body,
+            $path,
+            $parentMenu,
+            $locale,
+            'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent'
+        );
 
         return $page;
     }
@@ -154,7 +157,8 @@ class PageBuilder
     public function createPage($title, $body, $path, $parentMenu, $locale = null, $class = null)
     {
         //Creating the Page
-        $page = empty($class) ? new StaticContent() : new $class();
+        $page = empty($class) ? new Page() : new $class();
+        $page->setName(Urlizer::urlize($title));
         $page->setTitle($title);
         $page->setBody($body);
 
@@ -210,7 +214,7 @@ class PageBuilder
      */
     public function createRoute($path, Page $page)
     {
-        return $this->routeBuilder->createContentRoute($path, $page, self::DEFAULT_CONTROLLER);
+        return $this->routeFactory->createContentRoute($path, $page, self::DEFAULT_CONTROLLER);
     }
 
     /**
@@ -224,7 +228,8 @@ class PageBuilder
     public function createMenuNode(Page $page, MenuNode $parentMenu = null, $locale = null)
     {
         if ($parentMenu !== null) {
-            $menu = $this->menuBuilder->createContentMenuNode($page, $page->getTitle(), $parentMenu);
+            $menu = $this->menuFactory->createContentMenuNode($page, $page->getTitle(), $parentMenu);
+            $menu->setPage($page);
 
             if ($locale !== null) {
                 $menu->setLocale($locale);

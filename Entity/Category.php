@@ -15,21 +15,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 
 /**
- * @ORM\Table(name="positibe_static_content")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository")
- * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\StaticContentTranslation")
+ * @ORM\Table(name="positibe_page_category")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\PageRepository")
+ * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\PageTranslation")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
- * Class StaticContent
+ * Class Category
  * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContent extends Page
+class Category extends Page
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setContentType(ContentType::TYPE_PAGE);
+        $this->setContentType(ContentType::TYPE_CATEGORY);
     }
 } 

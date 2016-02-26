@@ -7,12 +7,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class CategoryContentType
+ * Class CategoryType
  * @package Positibe\Bundle\OrmContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class CategoryContentType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -34,7 +34,7 @@ class CategoryContentType extends AbstractType
 
     public function getParent()
     {
-        return 'positibe_static_content';
+        return 'positibe_page';
     }
 
     /**
@@ -55,6 +55,6 @@ class CategoryContentType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_category_content';
+        return 'positibe_page_category';
     }
 }

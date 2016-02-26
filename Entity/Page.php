@@ -11,24 +11,23 @@
 namespace Positibe\Bundle\OrmContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
-use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
+ * Class Page
+ * @package Positibe\Bundle\OrmContentBundle\Entity
+ *
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository")
- * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\StaticContentTranslation")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
+ * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\PageTranslation")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\EntityListeners({"Positibe\Bundle\OrmRoutingBundle\EventListener\AutoRoutingEntityListener"})
- *
- * Class Page
- * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -67,7 +66,7 @@ class Page extends AbstractPage implements CustomRouteInformation
     /**
      * @var Page[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="StaticContent", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="parent", cascade={"persist"})
      */
     protected $children;
 
@@ -75,15 +74,14 @@ class Page extends AbstractPage implements CustomRouteInformation
      * @var ArrayCollection|RouteObjectInterface[]
      *
      * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade="all")
-     * @ORM\JoinTable(name="positibe_static_content_routes")
+     * @ORM\JoinTable(name="positibe_page_routes")
      */
     protected $routes;
 
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmMenuBundle\Entity\MenuNode", orphanRemoval=TRUE, cascade="all")
-     * @ORM\JoinTable(name="positibe_static_content_menus")
+     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="page", cascade="all")
      */
     protected $menuNodes;
 
@@ -91,7 +89,6 @@ class Page extends AbstractPage implements CustomRouteInformation
     {
         parent::__construct();
         $this->children = new ArrayCollection();
-        $this->setContentType(ContentType::TYPE_PAGE);
     }
 
     /**

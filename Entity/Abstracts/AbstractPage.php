@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
@@ -23,7 +23,7 @@ use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
 use Positibe\Component\Seo\Entity\SeoAwareEntityTrait;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
+use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;

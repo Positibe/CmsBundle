@@ -8,22 +8,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Positibe\Bundle\OrmContentBundle\Entity\Traits\PageRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Entity\HasMenuRepositoryInterface;
 use Positibe\Bundle\OrmRoutingBundle\Entity\HasRoutesRepositoryInterface;
 
 /**
- * Class StaticContentRepository
+ * Class PageRepository
  * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentRepository extends EntityRepository implements HasRoutesRepositoryInterface, HasMenuRepositoryInterface
+class PageRepository extends EntityRepository implements HasRoutesRepositoryInterface, HasMenuRepositoryInterface
 {
-    use StaticContentRepositoryTrait;
+    use PageRepositoryTrait;
 
     public function findOneByRoutes($route)
     {

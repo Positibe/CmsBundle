@@ -10,7 +10,7 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
-use Positibe\Bundle\OrmRoutingBundle\Builder\RouteBuilder;
+use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -24,20 +24,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AbstractPageType extends AbstractType
 {
-
     private $locales;
     private $defaultLocale;
-    private $routeBuilder;
+    private $routeFactory;
 
     private $resourceName;
-    public function __construct(RouteBuilder $routeBuilder, $locales, $defaultLocale)
+
+    public function __construct(RouteFactory $routeFactory, $locales, $defaultLocale)
     {
+        $this->routeFactory = $routeFactory;
         $this->locales = $locales;
         $this->defaultLocale = $defaultLocale;
-        $this->routeBuilder = $routeBuilder;
-
-        $resource = explode('Type', get_class($this));
-        $this->resourceName = strtolower(preg_replace('/[A-Z]/', '_' . '\\0', lcfirst($resource[0])));
     }
 
     /**
@@ -143,6 +140,11 @@ class AbstractPageType extends AbstractType
 
     public function getResourceName()
     {
+        if (!$this->resourceName) {
+            $resource = explode('Type', get_class($this));
+            $this->resourceName = strtolower(preg_replace('/[A-Z]/', '_' . '\\0', lcfirst($resource[0])));
+        }
+
         return $this->resourceName;
     }
 

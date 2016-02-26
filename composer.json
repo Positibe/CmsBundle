@@ -25,7 +25,8 @@
         "positibe/orm-media-bundle": "~0.0",
         "positibe/orm-seo-bundle": "~0.0",
         "positibe/seo": "~0.1",
-        "gedmo/doctrine-extensions": "2.3.*"
+        "gedmo/doctrine-extensions": "2.3.*",
+        "pagerfanta/pagerfanta": "1.0.*"
     },
     "autoload": {
         "psr-4": { "Positibe\\Bundle\\OrmContentBundle\\": "" }

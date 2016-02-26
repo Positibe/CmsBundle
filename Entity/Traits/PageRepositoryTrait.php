@@ -8,22 +8,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\OrmContentBundle\Entity\Traits;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Gedmo\Translatable\TranslatableListener;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNode;
+use Positibe\Bundle\OrmContentBundle\Entity\Page;
 
 /**
- * Class StaticContentRepositoryTrait
+ * Class PageRepositoryTrait
  * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-trait StaticContentRepositoryTrait
+trait PageRepositoryTrait
 {
     use AbstractPageRepositoryTrait;
 
@@ -126,6 +126,11 @@ trait StaticContentRepositoryTrait
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param $contentType
+     * @param $locale
+     * @return Page[]|ArrayCollection
+     */
     public function findByContentType($contentType, $locale)
     {
         $qb = $this->createQueryBuilder('o')

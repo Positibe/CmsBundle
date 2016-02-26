@@ -24,5 +24,7 @@ class PositibeOrmContentExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\OrmContentBundle\Entity\MenuNode');
     }
 }

@@ -8,33 +8,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
 use Positibe\Bundle\OrmBlockBundle\Entity\Block;
+use Positibe\Bundle\OrmContentBundle\Entity\Page;
 
 /**
- * @ORM\Table("positibe_block_static_content")
+ * @ORM\Table("positibe_block_page")
  * @ORM\Entity
  *
- * Class StaticContentBlock
+ * Class PageBlock
  * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentBlock extends Block {
-
+class PageBlock extends Block
+{
     /**
-     * @var StaticContent
+     * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\StaticContent")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page")
      */
-    private $staticContent;
+    private $page;
 
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_content.block_static_content';
+        $this->type = 'positibe_orm_content.block_page';
     }
 
     public function getType()
@@ -45,17 +46,17 @@ class StaticContentBlock extends Block {
     /**
      * @return mixed
      */
-    public function getStaticContent()
+    public function getPage()
     {
-        return $this->staticContent;
+        return $this->page;
     }
 
     /**
-     * @param mixed $staticContent
+     * @param mixed $page
      */
-    public function setStaticContent($staticContent)
+    public function setPage($page)
     {
-        $this->staticContent = $staticContent;
+        $this->page = $page;
     }
 
 

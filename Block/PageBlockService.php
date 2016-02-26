@@ -12,8 +12,8 @@ namespace Positibe\Bundle\OrmContentBundle\Block;
 
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContentBlock;
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository;
+use Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock;
+use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -21,12 +21,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class StaticContentBlockService
+ * Class PageBlockService
  * @package Positibe\Bundle\OrmContentBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentBlockService extends BaseBlockService
+class PageBlockService extends BaseBlockService
 {
     protected $template = 'PositibeOrmContentBundle:Block:block_static_content.html.twig';
     protected $em;
@@ -54,15 +54,15 @@ class StaticContentBlockService extends BaseBlockService
         if (!$response) {
             $response = new Response();
         }
-        /** @var StaticContentBlock $block */
+        /** @var PageBlock $block */
         $block = $blockContext->getBlock();
 
-        $this->getContentRepository($block)->findOneContent($block->getStaticContent());
+        $this->getContentRepository($block)->findOneContent($block->getPage());
 
         if ($blockContext->getBlock()->getEnabled()) {
             $response = $this->renderResponse(
                 $blockContext->getTemplate(),
-                array('block' => $block, 'content' => $block->getStaticContent()),
+                array('block' => $block, 'content' => $block->getPage()),
                 $response
             );
         }
@@ -93,12 +93,12 @@ class StaticContentBlockService extends BaseBlockService
     }
 
     /**
-     * @param StaticContentBlock $staticContentBlock
-     * @return \Doctrine\ORM\EntityRepository|StaticContentRepository
+     * @param PageBlock $staticContentBlock
+     * @return \Doctrine\ORM\EntityRepository|PageRepository
      */
-    public function getContentRepository(StaticContentBlock $staticContentBlock)
+    public function getContentRepository(PageBlock $staticContentBlock)
     {
-        return $this->em->getRepository(get_class($staticContentBlock->getStaticContent()));
+        return $this->em->getRepository(get_class($staticContentBlock->getPage()));
     }
 
     public function getCacheKeys(BlockInterface $block)

@@ -3,20 +3,20 @@
 namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository;
+use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
-use Positibe\Bundle\OrmRoutingBundle\Builder\RouteBuilder;
+use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class StaticContentType
+ * Class PageType
  * @package Positibe\Bundle\OrmContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentType extends AbstractType
+class PageType extends AbstractType
 {
     private $locales;
     private $defaultLocale;
@@ -25,16 +25,13 @@ class StaticContentType extends AbstractType
      * @var EntityManager
      */
     private $em;
-    /** @var  StaticContentRepository */
-    private $repository;
 
-    public function __construct(EntityManager $entityManager, RouteBuilder $routeBuilder, $locales, $defaultLocale)
+    public function __construct(EntityManager $entityManager, RouteFactory $routeBuilder, $locales, $defaultLocale)
     {
         $this->locales = $locales;
         $this->defaultLocale = $defaultLocale;
         $this->routeBuilder = $routeBuilder;
         $this->em = $entityManager;
-        $this->repository = $entityManager->getRepository('PositibeOrmContentBundle:CategoryContent');
     }
 
     /**
@@ -193,7 +190,7 @@ class StaticContentType extends AbstractType
     private function getCategoryTranslated($options)
     {
         $locale = $options['data']->getLocale();
-        $categories = $this->repository->findByContentType(
+        $categories = $this->getCategoryRepository()->findByContentType(
             ContentType::TYPE_CATEGORY,
             $locale
         );
@@ -205,6 +202,14 @@ class StaticContentType extends AbstractType
         }
 
         return $categories;
+    }
+
+    /**
+     * @return PageRepository
+     */
+    private function getCategoryRepository()
+    {
+        return $this->em->getRepository('PositibeOrmContentBundle:Category');
     }
 
     /**
@@ -225,6 +230,6 @@ class StaticContentType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_static_content';
+        return 'positibe_page';
     }
 }
