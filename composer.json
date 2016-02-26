@@ -19,11 +19,11 @@
     ],
     "require": {
         "symfony/framework-bundle": "~2.3",
-        "positibe/orm-block-bundle": "~0.0",
-        "positibe/orm-menu-bundle": "~0.0",
-        "positibe/orm-routing-bundle": "~0.0",
-        "positibe/orm-media-bundle": "~0.0",
-        "positibe/orm-seo-bundle": "~0.0",
+        "positibe/orm-block-bundle": "~0.3",
+        "positibe/orm-menu-bundle": "~0.3",
+        "positibe/orm-routing-bundle": "~0.3",
+        "positibe/orm-media-bundle": "~0.3",
+        "positibe/orm-seo-bundle": "~0.3",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "2.3.*",
         "pagerfanta/pagerfanta": "1.0.*"
