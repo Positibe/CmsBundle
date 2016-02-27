@@ -1,5 +1,0 @@
-Positibe\Bundle\StaticContentBundle\Entity\StaticContent:
-    uri_schema: /{title}
-    token_providers:
-#        category: [content_method, { method: getCategoryTitle, slugify: true }]
-        title: [content_method, { method: getTitle }] # slugify is true by default

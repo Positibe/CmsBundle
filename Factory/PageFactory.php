@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
+use Positibe\Bundle\OrmMediaBundle\Entity\Media;
 use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
@@ -140,7 +141,7 @@ class PageFactory
         return '/' . Urlizer::urlize($part) . $path;
     }
 
-    public function createPageCategory($title, $body, $path, $parentMenu, $locale = null)
+    public function createPageCategory($title, $body, $path, $parentMenu, $locale = null, $imagePath = null)
     {
         $page = $this->createPage(
             $title,
@@ -148,13 +149,14 @@ class PageFactory
             $path,
             $parentMenu,
             $locale,
-            'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent'
+            'Positibe\Bundle\OrmContentBundle\Entity\Category',
+            $imagePath
         );
 
         return $page;
     }
 
-    public function createPage($title, $body, $path, $parentMenu, $locale = null, $class = null)
+    public function createPage($title, $body, $path, $parentMenu, $locale = null, $class = null, $imagePath = null)
     {
         //Creating the Page
         $page = empty($class) ? new Page() : new $class();
@@ -176,6 +178,15 @@ class PageFactory
 
         if ($menu) {
             $page->addMenuNode($menu);
+        }
+
+        if ($imagePath) {
+            $media = new Media();
+            $media->setBinaryContent($imagePath);
+            $media->setName($page->getName()); // video related to the user
+            $media->setContext('page'); // video related to the user
+            $media->setProviderName('sonata.media.provider.image');
+            $page->setImage($media);
         }
 
         return $page;

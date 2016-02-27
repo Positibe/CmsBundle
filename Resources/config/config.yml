@@ -6,12 +6,12 @@ cmf_core:
 
 positibe_orm_routing:
     auto_routing:
-        Positibe\Bundle\OrmContentBundle\Entity\StaticContent:
+        Positibe\Bundle\OrmContentBundle\Entity\Page:
             uri_schema: /{category}/{title}
             token_providers:
                 category: [content_method, { method: getCategoryName }]
                 title: [content_method, { method: getTitle }]
-        Positibe\Bundle\OrmContentBundle\Entity\CategoryContent:
+        Positibe\Bundle\OrmContentBundle\Entity\Category:
             uri_schema: /{title}
             token_providers:
                 title: [content_method, { method: getTitle }]

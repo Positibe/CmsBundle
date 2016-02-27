@@ -93,12 +93,12 @@ class PageBlockService extends BaseBlockService
     }
 
     /**
-     * @param PageBlock $staticContentBlock
+     * @param PageBlock $pageBlock
      * @return \Doctrine\ORM\EntityRepository|PageRepository
      */
-    public function getContentRepository(PageBlock $staticContentBlock)
+    public function getContentRepository(PageBlock $pageBlock)
     {
-        return $this->em->getRepository(get_class($staticContentBlock->getPage()));
+        return $this->em->getRepository(get_class($pageBlock->getPage()));
     }
 
     public function getCacheKeys(BlockInterface $block)

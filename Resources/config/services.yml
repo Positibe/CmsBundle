@@ -51,7 +51,7 @@ services:
               - { name: sonata.block }
 
     positibe_orm_content.block_static_content:
-        class: Positibe\Bundle\OrmContentBundle\Block\StaticContentBlockService
+        class: Positibe\Bundle\OrmContentBundle\Block\PageBlockService
         arguments: ['positibe_orm_content.block_static_content', @templating, @doctrine.orm.entity_manager]
         tags:
             - {name: sonata.block }

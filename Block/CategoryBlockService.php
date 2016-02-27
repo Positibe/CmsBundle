@@ -11,7 +11,6 @@
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContentRepository;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
