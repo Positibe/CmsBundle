@@ -149,14 +149,14 @@ class PageFactory
             $path,
             $parentMenu,
             $locale,
-            'Positibe\Bundle\OrmContentBundle\Entity\Category',
-            $imagePath
+            $imagePath,
+            'Positibe\Bundle\OrmContentBundle\Entity\Category'
         );
 
         return $page;
     }
 
-    public function createPage($title, $body, $path, $parentMenu, $locale = null, $class = null, $imagePath = null)
+    public function createPage($title, $body, $path, $parentMenu, $locale = null, $imagePath = null, $class = null)
     {
         //Creating the Page
         $page = empty($class) ? new Page() : new $class();
