@@ -161,7 +161,7 @@ class PageType extends AbstractType
                 'entity',
                 array(
                     'label' => 'static_content.form.parent_label',
-                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent',
+                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Category',
                     'choices' => $this->getCategoryTranslated($options)
                 )
             )
@@ -219,7 +219,7 @@ class PageType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\StaticContent',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
                 'translation_domain' => 'PositibeOrmContentBundle'
             )
         );

@@ -136,9 +136,8 @@ trait PageRepositoryTrait
         $qb = $this->createQueryBuilder('o')
             ->where('o.contentType = :contentType')
             ->setParameter('contentType', $contentType);
-        $query = $qb->getQuery();
 
-        return $query->getResult();
+        return $this->getQuery($qb)->getResult();
     }
 
     public function findContentByParent($parent, $count = 2, $sort = 'publishStartDate', $order = 'DESC')
@@ -151,14 +150,8 @@ trait PageRepositoryTrait
             ->setParameter('parent', $parent)
             ->setMaxResults($count)
             ->orderBy(sprintf('o.%s', $sort), $order);
-        $query = $qb->getQuery();
 
-        $query->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
-
-        return $query->getResult();
+        return $this->getQuery($qb)->getResult();
     }
 
     public function findOneContent($content)
@@ -170,14 +163,7 @@ trait PageRepositoryTrait
             ->leftJoin('o.routes', 'routes')
             ->setParameter('content', $content);
 
-        $query = $qb->getQuery();
-
-        $query->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
-
-        return $query->getOneOrNullResult();
+        return $this->getQuery($qb)->getOneOrNullResult();
     }
 
     public function findOneByName($name)
@@ -189,14 +175,7 @@ trait PageRepositoryTrait
             ->leftJoin('o.routes', 'routes')
             ->setParameter('name', $name);
 
-        $query = $qb->getQuery();
-
-        $query->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
-
-        return $query->getOneOrNullResult();
+        return $this->getQuery($qb)->getOneOrNullResult();
 
     }
 

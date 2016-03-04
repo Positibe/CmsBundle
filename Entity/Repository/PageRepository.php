@@ -39,10 +39,7 @@ class PageRepository extends EntityRepository implements HasRoutesRepositoryInte
             ->where('r = :route')
             ->setParameter('route', $route);
 
-        $query = $qb->getQuery()->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
+        $query = $this->getQuery($qb);
 
         return $query->getOneOrNullResult();
     }

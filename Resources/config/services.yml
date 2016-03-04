@@ -19,7 +19,7 @@ services:
     positibe_orm_content.category_form_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\CategoryType
         tags:
-          - { name: form.type , alias: positibe_page_category }
+          - { name: form.type , alias: positibe_category }
 
     positibe_orm_block.form.static_content_media:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentBlockType

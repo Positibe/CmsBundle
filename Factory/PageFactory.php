@@ -80,7 +80,7 @@ class PageFactory
             $route->setStaticPrefix($this->fixStaticPrefix($route->getStaticPrefix(), $page));
             if (!$route->getId()) {
                 $route->setContent($page);
-                $route->setDefault('_controller', self::DEFAULT_CONTROLLER);
+//                $route->setDefault('_controller', self::DEFAULT_CONTROLLER);
             }
 
             if ($auto && $needRoute && $route->getLocale() === $currentLocale) {
@@ -92,7 +92,7 @@ class PageFactory
             $route = $this->routeFactory->createContentRoute(
                 $this->fixStaticPrefix(null, $page),
                 $page,
-                self::DEFAULT_CONTROLLER
+                null
             );
             $route->setLocale($currentLocale);
             $page->addRoute($route);
@@ -225,7 +225,7 @@ class PageFactory
      */
     public function createRoute($path, Page $page)
     {
-        return $this->routeFactory->createContentRoute($path, $page, self::DEFAULT_CONTROLLER);
+        return $this->routeFactory->createContentRoute($path, $page, null);
     }
 
     /**

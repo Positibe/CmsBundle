@@ -19,5 +19,7 @@ positibe_orm_routing:
 cmf_routing:
     dynamic:
         controllers_by_class:
-            Positibe\Bundle\OrmContentBundle\Entity\CategoryContent: PositibeOrmContentBundle:Default:categoryIndex
+            # the order here matter
+            Positibe\Bundle\OrmContentBundle\Entity\Category: PositibeOrmContentBundle:Default:categoryIndex
+            Positibe\Bundle\OrmContentBundle\Entity\Page: PositibeOrmContentBundle:Default:index
 #            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute:  cmf_routing.redirect_controller:redirectAction

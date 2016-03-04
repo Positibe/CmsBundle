@@ -11,6 +11,7 @@
 namespace Positibe\Bundle\OrmContentBundle\Entity\Traits;
 
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
 
 
@@ -22,6 +23,11 @@ use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
  */
 trait AbstractPageRepositoryTrait
 {
+    public function getQuery(QueryBuilder $qb)
+    {
+        return $qb->getQuery();
+    }
+
     public function findOneByMenuNodes(MenuNodeInterface $menuNode)
     {
         $qb = $this->createQueryBuilder('o')
@@ -31,7 +37,7 @@ trait AbstractPageRepositoryTrait
             ->where('m = :menu')
             ->setParameter('menu', $menuNode);
 
-        $query = $qb->getQuery();
+        $query = $this->getQuery($qb);
 
         return $query->getOneOrNullResult();
     }
@@ -45,7 +51,7 @@ trait AbstractPageRepositoryTrait
             ->where('m.name = :menu')
             ->setParameter('menu', $menuNodeName);
 
-        $query = $qb->getQuery();
+        $query = $this->getQuery($qb);
 
         return $query->getOneOrNullResult();
     }
@@ -65,10 +71,7 @@ trait AbstractPageRepositoryTrait
             ->where('r = :route')
             ->setParameter('route', $route);
 
-        $query = $qb->getQuery()->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
+        $query = $this->getQuery($qb);
 
         return $query->getOneOrNullResult();
     }
@@ -84,10 +87,7 @@ trait AbstractPageRepositoryTrait
             ->orderBy('o.publishStartDate', 'DESC')
             ->setParameter('featured', true);
 
-        $query = $qb->getQuery()->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
+        $query = $this->getQuery($qb);
 
         return $query->getResult();
     }

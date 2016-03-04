@@ -12,6 +12,7 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryInterface;
+use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
 
 
@@ -21,7 +22,10 @@ use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryInterface {
+class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryInterface
+{
+    use MenuNodeRepositoryTrait;
+
     /**
      * @param $name
      * @param int $level
@@ -47,13 +51,6 @@ class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryI
             $level--;
         }
 
-        $query = $qb->getQuery();
-
-//        $query->setHint(
-//            Query::HINT_CUSTOM_OUTPUT_WALKER,
-//            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-//        );
-
-        return $query->getOneOrNullResult();
+        return $this->getQuery($qb)->getOneOrNullResult();
     }
 } 

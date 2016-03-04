@@ -44,7 +44,7 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\CategoryContent',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Category',
                 'translation_domain' => 'PositibeOrmContentBundle'
             )
         );
@@ -55,6 +55,6 @@ class CategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_page_category';
+        return 'positibe_category';
     }
 }
