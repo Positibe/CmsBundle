@@ -15,6 +15,7 @@ use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
+use Positibe\Bundle\OrmMediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
@@ -184,8 +185,7 @@ class PageFactory
             $media = new Media();
             $media->setBinaryContent($imagePath);
             $media->setName($page->getName()); // video related to the user
-            $media->setContext('page'); // video related to the user
-            $media->setProviderName('sonata.media.provider.image');
+            $media->setProviderName(ImageProvider::getName());
             $page->setImage($media);
         }
 
