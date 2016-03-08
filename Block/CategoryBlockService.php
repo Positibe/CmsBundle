@@ -11,6 +11,7 @@
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
 use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -98,19 +99,19 @@ class CategoryBlockService extends BaseBlockService
     }
 
     /**
-     * @return StaticContentRepository
+     * @return PageRepository
      */
     public function getContentRepository()
     {
-        return $this->em->getRepository('PositibeOrmContentBundle:StaticContent');
+        return $this->em->getRepository('PositibeOrmContentBundle:Page');
     }
 
     /**
-     * @return StaticContentRepository
+     * @return PageRepository
      */
     public function getCategoryRepository()
     {
-        return $this->em->getRepository('PositibeOrmContentBundle:CategoryContent');
+        return $this->em->getRepository('PositibeOrmContentBundle:Category');
     }
 
     public function getCacheKeys(BlockInterface $block)
