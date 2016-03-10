@@ -51,9 +51,10 @@ class PageType extends AbstractType
             )
             ->add(
                 'body',
-                null,
+                'ckeditor',
                 array(
                     'label' => 'static_content.form.body_label',
+                    'config_name' => 'positibe_cmf',
                     'attr' => array(
                         'rows' => 12,
                         'class' => 'inbox-editor inbox-wysihtml5'
@@ -97,7 +98,7 @@ class PageType extends AbstractType
                     'required' => false,
                     'label' => 'static_content.form.publish_start_label',
                     'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => 'es',
+                    'dp_language' => $this->defaultLocale,
                 )
             )
             ->add(
@@ -109,7 +110,7 @@ class PageType extends AbstractType
                     'required' => false,
                     'label' => 'static_content.form.publish_end_label',
                     'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => 'es',
+                    'dp_language' => $this->defaultLocale,
                 )
             )
             ->add(
@@ -148,10 +149,6 @@ class PageType extends AbstractType
                 'positibe_media_type',
                 array(
                     'provider' => 'positibe_orm_media.image_provider',
-                    'attr' => array(
-                        'class' => 'fileupload-preview thumbnail',
-                        'style' => 'display:none'
-                    ),
                     'required' => false
                 )
             )
