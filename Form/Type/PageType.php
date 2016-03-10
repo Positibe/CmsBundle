@@ -145,10 +145,9 @@ class PageType extends AbstractType
             )
             ->add(
                 'image',
-                'sonata_media_type',
+                'positibe_media_type',
                 array(
-                    'provider' => 'sonata.media.provider.image',
-                    'context' => 'page',
+                    'provider' => 'positibe_orm_media.image_provider',
                     'attr' => array(
                         'class' => 'fileupload-preview thumbnail',
                         'style' => 'display:none'
