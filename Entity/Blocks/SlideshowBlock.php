@@ -11,9 +11,9 @@
 namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Positibe\Bundle\OrmBlockBundle\Entity\Block;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 
 
 /**
@@ -25,7 +25,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class SlideshowBlock extends Block
+class SlideshowBlock extends AbstractVisibilityBlock
 {
     /**
      * @var integer
@@ -48,6 +48,7 @@ class SlideshowBlock extends Block
     {
         parent::__construct();
         $this->type = 'positibe_orm_media.block_slideshow';
+        $this->contentBlocks = new ArrayCollection();
     }
 
     /**

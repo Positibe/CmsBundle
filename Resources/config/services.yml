@@ -33,19 +33,19 @@ services:
 #        tags:
 #            - {name: form.type, alias: positibe_media_block }
 
-    positibe_orm_media.form.content_block_type:
+    positibe_orm_content.form.content_block_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\ContentBlockType
         arguments: [%locales%]
         tags:
             - {name: form.type, alias: positibe_content_block }
 
-    positibe_orm_media.form.visibility_block_type:
+    positibe_orm_content.form.visibility_block_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractVisibilityBlockType
         tags:
             - {name: form.type, alias: positibe_block_visibility }
 
-    positibe_orm_media.form.slideshow_media_type:
-        class: Positibe\Bundle\OrmMediaBundle\Form\Type\SlideshowBlockType
+    positibe_orm_content.form.slideshow_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\SlideshowBlockType
         tags:
             - {name: form.type, alias: positibe_slideshow_block }
 
@@ -56,9 +56,9 @@ services:
             tags:
               - { name: sonata.block }
 
-    positibe_orm_content.block_static_content:
+    positibe_orm_content.block_page:
         class: Positibe\Bundle\OrmContentBundle\Block\PageBlockService
-        arguments: ['positibe_orm_content.block_static_content', @templating, @doctrine.orm.entity_manager]
+        arguments: ['positibe_orm_content.block_static_content', @templating, @request_stack, @doctrine.orm.entity_manager]
         tags:
             - {name: sonata.block }
 

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmMediaBundle\Form\Type;
+namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
 use Positibe\Bundle\OrmMediaBundle\Entity\MediaBlock;
 use Symfony\Component\Form\AbstractType;
@@ -33,8 +33,9 @@ class SlideshowBlockType extends AbstractType
         $builder
             ->add(
                 'contentBlocks',
-                null,
+                'entity',
                 array(
+                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\ContentBlock',
                     'required' => false,
                     'label' => 'slideshow_block.form.image_blocks_label',
                     'translation_domain' => 'PositibeOrmMediaBundle',
@@ -51,7 +52,7 @@ class SlideshowBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmMediaBundle\Entity\Blocks\SlideshowBlock',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\SlideshowBlock',
             )
         );
     }
