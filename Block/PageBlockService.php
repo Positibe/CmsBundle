@@ -12,13 +12,12 @@ namespace Positibe\Bundle\OrmContentBundle\Block;
 
 
 use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 use Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock;
 use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
-use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class PageBlockService
@@ -26,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageBlockService extends BaseBlockService
+class PageBlockService extends AbstractBlockService
 {
     protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
     protected $em;
@@ -34,15 +33,12 @@ class PageBlockService extends BaseBlockService
     /**
      * @param string $name
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
+     * @param RequestStack $requestStack
      * @param EntityManager $entityManager
-     * @param null $template
      */
-    public function __construct($name, $templating, EntityManager $entityManager, $template = null)
+    public function __construct($name, $templating, RequestStack $requestStack, EntityManager $entityManager)
     {
-        if ($template) {
-            $this->template = $template;
-        }
-        parent::__construct($name, $templating);
+        parent::__construct($name, $templating, $requestStack);
         $this->em = $entityManager;
     }
 
@@ -73,36 +69,11 @@ class PageBlockService extends BaseBlockService
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'template' => $this->template
-            )
-        );
-    }
-
-    /**
-     * @param string $template
-     */
-    public function setTemplate($template)
-    {
-        $this->template = $template;
-    }
-
-    /**
      * @param PageBlock $pageBlock
      * @return \Doctrine\ORM\EntityRepository|PageRepository
      */
     public function getContentRepository(PageBlock $pageBlock)
     {
         return $this->em->getRepository(get_class($pageBlock->getPage()));
-    }
-
-    public function getCacheKeys(BlockInterface $block)
-    {
-        return array('block_id' => $block->getName());
     }
 } 
