@@ -68,6 +68,12 @@ services:
         tags:
             - {name: sonata.block }
 
+    positibe_orm_content.block_content:
+        class: Positibe\Bundle\OrmContentBundle\Block\ContentBlockService
+        arguments: ['positibe_orm_content.block_content', @templating, @request_stack]
+        tags:
+            - { name: sonata.block }
+
 #### Services and Utils ####
     positibe_orm_content.page_factory:
         class: Positibe\Bundle\OrmContentBundle\Factory\PageFactory

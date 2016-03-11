@@ -23,39 +23,95 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AbstractVisibilityBlockType extends AbstractType
 {
+    protected $publicRoutes;
+    protected $roles;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add(
+                'always',
+                null,
+                array(
+                    'label' => 'visibility_block.form.always_label'
+                )
+            )
             ->add(
                 'categories',
                 null,
                 array(
                     'label' => 'visibility_block.form.categories_label',
-                    'multiple' => true
+                    'multiple' => true,
+                    'expanded' => true
                 )
             )
             ->add(
                 'pages',
-                null,
+                'genemu_jquerychosen_entity',
                 array(
+                    'required' => false,
                     'label' => 'visibility_block.form.pages_label',
-                    'multiple' => true
+                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
+                    'multiple' => true,
+                    'attr' => array('class' => 'chosen-select form-control'),
+                    'placeholder' => 'visibility_block.form.pages_label',
+                    'empty_value' => 'visibility_block.form.pages_label'
                 )
             )
             ->add(
                 'routes',
-                null,
+                'choice',
                 array(
-                    'label' => 'visibility_block.form.routes_label'
+                    'label' => 'visibility_block.form.routes_label',
+                    'choices' => array_combine($this->publicRoutes, $this->publicRoutes),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false
                 )
             )
             ->add(
                 'roles',
-                null,
+                'choice',
                 array(
-                    'label' => 'visibility_block.form.roles_label'
+                    'label' => 'visibility_block.form.roles_label',
+                    'choices' => array_combine($this->roles, $this->roles),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
                 )
             );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublicRoutes()
+    {
+        return $this->publicRoutes;
+    }
+
+    /**
+     * @param mixed $publicRoutes
+     */
+    public function setPublicRoutes($publicRoutes)
+    {
+        $this->publicRoutes = $publicRoutes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function getParent()

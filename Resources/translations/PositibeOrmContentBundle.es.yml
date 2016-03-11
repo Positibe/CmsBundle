@@ -45,9 +45,12 @@ content_block:
         locale_label: Idioma:
 visibility_block:
     form:
+        always_label: Siempre visible
         categories_label: Categoría:
         pages_label: Páginas:
         routes_label: Rutas:
         roles_label: Roles:
 PositibeOrmContentBundle:Default:index: Página simple
 PositibeOrmContentBundle:Default:categoryIndex: Listado de páginas
+ROLE_USER: Autenticado
+IS_AUTHENTICATED_ANONYMOUSLY: Anónimo

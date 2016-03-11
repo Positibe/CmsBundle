@@ -21,7 +21,7 @@ use Positibe\Bundle\OrmMediaBundle\Entity\Media;
  * @ORM\Entity
  *
  * Class ContentBlock
- * @package Positibe\Bundle\OrmMediaBundle\Entity
+ * @package Positibe\Bundle\OrmContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -74,7 +74,7 @@ class ContentBlock extends AbstractVisibilityBlock
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_media.block_content';
+        $this->type = 'positibe_orm_content.block_content';
     }
 
     public function __toString()
@@ -92,7 +92,7 @@ class ContentBlock extends AbstractVisibilityBlock
      */
     public function getType()
     {
-        return 'positibe_orm_media.block_image';
+        return $this->type;
     }
 
     /**

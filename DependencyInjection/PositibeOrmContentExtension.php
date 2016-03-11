@@ -26,5 +26,9 @@ class PositibeOrmContentExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\OrmContentBundle\Entity\MenuNode');
+
+        $container->getDefinition('positibe_orm_media.form.visibility_block_type')
+            ->addMethodCall('setRoles', array($config['roles']))
+            ->addMethodCall('setPublicRoutes', array($config['public_routes']));
     }
 }
