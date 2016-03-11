@@ -38,7 +38,6 @@ class SlideshowBlockType extends AbstractType
                     'required' => false,
                     'label' => 'slideshow_block.form.image_blocks_label',
                     'translation_domain' => 'PositibeOrmMediaBundle',
-//                    'property' => 'title',
                     'multiple' => true,
                     'expanded' => true
                 )
@@ -52,14 +51,14 @@ class SlideshowBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmMediaBundle\Entity\SlideshowBlock',
+                'data_class' => 'Positibe\Bundle\OrmMediaBundle\Entity\Blocks\SlideshowBlock',
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_abstract_block';
+        return 'positibe_block_visibility';
     }
 
     /**

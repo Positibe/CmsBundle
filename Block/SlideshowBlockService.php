@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmMediaBundle\Block;
+namespace Positibe\Bundle\OrmContentBundle\Block;
 
 use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 

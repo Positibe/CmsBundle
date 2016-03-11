@@ -28,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PageBlockService extends BaseBlockService
 {
-    protected $template = 'PositibeOrmContentBundle:Block:block_static_content.html.twig';
+    protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
     protected $em;
 
     /**

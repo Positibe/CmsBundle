@@ -50,16 +50,6 @@ class SlideshowBlock extends Block
         $this->type = 'positibe_orm_media.block_slideshow';
     }
 
-    public function getType()
-    {
-        return 'positibe_orm_media.block_slideshow';
-    }
-
-    public function getMedias()
-    {
-        return $this->contentBlocks;
-    }
-
     /**
      * @return ArrayCollection|ContentBlock[]
      */

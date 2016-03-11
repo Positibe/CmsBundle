@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\OrmBlockBundle\Entity\Block;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
 
 /**
@@ -23,7 +23,7 @@ use Positibe\Bundle\OrmContentBundle\Entity\Page;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageBlock extends Block
+class PageBlock extends AbstractVisibilityBlock
 {
     /**
      * @var Page
@@ -36,11 +36,6 @@ class PageBlock extends Block
     {
         parent::__construct();
         $this->type = 'positibe_orm_content.block_page';
-    }
-
-    public function getType()
-    {
-        return 'positibe_orm_content.block_static_content';
     }
 
     /**
@@ -58,6 +53,4 @@ class PageBlock extends Block
     {
         $this->page = $page;
     }
-
-
 } 

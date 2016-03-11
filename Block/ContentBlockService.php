@@ -11,11 +11,6 @@
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
 use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
-use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 
 /**
  * Class ContentBlockService
@@ -26,37 +21,4 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ContentBlockService extends AbstractBlockService
 {
     protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
-    protected $requestStack;
-
-    public function __construct($name, $templating, RequestStack $requestStack)
-    {
-        parent::__construct($name, $templating);
-        $this->requestStack = $requestStack;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'template' => $this->template,
-                'request' => $this->requestStack->getMasterRequest()
-            )
-        );
-    }
-
-    /**
-     * @param BlockInterface|AbstractVisibilityBlock $block
-     * @return array
-     */
-    public function getCacheKeys(BlockInterface $block)
-    {
-        return array(
-            'block_id' => $block->getName(),
-            'request_uri' => $this->requestStack->getMasterRequest()->getRequestUri()
-        );
-    }
 } 

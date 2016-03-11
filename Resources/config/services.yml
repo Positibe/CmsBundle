@@ -21,11 +21,11 @@ services:
         tags:
           - { name: form.type , alias: positibe_category }
 
-#    positibe_orm_block.form.static_content_media:
-#        class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentBlockType
-#        arguments: [%block_locations%]
-#        tags:
-#            - {name: form.type, alias: positibe_static_content_block }
+    positibe_orm_block.form.page_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\PageBlockType
+        arguments: [%block_locations%]
+        tags:
+            - {name: form.type, alias: positibe_page_block }
 
 #    positibe_orm_media.form.block_media:
 #        class: Positibe\Bundle\OrmMediaBundle\Form\Type\MediaBlockType
@@ -71,6 +71,12 @@ services:
     positibe_orm_content.block_content:
         class: Positibe\Bundle\OrmContentBundle\Block\ContentBlockService
         arguments: ['positibe_orm_content.block_content', @templating, @request_stack]
+        tags:
+            - { name: sonata.block }
+
+    positibe_orm_content.block_slideshow:
+        class: Positibe\Bundle\OrmContentBundle\Block\SlideshowBlockService
+        arguments: ['positibe_orm_content.block_slideshow', @templating, @request_stack]
         tags:
             - { name: sonata.block }
 

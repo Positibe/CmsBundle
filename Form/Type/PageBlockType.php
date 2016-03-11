@@ -16,14 +16,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class StaticContentBlockType
+ * Class PageBlockType
  * @package Positibe\Bundle\OrmContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class StaticContentBlockType extends AbstractType
+class PageBlockType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -32,10 +31,10 @@ class StaticContentBlockType extends AbstractType
     {
         $builder
             ->add(
-                'staticContent',
+                'page',
                 'genemu_jquerychosen_entity',
                 array(
-                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\StaticContent',
+                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
                     'attr' => array('class' => 'chosen-select form-control'),
                     'required' => true,
                     'label' => 'static_content_block.form.static_content_label',
@@ -50,7 +49,7 @@ class StaticContentBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\StaticContentBlock',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock',
                 'translation_domain' => 'PositibeOrmContentBundle'
             )
         );
@@ -58,7 +57,7 @@ class StaticContentBlockType extends AbstractType
 
     public function getParent()
     {
-        return 'positibe_abstract_block';
+        return 'positibe_block_visibility';
     }
 
     /**
@@ -68,7 +67,7 @@ class StaticContentBlockType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_static_content_block';
+        return 'positibe_page_block';
     }
 
 } 
