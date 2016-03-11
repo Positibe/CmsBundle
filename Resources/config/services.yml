@@ -39,6 +39,11 @@ services:
         tags:
             - {name: form.type, alias: positibe_content_block }
 
+    positibe_orm_media.form.visibility_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractVisibilityBlockType
+        tags:
+            - {name: form.type, alias: positibe_block_visibility }
+
     positibe_orm_media.form.slideshow_media_type:
         class: Positibe\Bundle\OrmMediaBundle\Form\Type\SlideshowBlockType
         tags:

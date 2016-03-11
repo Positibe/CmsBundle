@@ -16,78 +16,61 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
- * Class ContentBlockType
+ * Class AbstractVisibilityBlockType
  * @package Positibe\Bundle\OrmContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class ContentBlockType extends AbstractType
+class AbstractVisibilityBlockType extends AbstractType
 {
-    private $locales;
-
-    public function __construct($locales)
-    {
-        $this->locales = $locales;
-    }
-
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'title',
+                'categories',
                 null,
                 array(
-                    'label' => 'content_block.form.title_label'
+                    'label' => 'visibility_block.form.categories_label',
+                    'multiple' => true
                 )
             )
             ->add(
-                'body',
-                'ckeditor',
+                'pages',
+                null,
                 array(
-                    'label' => 'content_block.form.body_label',
-                    'config_name' => 'default',
-                    'attr' => array(
-                        'rows' => 12
-                    ),
-                    'required' => false
+                    'label' => 'visibility_block.form.pages_label',
+                    'multiple' => true
                 )
             )
             ->add(
-                'image',
-                'positibe_image_type',
+                'routes',
+                null,
                 array(
-                    'provider' => 'positibe_orm_media.image_provider',
-                    'required' => false,
-                    'label' => 'content_block.form.image_label'
+                    'label' => 'visibility_block.form.routes_label'
                 )
             )
             ->add(
-                'locale',
-                'choice',
+                'roles',
+                null,
                 array(
-                    'label' => 'content_block.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales)
+                    'label' => 'visibility_block.form.roles_label'
                 )
             );
+    }
+
+    public function getParent()
+    {
+        return 'positibe_abstract_block';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\ContentBlock',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock',
                 'translation_domain' => 'PositibeOrmContentBundle'
             )
         );
-    }
-
-    public function getParent()
-    {
-        return 'positibe_block_visibility';
     }
 
     /**
@@ -97,6 +80,7 @@ class ContentBlockType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_content_block';
+        return 'positibe_block_visibility';
     }
+
 } 

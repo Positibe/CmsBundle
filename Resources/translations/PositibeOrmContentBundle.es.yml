@@ -43,5 +43,11 @@ content_block:
         body_label: Contenido:
         image_label: Imagen:
         locale_label: Idioma:
+visibility_block:
+    form:
+        categories_label: Categoría:
+        pages_label: Páginas:
+        routes_label: Rutas:
+        roles_label: Roles:
 PositibeOrmContentBundle:Default:index: Página simple
 PositibeOrmContentBundle:Default:categoryIndex: Listado de páginas
