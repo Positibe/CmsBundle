@@ -26,7 +26,8 @@
         "positibe/orm-seo-bundle": "~0.3",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "2.3.*",
-        "pagerfanta/pagerfanta": "1.0.*"
+        "pagerfanta/pagerfanta": "1.0.*",
+        "egeloen/ckeditor-bundle": "~3.0"
     },
     "autoload": {
         "psr-4": { "Positibe\\Bundle\\OrmContentBundle\\": "" }
