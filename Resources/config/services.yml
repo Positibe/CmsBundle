@@ -21,20 +21,21 @@ services:
         tags:
           - { name: form.type , alias: positibe_category }
 
-    positibe_orm_block.form.static_content_media:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentBlockType
-        arguments: [%block_locations%]
-        tags:
-            - {name: form.type, alias: positibe_static_content_block }
+#    positibe_orm_block.form.static_content_media:
+#        class: Positibe\Bundle\OrmContentBundle\Form\Type\StaticContentBlockType
+#        arguments: [%block_locations%]
+#        tags:
+#            - {name: form.type, alias: positibe_static_content_block }
 
-    positibe_orm_media.form.block_media:
-        class: Positibe\Bundle\OrmMediaBundle\Form\Type\MediaBlockType
-        arguments: [%block_locations%]
-        tags:
-            - {name: form.type, alias: positibe_media_block }
+#    positibe_orm_media.form.block_media:
+#        class: Positibe\Bundle\OrmMediaBundle\Form\Type\MediaBlockType
+#        arguments: [%block_locations%]
+#        tags:
+#            - {name: form.type, alias: positibe_media_block }
 
-    positibe_orm_media.form.content_media_type:
-        class: Positibe\Bundle\OrmMediaBundle\Form\Type\ContentBlockType
+    positibe_orm_media.form.content_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\ContentBlockType
+        arguments: [%locales%]
         tags:
             - {name: form.type, alias: positibe_content_block }
 

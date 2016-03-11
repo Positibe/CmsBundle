@@ -37,5 +37,11 @@ static_content_block:
     form:
         static_content_label: Página:
 
+content_block:
+    form:
+        title_label: Título:
+        body_label: Contenido:
+        image_label: Imagen:
+        locale_label: Idioma:
 PositibeOrmContentBundle:Default:index: Página simple
 PositibeOrmContentBundle:Default:categoryIndex: Listado de páginas

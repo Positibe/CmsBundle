@@ -54,7 +54,7 @@ class PageType extends AbstractType
                 'ckeditor',
                 array(
                     'label' => 'static_content.form.body_label',
-                    'config_name' => 'positibe_cmf',
+                    'config_name' => 'default',
                     'attr' => array(
                         'rows' => 12,
                         'class' => 'inbox-editor inbox-wysihtml5'
@@ -146,7 +146,7 @@ class PageType extends AbstractType
             )
             ->add(
                 'image',
-                'positibe_media_type',
+                'positibe_image_type',
                 array(
                     'provider' => 'positibe_orm_media.image_provider',
                     'required' => false
