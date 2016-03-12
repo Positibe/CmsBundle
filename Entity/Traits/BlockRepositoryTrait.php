@@ -10,10 +10,7 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity\Traits;
 
-use Doctrine\ORM\QueryBuilder;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
-use Symfony\Component\HttpFoundation\Request;
-
 
 /**
  * Class BlockRepositoryTrait
@@ -25,7 +22,6 @@ trait BlockRepositoryTrait
 {
     public function findByTemplatePosition($configuration)
     {
-        /** @var QueryBuilder $qb */
         $qb = $this->createQueryBuilder('o')
             ->orderBy('o.position', 'ASC')
             ->orderBy('o.updatedAt', 'DESC');
@@ -38,9 +34,7 @@ trait BlockRepositoryTrait
         }
 
         if (isset($configuration['request'])) {
-            /** @var Request $request */
             $request = $configuration['request'];
-            $uri = $request->getUri();
             $route = $request->get('_route');
             $stringQuery = 'o.always = :always OR o.routes LIKE :route';
             if ($content = $request->get('contentDocument')) {
