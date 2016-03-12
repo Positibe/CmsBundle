@@ -11,7 +11,6 @@
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\OrmContentBundle\Entity\AbstractPageRepositoryTrait;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -78,7 +77,7 @@ class FeaturedBlockService extends BaseBlockService
         $resolver->setDefaults(
             array(
                 'template' => $this->template,
-                'class' => 'Positibe\Bundle\OrmContentBundle\Entity\StaticContent'
+                'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page'
             )
         );
     }
@@ -93,7 +92,7 @@ class FeaturedBlockService extends BaseBlockService
 
     /**
      * @param $class
-     * @return \Doctrine\ORM\EntityRepository|AbstractPageRepositoryTrait
+     * @return \Doctrine\ORM\EntityRepository
      */
     public function getContentRepository($class)
     {

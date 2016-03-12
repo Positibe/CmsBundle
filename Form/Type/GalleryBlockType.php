@@ -8,21 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmMediaBundle\Form\Type;
+namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
-use Positibe\Bundle\OrmMediaBundle\Entity\MediaBlock;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
- * Class MediaBlockType
+ * Class GalleryBlockType
  * @package Positibe\Bundle\OrmContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MediaBlockType extends AbstractType
+class GalleryBlockType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -32,18 +31,9 @@ class MediaBlockType extends AbstractType
     {
         $builder
             ->add(
-                'medias',
-                'collection',
+                'gallery',
+                'positibe_gallery_type',
                 array(
-                    'type' => 'sonata_media_type',
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'options' => array(
-                        'required' => false,
-                        'attr' => array('class' => 'media'),
-                        'provider' => 'sonata.media.provider.image',
-                        'context' => 'slideshow',
-                    ),
                     'required' => false,
                     'label' => 'media_block.form.media_label',
                 )
@@ -57,15 +47,15 @@ class MediaBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmMediaBundle\Entity\MediaBlock',
-                'translation_domain' => 'PositibeOrmMediaBundle'
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\GalleryBlock',
+                'translation_domain' => 'PositibeOrmContentBundle'
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_abstract_block';
+        return 'positibe_block_visibility';
     }
 
     /**
@@ -75,7 +65,7 @@ class MediaBlockType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_media_block';
+        return 'positibe_gallery_block';
     }
 
 } 

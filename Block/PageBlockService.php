@@ -10,8 +10,6 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
-
-use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 use Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock;
 use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
@@ -28,18 +26,19 @@ use Symfony\Component\HttpFoundation\Response;
 class PageBlockService extends AbstractBlockService
 {
     protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
     protected $em;
 
     /**
      * @param string $name
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
      * @param RequestStack $requestStack
-     * @param EntityManager $entityManager
      */
-    public function __construct($name, $templating, RequestStack $requestStack, EntityManager $entityManager)
+    public function __construct($name, $templating, RequestStack $requestStack)
     {
         parent::__construct($name, $templating, $requestStack);
-        $this->em = $entityManager;
     }
 
     /**
@@ -76,4 +75,22 @@ class PageBlockService extends AbstractBlockService
     {
         return $this->em->getRepository(get_class($pageBlock->getPage()));
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEm()
+    {
+        return $this->em;
+    }
+
+    /**
+     * @param mixed $em
+     */
+    public function setEm($em)
+    {
+        $this->em = $em;
+    }
+
+
 } 

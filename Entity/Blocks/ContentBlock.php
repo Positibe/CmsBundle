@@ -10,7 +10,6 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
-use Positibe\Bundle\OrmBlockBundle\Entity\Block;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;

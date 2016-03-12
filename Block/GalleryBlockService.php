@@ -14,12 +14,12 @@ use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 
 
 /**
- * Class SlideshowBlockService
- * @package Positibe\Bundle\OrmMediaBundle\Block
+ * Class GalleryBlockService
+ * @package Positibe\Bundle\OrmContentBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class SlideshowBlockService extends AbstractBlockService
+class GalleryBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeOrmMediaBundle:Block:block_slideshow.html.twig';
+    protected $template = 'PositibeOrmContentBundle:Block:block_gallery.html.twig';
 } 

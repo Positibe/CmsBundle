@@ -2,7 +2,6 @@ parameters:
     stof_doctrine_extensions.event_listener.locale.class: Positibe\Bundle\CmfBundle\EventListener\LocaleListener
 
 services:
-
 #### Forms Type ####
     positibe_orm_content.abstract_page_form_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractPageType
@@ -21,17 +20,16 @@ services:
         tags:
           - { name: form.type , alias: positibe_category }
 
+    positibe_orm_content.form.visibility_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractVisibilityBlockType
+        tags:
+            - {name: form.type, alias: positibe_block_visibility }
+
     positibe_orm_block.form.page_block_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\PageBlockType
         arguments: [%block_locations%]
         tags:
             - {name: form.type, alias: positibe_page_block }
-
-#    positibe_orm_media.form.block_media:
-#        class: Positibe\Bundle\OrmMediaBundle\Form\Type\MediaBlockType
-#        arguments: [%block_locations%]
-#        tags:
-#            - {name: form.type, alias: positibe_media_block }
 
     positibe_orm_content.form.content_block_type:
         class: Positibe\Bundle\OrmContentBundle\Form\Type\ContentBlockType
@@ -39,15 +37,15 @@ services:
         tags:
             - {name: form.type, alias: positibe_content_block }
 
-    positibe_orm_content.form.visibility_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractVisibilityBlockType
+    positibe_orm_content.form.gallery_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\GalleryBlockType
         tags:
-            - {name: form.type, alias: positibe_block_visibility }
+            - {name: form.type, alias: positibe_gallery_block }
 
-    positibe_orm_content.form.slideshow_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\SlideshowBlockType
+    positibe_orm_content.form.menu_block_type:
+        class: Positibe\Bundle\OrmContentBundle\Form\Type\MenuBlockType
         tags:
-            - {name: form.type, alias: positibe_slideshow_block }
+            - {name: form.type, alias: positibe_menu_block }
 
 #### Block Services ####
     positibe_orm_content.block_category:
@@ -58,9 +56,11 @@ services:
 
     positibe_orm_content.block_page:
         class: Positibe\Bundle\OrmContentBundle\Block\PageBlockService
-        arguments: ['positibe_orm_content.block_static_content', @templating, @request_stack, @doctrine.orm.entity_manager]
+        arguments: ['positibe_orm_content.block_static_content', @templating, @request_stack]
         tags:
             - {name: sonata.block }
+        calls:
+            - [ setEm, [@doctrine.orm.entity_manager]]
 
     positibe_orm_content.block_featured_page:
         class: Positibe\Bundle\OrmContentBundle\Block\FeaturedBlockService
@@ -74,9 +74,15 @@ services:
         tags:
             - { name: sonata.block }
 
-    positibe_orm_content.block_slideshow:
-        class: Positibe\Bundle\OrmContentBundle\Block\SlideshowBlockService
-        arguments: ['positibe_orm_content.block_slideshow', @templating, @request_stack]
+    positibe_orm_content.block_gallery:
+        class: Positibe\Bundle\OrmContentBundle\Block\GalleryBlockService
+        arguments: ['positibe_orm_content.block_gallery', @templating, @request_stack]
+        tags:
+            - { name: sonata.block }
+
+    positibe_orm_content.block_menu:
+        class: Positibe\Bundle\OrmContentBundle\Block\MenuBlockService
+        arguments: ['positibe_orm_content.block_menu', @templating, @request_stack]
         tags:
             - { name: sonata.block }
 
@@ -87,17 +93,3 @@ services:
 
     positibe_orm_content.menu_node_factory:
         class: Positibe\Bundle\OrmContentBundle\Factory\MenuNodeFactory
-
-#### @todo hubicar en su lugar
-    positibe_cmf.form.menu_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\MenuBlockType
-        tags:
-            - { name: form.type, alias: positibe_menu_block }
-
-    positibe_cmf.block_menu:
-        class: Positibe\Bundle\OrmContentBundle\Block\MenuBlockService
-        arguments: ['positibe_orm_block.block_menu', @templating, @knp_menu.menu_provider]
-        tags:
-            - { name: sonata.block }
-        calls:
-            - [ setContainer, [@service_container]]

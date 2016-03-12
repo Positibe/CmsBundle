@@ -10,8 +10,8 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
-use Positibe\Bundle\OrmBlockBundle\Entity\Block;
 use Doctrine\ORM\Mapping as ORM;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
 
 
@@ -24,7 +24,7 @@ use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuBlock extends Block
+class MenuBlock extends AbstractVisibilityBlock
 {
     /**
      * @var integer
@@ -52,7 +52,7 @@ class MenuBlock extends Block
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_cmf.block_menu';
+        $this->type = 'positibe_orm_content.block_menu';
         $this->menuTemplate = 'menu/main.html.twig';
     }
 

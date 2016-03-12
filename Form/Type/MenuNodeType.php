@@ -68,6 +68,11 @@ class MenuNodeType extends AbstractType
         );
     }
 
+    public function getParent()
+    {
+        return 'positibe_block_visibility';
+    }
+
     /**
      * @return string
      */

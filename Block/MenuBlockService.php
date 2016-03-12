@@ -10,10 +10,8 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Block;
 
+use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\Service\MenuBlockService as SonataMenuBlockService;
-use Sonata\BlockBundle\Model\BlockInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,21 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuBlockService extends SonataMenuBlockService
+class MenuBlockService extends AbstractBlockService
 {
-    /** @var  ContainerInterface */
-    private $container;
-
-    public function getCacheKeys(BlockInterface $block)
-    {
-        $cacheKeys = parent::getCacheKeys($block);
-
-        $cacheKeys['block_id'] = $block->getName();
-        $cacheKeys['request_uri'] = $this->container->get('request_stack')->getMasterRequest()->getRequestUri();
-
-        return $cacheKeys;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -100,21 +85,5 @@ class MenuBlockService extends SonataMenuBlockService
         }
 
         return $options;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @param mixed $container
-     */
-    public function setContainer($container)
-    {
-        $this->container = $container;
     }
 } 

@@ -1,0 +1,25 @@
+{% extends '@PositibeOrmBlock/Block/block_base.html.twig' %}
+
+{% block block %}
+    {% set galleryHasMedias = content.gallery.galleryHasMedias %}
+    <div id="{{ content.gallery }}" class="carousel slide">
+        <ol class="carousel-indicators">
+            {% for i in 0..(galleryHasMedias | length) %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index0 }}"
+                    {% if loop.index0 == 0 %}class="active"{% endif %}></li>
+            {% endfor %}
+        </ol>
+        {% for image in galleryHasMedias %}
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{{ image.path }}" alt="{{ page.title }}">
+
+                    <div class="carousel-caption">
+                        {{ page.body | raw | striptags | truncate(150) }}
+                    </div>
+                </div>
+                ...
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

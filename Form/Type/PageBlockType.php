@@ -10,7 +10,6 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
-use Positibe\Bundle\OrmContentBundle\Entity\StaticContentBlock;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
