@@ -26,13 +26,6 @@ use Doctrine\ORM\Mapping as ORM;
 class AbstractVisibilityBlock extends Block
 {
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="always", type="boolean")
-     */
-    protected $always;
-
-    /**
      * @var Category
      *
      * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Category")
@@ -60,29 +53,6 @@ class AbstractVisibilityBlock extends Block
      * @ORM\Column(name="routes", type="array")
      */
     protected $routes;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="roles", type="array")
-     */
-    protected $roles;
-
-    /**
-     * @return boolean
-     */
-    public function isAlways()
-    {
-        return $this->always;
-    }
-
-    /**
-     * @param boolean $always
-     */
-    public function setAlways($always)
-    {
-        $this->always = $always;
-    }
 
     /**
      * @return Category
@@ -114,22 +84,6 @@ class AbstractVisibilityBlock extends Block
     public function setPages($pages)
     {
         $this->pages = $pages;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
-     * @param array $roles
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
     }
 
     /**
