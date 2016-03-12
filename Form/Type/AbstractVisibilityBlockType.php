@@ -33,7 +33,8 @@ class AbstractVisibilityBlockType extends AbstractType
                 'always',
                 null,
                 array(
-                    'label' => 'visibility_block.form.always_label'
+                    'label' => 'visibility_block.form.always_label',
+                    'required' => false
                 )
             )
             ->add(

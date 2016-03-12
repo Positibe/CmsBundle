@@ -47,7 +47,7 @@ class SlideshowBlock extends AbstractVisibilityBlock
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_media.block_slideshow';
+        $this->type = 'positibe_orm_content.block_slideshow';
         $this->contentBlocks = new ArrayCollection();
     }
 
