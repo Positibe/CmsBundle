@@ -42,18 +42,19 @@ trait BlockRepositoryTrait
             $request = $configuration['request'];
             $uri = $request->getUri();
             $route = $request->get('_route');
-            $content = $request->get('contentDocument');
-            $category = null;
-            if ($content instanceof Page) {
-                $category = $content->getParent();
+            $stringQuery = 'o.always = :always OR o.routes LIKE :route';
+            if ($content = $request->get('contentDocument')) {
+                $stringQuery .= ' OR pages = :page';
+                $qb->leftJoin('o.pages', 'pages')->setParameter('page', $content);
+
+                if ($content instanceof Page) {
+                    $stringQuery .= ' OR categories = :category';
+                    $qb->leftJoin('o.categories', 'categories')->setParameter('category', $content->getParent());
+                }
             }
             $qb
-                ->leftJoin('o.pages', 'pages')
-                ->leftJoin('o.categories', 'categories')
-                ->andWhere('o.always = :always OR pages = :page OR categories = :category OR o.routes LIKE :route')
+                ->andWhere($stringQuery)
                 ->setParameter('always', true)
-                ->setParameter('page', $content)
-                ->setParameter('category', $category)
                 ->setParameter('route', '%' . $route . '%');
         }
 
