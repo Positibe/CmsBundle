@@ -43,6 +43,9 @@ content_block:
         body_label: Contenido:
         image_label: Imagen:
         locale_label: Idioma:
+gallery_block:
+    form:
+        gallery_label: Galería:
 visibility_block:
     form:
         always_label: Siempre visible

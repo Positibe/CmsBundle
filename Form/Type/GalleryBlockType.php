@@ -35,7 +35,8 @@ class GalleryBlockType extends AbstractType
                 'positibe_gallery_type',
                 array(
                     'required' => false,
-                    'label' => 'media_block.form.media_label',
+                    'label' => 'gallery_block.form.gallery_label',
+                    'translation_domain' => 'PositibeOrmContentBundle'
                 )
             );
     }

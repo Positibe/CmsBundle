@@ -42,18 +42,10 @@ class MenuBlock extends AbstractVisibilityBlock
      */
     private $menu;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="menu_template", type="string", length=255)
-     */
-    private $menuTemplate = null;
-
     public function __construct()
     {
         parent::__construct();
         $this->type = 'positibe_orm_content.block_menu';
-        $this->menuTemplate = 'menu/main.html.twig';
     }
 
     public function getType()
@@ -75,21 +67,5 @@ class MenuBlock extends AbstractVisibilityBlock
     public function setMenu($menu)
     {
         $this->menu = $menu;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMenuTemplate()
-    {
-        return $this->menuTemplate;
-    }
-
-    /**
-     * @param string $menuTemplate
-     */
-    public function setMenuTemplate($menuTemplate)
-    {
-        $this->menuTemplate = $menuTemplate;
     }
 } 

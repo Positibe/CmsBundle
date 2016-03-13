@@ -12,12 +12,15 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
 
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmMediaBundle\Entity\Gallery;
+use Doctrine\ORM\Mapping as ORM;
 
 
 /**
+ * @ORM\Table(name="positibe_block_gallery")
+ * @ORM\Entity
+ *
  * Class GalleryBlock
  * @package Positibe\Bundle\OrmContentBundle\Entity\Blocks
- *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class GalleryBlock extends AbstractVisibilityBlock
@@ -25,7 +28,7 @@ class GalleryBlock extends AbstractVisibilityBlock
     /**
      * @var Gallery
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmMediaBundle\Entity\Gallery")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmMediaBundle\Entity\Gallery", cascade="all")
      */
     protected $gallery;
 
