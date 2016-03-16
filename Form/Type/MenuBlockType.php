@@ -55,7 +55,7 @@ class MenuBlockType extends AbstractType
 
     public function getParent()
     {
-        return 'positibe_abstract_block';
+        return 'positibe_block_visibility';
     }
 
     /**

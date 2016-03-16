@@ -72,10 +72,8 @@ class MenuNode extends MenuNodeBase
      */
     public function getOptions()
     {
-        $options = parent::getOptions();
-
         return array_merge(
-            $options,
+            parent::getOptions(),
             array(
                 'linkType' => $this->linkType,
                 'content' => $this->page === null ? $this->getContent() : $this->getPage(),
