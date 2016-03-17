@@ -13,6 +13,7 @@ namespace Positibe\Bundle\OrmContentBundle\Block;
 use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class MenuBlockService
@@ -50,8 +51,7 @@ class MenuBlockService extends AbstractBlockService
         if (method_exists($blockContext->getBlock(), 'getMenu') && method_exists($blockContext->getBlock()->getMenu(), 'getName') ) {
             $menuName = $blockContext->getBlock()->getMenu()->getName();
         } else {
-            $settings = $blockContext->getSettings();
-            $menuName = $settings['menu_name'];
+            $menuName = $blockContext->getSetting('menu_name');
         }
 
         return $menuName;
@@ -76,8 +76,6 @@ class MenuBlockService extends AbstractBlockService
 
         $options = array();
 
-        $options['template'] = 'menu/main.html.twig';
-
         foreach ($settings as $key => $value) {
             if (array_key_exists($key, $mapping) && null !== $value) {
                 $options[$mapping[$key]] = $value;
@@ -85,5 +83,26 @@ class MenuBlockService extends AbstractBlockService
         }
 
         return $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+                'request' => false,
+                'menu_name' => null,
+                'current_class'  => 'active',
+                'first_class'    => false,
+                'last_class'     => false,
+                'current_uri'    => null,
+                'menu_class'     => "list-group",
+                'children_class' => "list-group-item",
+                'menu_template'  => null,
+            )
+        );
     }
 } 

@@ -54,7 +54,7 @@ trait PageRepositoryTrait
 
         if (!empty($criteria['category'])) {
             $queryBuilder
-                ->leftJoin('o.parent','category')
+                ->leftJoin('o.parent', 'category')
                 ->andWhere('category.name = :category')
                 ->setParameter('category', $criteria['category']);
             unset($criteria['category']);
@@ -143,11 +143,18 @@ trait PageRepositoryTrait
     public function findContentByParent($parent, $count = 2, $sort = 'publishStartDate', $order = 'DESC')
     {
         $qb = $this->createQueryBuilder('o')
-            ->addSelect('p', 'routes')
+            ->addSelect('p', 'routes', 'image')
             ->leftJoin('o.routes', 'routes')
             ->innerJoin('o.parent', 'p')
-            ->where('p = :parent')
-            ->setParameter('parent', $parent)
+            ->leftJoin('o.image', 'image');
+
+        if (is_string($parent)) {
+            $qb->where('p.name = :parent');
+        } else {
+            $qb->where('p = :parent');
+        }
+
+        $qb->setParameter('parent', $parent)
             ->setMaxResults($count)
             ->orderBy(sprintf('o.%s', $sort), $order);
 
