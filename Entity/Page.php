@@ -81,7 +81,8 @@ class Page extends AbstractPage implements CustomRouteInformation
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="page", cascade="all")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", orphanRemoval=TRUE, cascade="all")
+     * @ORM\JoinTable(name="positibe_page_menus")
      */
     protected $menuNodes;
 

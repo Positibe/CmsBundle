@@ -47,9 +47,46 @@ class MenuNode extends MenuNodeBase
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page", inversedBy="menuNodes")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page")
      */
     protected $page;
+
+    /**
+     * @param MenuNodeReferrersInterface $content
+     */
+    public function setContent($content)
+    {
+        parent::setContent($content);
+
+        if ($this->content instanceof Page) {
+            $this->page = $content;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOptions()
+    {
+        return array_merge(
+            parent::getOptions(),
+            array(
+                'linkType' => $this->linkType,
+                'content' => $this->getContent(),
+                'contentClass' => $this->getContentClass(),
+                'iconClass' => $this->getIconClass()
+            )
+        );
+    }
+
+    public function getContent()
+    {
+        if ($this->content == null && $this->page !== null) {
+            $this->content = $this->page;
+        }
+
+        return $this->content;
+    }
 
     /**
      * @return Page
@@ -65,21 +102,5 @@ class MenuNode extends MenuNodeBase
     public function setPage($page)
     {
         $this->page = $page;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOptions()
-    {
-        return array_merge(
-            parent::getOptions(),
-            array(
-                'linkType' => $this->linkType,
-                'content' => $this->page === null ? $this->getContent() : $this->getPage(),
-                'contentClass' => $this->getContentClass(),
-                'iconClass' => $this->getIconClass()
-            )
-        );
     }
 } 
