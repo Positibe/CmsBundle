@@ -48,7 +48,7 @@ class MenuNode extends MenuNodeBase
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage")
      */
     protected $page;
 
