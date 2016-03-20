@@ -55,7 +55,7 @@ services:
 
     positibe_orm_content.block_page:
         class: Positibe\Bundle\OrmContentBundle\Block\PageBlockService
-        arguments: ['positibe_orm_content.block_static_content', @templating, @request_stack]
+        arguments: ['positibe_orm_content.block_page', @templating, @request_stack]
         tags:
             - {name: sonata.block }
         calls:
