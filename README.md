@@ -1,7 +1,7 @@
 PositibeOrmContentBundle
 ========================
 
-This bundle provide a Page entity and integrate some other Positibe bundles to create a Page CMS representation.
+This bundle provide a AbstractPage, Page and Category entity and integrate some other Positibe bundles to create a Page CMS representation.
 
 Installation
 ------------

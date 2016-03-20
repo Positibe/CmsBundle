@@ -12,6 +12,7 @@ namespace Positibe\Bundle\OrmContentBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -52,13 +53,13 @@ class MenuNode extends MenuNodeBase
     protected $page;
 
     /**
-     * @param MenuNodeReferrersInterface $content
+     * @param \Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface $content
      */
     public function setContent($content)
     {
         parent::setContent($content);
 
-        if ($this->content instanceof Page) {
+        if ($this->content instanceof AbstractPage) {
             $this->page = $content;
         }
     }

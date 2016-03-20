@@ -13,6 +13,7 @@ namespace Positibe\Bundle\OrmContentBundle\Factory;
 use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
 use Positibe\Bundle\OrmMediaBundle\Provider\ImageProvider;
@@ -55,9 +56,9 @@ class PageFactory
     }
 
     /**
-     * @param Page $page
+     * @param AbstractPage $page
      */
-    public function updateNodeMenus(Page $page)
+    public function updateNodeMenus(AbstractPage $page)
     {
         /** @var MenuNode $menu */
         foreach ($page->getMenuNodes()->toArray() as $menu) {
@@ -69,10 +70,10 @@ class PageFactory
     }
 
     /**
-     * @param Page $page
+     * @param AbstractPage $page
      * @param bool $auto
      */
-    public function updateRoutes(Page $page, $auto = true)
+    public function updateRoutes(AbstractPage $page, $auto = true)
     {
         $currentLocale = $this->getLocale($page);
         $needRoute = true;
@@ -100,12 +101,12 @@ class PageFactory
         }
     }
 
-    public function getLocale(Page $page)
+    public function getLocale(AbstractPage $page)
     {
         return $page->getLocale() ? $page->getLocale() : $this->locale;
     }
 
-    public function fixStaticPrefix($staticPrefix, Page $page)
+    public function fixStaticPrefix($staticPrefix, AbstractPage $page)
     {
         if (empty($staticPrefix)) {
             $staticPrefix = $this->insertPartBeforePath($page->getTitle());
@@ -195,10 +196,10 @@ class PageFactory
     /**
      * Create the seo metadata information for the content
      *
-     * @param Page $page
-     * @return Page
+     * @param AbstractPage $page
+     * @return AbstractPage
      */
-    public function updateSeoMetadata(Page $page)
+    public function updateSeoMetadata(AbstractPage $page)
     {
         $seoMetadata = $page->getSeoMetadata();
         if ($seoMetadata === null) {
@@ -220,10 +221,10 @@ class PageFactory
      * Get the route for the content
      *
      * @param $path
-     * @param Page $page
+     * @param AbstractPage $page
      * @return Route
      */
-    public function createRoute($path, Page $page)
+    public function createRoute($path, AbstractPage $page)
     {
         return $this->routeFactory->createContentRoute($path, $page, null);
     }
@@ -231,12 +232,12 @@ class PageFactory
     /**
      * Get the menu for the content if have a parent menu
      *
-     * @param Page $page
+     * @param AbstractPage $page
      * @param MenuNode $parentMenu
      * @param null $locale
      * @return null|MenuNode
      */
-    public function createMenuNode(Page $page, MenuNode $parentMenu = null, $locale = null)
+    public function createMenuNode(AbstractPage $page, MenuNode $parentMenu = null, $locale = null)
     {
         if ($parentMenu !== null) {
             $menu = $this->menuFactory->createContentMenuNode($page, $page->getTitle(), $parentMenu);

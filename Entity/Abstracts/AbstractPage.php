@@ -10,11 +10,14 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
 
+use Positibe\Bundle\OrmContentBundle\Model\ContentType;
+use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
@@ -31,20 +34,37 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Class AbstractPage
  * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @ORM\Table(name="positibe_page")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\EntityListeners({"Positibe\Bundle\OrmRoutingBundle\EventListener\AutoRoutingEntityListener"})
+ * @ORM\HasLifecycleCallbacks
+ *
+ * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\PageTranslation")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
- * @ORM\HasLifecycleCallbacks
  */
 abstract class AbstractPage implements PublishableInterface,
     PublishTimePeriodInterface,
     RouteReferrersInterface,
     MenuNodeReferrersInterface,
     SeoAwareInterface,
-    TranslatableInterface
+    TranslatableInterface,
+    CustomRouteInformation
 {
     use PublishableTrait;
     use PublishTimePeriodTrait;
     use SeoAwareEntityTrait;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
     /**
      * @var string
@@ -91,21 +111,47 @@ abstract class AbstractPage implements PublishableInterface,
     protected $image;
 
     /**
-     * @var ArrayCollection|Route[]
-     */
-    protected $routes;
-
-    /**
-     * @var MenuNode[]|ArrayCollection
-     */
-    protected $menuNodes;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="featured", type="boolean")
      */
     protected $featured;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="custom_controller", type="string", length=255, nullable=TRUE)
+     */
+    protected $customController;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_type", type="string", length=255, nullable=TRUE)
+     */
+    protected $contentType = ContentType::TYPE_PAGE;
+
+    /**
+     * @var ArrayCollection|RouteObjectInterface[]
+     *
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade="all")
+     * @ORM\JoinTable(name="positibe_page_routes",
+     *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="route_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $routes;
+
+    /**
+     * @var MenuNode[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", orphanRemoval=TRUE, cascade="all")
+     * @ORM\JoinTable(name="positibe_page_menus",
+     *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="menu_node_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $menuNodes;
 
     public function __construct()
     {
@@ -113,6 +159,38 @@ abstract class AbstractPage implements PublishableInterface,
         $this->menuNodes = new ArrayCollection();
         $this->seoMetadata = new SeoMetadata();
         $this->featured = false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return $this->contentType;
+    }
+
+    /**
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -342,4 +420,27 @@ abstract class AbstractPage implements PublishableInterface,
     {
         $this->featured = $featured;
     }
+
+
+    /**
+     * @return string|null
+     */
+    public function getCustomController()
+    {
+        return $this->customController;
+    }
+
+    /**
+     * @param string $customController
+     */
+    public function setCustomController($customController)
+    {
+        $this->customController = $customController;
+    }
+
+    public function getCustomTemplate()
+    {
+        return null;
+    }
+
 } 

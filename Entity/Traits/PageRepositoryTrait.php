@@ -130,6 +130,8 @@ trait PageRepositoryTrait
      * @param $contentType
      * @param $locale
      * @return Page[]|ArrayCollection
+     *
+     * @deprecated
      */
     public function findByContentType($contentType, $locale)
     {

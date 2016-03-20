@@ -10,8 +10,10 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 
 /**
@@ -25,11 +27,50 @@ use Positibe\Bundle\OrmContentBundle\Model\ContentType;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class Category extends Page
+class Category extends AbstractPage
 {
+    /**
+     * @var Page[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="parent", cascade={"persist"})
+     */
+    protected $children;
+
     public function __construct()
     {
         parent::__construct();
-        $this->setContentType(ContentType::TYPE_CATEGORY);
+        $this->contentType = ContentType::TYPE_CATEGORY;
+        $this->children = new ArrayCollection();
+    }
+
+
+    public function addChild($page)
+    {
+        $this->children->add($page);
+
+        return $this;
+    }
+
+    public function removeChild($page)
+    {
+        $this->children->removeElement($page);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Page[]
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param ArrayCollection|Page[] $children
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
     }
 } 
