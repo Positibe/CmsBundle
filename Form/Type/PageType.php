@@ -4,7 +4,6 @@ namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
-use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -186,10 +185,7 @@ class PageType extends AbstractType
     private function getCategoryTranslated($options)
     {
         $locale = $options['data']->getLocale();
-        $categories = $this->getCategoryRepository()->findByContentType(
-            ContentType::TYPE_CATEGORY,
-            $locale
-        );
+        $categories = $this->getCategoryRepository()->findAll();
         if ($locale !== $this->defaultLocale) {
             foreach ($categories as $category) {
                 $category->setLocale($locale);
