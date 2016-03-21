@@ -134,7 +134,7 @@ abstract class AbstractPage implements PublishableInterface,
     /**
      * @var ArrayCollection|RouteObjectInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade="all")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade="{"persist", "remove"}", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_page_routes",
      *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="route_id", referencedColumnName="id", unique=true)}
@@ -145,7 +145,7 @@ abstract class AbstractPage implements PublishableInterface,
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", orphanRemoval=TRUE, cascade="all")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", cascade="{"persist", "remove"}", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_page_menus",
      *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="menu_node_id", referencedColumnName="id", unique=true)}

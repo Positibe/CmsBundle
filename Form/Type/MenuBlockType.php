@@ -47,7 +47,7 @@ class MenuBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\MenuBlock',
+                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\MenuBlock',
                 'translation_domain' => 'PositibeOrmMediaBundle'
             )
         );

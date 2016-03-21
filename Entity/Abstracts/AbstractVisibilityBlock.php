@@ -28,7 +28,7 @@ class AbstractVisibilityBlock extends Block
     /**
      * @var Category
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Category")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Category", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_block_visibility_category",
      *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
@@ -39,7 +39,7 @@ class AbstractVisibilityBlock extends Block
     /**
      * @var Page
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_block_visibility_pages",
      *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")}

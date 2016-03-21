@@ -32,7 +32,7 @@ class Category extends AbstractPage
     /**
      * @var Page[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Page", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="parent", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     protected $children;
 

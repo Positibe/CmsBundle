@@ -26,7 +26,7 @@ trait HasMenuTrait
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", cascade="persist")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", cascade="persist", fetch="EXTRA_LAZY")
      */
     protected $menuNodes;
 
