@@ -41,7 +41,7 @@ class MenuNode extends MenuNodeBase
     /**
      * @var MenuNode[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="parent", cascade="{"persist", "remove"}", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="parent", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
      */
     protected $children;
 
