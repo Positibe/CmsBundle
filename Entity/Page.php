@@ -10,13 +10,9 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Class Page
@@ -24,7 +20,6 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
  *
  * @ORM\Table(name="positibe_page")
  * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
- *
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

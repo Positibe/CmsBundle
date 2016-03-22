@@ -19,8 +19,6 @@ use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 /**
  * @ORM\Table(name="positibe_page_category")
  * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
- * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\PageTranslation")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
  * Class Category
  * @package Positibe\Bundle\OrmContentBundle\Entity

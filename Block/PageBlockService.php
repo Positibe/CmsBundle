@@ -73,7 +73,13 @@ class PageBlockService extends AbstractBlockService
      */
     public function getContentRepository(PageBlock $pageBlock)
     {
-        return $this->em->getRepository(get_class($pageBlock->getPage()));
+        $repository = $this->em->getRepository(get_class($pageBlock->getPage()));
+
+        if (method_exists($repository, 'setLocale')) {
+            $repository->setLocale($this->requestStack->getMasterRequest()->getLocale());
+        }
+
+        return $repository;
     }
 
     /**
