@@ -113,11 +113,4 @@ class CategoryBlockService extends BaseBlockService
     {
         return $this->em->getRepository('PositibeOrmContentBundle:Category');
     }
-
-    public function getCacheKeys(BlockInterface $block)
-    {
-        return array('type' => $block->getType());
-    }
-
-
 } 
