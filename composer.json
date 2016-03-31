@@ -25,7 +25,7 @@
         "positibe/orm-media-bundle": "~0.3",
         "positibe/orm-seo-bundle": "~0.3",
         "positibe/seo": "~0.1",
-        "gedmo/doctrine-extensions": "2.3.*",
+        "gedmo/doctrine-extensions": "~2.3",
         "pagerfanta/pagerfanta": "1.0.*",
         "egeloen/ckeditor-bundle": "~3.0"
     },
