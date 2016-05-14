@@ -37,7 +37,10 @@ class MenuBlockType extends AbstractType
                         'rootType',
                         ContentAwareFactory::LINK_TYPE_ROOT
                     );
-                }
+                },
+                'attr' => array(
+                    'class' => 'chosen-select form-control'
+                )
             )
         );
     }
@@ -48,7 +51,7 @@ class MenuBlockType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\MenuBlock',
-                'translation_domain' => 'PositibeOrmMediaBundle'
+                'translation_domain' => 'PositibeOrmContentBundle'
             )
         );
     }

@@ -31,7 +31,7 @@ class PageBlockType extends AbstractType
         $builder
             ->add(
                 'page',
-                'genemu_jquerychosen_entity',
+                'entity',
                 array(
                     'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
                     'attr' => array('class' => 'chosen-select form-control'),

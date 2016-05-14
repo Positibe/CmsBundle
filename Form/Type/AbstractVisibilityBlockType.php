@@ -48,15 +48,13 @@ class AbstractVisibilityBlockType extends AbstractType
             )
             ->add(
                 'pages',
-                'genemu_jquerychosen_entity',
+                null,
                 array(
                     'required' => false,
                     'label' => 'visibility_block.form.pages_label',
                     'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
                     'multiple' => true,
-                    'attr' => array('class' => 'chosen-select form-control'),
-                    'placeholder' => 'visibility_block.form.pages_label',
-                    'empty_value' => 'visibility_block.form.pages_label'
+                    'attr' => array('class' => 'chosen-select form-control')
                 )
             )
             ->add(
