@@ -46,12 +46,13 @@ class ContentBlockType extends AbstractType
             )
             ->add(
                 'body',
-                'ckeditor',
+                null,
                 array(
                     'label' => 'content_block.form.body_label',
-                    'config_name' => 'default',
+//                    'config_name' => 'default',
                     'attr' => array(
-                        'rows' => 12
+                        'rows' => 12,
+                        'class' => 'ckeditor'
                     ),
                     'required' => false
                 )

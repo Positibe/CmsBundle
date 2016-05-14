@@ -1,3 +1,7 @@
+pagina_simple: Página
+categoria: Categoría
+contacto: Contactos
+homepage: Página de inicio
 es: Español
 en: Inglés
 fr: Frances
@@ -13,7 +17,7 @@ static_content:
         seo_label: SEO
         menus_label: Menus:
         locale_label: Idioma:
-        parent_label: Categoría
+        parent_label: Tipo de página:
         content_type_label: Tipo de contenido:
         content_type_category: Categoría
         content_type_page: Página

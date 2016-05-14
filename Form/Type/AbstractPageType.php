@@ -47,95 +47,89 @@ class AbstractPageType extends AbstractType
         $entityName = array_pop($entityArray);
         $resourceName = strtolower(preg_replace('/[A-Z]/', '_' . '\\0', lcfirst($entityName)));
         $builder
-            ->add(
-                'title',
-                null,
-                array(
-                    'label' => $resourceName . '.form.title_label',
-                    'required' => true
-                )
+          ->add(
+            'title',
+            null,
+            array(
+              'label' => $resourceName . '.form.title_label',
+              'required' => true
             )
-            ->add(
-                'body',
-                null,
-                array(
-                    'label' => $resourceName . '.form.body_label',
-                    'attr' => array(
-                        'rows' => 12,
-                        'class' => 'inbox-editor inbox-wysihtml5'
-                    )
-                )
+          )
+          ->add(
+            'body',
+            null,
+            array(
+              'label' => $resourceName . '.form.body_label',
+              'attr' => array(
+                'rows' => 12,
+                'class' => 'ckeditor'
+              ),
+              'required' => false
             )
-            ->add(
-                'locale',
-                'choice',
-                array(
-                    'label' => $resourceName . '.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales)
-                )
+          )
+          ->add(
+            'locale',
+            'choice',
+            array(
+              'label' => $resourceName . '.form.locale_label',
+              'choices' => array_combine($this->locales, $this->locales)
             )
-            ->add(
-                'publishable',
-                null,
-                array(
-                    'label' => $resourceName . '.form.publishable_label',
-                    'required' => false
-                )
+          )
+          ->add(
+            'publishable',
+            null,
+            array(
+              'label' => $resourceName . '.form.publishable_label',
+              'required' => false
             )
-            ->add(
-                'publishStartDate',
-                'sonata_type_datetime_picker',
-                array(
-                    'dp_side_by_side' => true,
-                    'dp_use_seconds' => false,
-                    'required' => false,
-                    'label' => $resourceName . '.form.publish_start_label',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => 'es',
-                )
+          )
+          ->add(
+            'publishStartDate',
+            'datetime',
+            array(
+              'required' => false,
+              'label' => $resourceName . '.form.publish_start_label',
+              'widget' => 'single_text',
+              'attr' => array('class' => 'datetime-picker'),
+              'format' => 'dd/MM/yyyy HH:mm'
             )
-            ->add(
-                'publishEndDate',
-                'sonata_type_datetime_picker',
-                array(
-                    'dp_side_by_side' => true,
-                    'dp_use_seconds' => false,
-                    'required' => false,
-                    'label' => $resourceName . '.form.publish_end_label',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => 'es',
-                )
+          )
+          ->add(
+            'publishEndDate',
+            'datetime',
+            array(
+              'label' => $resourceName . '.form.publish_end_label',
+              'widget' => 'single_text',
+              'attr' => array('class' => 'datetime-picker'),
+              'format' => 'dd/MM/yyyy HH:mm',
+              'required' => false,
             )
-            ->add(
-                'routes',
-                'positibe_route_permalink',
-                array(
-                    'label' => $resourceName . '.form.routes_label',
-                    'content_has_routes' => $options['data'],
-                    'current_locale' => $options['data']->getLocale()
-                )
+          )
+          ->add(
+            'routes',
+            'positibe_route_permalink',
+            array(
+              'label' => $resourceName . '.form.routes_label',
+              'content_has_routes' => $options['data'],
+              'current_locale' => $options['data']->getLocale()
             )
-            ->add(
-                'seoMetadata',
-                new SeoMetadataType(),
-                array(
-                    'label' => $resourceName . '.form.seo_label',
-                )
+          )
+          ->add(
+            'seoMetadata',
+            new SeoMetadataType(),
+            array(
+              'label' => $resourceName . '.form.seo_label',
             )
-            ->add(
-                'image',
-                'sonata_media_type',
-                array(
-                    'provider' => 'sonata.media.provider.image',
-                    'context' => 'page',
-                    'attr' => array(
-                        'class' => 'fileupload-preview thumbnail',
-                        'style' => 'display:none'
-                    ),
-                    'label' => $resourceName . '.form.image_label',
-                    'required' => false
-                )
-            );
+          )
+          ->add(
+            'image',
+            'positibe_image_type',
+            array(
+              'label' => $resourceName . '.form.image_label',
+              'translation_domain' => 'messages',
+              'required' => false
+            )
+          );
     }
 
     public function getResourceName()
@@ -154,9 +148,9 @@ class AbstractPageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\AbstractPage',
-            )
+          array(
+            'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\AbstractPage',
+          )
         );
     }
 

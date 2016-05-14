@@ -40,87 +40,84 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(
-                'title',
-                null,
-                array(
-                    'label' => 'static_content.form.title_label',
-                    'required' => true
-                )
+          ->add(
+            'title',
+            null,
+            array(
+              'label' => 'static_content.form.title_label',
+              'required' => true
             )
-            ->add(
-                'body',
-                'ckeditor',
-                array(
-                    'label' => 'static_content.form.body_label',
-                    'config_name' => 'default',
-                    'attr' => array(
-                        'rows' => 12,
-                        'class' => 'inbox-editor inbox-wysihtml5'
-                    )
-                )
+          )
+          ->add(
+            'body',
+            null,
+            array(
+              'label' => 'static_content.form.body_label',
+              'attr' => array(
+                'rows' => 12,
+                'class' => 'ckeditor'
+              )
             )
-            ->add(
-                'locale',
-                'choice',
-                array(
-                    'label' => 'static_content.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales)
-                )
+          )
+          ->add(
+            'locale',
+            'choice',
+            array(
+              'label' => 'static_content.form.locale_label',
+              'choices' => array_combine($this->locales, $this->locales)
             )
-            ->add(
-                'customController',
-                'choice',
-                array(
-                    'label' => 'static_content.form.custom_controller_label',
-                    'choices' => array_combine(
-                        array_keys($this->routeBuilder->getController()),
-                        array_keys($this->routeBuilder->getController())
-                    ),
-                    'required' => false,
-                )
+          )
+          ->add(
+            'customController',
+            'choice',
+            array(
+              'label' => 'static_content.form.custom_controller_label',
+              'choices' => array_combine(
+                array_keys($this->routeBuilder->getController()),
+                array_keys($this->routeBuilder->getController())
+              ),
+              'required' => false,
             )
-            ->add(
-                'publishable',
-                null,
-                array(
-                    'label' => 'static_content.form.publishable_label',
-                    'required' => false
-                )
+          )
+          ->add(
+            'publishable',
+            null,
+            array(
+              'label' => 'static_content.form.publishable_label',
+              'required' => false
             )
-            ->add(
-                'publishStartDate',
-                'sonata_type_datetime_picker',
-                array(
-                    'dp_side_by_side' => true,
-                    'dp_use_seconds' => false,
-                    'required' => false,
-                    'label' => 'static_content.form.publish_start_label',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => $this->defaultLocale,
-                )
+          )
+          ->add(
+            'publishStartDate',
+            'datetime',
+            array(
+              'required' => false,
+              'label' => 'static_content.form.publish_start_label',
+              'widget' => 'single_text',
+              'attr' => array('class' => 'datetime-picker'),
+              'format' => 'dd/MM/yyyy HH:mm'
             )
-            ->add(
-                'publishEndDate',
-                'sonata_type_datetime_picker',
-                array(
-                    'dp_side_by_side' => true,
-                    'dp_use_seconds' => false,
-                    'required' => false,
-                    'label' => 'static_content.form.publish_end_label',
-                    'format' => 'dd/MM/yyyy HH:mm',
-                    'dp_language' => $this->defaultLocale,
-                )
+          )
+          ->add(
+            'publishEndDate',
+            'datetime',
+            array(
+              'required' => false,
+              'label' => 'static_content.form.publish_end_label',
+              'widget' => 'single_text',
+              'attr' => array('class' => 'datetime-picker'),
+              'format' => 'dd/MM/yyyy HH:mm'
             )
-            ->add(
-                'routes',
-                'positibe_route_permalink',
-                array(
-                    'label' => 'static_content.form.routes_label',
-                    'content_has_routes' => $options['data'],
-                    'current_locale' => $options['data']->getLocale()
-                )
+          )
+          ->add(
+            'routes',
+            'positibe_route_permalink',
+            array(
+              'label' => 'static_content.form.routes_label',
+              'content_has_routes' => $options['data'],
+              'current_locale' => $options['data']->getLocale()
             )
+          )
 //            ->add(
 //                'menuNodes',
 //                'collection',
@@ -136,46 +133,38 @@ class PageType extends AbstractType
 //                    'label' => 'static_content.form.menus_label',
 //                )
 //            )
-            ->add(
-                'seoMetadata',
-                new SeoMetadataType(),
-                array(
-                    'label' => 'static_content.form.seo_label',
-                )
+          ->add(
+            'seoMetadata',
+            new SeoMetadataType(),
+            array(
+              'label' => 'static_content.form.seo_label',
             )
-            ->add(
-                'image',
-                'positibe_image_type',
-                array(
-                    'provider' => 'positibe_orm_media.image_provider',
-                    'required' => false
-                )
+          )
+          ->add(
+            'image',
+            'positibe_image_type',
+            array(
+              'provider' => 'positibe_orm_media.image_provider',
+              'required' => false
             )
-            ->add(
-                'parent',
-                'entity',
-                array(
-                    'label' => 'static_content.form.parent_label',
-                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Category',
-                    'choices' => $this->getCategoryTranslated($options)
-                )
+          )
+          ->add(
+            'parent',
+            'entity',
+            array(
+              'label' => 'static_content.form.parent_label',
+              'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Category',
+              'choices' => $this->getCategoryTranslated($options)
             )
-            ->add(
-                'featured',
-                null,
-                array(
-                    'label' => 'static_content.form.featured_label',
-                    'required' => false
-                )
+          )
+          ->add(
+            'featured',
+            null,
+            array(
+              'label' => 'static_content.form.featured_label',
+              'required' => false
             )
-//            ->add(
-//                'contentType',
-//                'hidden',
-//                array(
-//                    'label' => 'static_content.form.content_type_label'
-//                )
-//            )
-        ;
+          );
     }
 
     /**
@@ -210,10 +199,10 @@ class PageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
-                'translation_domain' => 'PositibeOrmContentBundle'
-            )
+          array(
+            'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
+            'translation_domain' => 'PositibeOrmContentBundle'
+          )
         );
     }
 

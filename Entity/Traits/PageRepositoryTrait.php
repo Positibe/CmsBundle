@@ -126,22 +126,6 @@ trait PageRepositoryTrait
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * @param $contentType
-     * @param $locale
-     * @return Page[]|ArrayCollection
-     *
-     * @deprecated
-     */
-    public function findByContentType($contentType, $locale)
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->where('o.contentType = :contentType')
-            ->setParameter('contentType', $contentType);
-
-        return $this->getQuery($qb)->getResult();
-    }
-
     public function findContentByParent($parent, $count = 2, $sort = 'publishStartDate', $order = 'DESC')
     {
         $qb = $this->createQueryBuilder('o')
