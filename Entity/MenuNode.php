@@ -41,14 +41,14 @@ class MenuNode extends MenuNodeBase
     /**
      * @var MenuNode[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="parent", cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="parent", cascade={"persist"}, orphanRemoval=TRUE, fetch="EXTRA_LAZY")
      */
     protected $children;
 
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage", inversedBy="menuNodes")
      */
     protected $page;
 
