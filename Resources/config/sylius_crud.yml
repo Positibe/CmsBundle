@@ -1,0 +1,38 @@
+sylius_resource:
+    settings:
+        sortable: true
+        filterable: true
+        paginate: $paginate
+    resources:
+        positibe.page:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Page
+        positibe.category:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Category
+        positibe.menu:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\MenuNode
+        positibe.block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock
+        positibe.menu_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\MenuBlock
+        positibe.content_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\ContentBlock
+        positibe.page_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock
+        positibe.gallery_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\GalleryBlock

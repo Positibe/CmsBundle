@@ -5,7 +5,7 @@
     "keywords": ["content","content management framework", "positibe", "positibelabs"],
     "homepage": "http://positibelabs.blogspot.com/bundles/content",
     "license": "Private",
-    "version": "0.3.2.0",
+    "version": "0.4.0.0-beta",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -26,7 +26,8 @@
         "positibe/orm-seo-bundle": "~0.3",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "~2.3",
-        "pagerfanta/pagerfanta": "1.0.*"
+        "pagerfanta/pagerfanta": "1.0.*",
+        "sylius/resource-bundle": "0.17.*"
     },
     "autoload": {
         "psr-4": { "Positibe\\Bundle\\OrmContentBundle\\": "" }

@@ -14,6 +14,7 @@ use Positibe\Bundle\OrmBlockBundle\Entity\Block;
 use Positibe\Bundle\OrmContentBundle\Entity\Category;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Class AbstractVisibilityBlock
@@ -23,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class AbstractVisibilityBlock extends Block
+class AbstractVisibilityBlock extends Block implements ResourceInterface
 {
     /**
      * @var Category

@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Class Menu
@@ -26,7 +27,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuNode extends MenuNodeBase
+class MenuNode extends MenuNodeBase implements ResourceInterface
 {
     /**
      * Parent menu node.
@@ -70,13 +71,13 @@ class MenuNode extends MenuNodeBase
     public function getOptions()
     {
         return array_merge(
-            parent::getOptions(),
-            array(
-                'linkType' => $this->linkType,
-                'content' => $this->getContent(),
-                'contentClass' => $this->getContentClass(),
-                'iconClass' => $this->getIconClass()
-            )
+          parent::getOptions(),
+          array(
+            'linkType' => $this->linkType,
+            'content' => $this->getContent(),
+            'contentClass' => $this->getContentClass(),
+            'iconClass' => $this->getIconClass()
+          )
         );
     }
 
