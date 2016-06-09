@@ -12,8 +12,10 @@ namespace Positibe\Bundle\OrmContentBundle\Factory;
 
 use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
+use Positibe\Bundle\OrmContentBundle\Entity\Repository\MenuNodeRepository;
 use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 
 /**
@@ -22,7 +24,72 @@ use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuNodeFactory {
+class MenuNodeFactory implements FactoryInterface
+{
+    protected $menuNodeRepository;
+
+    public function __construct(MenuNodeRepository $menuNodeRepository)
+    {
+        $this->menuNodeRepository = $menuNodeRepository;
+    }
+
+    /**
+     * @return object|MenuNode
+     */
+    public function createNew()
+    {
+        return new MenuNode();
+    }
+
+    /**
+     * @param $name
+     * @return MenuNode
+     */
+    public function createNewByParentName($name)
+    {
+        $parent = $this->menuNodeRepository->findOneByName($name);
+
+        $menu = $this->createNew();
+        $menu->setParent($parent);
+
+        return $menu;
+    }
+
+    /**
+     * @param $parent
+     * @param $name
+     * @return MenuNode
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function createNewChildByParentName($parent, $name)
+    {
+        $parent = $this->menuNodeRepository->createQueryBuilder('o')
+          ->join('o.parent', 'parent')
+          ->where('o.name = :name AND parent.name = :parent')
+          ->setParameter('name', $name)
+          ->setParameter('parent', $parent)
+          ->getQuery()->getOneOrNullResult();
+
+        $menu = $this->createNew();
+        $menu->setParent($parent);
+
+        return $menu;
+    }
+
+    /**
+     * @param $id
+     * @return MenuNode
+     */
+    public function createNewByParentId($id)
+    {
+        $parent = $this->menuNodeRepository->find($id);
+
+        $menu = new MenuNode();
+        $menu->setParent($parent);
+
+        return $menu;
+    }
+
     /**
      * Create a Menu parent
      *
@@ -80,8 +147,12 @@ class MenuNodeFactory {
      * @param int $position
      * @return MenuNode
      */
-    public function createContentMenuNode(MenuNodeReferrersInterface $content, $label, $parentMenu = null, $position = 0)
-    {
+    public function createContentMenuNode(
+      MenuNodeReferrersInterface $content,
+      $label,
+      $parentMenu = null,
+      $position = 0
+    ) {
         $menu = new MenuNode();
         $menu->setLabel($label);
         $menu->setName(Urlizer::urlize($label));
@@ -97,7 +168,7 @@ class MenuNodeFactory {
      * Create a menu that reference to a route
      *
      * @param $label
-     * @param string $route         The name of the route
+     * @param string $route The name of the route
      * @param null $parentMenu
      * @param int $position
      * @return MenuNode

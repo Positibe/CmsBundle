@@ -8,31 +8,39 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Page
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository
         positibe.category:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Category
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\CategoryRepository
         positibe.menu:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\MenuNode
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\MenuNodeRepository
         positibe.block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository
         positibe.menu_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\MenuBlock
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository
         positibe.content_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\ContentBlock
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository
         positibe.page_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository
         positibe.gallery_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\OrmContentBundle\Entity\Blocks\GalleryBlock
+                repository: Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository

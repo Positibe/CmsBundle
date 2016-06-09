@@ -12,19 +12,9 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
 
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
-use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
-use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
-use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
-use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
-use Positibe\Component\Publishable\Entity\PublishableTrait;
-use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
-use Positibe\Component\Seo\Entity\SeoAwareEntityTrait;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
 use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
@@ -47,14 +37,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 abstract class AbstractPage extends BaseContent implements
-  ResourceInterface,
-  PublishableInterface,
-  PublishTimePeriodInterface,
-  RouteReferrersInterface,
-  MenuNodeReferrersInterface,
-  SeoAwareInterface,
-  TranslatableInterface,
-  CustomRouteInformation
+    MenuNodeReferrersInterface,
+    CustomRouteInformation
 {
     /**
      * @var integer
@@ -119,9 +103,8 @@ abstract class AbstractPage extends BaseContent implements
 
     public function __construct()
     {
-        $this->routes = new ArrayCollection();
+        parent::__construct();
         $this->menuNodes = new ArrayCollection();
-        $this->seoMetadata = new SeoMetadata();
         $this->featured = false;
     }
 
@@ -251,7 +234,6 @@ abstract class AbstractPage extends BaseContent implements
     {
         return $this->featured;
     }
-
     /**
      * @return boolean
      */

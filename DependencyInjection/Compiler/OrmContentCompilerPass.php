@@ -37,5 +37,4 @@ class OrmContentCompilerPass implements CompilerPassInterface
                 array('Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock')
             );
     }
-
 } 

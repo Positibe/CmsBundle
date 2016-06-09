@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 

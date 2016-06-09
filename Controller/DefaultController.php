@@ -4,6 +4,8 @@ namespace Positibe\Bundle\OrmContentBundle\Controller;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
+use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\OrmContentBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +25,7 @@ class DefaultController extends Controller
      * We don't need an explicit check in this method.
      *
      * @param Request $request
-     * @param object  $contentDocument
+     * @param AbstractPage  $contentDocument
      * @param string  $contentTemplate Symfony path of the template to render
      *                                 the content document. If omitted, the
      *                                 default template is used.
@@ -45,6 +47,12 @@ class DefaultController extends Controller
         return $this->render($contentTemplate, $params);
     }
 
+    /**
+     * @param Request $request
+     * @param Category $contentDocument
+     * @param null $contentTemplate
+     * @return Response
+     */
     public function categoryIndexAction(Request $request, $contentDocument, $contentTemplate = null)
     {
         $contentTemplate = $contentTemplate ?: $this->defaultCategoryTemplate;

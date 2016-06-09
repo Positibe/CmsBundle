@@ -20,6 +20,7 @@ use Positibe\Bundle\OrmMediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 
 
@@ -29,7 +30,7 @@ use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageFactory
+class PageFactory implements FactoryInterface
 {
     const DEFAULT_CONTROLLER = 'PositibeOrmContentBundle:Default:index';
     private $menuFactory;
@@ -44,15 +45,40 @@ class PageFactory
      * @param $locale
      */
     public function __construct(
-        MenuNodeFactory $menuFactory,
-        RouteFactory $routeFactory,
-        EntityManager $entityManager,
-        $locale
+      MenuNodeFactory $menuFactory,
+      RouteFactory $routeFactory,
+      EntityManager $entityManager,
+      $locale
     ) {
         $this->menuFactory = $menuFactory;
         $this->routeFactory = $routeFactory;
         $this->em = $entityManager;
         $this->locale = $locale;
+    }
+
+    /**
+     * Create a new resource.
+     *
+     * @return object
+     */
+    public function createNew()
+    {
+        return new Page();
+    }
+
+
+    public function createNewByParentName($name)
+    {
+        /** @var Page $category */
+        $category = $this->em->createQueryBuilder()->select('c')->from('PositibeOrmContentBundle:Page', 'c')
+          ->where('c.name = :name')
+          ->setParameter('name', $name)->getQuery()->getOneOrNullResult();
+
+        /** @var Page $staticContent */
+        $staticContent = $this->createNew();
+        $staticContent->setParent($category);
+
+        return $staticContent;
     }
 
     /**
@@ -92,9 +118,9 @@ class PageFactory
 
         if ($auto && $needRoute) {
             $route = $this->routeFactory->createContentRoute(
-                $this->fixStaticPrefix(null, $page),
-                $page,
-                null
+              $this->fixStaticPrefix(null, $page),
+              $page,
+              null
             );
             $route->setLocale($currentLocale);
             $page->addRoute($route);
@@ -113,7 +139,7 @@ class PageFactory
 
             $locale = $page->getLocale();
             $pageWithParent = $page;
-            while ($pageWithParent->getParent() !== null) {
+            while ($pageWithParent instanceof Page && $pageWithParent->getParent() !== null) {
                 $parent = $pageWithParent->getParent();
 
                 if (!empty($locale)) {
@@ -146,13 +172,13 @@ class PageFactory
     public function createPageCategory($title, $body, $path, $parentMenu, $locale = null, $imagePath = null)
     {
         $page = $this->createPage(
-            $title,
-            $body,
-            $path,
-            $parentMenu,
-            $locale,
-            $imagePath,
-            'Positibe\Bundle\OrmContentBundle\Entity\Category'
+          $title,
+          $body,
+          $path,
+          $parentMenu,
+          $locale,
+          $imagePath,
+          'Positibe\Bundle\OrmContentBundle\Entity\Category'
         );
 
         return $page;

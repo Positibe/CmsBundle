@@ -92,3 +92,6 @@ services:
 
     positibe_orm_content.menu_node_factory:
         class: Positibe\Bundle\OrmContentBundle\Factory\MenuNodeFactory
+        arguments: [@positibe.repository.menu]
+        tags:
+            - { name: sylius.factory ,alias: positibe.factory.menu}

@@ -12,6 +12,7 @@ namespace Positibe\Bundle\OrmContentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class SeoMetadataType
@@ -27,15 +28,25 @@ class SeoMetadataType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove(
-                'extraProperties'
-            )
-            ->remove(
-                'extraNames'
-            )
-            ->remove(
-                'extraHttp'
-            );
+          ->remove(
+            'extraProperties'
+          )
+          ->remove(
+            'extraNames'
+          )
+          ->remove(
+            'extraHttp'
+          );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $defaults['by_reference'] = true;
+
+        $resolver->setDefaults($defaults);
     }
 
     public function getParent()

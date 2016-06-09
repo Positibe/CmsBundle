@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -81,6 +82,9 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
         );
     }
 
+    /**
+     * @return Page|AbstractPage|MenuNodeReferrersInterface
+     */
     public function getContent()
     {
         if ($this->content == null && $this->page !== null) {
@@ -91,7 +95,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     }
 
     /**
-     * @return Page
+     * @return AbstractPage
      */
     public function getPage()
     {
@@ -99,7 +103,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     }
 
     /**
-     * @param Page $page
+     * @param AbstractPage $page
      */
     public function setPage($page)
     {
