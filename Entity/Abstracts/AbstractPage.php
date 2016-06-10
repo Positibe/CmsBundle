@@ -13,7 +13,13 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
+use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
@@ -39,7 +45,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractPage extends BaseContent implements
   ResourceInterface,
+  PublishableInterface,
+  PublishTimePeriodInterface,
+  RouteReferrersInterface,
   MenuNodeReferrersInterface,
+  SeoAwareInterface,
+  TranslatableInterface,
   CustomRouteInformation
 {
     /**
@@ -105,8 +116,9 @@ abstract class AbstractPage extends BaseContent implements
 
     public function __construct()
     {
-        parent::__construct();
+        $this->routes = new ArrayCollection();
         $this->menuNodes = new ArrayCollection();
+        $this->seoMetadata = new SeoMetadata();
         $this->featured = false;
     }
 
