@@ -12,6 +12,7 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
 
 use Positibe\Bundle\OrmContentBundle\Model\ContentType;
 use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
@@ -37,8 +38,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 abstract class AbstractPage extends BaseContent implements
-    MenuNodeReferrersInterface,
-    CustomRouteInformation
+  ResourceInterface,
+  MenuNodeReferrersInterface,
+  CustomRouteInformation
 {
     /**
      * @var integer
@@ -234,6 +236,7 @@ abstract class AbstractPage extends BaseContent implements
     {
         return $this->featured;
     }
+
     /**
      * @return boolean
      */
