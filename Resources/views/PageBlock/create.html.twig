@@ -1,0 +1,27 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% block title %}Bloques de página{% endblock %}
+{% block subtitle %}Crear nuevo bloque de página{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'page' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_block_index') }}">Bloques de página</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        Nuevo bloque de página
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    {{ include('@PositibeOrmContent/PageBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+{% endblock %}

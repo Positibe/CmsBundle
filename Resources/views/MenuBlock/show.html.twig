@@ -1,0 +1,46 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+
+{% block title %}Bloques de menu{% endblock %}
+{% block subtitle %}{{ menu_block.title }} {% endblock %}
+{% set menu_active  = 'block'%}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_block_index') }}">Bloques de menu</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ menu_block.name }} <small>({{ menu_block.menu     }})</small>
+    </li>
+{% endblock %}
+
+{% block actions_block %}
+        <a href="{{ path('positibe_menu_block_update', {'name': menu_block.name}) }}" class="btn grey-salt
+    btn-fit-height"><i class="fa fa-edit"></i> Editar</a>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase">
+                    <i class="fa fa-file"></i>{{ menu_block.name }}
+                </p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_block_index') }}"
+                   name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+
+                <a href="{{ path('positibe_menu_block_update', {'name': menu_block.name}) }}" class="btn btn-default btn-circle">
+                    <i class="fa fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <h4>Menu: <small> {{ menu_block.menu | default('-') | raw }}</small> </h4>
+        </div>
+    </div>
+{% endblock %}

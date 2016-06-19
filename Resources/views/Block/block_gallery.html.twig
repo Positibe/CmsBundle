@@ -13,7 +13,7 @@
             {% for media in galleryHasMedias %}
 
                 <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <img src="{{ media.media.path }}" alt="{{ media.title }}">
+                    <img src="{{ cmf_media_display_url(media.media) }}" alt="{{ media.title }}" class="img-responsive">
 
                     <div class="carousel-caption">
                         {{ media.body | raw | striptags | truncate(150) }}

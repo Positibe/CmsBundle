@@ -1,0 +1,62 @@
+<script>
+    jQuery(document).ready(function (e) {
+        var linkTypeInput = jQuery('#positibe_menu_node_linkType');
+        linkTypeChoices(linkTypeInput.val());
+        linkTypeInput.on('change', function (e) {
+            var linkType = jQuery(this).val();
+            linkTypeChoices(linkType);
+        });
+        jQuery('#positibe_menu_node_contentClass').on('change', function (e) {
+            loadContentByClass(jQuery('#positibe_menu_node_contentClass').val());
+        });
+    });
+    function linkTypeChoices(linkType) {
+        if (linkType === 'uri') {
+            jQuery('#selectable_positibe_menu_node_uri').attr('style', 'display: block;');
+            jQuery('#selectable_positibe_menu_node_route').attr('style', 'display: none;');
+            jQuery('#selectable_positibe_menu_node_content').attr('style', 'display: none;');
+        } else if (linkType === 'route') {
+            jQuery('#selectable_positibe_menu_node_route').attr('style', 'display: block;');
+            jQuery('#selectable_positibe_menu_node_uri').attr('style', 'display: none;');
+            jQuery('#selectable_positibe_menu_node_content').attr('style', 'display: none;');
+        } else if (linkType === 'content') {
+            jQuery('#selectable_positibe_menu_node_content').attr('style', 'display: block;');
+            jQuery('#selectable_positibe_menu_node_route').attr('style', 'display: none;');
+            jQuery('#selectable_positibe_menu_node_uri').attr('style', 'display: none;');
+        }
+    }
+
+    function loadContentByClass(contentClass) {
+        var option = jQuery('#positibe_menu_node_content_chosen');
+        if (option.length > 0) {
+            option.find('.chosen-single').addClass('btn disabled');
+            option.find('.chosen-single > span').addClass('text-left');
+        }
+        else {
+            option = jQuery('#selectable_positibe_menu_node_content');
+            option.addClass('disabled');
+        }
+        $.ajax({
+            url: ('{{ path('positibe_orm_menu_content_class') }}?contentClass=' + contentClass),
+            success: function (data) {
+                var select = $(data);
+                select.attr('id', 'positibe_menu_node_content');
+                select.attr('name', 'positibe_menu_node[content]');
+
+                var option = jQuery('#positibe_menu_node_content_chosen');
+                if (option.length === 0) {
+                    option = jQuery('#positibe_menu_node_content');
+                }
+                var formGroup = option.parent();
+
+                option.remove();
+                formGroup.append(select);
+            },
+            complete: function () {
+                var option = jQuery('#positibe_menu_node_content_chosen');
+                option.find('.chosen-single').removeClass('btn disabled');
+                option.find('.chosen-single > span').removeClass('text-left');
+            }
+        });
+    }
+</script>

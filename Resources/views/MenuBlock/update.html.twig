@@ -1,0 +1,33 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Bloques de menu{% endblock %}
+{% block subtitle %}Editar bloque de menu{% endblock %}
+{% set menu_active  = 'block'%}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_block_index') }}">Bloques de menu</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ menu_block.name }}
+        <small>({{ menu_block.menu }})</small>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/MenuBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+
+    {{ delete_confirm('positibe_menu_block_remove', path('positibe_menu_block_delete', {'name': menu_block.name})) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+{% endblock %}

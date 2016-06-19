@@ -1,0 +1,52 @@
+<div class="tab-pane" id="form_block_tab_location">
+    {{ form_row(form.templatePosition) }}
+    {{ form_row(form.roles) }}
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Visibilidad:</label>
+
+        <div class="col-sm-10" style="padding-top: 7px; margin-top: 1px">
+            {{ form_widget(form.always, {'attr': {'class': 'form_block_always' }}) }}
+            <div class="well well-sm form_block_visibility">
+                <div class="row ">
+                    <div class="col-sm-2">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <a href="#form_visibility_block_tab_category" data-toggle="tab" aria-expanded="true">
+                                    Categoría</a>
+                            </li>
+                            <li class="">
+                                <a href="#form_visibility_block_tab_pages" data-toggle="tab" aria-expanded="true">
+                                    Páginas</a>
+                            </li>
+                            <li class="">
+                                <a href="#form_visibility_block_tab_routes" data-toggle="tab" aria-expanded="true">
+                                    Rutas</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="form_visibility_block_tab_category">
+                                {{ form_errors(form.categories) }}
+                                {{ form_widget(form.categories) }}
+                            </div>
+                            <div class="tab-pane " id="form_visibility_block_tab_pages">
+                                {{ form_errors(form.pages) }}
+                                {{ form_widget(form.pages) }}
+                            </div>
+                            <div class="tab-pane " id="form_visibility_block_tab_routes">
+                                {{ form_errors(form.routes) }}
+                                {{ form_widget(form.routes) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane" id="form_block_tab_configuration">
+    {{ form_row(form.publishable) }}
+    {{ form_row(form.publishStartDate) }}
+    {{ form_row(form.publishEndDate) }}
+</div>

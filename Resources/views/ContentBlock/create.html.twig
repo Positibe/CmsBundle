@@ -1,0 +1,27 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% block title %}Bloques simples{% endblock %}
+{% block subtitle %}Crear nuevo bloque simples{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'image' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_content_block_index') }}">Bloques simples</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        Nuevo bloque simples
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    {{ include('@PositibeOrmContent/ContentBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+{% endblock %}

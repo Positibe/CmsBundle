@@ -1,0 +1,31 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% block title %}Menús{% endblock %}
+{% block subtitle %}Crear nuevo submenú{% endblock %}
+{% set menu_active = 'content' %}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_index') }}">Menús</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}">{{ app.request.get('parent') }}</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        Nuevo submenú
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    {{ include('@PositibeOrmContent/SubMenu/_form.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/SubMenu/_form_javascript.html.twig') }}
+{% endblock %}

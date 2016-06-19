@@ -1,0 +1,36 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Tipos de página{% endblock %}
+{% block subtitle %}Editar coleción de páginas{% endblock %}
+{% set menu_active = 'content' %}
+{% set content_menu = 'category' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_category_index') }}">Tipos de página</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ category.title }}
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'form-horizontal inbox-compose' }}) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/Category/_form.html.twig') }}
+    {{ form_end(form) }}
+    {{ delete_confirm('positibe_category_remove', path('positibe_category_delete', {'name': category.name}) ) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        jQuery('#positibe_category_locale').on('change', function (e) {
+            location.replace('{{ path('positibe_category_update', {'name': category.name}) }}?data_locale='
+            + $(this).val());
+        });
+    </script>
+{% endblock %}

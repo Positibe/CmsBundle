@@ -1,0 +1,78 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import pagination %}
+{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+
+{% block title %}Menús{% endblock %}
+{% block subtitle %}Listado de menús{% endblock %}
+{% set menu_active = 'content' %}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_index') }}">Menús</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-sitemap"></i> Menu</p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_menu_create') }}" class="btn btn-sm btn-default btn-circle"><i class="fa
+        fa-plus"></i> Nuevo menú</a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            {{ pagination(menus) }}
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th>No.</th>
+                    <th class="col-lg-2">{{ sylius_resource_sort('name', 'Nombre') }}</th>
+                    <th>Submenus</th>
+                    <th class="col-lg-5">Attributos</th>
+                    <th>Mostrado</th>
+                    <th>Acciones</th>
+                </tr>
+                {% set count = menus.maxPerPage * (menus.currentPage - 1) %}
+                {% for menu in menus %}
+                    <tr>
+                        <td>{{ count + loop.index }}</td>
+                        <td><a href="{{ path('positibe_menu_update', {'name': menu.name}) }}">{{ menu.name }}</a></td>
+                        <td>
+                            <a class="badge badge-{% if menu.children | length == 0 %}warning{% else %}success{% endif %}"
+                               href="{{ path('positibe_submenu_index', {'parent': menu.name }) }}">
+                                <strong>{{ menu.children | length }}</strong>
+                            </a>
+                        </td>
+                        <td>{{ menu.childrenAttributes | join(',') | default('-') }}</td>
+                        <td>
+                            {% if menu.display == false or menu.displayChildren == false or menu.publishable == false %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% else %}
+                                <i class="fa fa-check-square text-success"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path('positibe_submenu_index', {'parent': menu.name}) }}"
+                                   class="btn btn-default btn-xs"><i class="fa fa-search"></i> Detalles</a>
+                                <a href="{{ path('positibe_menu_update', {'name': menu.name }) }}"
+                                   class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No hay menus</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ pagination(menus) }}
+        </div>
+    </div>
+
+{% endblock %}

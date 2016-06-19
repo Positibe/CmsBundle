@@ -1,0 +1,50 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Menús{% endblock %}
+{% block subtitle %}Editar submenú{% endblock %}
+{% set menu_active = 'content' %}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_index') }}">Menús</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"> {{ app.request.get('parent') }}</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_submenu_child_index', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}">
+            {{ app.request.get('name') }}
+        </a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ menu.label | default(menu.name) }}
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/SubMenuChildren/_form.html.twig') }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    {{ delete_confirm('positibe_menu_node_remove', path('positibe_submenu_child_delete', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name })) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/SubMenu/_form_javascript.html.twig') }}
+    <script>
+        jQuery('#positibe_menu_node_locale').on('change', function (e) {
+            location.replace(
+                    '{{ path('positibe_submenu_child_index', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}?data_locale=' + $(this).val()
+            );
+        });
+    </script>
+{% endblock %}

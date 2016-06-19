@@ -1,0 +1,80 @@
+positibe_submenu_create:
+    path: /menus/{parent}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.menu:createAction
+        _sylius:
+            template: PositibeOrmContentBundle:SubMenu:create.html.twig
+            form: positibe_menu_node
+            factory:
+                method: createNewByParentName
+                arguments: [$parent]
+            redirect:
+                route: positibe_submenu_update
+                parameters: { parent: $parent, name: resource.name }
+
+positibe_submenu_index:
+   path: /menus/{parent}
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.menu:indexAction
+       _sylius:
+           template: PositibeOrmContentBundle:SubMenu:index.html.twig
+           sorting:
+               position: asc
+           criteria:
+               parent: $parent
+
+positibe_submenu_update:
+    path: /menus/{parent}/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.menu:updateAction
+        _sylius:
+            template: PositibeOrmContentBundle:SubMenu:update.html.twig
+            form: positibe_menu_node
+            repository:
+                method: findOneByNameAndParent
+                arguments: [$name, $parent]
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_submenu_update
+                parameters: { parent: $parent, name: resource.name }
+
+positibe_submenu_delete:
+    path: /menus/{parent}/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.menu:deleteAction
+        _sylius:
+            repository:
+                method: findOneByNameAndParent
+                arguments: [$name, $parent]
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_submenu_index
+                parameters: { parent: $parent }
+
+positibe_submenu_move_up:
+    pattern: /menus/{parent}/{name}/move-up
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.menu:moveUpAction
+        _sylius:
+            repository:
+                method: findOneByNameAndParent
+                arguments: [$name, $parent]
+            redirect: referer
+
+positibe_submenu_move_down:
+    pattern: /menus/{parent}/{name}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.menu:moveDownAction
+        _sylius:
+            repository:
+                method: findOneByNameAndParent
+                arguments: [$name, $parent]
+            redirect: referer

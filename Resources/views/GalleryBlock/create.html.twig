@@ -1,0 +1,29 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% block title %}Bloques de galería de imágenes{% endblock %}
+{% block subtitle %}Crear nuevo bloque de galería de imágenes{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'gallery' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_gallery_block_index') }}">Bloques de galería de imágenes</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        Nuevo bloque de galería de imágenes
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    {{ include('@PositibeOrmContent/GalleryBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeCmf/_form_collections.html.twig') }}
+{% endblock %}

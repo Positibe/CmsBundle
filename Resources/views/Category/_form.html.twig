@@ -1,0 +1,79 @@
+{% form_theme form '@PositibeCmf/_metronic_material_theme.html.twig' %}
+
+<div class="portlet light ">
+    <div class="portlet-title tabbable-line">
+        <div class="caption">
+            <i class="icon-globe theme-font hide"></i>
+            <span class="caption-subject font-green-sharp bold uppercase"><i class="fa  fa-folder-open-o"></i> Datos de lo tipo de página{% if category.title is not null %}: {{ category.title | truncate(25) }}{% endif %}</span>
+        </div>
+        <div class="actions btn-set">
+            <a href="{{ path('positibe_category_index') }}"
+               name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-circle "><i
+                        class="fa fa-reply"></i> Resetear</a>
+            <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Guardar</button>
+            {% if category is defined and category.id is not null %}
+                <a class="btn red-haze btn-circle" data-toggle="modal" href="#positibe_category_remove">
+                    <i class="fa fa-trash"></i> Remover
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="portlet-body">
+        <div class="tabbable-line tabbable-full-width">
+
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#form_category_tab_basic" data-toggle="tab" aria-expanded="true">Información
+                        básica</a>
+                </li>
+                <li class="">
+                    <a href="#form_category_tab_image" data-toggle="tab" aria-expanded="false">Imagen</a>
+                </li>
+                <li class="">
+                    <a href="#form_category_tab_configuration" data-toggle="tab" aria-expanded="false">Configuración</a>
+                </li>
+                <li class="">
+                    <a href="#form_category_tab_seo" data-toggle="tab" aria-expanded="false">Meta</a>
+                </li>
+                <li class="">
+                    <a href="#form_category_tab_custom" data-toggle="tab" aria-expanded="false">Personalización</a>
+                </li>
+                <li class="pull-right">
+                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn btn-circle' }}) }}
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="form_category_tab_basic">
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.body) }}
+                </div>
+                <div class="tab-pane" id="form_category_tab_seo">
+                    {{ form_errors(form.seoMetadata) }}
+                    {{ form_widget(form.seoMetadata) }}
+                </div>
+                <div class="tab-pane" id="form_category_tab_configuration">
+                    {{ form_row(form.publishable) }}
+                    {{ form_row(form.publishStartDate) }}
+                    {{ form_row(form.publishEndDate) }}
+                </div>
+                <div class="tab-pane" id="form_category_tab_image">
+                    {{ form_widget(form.image) }}
+                </div>
+                <div class="tab-pane" id="form_category_tab_custom">
+                    {{ form_widget(form.routes) }}
+                    {{ form_row(form.customController) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-actions text-right">
+            <hr>
+            <a href="{{ path('positibe_category_index') }}" class="btn btn-default">Cancelar</a>
+            <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
+        </div>
+    </div>
+</div>
+
+

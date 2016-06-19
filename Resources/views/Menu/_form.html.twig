@@ -1,0 +1,57 @@
+{% form_theme form '@PositibeCmf/_metronic_material_theme.html.twig' %}
+
+<div class="portlet light ">
+    <div class="portlet-title tabbable-line">
+        <div class="caption caption-md">
+            <i class="icon-globe theme-font hide"></i>
+            <span class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-sitemap"></i> Datos del menú</span>
+        </div>
+        <div class="actions btn-set">
+            <a href="{{ path('positibe_menu_index') }}"
+               name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-circle "><i
+                        class="fa fa-reply"></i> Resetear</a>
+            <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Guardar</button>
+            {% if menu is defined and menu.id is not null %}
+                <a class="btn red-haze btn-circle" data-toggle="modal" href="#form_menu_remove">
+                    <i class="fa fa-trash"></i> Remover
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="portlet-body">
+        <div class="tabbable-line tabbable-full-width">
+
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#form_menu_tab_basic" data-toggle="tab" aria-expanded="true">Información
+                        básica</a>
+                </li>
+                <li class="">
+                    <a href="#form_menu_tab_attr" data-toggle="tab" aria-expanded="false">Attributos HTML</a>
+                </li>
+                <li class="">
+                    <a href="#form_menu_tab_configuration" data-toggle="tab" aria-expanded="false">Configuración</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="form_menu_tab_basic">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="tab-pane" id="form_menu_tab_attr">
+                    {{ form_row(form.childrenAttributes) }}
+                </div>
+                <div class="tab-pane" id="form_menu_tab_configuration">
+                    {{ form_row(form.display) }}
+                    {{ form_row(form.displayChildren) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-actions text-right">
+            <hr>
+            <a href="{{ path('positibe_menu_index') }}" class="btn btn-default">Cancelar</a>
+            <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
+        </div>
+    </div>
+</div>

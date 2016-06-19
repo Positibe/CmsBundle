@@ -1,0 +1,47 @@
+positibe_menu_block_create:
+    path: /menu_block/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.menu_block:createAction
+        _sylius:
+            redirect:
+                route: positibe_menu_block_show
+                parameters: { name: resource.name }
+
+positibe_menu_block_index:
+   path: /menu_block
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.menu_block:indexAction
+
+positibe_menu_block_show:
+    path: /menu_block/{name}
+    methods: [GET]
+    defaults:
+        _controller: positibe.controller.menu_block:showAction
+        _sylius:
+            criteria:
+                name: $name
+
+positibe_menu_block_update:
+    path: /menu_block/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.menu_block:updateAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_menu_block_show
+                parameters: { name: resource.name }
+
+positibe_menu_block_delete:
+    path: /menu_block/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.menu_block:deleteAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_block_index

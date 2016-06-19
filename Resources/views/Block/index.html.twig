@@ -1,0 +1,150 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import pagination %}
+{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+
+{% block title %}Bloques{% endblock %}
+{% block subtitle %}Listado de bloques{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'block' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_block_index') }}">Bloques</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-cubes"></i> Bloques</p>
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-default btn-circle" href="javascript:;" data-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fa fa-plus"></i> Nuevo bloque <i class="fa fa-angle-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="{{ path('positibe_content_block_create') }}"><i class="fa fa fa-photo"></i> Simple</a>
+                            <a href="{{ path('positibe_gallery_block_create') }}"><i class="fa fa-file-movie-o"></i>
+                                Galería</a>
+                            <a href="{{ path('positibe_page_block_create') }}"><i class="fa fa-file-text"></i>
+                                Página</a>
+                            <a href="{{ path('positibe_menu_block_create') }}"><i class="fa fa-sitemap"></i>
+                                Menú</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="portlet-body">
+            {{ pagination(blocks) }}
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th style="width: 20px">No.</th>
+                    <th>{{ sylius_resource_sort('name', 'Nombre') }}</th>
+                    <th>{{ sylius_resource_sort('templatePosition', 'Ubicación') }}</th>
+                    <th>{{ sylius_resource_sort('type', 'Tipo') }}</th>
+                    <th>{{ sylius_resource_sort('always', 'Visible') }}</th>
+                    <th>Ordenar</th>
+                    <th style="width: 165px">Acciones</th>
+                </tr>
+                {% set count = blocks.maxPerPage * (blocks.currentPage - 1) %}
+                {% for block in blocks %}
+                    {% if block.type == 'positibe_orm_content.block_page' %}
+                        {% set path_update = path('positibe_page_block_update', {'name': block.name}) %}
+                        {% set path_show = path('positibe_page_block_show', {'name': block.name}) %}
+                    {% elseif block.type == 'positibe_orm_content.block_content' %}
+                        {% set path_update = path('positibe_content_block_update', {'name': block.name}) %}
+                        {% set path_show = path('positibe_content_block_show', {'name': block.name}) %}
+                    {% elseif block.type == 'positibe_orm_content.block_gallery' %}
+                        {% set path_update = path('positibe_gallery_block_update', {'name': block.name}) %}
+                        {% set path_show = path('positibe_gallery_block_show', {'name': block.name}) %}
+                    {% elseif block.type == 'positibe_orm_content.block_menu' %}
+                        {% set path_update = path('positibe_menu_block_update', {'name': block.name}) %}
+                        {% set path_show = path('positibe_menu_block_show', {'name': block.name}) %}
+                    {% else %}
+                        {% set path_update = '#' %}
+                        {% set path_show = '#' %}
+                    {% endif %}
+                    <tr>
+                        <td>{{ count + loop.index }}</td>
+                        <td>
+                            <a href="{{ path_update }}">{{ block.name }}</a></td>
+                        <td>{{ block.templatePosition | default('-') }} ({{ block.position }})</td>
+                        <td><strong>{{ block.type | trans({}, 'PositibeCmfBundle') }}</strong></td>
+                        <td>
+                            <div class="badge text-muted">
+                                {% set visibility = [] %}
+                                {% if block.always %}
+                                    {% set visibility = visibility|merge(['Siempre']) %}
+                                {% endif %}
+                                {% if block.roles | length > 0 %}
+                                    {% set visibility = visibility|merge(['Por rol']) %}
+                                {% endif %}
+                                {% if block.pages | length > 0 %}
+                                    {% set visibility = visibility|merge(['Por página']) %}
+                                {% endif %}
+                                {% if block.categories | length > 0 %}
+                                    {% set visibility = visibility|merge(['Por Categoría']) %}
+                                {% endif %}
+                                {% if block.routes | length > 0 %}
+                                    {% set visibility = visibility|merge(['Ror ruta']) %}
+                                {% endif %}
+                                {{ visibility | join('/') }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-sm">
+                                {{ buttons.move(path('positibe_block_move_up', {'name': block.name}), 'up',
+                                loop.first and not blocks.hasPreviousPage, loop.last and not blocks.hasNextPage) }}
+                                {{ buttons.move(path('positibe_block_move_down', {'name': block.name}), 'down',
+                                loop.first and not blocks.hasPreviousPage, loop.last and not blocks.hasNextPage) }}
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ path_show }}"
+                                   class="btn btn-default btn-xs"><i class="fa fa-search"></i> Detalles</a>
+                                <a href="{{ path_update }}"
+                                   class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">No hay bloques</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ pagination(blocks) }}
+            <table class="table table-hover">
+                <tr>
+
+                </tr>
+
+            </table>
+            <div class="table-options">
+                <div class="pull-left">
+                    {{ pagination(blocks) }}
+                </div>
+                <div class="text-right">
+                    <div class="pagination text-left" style="position: relative">
+                        {{ sylius_resource_paginate(blocks, [10, 30, 50]) }}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Bloques de galería de imágenes{% endblock %}
+{% block subtitle %}Editar bloque de galería de imágenes{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'gallery' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_gallery_block_index') }}">Bloques de galería de imágenes</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ gallery_block.name }}
+        <small>({{ gallery_block.name }})</small>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/GalleryBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+
+    {{ delete_confirm('positibe_gallery_block_remove', path('positibe_gallery_block_delete', {'name': gallery_block.name})) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeCmf/_form_collections.html.twig') }}
+{% endblock %}

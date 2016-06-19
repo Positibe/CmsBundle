@@ -1,0 +1,74 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import pagination %}
+{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+
+{% block title %}Bloques de página{% endblock %}
+{% block subtitle %}Listado de bloques{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'page' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_index') }}">Bloques de página</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {#<form action="" method="get" id="form_category_content_block_filter" name="criteria"></form>#}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase">
+                    <i class="fa fa-file-text"></i> Bloques de página</p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_page_block_create') }}"
+                   class="btn btn-sm btn-default btn-circle"><i class="fa fa-plus"></i> Nuevo bloque de página</a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            {{ pagination(page_blocks) }}
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th>No.</th>
+                    <th class="col-lg-2">{{ sylius_resource_sort('name', 'Nombre') }}</th>
+                    <th class="col-lg-7">Página</th>
+                    <th>Acciones</th>
+                </tr>
+                {% set count = page_blocks.maxPerPage * (page_blocks.currentPage - 1) %}
+                {% for block in page_blocks %}
+                    <tr>
+                        <td>{{ count + loop.index }}</td>
+                        <td>
+                            <a href="{{ path('positibe_page_block_update', {'name': block.name}) }}">{{ block.name }}
+                            </a>
+                        </td>
+                        <td>
+
+                            <a href="{{ path('positibe_page_show', {'name': block.page.name }) }}">
+                                <div class="badge badge-info"><strong>{{ block.page.title }}</strong></div>
+                            </a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('positibe_page_block_show', {'name': block.name}) }}"><i
+                                        class="fa fa-search"></i> Detalles</a>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('positibe_page_block_update', {'name': block.name}) }}"><i
+                                        class="fa fa-edit"></i> Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="34">No hay bloques</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ pagination(page_blocks) }}
+        </div>
+    </div>
+
+{% endblock %}

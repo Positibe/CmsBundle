@@ -1,0 +1,65 @@
+positibe_block_create:
+    path: /block/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.block:createAction
+        _sylius:
+            redirect:
+                route: positibe_block_show
+                parameters: { name: resource.name }
+
+positibe_block_index:
+   path: /block
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.block:indexAction
+
+positibe_block_show:
+    path: /block/{name}
+    methods: [GET]
+    defaults:
+        _controller: positibe.controller.block:showAction
+        _sylius:
+            criteria:
+                name: $name
+
+positibe_block_update:
+    path: /block/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.block:updateAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_block_show
+                parameters: { name: resource.name }
+
+positibe_block_delete:
+    path: /block/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.block:deleteAction
+        _sylius:
+            criteria:
+                name: $name
+
+positibe_block_move_up:
+    pattern: /block/{name}/move-up
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.block:moveUpAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect: referer
+
+positibe_block_move_down:
+    pattern: /block/{name}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.block:moveDownAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect: referer

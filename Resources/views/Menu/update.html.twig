@@ -1,0 +1,38 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Menús{% endblock %}
+{% block subtitle %}Editar menú{% endblock %}
+{% set menu_active = 'content' %}
+{% set content_menu = 'menu' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_menu_index') }}">Menús</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ menu.label | default(menu.name) }}
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/Menu/_form.html.twig') }}
+    {{ form_end(form) }}
+    {{ delete_confirm('form_menu_remove', path('positibe_menu_delete', {'name': menu.name })) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        jQuery('#positibe_menu_locale').on('change', function (e) {
+            location.replace(
+                    '{{ path('positibe_menu_update', {'name': menu.name}) }}?data_locale=' + $(this).val()
+            );
+        });
+    </script>
+{% endblock %}

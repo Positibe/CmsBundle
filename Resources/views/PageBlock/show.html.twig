@@ -1,0 +1,53 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% block title %}Bloques de página{% endblock %}
+{% block subtitle %}Detalles de bloque de página{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'page' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_page_block_index') }}">Bloques de página</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ page_block.name }}
+    </li>
+{% endblock %}
+
+{% block actions_block %}
+    <a href="{{ path('positibe_page_block_update', {'name': page_block.name}) }}" class="btn grey-salt
+    btn-fit-height"><i class="fa fa-edit"></i> Editar</a>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase">
+                    <i class="fa fa-file-text"></i>{{ page_block.name }}
+                </p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_block_index') }}"
+                   name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+
+                <a href="{{ path('positibe_page_block_update', {'name': page_block.name}) }}" class="btn btn-default btn-circle">
+                    <i class="fa fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <h4>Página:</h4>
+
+            <p><strong>Título:</strong> <a
+                        href="{{ path('positibe_page_show', {'name': page_block.page.name }) }}">{{ page_block.page.title }}</a>
+            </p>
+
+            <p><strong>Cuerpo:</strong></p>
+
+            <p> {{ page_block.page.body | raw }}</p>
+        </div>
+    </div>
+{% endblock %}

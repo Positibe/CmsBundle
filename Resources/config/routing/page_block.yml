@@ -1,0 +1,67 @@
+positibe_page_block_create:
+    path: /page_blocks/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.page_block:createAction
+        _sylius:
+            redirect:
+                route: positibe_page_block_show
+                parameters: { name: resource.name }
+
+positibe_page_block_index:
+   path: /page_blocks
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.page_block:indexAction
+
+positibe_page_block_show:
+    path: /page_blocks/{name}
+    methods: [GET]
+    defaults:
+        _controller: positibe.controller.page_block:showAction
+        _sylius:
+            criteria:
+                name: $name
+
+positibe_page_block_update:
+    path: /page_blocks/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.page_block:updateAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_page_block_show
+                parameters: { name: resource.name }
+
+positibe_page_block_delete:
+    path: /page_blocks/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.page_block:deleteAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_block_index
+
+positibe_page_block_move_up:
+        pattern: /{name}/move-up
+        methods: [PUT]
+        defaults:
+            _controller: positibe.controller.page_block:moveUpAction
+            _sylius:
+                criteria:
+                    name: $name
+                redirect: referer
+
+positibe_page_block_move_down:
+    pattern: /{name}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.page_block:moveDownAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect: referer

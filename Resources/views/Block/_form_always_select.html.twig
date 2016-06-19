@@ -1,0 +1,18 @@
+<script>
+    jQuery(document).ready(function () {
+        function changeDisplayVisibilityOn() {
+            var check = jQuery('.form_block_always');
+            if (check.is(':checked')) {
+                jQuery('.form_block_visibility').css('display', 'none');
+            }
+            else {
+                jQuery('.form_block_visibility').css('display', 'block');
+            }
+        }
+        changeDisplayVisibilityOn();
+
+        jQuery('.form_block_always').on('click', function (e) {
+            changeDisplayVisibilityOn()
+        });
+    })
+</script>

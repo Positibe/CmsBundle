@@ -1,0 +1,32 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+
+{% block title %}Bloques de página{% endblock %}
+{% block subtitle %}Editar bloque de página{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'page' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_page_block_index') }}">Bloques de página</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ page_block.name }}
+    </li>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
+    <input type="hidden" name="_method" value="PUT"/>
+    {{ include('@PositibeOrmContent/PageBlock/_form.html.twig') }}
+    {{ form_end(form) }}
+
+    {{ delete_confirm('positibe_page_block_remove', path('positibe_page_block_delete', {'name': page_block.name})) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+{% endblock %}

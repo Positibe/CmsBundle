@@ -1,0 +1,63 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+
+{% block title %}Bloques de imágenes{% endblock %}
+{% block subtitle %}{{ gallery_block.name }} {% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'gallery' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_gallery_block_index') }}">Bloques de imágenes</a>
+    </li>
+    <li>
+        <i class="fa fa-angle-right"></i>
+        {{ gallery_block.name }}
+        <small>({{ gallery_block.name }})</small>
+    </li>
+{% endblock %}
+
+{% block actions_block %}
+    <a href="{{ path('positibe_gallery_block_update', {'name': gallery_block.name}) }}" class="btn grey-salt
+    btn-fit-height"><i class="fa fa-edit"></i> Editar</a>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase">
+                    <i class="fa fa-file-movie-o"></i> {{ gallery_block.name }}
+                </p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_block_index') }}"
+                   name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+
+                <a href="{{ path('positibe_gallery_block_update', {'name': gallery_block.name}) }}"
+                   class="btn btn-default btn-circle">
+                    <i class="fa fa-edit"></i> Editar
+                </a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <h4>Imágenes:</h4>
+
+            {% for galleryHasMedia in gallery_block.gallery.galleryHasMedias %}
+                <hr>
+                <article class="row">
+                    <div class="col-sm-2">
+                        <img src="{{ galleryHasMedia.media.path | imagine_filter('image_thumbnail') }}" class="img-responsive">
+                    </div>
+                    <div class="col-sm-10">
+                        <h4>{{ galleryHasMedia.title }}</h4>
+
+                        <p>{{ galleryHasMedia.body }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

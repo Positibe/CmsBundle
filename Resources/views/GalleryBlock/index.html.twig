@@ -1,0 +1,73 @@
+{% extends '@PositibeCmf/layout.html.twig' %}
+
+{% from '@PositibeCmf/_macros.html.twig' import pagination %}
+{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+
+{% block title %}Bloques de galería de imágenes{% endblock %}
+{% block subtitle %}Listado de bloques de galería de imágenes{% endblock %}
+{% set menu_active = 'block' %}
+{% set content_menu = 'gallery' %}
+
+{% block breadcrumb_list %}
+    <li>
+        <i class="fa fa-angle-right"></i>
+        <a href="{{ path('positibe_gallery_block_index') }}">Bloques de galería de imágenes</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-file-movie-o"></i> Bloques de galería de imágenes</p>
+            </div>
+            <div class="actions">
+                <a href="{{ path('positibe_gallery_block_create') }}" class="btn btn-sm btn-default btn-circle"><i
+                            class="fa
+        fa-plus"></i> Nuevo bloque de galería de imágenes</a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            {{ pagination(gallery_blocks) }}
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <th>No.</th>
+                    <th>{{ sylius_resource_sort('name', 'Nombre') }}</th>
+                    <th>Imágenes</th>
+                    <th>Acciones</th>
+                </tr>
+                {% set count = gallery_blocks.maxPerPage * (gallery_blocks.currentPage - 1) %}
+                {% for gallery_block in gallery_blocks %}
+                    <tr>
+                        <td>{{ count + loop.index }}</td>
+                        <td>
+                            <a href="{{ path('positibe_gallery_block_update',
+                            {'name': gallery_block.name}) }}" title="{{ gallery_block.name }}">
+                                {{ gallery_block.name | truncate(30) }}
+                            </a>
+                        </td>
+
+                        <td>
+                            {% for galleryHasMedia in gallery_block.gallery.galleryHasMedias %}
+                                <img src="{{ galleryHasMedia.media.path | imagine_filter('image_thumbnail_small') }}">
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('positibe_gallery_block_show', {'name': gallery_block.name}) }}"><i
+                                        class="fa fa-search"></i> Detalles</a>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('positibe_gallery_block_update', {'name': gallery_block.name}) }}"><i
+                                        class="fa fa-edit"></i> Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No hay bloques</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ pagination(gallery_blocks) }}
+        </div>
+    </div>
+{% endblock %}

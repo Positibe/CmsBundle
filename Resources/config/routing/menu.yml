@@ -1,0 +1,68 @@
+positibe_menu_create:
+    path: /menu/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.menu:createAction
+        _sylius:
+            template: PositibeOrmContentBundle:Menu:create.html.twig
+            criteria:
+                linkType: 'root'
+            redirect:
+                route: positibe_menu_update
+                parameters: { name: resource.name }
+
+positibe_menu_index:
+   path: /menu
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.menu:indexAction
+       _sylius:
+           template: PositibeOrmContentBundle:Menu:index.html.twig
+           criteria:
+               linkType: 'root'
+
+positibe_menu_update:
+    path: /menu/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.menu:updateAction
+        _sylius:
+            template: PositibeOrmContentBundle:Menu:update.html.twig
+            criteria:
+                name: $name
+                linkType: 'root'
+            redirect:
+                route: positibe_menu_update
+                parameters: { name: resource.name }
+
+positibe_menu_delete:
+    path: /menu/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.menu:deleteAction
+        _sylius:
+            criteria:
+                name: $name
+#                linkType: 'route'
+
+positibe_menu_move_up:
+    pattern: /menu/{name}/move-up
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.menu:moveUpAction
+        _sylius:
+            criteria:
+                name: $name
+                linkType: 'route'
+            redirect: referer
+
+positibe_menu_move_down:
+    pattern: /menu/{name}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: positibe.controller.menu:moveDownAction
+        _sylius:
+            criteria:
+                name: $name
+                linkType: 'route'
+            redirect: referer

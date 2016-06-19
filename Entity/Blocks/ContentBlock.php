@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
+use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
 /**
  * @ORM\Table("positibe_block_content")
@@ -24,7 +25,7 @@ use Positibe\Bundle\OrmMediaBundle\Entity\Media;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class ContentBlock extends AbstractVisibilityBlock
+class ContentBlock extends AbstractVisibilityBlock implements TranslatableInterface
 {
     /**
      * @var integer
@@ -175,11 +176,14 @@ class ContentBlock extends AbstractVisibilityBlock
     }
 
     /**
-     * @param mixed $locale
+     * @param $locale
+     * @return $this
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
+        return $this;
     }
 
     /**

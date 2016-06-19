@@ -1,0 +1,58 @@
+positibe_page_create:
+    path: /page/new
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.page:createAction
+        _sylius:
+            redirect:
+                route: positibe_page_update
+                parameters: { name: resource.name }
+
+positibe_page_create_by_category:
+    path: /page/new/{parent}
+    methods: [GET, POST]
+    defaults:
+        _controller: positibe.controller.page:createAction
+        _sylius:
+            redirect:
+                route: positibe_page_update
+                parameters: { name: resource.name }
+            factory:
+                method: createNewByParentName
+                arguments: [$parent]
+
+positibe_page_index:
+   path: /page
+   methods: [GET]
+   defaults:
+       _controller: positibe.controller.page:indexAction
+
+positibe_page_show:
+    path: /page/{name}
+    methods: [GET]
+    defaults:
+        _controller: positibe.controller.page:showAction
+        _sylius:
+            criteria:
+                name: $name
+
+positibe_page_update:
+    path: /page/{name}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: positibe.controller.page:updateAction
+        _sylius:
+            criteria:
+                name: $name
+            redirect:
+                route: positibe_page_update
+                parameters: { name: resource.name }
+
+positibe_page_delete:
+    path: /page/{name}
+    methods: [DELETE]
+    defaults:
+        _controller: positibe.controller.page:deleteAction
+        _sylius:
+            criteria:
+                name: $name
