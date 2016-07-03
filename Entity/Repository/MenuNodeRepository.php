@@ -12,6 +12,7 @@ namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Positibe\Bundle\CmfBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryInterface;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;

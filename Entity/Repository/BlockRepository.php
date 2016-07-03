@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
 
+use Positibe\Bundle\CmfBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\OrmBlockBundle\Entity\BlockRepositoryInterface;
 use Positibe\Bundle\OrmContentBundle\Entity\Page;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
