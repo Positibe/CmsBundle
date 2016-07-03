@@ -4,8 +4,8 @@
     "description": "Symfony PositibeOrmContentBundle",
     "keywords": ["content","content management framework", "positibe", "positibelabs"],
     "homepage": "http://positibelabs.blogspot.com/bundles/content",
-    "license": "Private",
-    "version": "0.4.0.0",
+    "license": "MIT",
+    "version": "0.4.1.0",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
