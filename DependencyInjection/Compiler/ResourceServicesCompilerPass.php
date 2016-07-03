@@ -85,10 +85,6 @@ class ResourceServicesCompilerPass implements CompilerPassInterface
           'positibe.factory.page',
           $container->getDefinition('positibe_orm_content.page_factory')
         );
-        $container->setDefinition(
-          'positibe.factory.menu',
-          $container->getDefinition('positibe_orm_content.menu_node_factory')
-        );
 
     }
 
