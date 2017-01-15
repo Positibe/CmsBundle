@@ -22,13 +22,13 @@
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/GalleryBlock/_form.html.twig') }}
+    {{ include('@PositibeContent/GalleryBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_gallery_block_remove', path('positibe_gallery_block_delete', {'name': gallery_block.name})) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
     {{ include('@PositibeCmf/_form_collections.html.twig') }}
 {% endblock %}

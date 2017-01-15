@@ -57,7 +57,7 @@
                         <select form="form_page_filter" name="criteria[category]" id="criteria_category"
                                 class="form-control input-sm">
                             {% set field_selected = app.request.get('criteria').category | default(null) %}
-                            {{ sonata_block_render({'type': 'positibe.action_block_service'}, {'action': 'PositibeCmfBundle:Filter:getEntityFilter', 'parameters': {'class':'PositibeOrmContentBundle:Category', 'selected': field_selected, 'field': 'name'}}) }}
+                            {{ sonata_block_render({'type': 'positibe.action_block_service'}, {'action': 'PositibeCmfBundle:Filter:getEntityFilter', 'parameters': {'class':'PositibeContentBundle:Category', 'selected': field_selected, 'field': 'name'}}) }}
                         </select>
                     </th>
                     <th>

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\DependencyInjection\Compiler;
+namespace Positibe\Bundle\ContentBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class ResourceServicesCompilerPass
- * @package Positibe\Bundle\OrmContentBundle\DependencyInjection\Compiler
+ * @package Positibe\Bundle\ContentBundle\DependencyInjection\Compiler
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -75,17 +75,6 @@ class ResourceServicesCompilerPass implements CompilerPassInterface
             'setRequestStack',
             [new Reference('request_stack')]
           );
-
-        //Overriding defaults factories
-        $container->setDefinition(
-          'positibe.factory.menu',
-          $container->getDefinition('positibe_orm_content.menu_node_factory')
-        );
-        $container->setDefinition(
-          'positibe.factory.page',
-          $container->getDefinition('positibe_orm_content.page_factory')
-        );
-
     }
 
 } 

@@ -31,7 +31,7 @@
     {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     {{ form_errors(form) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/SubMenuChildren/_form.html.twig') }}
+    {{ include('@PositibeContent/SubMenuChildren/_form.html.twig') }}
     {{ form_rest(form) }}
     {{ form_end(form) }}
 
@@ -39,7 +39,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeOrmContent/SubMenu/_form_javascript.html.twig') }}
+    {{ include('@PositibeContent/SubMenu/_form_javascript.html.twig') }}
     <script>
         jQuery('#positibe_menu_node_locale').on('change', function (e) {
             location.replace(

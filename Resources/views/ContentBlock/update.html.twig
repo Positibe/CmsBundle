@@ -21,7 +21,7 @@
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/ContentBlock/_form.html.twig') }}
+    {{ include('@PositibeContent/ContentBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_content_block_remove', path('positibe_content_block_delete', {'name': content_block.name})) }}
@@ -29,7 +29,7 @@
 
 
 {% block javascripts %}
-    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
     <script>
         jQuery('#positibe_content_block_locale').on('change', function (e) {
             location.replace('{{ path('positibe_content_block_update', {'name': content_block.name}) }}?data_locale='

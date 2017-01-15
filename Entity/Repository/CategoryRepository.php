@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
+namespace Positibe\Bundle\ContentBundle\Entity\Repository;
 
 /**
  * Class CategoryRepository
- * @package Positibe\Bundle\OrmContentBundle\Entity\Repository
+ * @package Positibe\Bundle\ContentBundle\Entity\Repository
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

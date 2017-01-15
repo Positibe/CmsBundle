@@ -22,7 +22,7 @@
 
     {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/Menu/_form.html.twig') }}
+    {{ include('@PositibeContent/Menu/_form.html.twig') }}
     {{ form_end(form) }}
     {{ delete_confirm('form_menu_remove', path('positibe_menu_delete', {'name': menu.name })) }}
 {% endblock %}

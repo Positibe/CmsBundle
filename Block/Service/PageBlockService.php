@@ -8,24 +8,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Block;
+namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
-use Positibe\Bundle\OrmContentBundle\Entity\Blocks\PageBlock;
-use Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository;
-use Sonata\BlockBundle\Block\BlockContextInterface;
+use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
+use Positibe\Bundle\ContentBundle\Entity\Blocks\PageBlock;
+use Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository;
+use Sonata\ContentBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageBlockService
- * @package Positibe\Bundle\OrmContentBundle\Block
+ * @package Positibe\Bundle\ContentBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class PageBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
@@ -21,7 +21,7 @@ use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
  * @ORM\Entity
  *
  * Class ContentBlock
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -74,7 +74,7 @@ class ContentBlock extends AbstractVisibilityBlock implements TranslatableInterf
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_content.block_content';
+        $this->type = 'positibe_content.block_content';
     }
 
     public function __toString()

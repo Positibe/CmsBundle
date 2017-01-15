@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
@@ -20,10 +20,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Class Menu
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @ORM\Table(name="positibe_menu")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\MenuNodeRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\MenuNodeRepository")
  *
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
@@ -50,7 +50,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage", inversedBy="menuNodes")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage", inversedBy="menuNodes")
      */
     protected $page;
 

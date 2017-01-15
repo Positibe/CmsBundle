@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\ContentBundle\Entity;
 
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractTranslation;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class PageTranslation
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @ORM\Table(name="positibe_page_translations", indexes={
  *      @ORM\Index(name="positibe_page_translation_idx", columns={"locale", "object_class", "field", "foreign_key"})

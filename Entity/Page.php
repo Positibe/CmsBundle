@@ -8,18 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity;
+namespace Positibe\Bundle\ContentBundle\Entity;
 
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Page
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository")
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

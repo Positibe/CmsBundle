@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Form\Type;
+namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AbstractVisibilityBlockType
- * @package Positibe\Bundle\OrmContentBundle\Form\Type
+ * @package Positibe\Bundle\ContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -52,7 +52,7 @@ class AbstractVisibilityBlockType extends AbstractType
                 array(
                     'required' => false,
                     'label' => 'visibility_block.form.pages_label',
-                    'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page',
+                    'class' => 'Positibe\Bundle\ContentBundle\Entity\Page',
                     'multiple' => true,
                     'attr' => array('class' => 'chosen-select form-control')
                 )
@@ -122,8 +122,8 @@ class AbstractVisibilityBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock',
-                'translation_domain' => 'PositibeOrmContentBundle'
+                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock',
+                'translation_domain' => 'PositibeContentBundle'
             )
         );
     }

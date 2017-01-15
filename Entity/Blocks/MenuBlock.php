@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
-use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\ContentBundle\Entity\MenuNode;
 
 
 /**
@@ -38,14 +38,14 @@ class MenuBlock extends AbstractVisibilityBlock
     /**
      * @var MenuNode
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\ContentBundle\Entity\MenuNode")
      */
     private $menu;
 
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_content.block_menu';
+        $this->type = 'positibe_content.block_menu';
     }
 
     public function getType()

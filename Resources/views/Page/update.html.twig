@@ -22,7 +22,7 @@
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'form-horizontal inbox-compose' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/Page/_form.html.twig') }}
+    {{ include('@PositibeContent/Page/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_page_remove', path('positibe_page_delete', {'name': page.name})) }}

@@ -8,25 +8,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Block;
+namespace Positibe\Bundle\ContentBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
-use Sonata\BlockBundle\Block\BaseBlockService;
-use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\ContentBundle\Block\BaseBlockService;
+use Sonata\ContentBundle\Block\BlockContextInterface;
+use Sonata\ContentBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
  * Class FeaturedBlockService
- * @package Positibe\Bundle\OrmContentBundle\Block
+ * @package Positibe\Bundle\ContentBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class FeaturedBlockService extends BaseBlockService
 {
-    protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
     protected $em;
 
     /**
@@ -77,7 +77,7 @@ class FeaturedBlockService extends BaseBlockService
         $resolver->setDefaults(
             array(
                 'template' => $this->template,
-                'class' => 'Positibe\Bundle\OrmContentBundle\Entity\Page'
+                'class' => 'Positibe\Bundle\ContentBundle\Entity\Page'
             )
         );
     }

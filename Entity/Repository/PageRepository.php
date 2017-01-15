@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
+namespace Positibe\Bundle\ContentBundle\Entity\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -20,7 +20,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Class PageRepository
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

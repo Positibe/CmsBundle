@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Traits;
+namespace Positibe\Bundle\ContentBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
+use Positibe\Bundle\ContentBundle\Entity\MenuNode;
 
 /**
  * Class HasMenuTrait
@@ -26,7 +26,7 @@ trait HasMenuTrait
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", cascade="persist", fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\ContentBundle\Entity\MenuNode", cascade="persist", fetch="EXTRA_LAZY")
      */
     protected $menuNodes;
 

@@ -3,95 +3,96 @@ parameters:
 
 services:
 #### Forms Type ####
-    positibe_orm_content.abstract_page_form_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractPageType
+    positibe_content.abstract_page_form_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\AbstractPageType
         arguments: [@positibe_orm_routing.route_factory, %locales%, %locale%]
         tags:
           - { name: form.type , alias: positibe_abstract_page }
 
-    positibe_orm_content.page_form_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\PageType
+    positibe_content.page_form_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\PageType
         arguments: [@doctrine.orm.entity_manager, @positibe_orm_routing.route_factory, %locales%, %locale%]
         tags:
           - { name: form.type , alias: positibe_page }
 
-    positibe_orm_content.category_form_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\CategoryType
+    positibe_content.category_form_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\CategoryType
         tags:
           - { name: form.type , alias: positibe_category }
 
-    positibe_orm_content.form.visibility_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\AbstractVisibilityBlockType
+    positibe_content.form.visibility_block_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\AbstractVisibilityBlockType
         tags:
             - {name: form.type, alias: positibe_block_visibility }
 
-    positibe_orm_block.form.page_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\PageBlockType
+    positibe_block.form.page_block_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\PageBlockType
         tags:
             - {name: form.type, alias: positibe_page_block }
 
-    positibe_orm_content.form.content_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\ContentBlockType
+    positibe_content.form.content_block_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\ContentBlockType
         arguments: [%locales%]
         tags:
             - {name: form.type, alias: positibe_content_block }
 
-    positibe_orm_content.form.gallery_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\GalleryBlockType
+    positibe_content.form.gallery_block_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\GalleryBlockType
         tags:
             - {name: form.type, alias: positibe_gallery_block }
 
-    positibe_orm_content.form.menu_block_type:
-        class: Positibe\Bundle\OrmContentBundle\Form\Type\MenuBlockType
+    positibe_content.form.menu_block_type:
+        class: Positibe\Bundle\ContentBundle\Form\Type\MenuBlockType
         tags:
             - {name: form.type, alias: positibe_menu_block }
 
 #### Block Services ####
-    positibe_orm_content.block_category:
-            class: Positibe\Bundle\OrmContentBundle\Block\CategoryBlockService
-            arguments: ['positibe_orm_content.block_category', @templating, @doctrine.orm.entity_manager]
+    positibe_content.block_category:
+            class: Positibe\Bundle\ContentBundle\Block\Service\CategoryBlockService
+            arguments: ['positibe_content.block_category', @templating, @doctrine.orm.entity_manager]
             tags:
               - { name: sonata.block }
 
-    positibe_orm_content.block_page:
-        class: Positibe\Bundle\OrmContentBundle\Block\PageBlockService
-        arguments: ['positibe_orm_content.block_page', @templating, @request_stack]
+    positibe_content.block_page:
+        class: Positibe\Bundle\ContentBundle\Block\Service\PageBlockService
+        arguments: ['positibe_content.block_page', @templating, @request_stack]
         tags:
             - {name: sonata.block }
         calls:
             - [ setEm, [@doctrine.orm.entity_manager]]
 
-    positibe_orm_content.block_featured_page:
-        class: Positibe\Bundle\OrmContentBundle\Block\FeaturedBlockService
-        arguments: ['positibe_orm_content.block_featured_page', @templating, @doctrine.orm.entity_manager]
+    positibe_content.block_featured_page:
+        class: Positibe\Bundle\ContentBundle\Block\Service\FeaturedBlockService
+        arguments: ['positibe_content.block_featured_page', @templating, @doctrine.orm.entity_manager]
         tags:
             - {name: sonata.block }
 
-    positibe_orm_content.block_content:
-        class: Positibe\Bundle\OrmContentBundle\Block\ContentBlockService
-        arguments: ['positibe_orm_content.block_content', @templating, @request_stack]
+    positibe_content.block_content:
+        class: Positibe\Bundle\ContentBundle\Block\Service\ContentBlockService
+        arguments: ['positibe_content.block_content', @templating, @request_stack]
         tags:
             - { name: sonata.block }
 
-    positibe_orm_content.block_gallery:
-        class: Positibe\Bundle\OrmContentBundle\Block\GalleryBlockService
-        arguments: ['positibe_orm_content.block_gallery', @templating, @request_stack]
+    positibe_content.block_gallery:
+        class: Positibe\Bundle\ContentBundle\Block\Service\GalleryBlockService
+        arguments: ['positibe_content.block_gallery', @templating, @request_stack]
         tags:
             - { name: sonata.block }
 
-    positibe_orm_content.block_menu:
-        class: Positibe\Bundle\OrmContentBundle\Block\MenuBlockService
-        arguments: ['positibe_orm_content.block_menu', @templating, @request_stack]
+    positibe_content.block_menu:
+        class: Positibe\Bundle\ContentBundle\Block\Service\MenuBlockService
+        arguments: ['positibe_content.block_menu', @templating, @request_stack]
         tags:
             - { name: sonata.block }
 
 #### Services and Utils ####
-    positibe_orm_content.page_factory:
-        class: Positibe\Bundle\OrmContentBundle\Factory\PageFactory
-        arguments: [@positibe_orm_content.menu_node_factory, @positibe_orm_routing.route_factory, @doctrine.orm.entity_manager, %locale%]
+    positibe.factory.page:
+        class: Positibe\Bundle\ContentBundle\Factory\PageFactory
+        arguments: ["@positibe.factory.menu", "@positibe_orm_routing.route_factory", @doctrine.orm.entity_manager, %locale%]
 
-    positibe_orm_content.menu_node_factory:
-        class: Positibe\Bundle\OrmContentBundle\Factory\MenuNodeFactory
-        arguments: [@positibe.repository.menu]
+    positibe.factory.menu:
+        class: Positibe\Bundle\ContentBundle\Factory\MenuNodeFactory
+        arguments: ["@positibe.repository.menu"
+        ]
         tags:
             - { name: sylius.factory ,alias: positibe.factory.menu}

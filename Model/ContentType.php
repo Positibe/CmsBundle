@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Model;
+namespace Positibe\Bundle\ContentBundle\Model;
 
 /**
  * Class ContentType
- * @package Positibe\Bundle\OrmContentBundle\Model
+ * @package Positibe\Bundle\ContentBundle\Model
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
+namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
 
-use Positibe\Bundle\OrmContentBundle\Model\ContentType;
+use Positibe\Bundle\ContentBundle\Model\ContentType;
 use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
@@ -24,21 +24,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
 use Positibe\Bundle\OrmMediaBundle\Entity\Media;
-use Positibe\Bundle\OrmContentBundle\Entity\MenuNode;
+use Positibe\Bundle\ContentBundle\Entity\MenuNode;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class AbstractPage
- * @package Positibe\Bundle\OrmContentBundle\Entity
+ * @package Positibe\Bundle\ContentBundle\Entity
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\EntityListeners({"Positibe\Bundle\OrmRoutingBundle\EventListener\AutoRoutingEntityListener"})
  * @ORM\HasLifecycleCallbacks
  *
- * @Gedmo\TranslationEntity(class="Positibe\Bundle\OrmContentBundle\Entity\PageTranslation")
+ * @Gedmo\TranslationEntity(class="Positibe\Bundle\ContentBundle\Entity\PageTranslation")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
@@ -110,7 +110,7 @@ abstract class AbstractPage extends BaseContent implements
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\MenuNode", cascade={"persist", "remove"}, fetch="EXTRA_LAZY", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="Positibe\Bundle\ContentBundle\Entity\MenuNode", cascade={"persist", "remove"}, fetch="EXTRA_LAZY", mappedBy="page")
      */
     protected $menuNodes;
 
@@ -120,6 +120,7 @@ abstract class AbstractPage extends BaseContent implements
         $this->menuNodes = new ArrayCollection();
         $this->seoMetadata = new SeoMetadata();
         $this->featured = false;
+        $this->publishStartDate = new \DateTime('now');
     }
 
     /**

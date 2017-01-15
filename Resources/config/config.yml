@@ -4,17 +4,17 @@ cmf_core:
             use_sonata_admin: false
 
 positibe_orm_menu:
-    content_class: [Positibe\Bundle\OrmContentBundle\Entity\Page, Positibe\Bundle\OrmContentBundle\Entity\Category ]
+    content_class: [Positibe\Bundle\ContentBundle\Entity\Page, Positibe\Bundle\ContentBundle\Entity\Category ]
 
 positibe_orm_routing:
     auto_routing:
-        Positibe\Bundle\OrmContentBundle\Entity\Page:
+        Positibe\Bundle\ContentBundle\Entity\Page:
 #            uri_schema: /{category}/{title}
             uri_schema: /{title}
             token_providers:
 #                category: [content_method, { method: getCategoryName }]
                 title: [content_method, { method: getTitle }]
-        Positibe\Bundle\OrmContentBundle\Entity\Category:
+        Positibe\Bundle\ContentBundle\Entity\Category:
             uri_schema: /{title}
             token_providers:
                 title: [content_method, { method: getTitle }]
@@ -23,6 +23,44 @@ cmf_routing:
     dynamic:
         controllers_by_class:
             # the order here matter
-            Positibe\Bundle\OrmContentBundle\Entity\Category: PositibeOrmContentBundle:Default:categoryIndex
-            Positibe\Bundle\OrmContentBundle\Entity\Page: PositibeOrmContentBundle:Default:index
+            Positibe\Bundle\ContentBundle\Entity\Category: PositibeContentBundle:Default:categoryIndex
+            Positibe\Bundle\ContentBundle\Entity\Page: PositibeContentBundle:Default:index
 #            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute:  cmf_routing.redirect_controller:redirectAction
+
+liip_imagine:
+    filter_sets:
+        # define the filter to be used with the image preview
+        image_upload_thumbnail:
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        image_thumbnail:
+            filters:
+                thumbnail: { size: [250, 250], mode: outbound }
+        image_thumbnail_small:
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+
+#ivory_ck_editor:
+#    configs:
+#        default:
+#            toolbar: standard
+#            filebrowserUploadRoute: "cmf_media_upload"
+#            filebrowserBrowseRoute: "elfinder"
+#            skin: "../../positibecmf/ckeditor/skins/office2013"
+
+#fm_elfinder:
+#    locale: %locale% # defaults to current request locale
+#    editor: ckeditor # other choices are tinymce or simple
+#    showhidden: false # defaults to false
+#    fullscreen: true # defaults true, applies to simple and ckeditor editors
+#    include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+#    compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+#    connector:
+#        debug: false # defaults to false
+#        roots:       # at least one root must be defined
+#            uploads:
+#                driver: LocalFileSystem
+#                path: uploads
+#                upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+#                upload_deny: ['all']
+#                upload_max_size: 2M

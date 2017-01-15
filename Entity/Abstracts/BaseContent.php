@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
+namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
@@ -28,7 +28,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class BaseContent
- * @package Positibe\Bundle\OrmContentBundle\Entity\Abstracts
+ * @package Positibe\Bundle\ContentBundle\Entity\Abstracts
  *
  * @ORM\MappedSuperclass
  *

@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
+namespace Positibe\Bundle\ContentBundle\Entity\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Positibe\Bundle\CmfBundle\Repository\LocaleRepositoryTrait;
+use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryInterface;
 use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeRepositoryTrait;
 use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeInterface;
@@ -21,7 +21,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Class MenuNodeRepository
- * @package Positibe\Bundle\OrmContentBundle\Entity\Repository
+ * @package Positibe\Bundle\ContentBundle\Entity\Repository
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

@@ -8,19 +8,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Abstracts;
+namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
 
-use Positibe\Bundle\OrmBlockBundle\Entity\Block;
-use Positibe\Bundle\OrmContentBundle\Entity\Category;
-use Positibe\Bundle\OrmContentBundle\Entity\Page;
+use Positibe\Bundle\ContentBundle\Entity\Block;
+use Positibe\Bundle\ContentBundle\Entity\Category;
+use Positibe\Bundle\ContentBundle\Entity\Page;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * Class AbstractVisibilityBlock
- * @package Positibe\Bundle\OrmContentBundle\Entity\Abstracts
+ * @package Positibe\Bundle\ContentBundle\Entity\Abstracts
  *
- * @ORM\Entity(repositoryClass="Positibe\Bundle\OrmContentBundle\Entity\Repository\BlockRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository")
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -29,7 +29,7 @@ class AbstractVisibilityBlock extends Block implements ResourceInterface
     /**
      * @var Category
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Category", fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\ContentBundle\Entity\Category", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_block_visibility_category",
      *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
@@ -40,7 +40,7 @@ class AbstractVisibilityBlock extends Block implements ResourceInterface
     /**
      * @var Page
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmContentBundle\Entity\Page", fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\ContentBundle\Entity\Page", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_block_visibility_pages",
      *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")}

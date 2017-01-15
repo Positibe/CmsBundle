@@ -1,2 +1,2 @@
-Positibe\Bundle\OrmContentBundle\Entity\Page: Página
-Positibe\Bundle\OrmContentBundle\Entity\Category: Categoría
+Positibe\Bundle\ContentBundle\Entity\Page: Página
+Positibe\Bundle\ContentBundle\Entity\Category: Categoría

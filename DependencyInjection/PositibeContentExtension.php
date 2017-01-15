@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\OrmContentBundle\DependencyInjection;
+namespace Positibe\Bundle\ContentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class PositibeOrmContentExtension extends Extension
+class PositibeContentExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -24,11 +24,16 @@ class PositibeOrmContentExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('block_services.yml');
 
-        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\OrmContentBundle\Entity\MenuNode');
+        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\ContentBundle\Entity\MenuNode');
 
-        $container->getDefinition('positibe_orm_content.form.visibility_block_type')
+        $container->getDefinition('positibe_content.form.visibility_block_type')
             ->addMethodCall('setRoles', array($config['roles']))
             ->addMethodCall('setPublicRoutes', array($config['public_routes']));
+
+
+        $container->getDefinition('positibe_block.abstract_simple_form')
+            ->addMethodCall('setTemplatePositions', array($config['template_positions']));
     }
 }

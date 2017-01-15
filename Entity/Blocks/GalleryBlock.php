@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
 
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\OrmMediaBundle\Entity\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  *
  * Class GalleryBlock
- * @package Positibe\Bundle\OrmContentBundle\Entity\Blocks
+ * @package Positibe\Bundle\ContentBundle\Entity\Blocks
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class GalleryBlock extends AbstractVisibilityBlock
@@ -35,13 +35,13 @@ class GalleryBlock extends AbstractVisibilityBlock
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_orm_content.block_gallery';
+        $this->type = 'positibe_content.block_gallery';
         $this->gallery = new Gallery();
     }
 
     /**
      * @param string $name
-     * @return \Positibe\Bundle\OrmBlockBundle\Entity\Block|string
+     * @return \Positibe\Bundle\ContentBundle\Entity\Block|string
      */
     public function setName($name)
     {

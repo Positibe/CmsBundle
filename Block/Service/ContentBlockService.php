@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Block;
+namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
+use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
 
 /**
  * Class ContentBlockService
@@ -20,5 +20,5 @@ use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
  */
 class ContentBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeOrmContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
 } 

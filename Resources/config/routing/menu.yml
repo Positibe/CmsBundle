@@ -4,7 +4,7 @@ positibe_menu_create:
     defaults:
         _controller: positibe.controller.menu:createAction
         _sylius:
-            template: PositibeOrmContentBundle:Menu:create.html.twig
+            template: PositibeContentBundle:Menu:create.html.twig
             criteria:
                 linkType: 'root'
             redirect:
@@ -17,7 +17,7 @@ positibe_menu_index:
    defaults:
        _controller: positibe.controller.menu:indexAction
        _sylius:
-           template: PositibeOrmContentBundle:Menu:index.html.twig
+           template: PositibeContentBundle:Menu:index.html.twig
            criteria:
                linkType: 'root'
 
@@ -27,7 +27,7 @@ positibe_menu_update:
     defaults:
         _controller: positibe.controller.menu:updateAction
         _sylius:
-            template: PositibeOrmContentBundle:Menu:update.html.twig
+            template: PositibeContentBundle:Menu:update.html.twig
             criteria:
                 name: $name
                 linkType: 'root'

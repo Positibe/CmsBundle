@@ -21,12 +21,12 @@
 {% block content %}
     {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeOrmContent/PageBlock/_form.html.twig') }}
+    {{ include('@PositibeContent/PageBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_page_block_remove', path('positibe_page_block_delete', {'name': page_block.name})) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
 {% endblock %}

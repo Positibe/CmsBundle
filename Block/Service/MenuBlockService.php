@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Block;
+namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\OrmBlockBundle\Block\Service\AbstractBlockService;
-use Sonata\BlockBundle\Block\BlockContextInterface;
+use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
+use Sonata\ContentBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -92,7 +92,7 @@ class MenuBlockService extends AbstractBlockService
     {
         $resolver->setDefaults(
             array(
-                'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+                'template' => 'SonataContentBundle:Block:block_core_menu.html.twig',
                 'request' => false,
                 'menu_name' => null,
                 'current_class'  => 'active',

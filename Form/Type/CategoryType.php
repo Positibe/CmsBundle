@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\OrmContentBundle\Form\Type;
+namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class CategoryType
- * @package Positibe\Bundle\OrmContentBundle\Form\Type
+ * @package Positibe\Bundle\ContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -44,8 +44,8 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Category',
-                'translation_domain' => 'PositibeOrmContentBundle'
+                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Category',
+                'translation_domain' => 'PositibeContentBundle'
             )
         );
     }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Form\Type;
+namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class GalleryBlockType
- * @package Positibe\Bundle\OrmContentBundle\Form\Type
+ * @package Positibe\Bundle\ContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -36,7 +36,7 @@ class GalleryBlockType extends AbstractType
                 array(
                     'required' => false,
                     'label' => 'gallery_block.form.gallery_label',
-                    'translation_domain' => 'PositibeOrmContentBundle'
+                    'translation_domain' => 'PositibeContentBundle'
                 )
             );
     }
@@ -48,8 +48,8 @@ class GalleryBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\OrmContentBundle\Entity\Blocks\GalleryBlock',
-                'translation_domain' => 'PositibeOrmContentBundle'
+                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Blocks\GalleryBlock',
+                'translation_domain' => 'PositibeContentBundle'
             )
         );
     }

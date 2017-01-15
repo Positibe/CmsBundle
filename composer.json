@@ -1,11 +1,11 @@
 {
     "name": "positibe/orm-content-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony PositibeOrmContentBundle",
+    "description": "Symfony PositibeContentBundle",
     "keywords": ["content","content management framework", "positibe", "positibelabs"],
     "homepage": "http://positibelabs.blogspot.com/bundles/content",
     "license": "MIT",
-    "version": "0.4.1.0",
+    "version": "1.0.0-alpha1",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -13,28 +13,26 @@
             "homepage": "https://github.com/pcabreus"
         },
         {
-            "name": "PositibeLabs Cooperative",
-            "homepage": "https://github.com/positibelabs"
+            "name": "PositibeLabs",
+            "homepage": "https://github.com/Positibe"
         }
     ],
     "require": {
-        "symfony/framework-bundle": "~2.7",
-        "positibe/orm-block-bundle": "~0.4",
-        "positibe/orm-menu-bundle": "~0.4",
+        "symfony/framework-bundle": "~2.8",
+        "positibe/menu-bundle": "~1.0.0-beta1",
+        "positibe/media-bundle": "~1.0.0-beta1",
         "positibe/orm-routing-bundle": "~0.4",
-        "positibe/orm-media-bundle": "~0.4",
-        "positibe/orm-seo-bundle": "~0.4",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "~2.3",
-        "pagerfanta/pagerfanta": "1.0.*",
-        "sylius/resource-bundle": "0.17.*"
+        "sonata-project/block-bundle": "~2.2",
+        "sylius/resource-bundle": "1.0.0-beta1"
     },
     "autoload": {
-        "psr-4": { "Positibe\\Bundle\\OrmContentBundle\\": "" }
+        "psr-4": { "Positibe\\Bundle\\ContentBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.4.x-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }

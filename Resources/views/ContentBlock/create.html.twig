@@ -18,10 +18,10 @@
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
-    {{ include('@PositibeOrmContent/ContentBlock/_form.html.twig') }}
+    {{ include('@PositibeContent/ContentBlock/_form.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeOrmContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
 {% endblock %}

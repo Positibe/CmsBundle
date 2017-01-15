@@ -8,18 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Entity\Repository;
+namespace Positibe\Bundle\ContentBundle\Entity\Repository;
 
 use Positibe\Bundle\CmfBundle\Repository\LocaleRepositoryTrait;
-use Positibe\Bundle\OrmBlockBundle\Entity\BlockRepositoryInterface;
-use Positibe\Bundle\OrmContentBundle\Entity\Page;
+use Positibe\Bundle\ContentBundle\Entity\BlockRepositoryInterface;
+use Positibe\Bundle\ContentBundle\Entity\Page;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 
 /**
  * Class BlockRepository
- * @package Positibe\Bundle\OrmContentBundle\Entity\Repository
+ * @package Positibe\Bundle\ContentBundle\Entity\Repository
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

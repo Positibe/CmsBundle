@@ -57,7 +57,7 @@ visibility_block:
         pages_label: Páginas:
         routes_label: Rutas:
         roles_label: Roles:
-PositibeOrmContentBundle:Default:index: Página simple
-PositibeOrmContentBundle:Default:categoryIndex: Listado de páginas
+PositibeContentBundle:Default:index: Página simple
+PositibeContentBundle:Default:categoryIndex: Listado de páginas
 ROLE_USER: Autenticado
 IS_AUTHENTICATED_ANONYMOUSLY: Anónimo

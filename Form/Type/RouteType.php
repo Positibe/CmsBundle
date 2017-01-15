@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\OrmContentBundle\Form\Type;
+namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class RouteType
- * @package Positibe\Bundle\OrmContentBundle\Form\Type
+ * @package Positibe\Bundle\ContentBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -60,7 +60,7 @@ class RouteType extends AbstractType {
     {
         $resolver->setDefaults(array(
                 'data_class' => 'Positibe\Bundle\OrmRoutingBundle\Entity\Route',
-                'translation_domain' => 'PositibeOrmContentBundle'
+                'translation_domain' => 'PositibeContentBundle'
             ));
     }
 
