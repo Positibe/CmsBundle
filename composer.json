@@ -1,5 +1,5 @@
 {
-    "name": "positibe/orm-content-bundle",
+    "name": "positibe/content-bundle",
     "type": "symfony-bundle",
     "description": "Symfony PositibeContentBundle",
     "keywords": ["content","content management framework", "positibe", "positibelabs"],
@@ -21,11 +21,11 @@
         "symfony/framework-bundle": "~2.8|~3.0",
         "positibe/menu-bundle": "~1.0.0-beta1",
         "positibe/media-bundle": "~1.0.0-beta1",
-        "positibe/orm-routing-bundle": "~0.4",
+        "positibe/orm-routing-bundle": "~1.0.0-beta1",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "~2.4",
         "sonata-project/block-bundle": "~3.0",
-        "sylius/resource-bundle": "1.0.0-beta1"
+        "sylius/resource-bundle": "~1.0.0-beta1"
     },
     "autoload": {
         "psr-4": { "Positibe\\Bundle\\ContentBundle\\": "" }
