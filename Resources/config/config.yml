@@ -3,6 +3,12 @@ cmf_core:
         orm:
             use_sonata_admin: false
 
+cmf_seo:
+    title: %%content_title%%
+    description: %%content_description%%
+    persistence:
+        orm:
+
 positibe_orm_menu:
     content_class: [Positibe\Bundle\ContentBundle\Entity\Page, Positibe\Bundle\ContentBundle\Entity\Category ]
 
