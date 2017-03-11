@@ -35,5 +35,14 @@ class PositibeContentExtension extends Extension
 
         $container->getDefinition('positibe_block.abstract_simple_form')
             ->addMethodCall('setTemplatePositions', array($config['template_positions']));
+
+        $this->addClassesToCompile(
+            array(
+                'Symfony\\Cmf\\Bundle\\CoreBundle\\EventListener\\PublishWorkflowListener',
+                'Symfony\\Cmf\\Bundle\\SeoBundle\\EventListener\\ContentListener',
+            )
+        );
+
+
     }
 }

@@ -13,8 +13,8 @@ namespace Positibe\Bundle\ContentBundle\Block\Loader;
 use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\ContentBundle\Block\Model\ContainerBlock;
 use Positibe\Bundle\ContentBundle\Entity\Block;
-use Sonata\ContentBundle\Block\BlockLoaderInterface;
-use Sonata\ContentBundle\Model\EmptyBlock;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Model\EmptyBlock;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -63,7 +63,7 @@ class OrmBlockLoader implements BlockLoaderInterface
      * @param mixed $configuration
      * @return BlockLoaderInterface|void
      *
-     * @throws \Sonata\ContentBundle\Exception\BlockNotFoundException if no block with that name is found
+     * @throws \Sonata\BlockBundle\Exception\BlockNotFoundException if no block with that name is found
      */
     public function load($configuration)
     {

@@ -10,8 +10,7 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
-use Sonata\ContentBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 

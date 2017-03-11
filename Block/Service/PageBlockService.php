@@ -10,10 +10,9 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
 use Positibe\Bundle\ContentBundle\Entity\Blocks\PageBlock;
 use Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository;
-use Sonata\ContentBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 

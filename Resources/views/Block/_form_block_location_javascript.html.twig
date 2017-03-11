@@ -1,0 +1,33 @@
+<script>
+    jQuery(document).ready(function () {
+
+        jQuery('.master_checker').on('click', function (e) {
+            var target = $(this).data('target');
+            var checkers = $('.item_checker.' + target + ' input');
+            var master = $(this).find('input');
+            if (!master.is(':checked')) {
+
+                master.parent().removeClass('checked');
+
+                checkers.attr('checked', false);
+                checkers.parent().removeClass('checked');
+
+            } else {
+                
+                master.parent().addClass('checked');
+
+                checkers.attr('checked', true);
+                checkers.parent().addClass('checked');
+            }
+        });
+
+        jQuery('.item_checker').on('click', function (e) {
+            if ($(this).find('input').is(':checked')) {
+                var master = $('.master_checker_' + $(this).find('input').attr('data-master')).find('input');
+                master.attr('checked', false);
+                master.parent().removeClass('checked');
+            }
+        });
+
+    })
+</script>

@@ -15,7 +15,6 @@ class DefaultController extends Controller
     protected $defaultTemplate = 'content/index.html.twig';
     protected $defaultCategoryTemplate = 'content/category.html.twig';
 
-
     /**
      * Render the provided content.
      *

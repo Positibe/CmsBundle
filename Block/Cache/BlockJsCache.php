@@ -2,9 +2,9 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Cache;
 
-use Sonata\ContentBundle\Block\BlockContextManagerInterface;
-use Sonata\ContentBundle\Block\BlockLoaderInterface;
-use Sonata\ContentBundle\Block\BlockRendererInterface;
+use Sonata\BlockBundle\Block\BlockContextManagerInterface;
+use Sonata\BlockBundle\Block\BlockLoaderInterface;
+use Sonata\BlockBundle\Block\BlockRendererInterface;
 use Sonata\Cache\CacheElement;
 use Sonata\Cache\CacheAdapterInterface;
 use Symfony\Component\HttpFoundation\Request;

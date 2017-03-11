@@ -10,8 +10,8 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Sonata\ContentBundle\Block\BaseBlockService;
-use Sonata\ContentBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;

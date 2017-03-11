@@ -1,3 +1,7 @@
+admin_cms:
+    path: /
+    defaults: { _controller: "FrameworkBundle:Template:template", template: "PositibeContentBundle::index.html.twig"}
+
 positibe_cache_block:
     resource: "@PositibeContentBundle/Resources/config/routing/block_cache.yml"
 

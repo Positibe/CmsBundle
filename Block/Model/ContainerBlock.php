@@ -10,7 +10,7 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Model;
 
-use Sonata\ContentBundle\Model\Block;
+use Sonata\BlockBundle\Model\Block;
 
 
 /**

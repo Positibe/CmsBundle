@@ -1,0 +1,5 @@
+services:
+    cmf_seo.extractor_strategy.extras:
+        class: Symfony\Cmf\Bundle\SeoBundle\Extractor\ExtrasExtractor
+        tags:
+            - { name: cmf_seo.extractor }

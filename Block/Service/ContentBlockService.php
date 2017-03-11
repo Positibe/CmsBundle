@@ -10,8 +10,6 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
-
 /**
  * Class ContentBlockService
  * @package Positibe\Bundle\OrmMediaBundle\Block

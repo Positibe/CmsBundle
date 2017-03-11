@@ -1,0 +1,124 @@
+{% extends '@PositibeCore/layout.html.twig' %}
+
+{% set menu_active = null %}
+{% set content_menu = null %}
+
+{% block breadcrumb %}
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="{{ path('admin_cms') }}">{{ 'Inicio'|trans }}</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h3>Contenidos</h3>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-light red-soft" href="{{ path('positibe_page_index') }}?status=1">
+                <div class="visual">
+                    <i class="fa fa-folder-open-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {#{{ abiertas }}#}
+                    </div>
+                    <div class="desc">
+                        {{ 'Páginas'|trans }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-light green-soft"
+               href="{{ path('positibe_category_index') }}?status=2">
+                <div class="visual">
+                    <i class="fa fa-"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {#{{ en_proceso }}#}
+                    </div>
+                    <div class="desc">
+                        {{ 'Categoría de páginas'|trans }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-light blue-soft" href="{{ path('positibe_menu_index') }}?status=3">
+                <div class="visual">
+                    <i class="fa fa-sitemap"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {#{{ resueltas }}#}
+                    </div>
+                    <div class="desc">
+                        {{ 'Menús'|trans }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard-stat dashboard-stat-light purple-soft"
+               href="{{ path('positibe_block_index') }}?status=3">
+                <div class="visual">
+                    <i class="fa fa-cubes"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {#{{ resueltas }}#}
+                    </div>
+                    <div class="desc">
+                        {{ 'Bloques de contenido'|trans }}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <h3>Tareas</h3>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="btn btn-lg btn-primary apc-cache-clear" href="">
+                Limpiar cache
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('.apc-cache-clear').on('click', function (e) {
+                e.preventDefault();
+                $(this).text('{{ 'Limpiando cache' }}');
+                $(this).addClass('disabled');
+
+                $.ajax({
+                    url: "{{ path('sonata_cache_apc', {'token': 's3cur3'}) }}",
+                    success: function (data, textStatus, jqXHR) {
+                        $('.apc-cache-clear').text('{{ 'Cache limpiada' }}');
+                    },
+                    error: function (error) {
+                        $('.apc-cache-clear').text('{{ 'No se pudo limpiar la cache' }}');
+                    },
+                    complete: function () {
+                        setTimeout(function () {
+                            $('.apc-cache-clear').text('{{ 'Limpiar cache' }}');
+                            $('.apc-cache-clear').removeClass('disabled');
+                        }, 2000);
+
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

@@ -10,9 +10,6 @@
 
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Block\Service\AbstractBlockService;
-
-
 /**
  * Class GalleryBlockService
  * @package Positibe\Bundle\ContentBundle\Block

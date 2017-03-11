@@ -11,11 +11,11 @@
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
-use Sonata\ContentBundle\Block\BaseBlockService;
-use Sonata\ContentBundle\Block\BlockContextInterface;
-use Sonata\ContentBundle\Model\BlockInterface;
+use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 /**
@@ -72,7 +72,7 @@ class FeaturedBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(

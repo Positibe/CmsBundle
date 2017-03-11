@@ -1,0 +1,3 @@
+positibe_change_locale:
+    path: /change_locale/{newLocale}
+    defaults: { _controller: PositibeContentBundle:Locale:changeLocale, newLocale: ~ }
