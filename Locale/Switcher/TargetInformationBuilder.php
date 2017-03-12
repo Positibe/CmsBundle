@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Locale\Switcher;
+namespace Positibe\Bundle\CmsBundle\Locale\Switcher;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

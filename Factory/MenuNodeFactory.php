@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Factory;
+namespace Positibe\Bundle\CmsBundle\Factory;
 
 use Gedmo\Sluggable\Util\Urlizer;
-use Positibe\Bundle\ContentBundle\Entity\MenuNode;
-use Positibe\Bundle\ContentBundle\Repository\MenuNodeRepository;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Repository\MenuNodeRepository;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Class MenuNodeFactory
- * @package Positibe\Bundle\ContentBundle\Factory
+ * @package Positibe\Bundle\CmsBundle\Factory
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

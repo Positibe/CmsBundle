@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\CmsBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
-use Positibe\Bundle\ContentBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
 
 
 /**
@@ -38,7 +38,7 @@ class MenuBlock extends AbstractVisibilityBlock
     /**
      * @var MenuNode
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\ContentBundle\Entity\MenuNode")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\CmsBundle\Entity\MenuNode")
      */
     private $menu;
 

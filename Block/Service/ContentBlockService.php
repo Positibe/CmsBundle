@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 /**
  * Class ContentBlockService
@@ -18,5 +18,5 @@ namespace Positibe\Bundle\ContentBundle\Block\Service;
  */
 class ContentBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
 } 

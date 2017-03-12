@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Form\Type;
+namespace Positibe\Bundle\CmsBundle\Form\Type;
 
-use Positibe\Bundle\ContentBundle\Entity\Block;
+use Positibe\Bundle\CmsBundle\Entity\Block;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AbstractBlockType
- * @package Positibe\Bundle\ContentBundle\Form\Type
+ * @package Positibe\Bundle\CmsBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -36,7 +36,7 @@ class AbstractBlockType extends AbstractType
                 array(
                     'label' => 'abstract_block.form.block_location_label',
                     'choices' => array_combine($this->templatePositions, $this->templatePositions),
-                    'translation_domain' => 'PositibeContentBundle',
+                    'translation_domain' => 'PositibeCmsBundle',
                     'required' => false
                 )
             )
@@ -46,7 +46,7 @@ class AbstractBlockType extends AbstractType
                 array(
                     'label' => 'abstract_block.form.publishable_label',
                     'required' => false,
-                    'translation_domain' => 'PositibeContentBundle'
+                    'translation_domain' => 'PositibeCmsBundle'
                 )
             )
           ->add(
@@ -55,7 +55,7 @@ class AbstractBlockType extends AbstractType
             array(
               'required' => false,
               'label' => 'abstract_block.form.publish_start_label',
-              'translation_domain' => 'PositibeContentBundle',
+              'translation_domain' => 'PositibeCmsBundle',
               'widget' => 'single_text',
               'attr' => array('class' => 'datetime-picker'),
               'format' => 'dd/MM/yyyy HH:mm'
@@ -67,7 +67,7 @@ class AbstractBlockType extends AbstractType
             array(
 
               'label' => 'abstract_block.form.publish_end_label',
-              'translation_domain' => 'PositibeContentBundle',
+              'translation_domain' => 'PositibeCmsBundle',
               'widget' => 'single_text',
               'attr' => array('class' => 'datetime-picker'),
               'format' => 'dd/MM/yyyy HH:mm',
@@ -87,7 +87,7 @@ class AbstractBlockType extends AbstractType
                         null,
                         array(
                             'label' => 'abstract_block.form.name_label',
-                            'translation_domain' => 'PositibeContentBundle'
+                            'translation_domain' => 'PositibeCmsBundle'
                         )
                     );
                 }
@@ -99,7 +99,7 @@ class AbstractBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Block'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Block'
             )
         );
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\Form\Type;
+namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\ContentBundle\Repository\PageRepository;
+use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class PageType
- * @package Positibe\Bundle\ContentBundle\Form\Type
+ * @package Positibe\Bundle\CmsBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -153,7 +153,7 @@ class PageType extends AbstractType
             'entity',
             array(
               'label' => 'static_content.form.parent_label',
-              'class' => 'Positibe\Bundle\ContentBundle\Entity\Category',
+              'class' => 'Positibe\Bundle\CmsBundle\Entity\Category',
               'choices' => $this->getCategoryTranslated($options)
             )
           )
@@ -190,7 +190,7 @@ class PageType extends AbstractType
      */
     private function getCategoryRepository()
     {
-        return $this->em->getRepository('PositibeContentBundle:Category');
+        return $this->em->getRepository('PositibeCmsBundle:Category');
     }
 
     /**
@@ -200,8 +200,8 @@ class PageType extends AbstractType
     {
         $resolver->setDefaults(
           array(
-            'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Page',
-            'translation_domain' => 'PositibeContentBundle'
+            'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
+            'translation_domain' => 'PositibeCmsBundle'
           )
         );
     }

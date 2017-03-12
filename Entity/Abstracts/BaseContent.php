@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
+namespace Positibe\Bundle\CmsBundle\Entity\Abstracts;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Positibe\Component\Publishable\Entity\PublishableTrait;
@@ -27,7 +27,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class BaseContent
- * @package Positibe\Bundle\ContentBundle\Entity\Abstracts
+ * @package Positibe\Bundle\CmsBundle\Entity\Abstracts
  *
  * @ORM\MappedSuperclass
  *

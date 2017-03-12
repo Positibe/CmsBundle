@@ -1,11 +1,11 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\Controller;
+namespace Positibe\Bundle\CmsBundle\Controller;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\ContentBundle\Entity\Category;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\CmsBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,7 +62,7 @@ class DefaultController extends Controller
             $contentTemplate
         );
 
-//        $children = $this->get('doctrine.orm.entity_manager')->getRepository('PositibeContentBundle:StaticContent')->createPagination($contentDocument);
+//        $children = $this->get('doctrine.orm.entity_manager')->getRepository('PositibeCmsBundle:StaticContent')->createPagination($contentDocument);
         $children = new Pagerfanta(new ArrayAdapter($contentDocument->getChildren()->toArray(), true, null));
         $children->setCurrentPage($request->get('page', 1), true, true);
         $children->setMaxPerPage(5);

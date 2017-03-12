@@ -8,20 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity;
+namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\ContentBundle\Model\ContentType;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\CmsBundle\Model\ContentType;
 
 /**
  * @ORM\Table(name="positibe_page_category")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\CmsBundle\Repository\PageRepository")
  *
  * Class Category
- * @package Positibe\Bundle\ContentBundle\Entity
+ * @package Positibe\Bundle\CmsBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Controller;
+namespace Positibe\Bundle\CmsBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as SyliusResourceController;
@@ -23,7 +23,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class TranslatableController
- * @package Positibe\Bundle\ContentBundle\Controller
+ * @package Positibe\Bundle\CmsBundle\Controller
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

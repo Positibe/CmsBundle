@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Form\Type;
+namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class PageBlockType
- * @package Positibe\Bundle\ContentBundle\Form\Type
+ * @package Positibe\Bundle\CmsBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -33,7 +33,7 @@ class PageBlockType extends AbstractType
                 'page',
                 'entity',
                 array(
-                    'class' => 'Positibe\Bundle\ContentBundle\Entity\Page',
+                    'class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
                     'attr' => array('class' => 'chosen-select form-control'),
                     'required' => true,
                     'label' => 'static_content_block.form.static_content_label',
@@ -48,8 +48,8 @@ class PageBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Blocks\PageBlock',
-                'translation_domain' => 'PositibeContentBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock',
+                'translation_domain' => 'PositibeCmsBundle'
             )
         );
     }

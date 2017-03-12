@@ -8,18 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\CmsBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
-use Positibe\Bundle\ContentBundle\Entity\Page;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 
 /**
  * @ORM\Table("positibe_block_page")
  * @ORM\Entity
  *
  * Class PageBlock
- * @package Positibe\Bundle\ContentBundle\Entity
+ * @package Positibe\Bundle\CmsBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -28,7 +28,7 @@ class PageBlock extends AbstractVisibilityBlock
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\ContentBundle\Entity\Page")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\CmsBundle\Entity\Page")
      */
     private $page;
 

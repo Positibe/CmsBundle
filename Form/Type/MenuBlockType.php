@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Form\Type;
+namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
@@ -50,8 +50,8 @@ class MenuBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\ContentBundle\Entity\Blocks\MenuBlock',
-                'translation_domain' => 'PositibeContentBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\MenuBlock',
+                'translation_domain' => 'PositibeCmsBundle'
             )
         );
     }

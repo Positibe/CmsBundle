@@ -8,23 +8,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Entity\Blocks\PageBlock;
-use Positibe\Bundle\ContentBundle\Repository\PageRepository;
+use Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock;
+use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageBlockService
- * @package Positibe\Bundle\ContentBundle\Block
+ * @package Positibe\Bundle\CmsBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class PageBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
     /**
      * @var \Doctrine\ORM\EntityManager
      */

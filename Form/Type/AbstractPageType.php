@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Form\Type;
+namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AbstractPageType
- * @package Positibe\Bundle\ContentBundle\Form\Type
+ * @package Positibe\Bundle\CmsBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -149,7 +149,7 @@ class AbstractPageType extends AbstractType
     {
         $resolver->setDefaults(
           array(
-            'data_class' => 'Positibe\Bundle\ContentBundle\Entity\AbstractPage',
+            'data_class' => 'Positibe\Bundle\CmsBundle\Entity\AbstractPage',
           )
         );
     }

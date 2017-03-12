@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ActionBlockService
- * @package Positibe\Bundle\ContentBundle\Block\Service
+ * @package Positibe\Bundle\CmsBundle\Block\Service
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

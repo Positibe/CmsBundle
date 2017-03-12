@@ -1,36 +1,36 @@
 admin_cms:
     path: /
-    defaults: { _controller: "FrameworkBundle:Template:template", template: "PositibeContentBundle::index.html.twig"}
+    defaults: { _controller: "FrameworkBundle:Template:template", template: "PositibeCmsBundle::index.html.twig"}
 
 positibe_cache_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/block_cache.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/block_cache.yml"
 
 positibe_admin_menu:
-    resource: "@PositibeContentBundle/Resources/config/routing/menu.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/menu.yml"
 
 positibe_admin_menu_node:
-    resource: "@PositibeContentBundle/Resources/config/routing/menu_node.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/menu_node.yml"
 #
 positibe_admin_menu_node_children:
-    resource: "@PositibeContentBundle/Resources/config/routing/menu_node_children.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/menu_node_children.yml"
 
 positibe_admin_page:
-    resource: "@PositibeContentBundle/Resources/config/routing/page.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/page.yml"
 
 positibe_admin_category:
-    resource: "@PositibeContentBundle/Resources/config/routing/category.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/category.yml"
 
 positibe_admin_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/block.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/block.yml"
 
 positibe_admin_menu_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/menu_block.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/menu_block.yml"
 
 positibe_admin_gallery_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/gallery_block.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/gallery_block.yml"
 
 positibe_admin_content_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/content_block.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/content_block.yml"
 
 positibe_admin_page_block:
-    resource: "@PositibeContentBundle/Resources/config/routing/page_block.yml"
+    resource: "@PositibeCmsBundle/Resources/config/routing/page_block.yml"

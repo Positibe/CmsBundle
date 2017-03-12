@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\Entity;
+namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Block
  *
  * @ORM\Table(name="positibe_block")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\BlockRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\CmsBundle\Entity\BlockRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
 class Block implements BlockInterface, PublishableInterface, PublishTimePeriodInterface, ChildInterface

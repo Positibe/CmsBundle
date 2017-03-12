@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\Tests\Controller;
+namespace Positibe\Bundle\CmsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Model;
+namespace Positibe\Bundle\CmsBundle\Block\Model;
 
 use Sonata\BlockBundle\Model\Block;
 
 
 /**
  * Class ContainerBlock
- * @package Positibe\Bundle\ContentBundle\Block\Model
+ * @package Positibe\Bundle\CmsBundle\Block\Model
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

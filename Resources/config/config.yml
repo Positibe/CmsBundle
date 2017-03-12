@@ -2,7 +2,7 @@ imports:
     - resource: "sylius_crud.yml"
 
 parameters:
-    positibe.menu_node.class: Positibe\Bundle\ContentBundle\Entity\MenuNode
+    positibe.menu_node.class: Positibe\Bundle\CmsBundle\Entity\MenuNode
 
 cmf_core:
     persistence:
@@ -15,17 +15,17 @@ cmf_seo:
         orm:
 
 positibe_menu:
-    content_class: [Positibe\Bundle\ContentBundle\Entity\Page, Positibe\Bundle\ContentBundle\Entity\Category ]
+    content_class: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category ]
 
-positibe_routing:
+positibe_cmf_routing_extra:
     auto_routing:
-        Positibe\Bundle\ContentBundle\Entity\Page:
+        Positibe\Bundle\CmsBundle\Entity\Page:
 #            uri_schema: /{category}/{title}
             uri_schema: /{title}
             token_providers:
 #                category: [content_method, { method: getCategoryName }]
                 title: [content_method, { method: getTitle }]
-        Positibe\Bundle\ContentBundle\Entity\Category:
+        Positibe\Bundle\CmsBundle\Entity\Category:
             uri_schema: /{title}
             token_providers:
                 title: [content_method, { method: getTitle }]
@@ -34,8 +34,8 @@ cmf_routing:
     dynamic:
         controllers_by_class:
             # the order here matter
-            Positibe\Bundle\ContentBundle\Entity\Category: PositibeContentBundle:Default:categoryIndex
-            Positibe\Bundle\ContentBundle\Entity\Page: PositibeContentBundle:Default:index
+            Positibe\Bundle\CmsBundle\Entity\Category: PositibeCmsBundle:Default:categoryIndex
+            Positibe\Bundle\CmsBundle\Entity\Page: PositibeCmsBundle:Default:index
 #            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute:  cmf_routing.redirect_controller:redirectAction
 
 liip_imagine:

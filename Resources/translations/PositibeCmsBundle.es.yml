@@ -57,7 +57,14 @@ visibility_block:
         pages_label: Páginas:
         routes_label: Rutas:
         roles_label: Roles:
-PositibeContentBundle:Default:index: Página simple
-PositibeContentBundle:Default:categoryIndex: Listado de páginas
+PositibeCmsBundle:Default:index: Página simple
+PositibeCmsBundle:Default:categoryIndex: Listado de páginas
 ROLE_USER: Autenticado
 IS_AUTHENTICATED_ANONYMOUSLY: Anónimo
+abstract_block:
+    form:
+        name_label: Nombre:
+        block_location_label: Ubicación:
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:

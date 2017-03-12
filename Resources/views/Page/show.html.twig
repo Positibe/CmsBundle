@@ -83,8 +83,8 @@
                                 <tr>
                                     <td>{{ route.name }}</td>
                                     <td>{{ route.getPath() }}</td>
-                                    <td>{{ route.getDefault('_controller') | trans({}, 'PositibeContentBundle') }}</td>
-                                    <td>{{ (route.getDefault('_locale') | default('es')) | trans({},'PositibeContentBundle') }}</td>
+                                    <td>{{ route.getDefault('_controller') | trans({}, 'PositibeCmsBundle') }}</td>
+                                    <td>{{ (route.getDefault('_locale') | default('es')) | trans({},'PositibeCmsBundle') }}</td>
                                 </tr>
 
                             {% else %}

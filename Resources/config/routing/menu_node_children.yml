@@ -4,7 +4,7 @@ positibe_submenu_child_create:
     defaults:
         _controller: positibe.controller.menu:createAction
         _sylius:
-            template: PositibeContentBundle:SubMenuChildren:create.html.twig
+            template: PositibeCmsBundle:SubMenuChildren:create.html.twig
             form: positibe_menu_node
             factory:
                 method: createNewChildByParentName
@@ -19,7 +19,7 @@ positibe_submenu_child_index:
    defaults:
        _controller: positibe.controller.menu:indexAction
        _sylius:
-           template: PositibeContentBundle:SubMenuChildren:index.html.twig
+           template: PositibeCmsBundle:SubMenuChildren:index.html.twig
            sorting:
                position: asc
            criteria:
@@ -31,7 +31,7 @@ positibe_submenu_child_update:
     defaults:
         _controller: positibe.controller.menu:updateAction
         _sylius:
-            template: PositibeContentBundle:SubMenuChildren:update.html.twig
+            template: PositibeCmsBundle:SubMenuChildren:update.html.twig
             form: positibe_menu_node
             criteria:
                 name: $child_name

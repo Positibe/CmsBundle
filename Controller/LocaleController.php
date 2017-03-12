@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Controller;
+namespace Positibe\Bundle\CmsBundle\Controller;
 
 use Lunetics\LocaleBundle\Event\FilterLocaleSwitchEvent;
 use Lunetics\LocaleBundle\LocaleBundleEvents;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class LocaleController
- * @package Positibe\Bundle\ContentBundle\Controller
+ * @package Positibe\Bundle\CmsBundle\Controller
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

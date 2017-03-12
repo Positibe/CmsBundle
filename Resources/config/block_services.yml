@@ -1,13 +1,13 @@
 services:
 #### Form Types ####
     positibe_block.abstract_simple_form:
-        class: Positibe\Bundle\ContentBundle\Form\Type\AbstractBlockType
+        class: Positibe\Bundle\CmsBundle\Form\Type\AbstractBlockType
         tags:
             - { name: form.type, alias: positibe_abstract_block }
 
 #### Block Service ####
     positibe_block.action_block_service:
-        class: Positibe\Bundle\ContentBundle\Block\Service\ActionBlockService
+        class: Positibe\Bundle\CmsBundle\Block\Service\ActionBlockService
         arguments: ['positibe_block.action_block_service', "@templating"]
         calls:
             - [ setContainer, ["@service_container"]]
@@ -16,19 +16,19 @@ services:
 
 #### Services and Utils ####
     positibe_block.block_loader:
-        class: Positibe\Bundle\ContentBundle\Block\Loader\OrmBlockLoader
+        class: Positibe\Bundle\CmsBundle\Block\Loader\OrmBlockLoader
         arguments: ["@doctrine.orm.entity_manager", "@cmf_core.publish_workflow.checker", "@security.authorization_checker"]
         tags:
             - { name: sonata.block.loader }
 
     positibe_block.block.cache.js_sync:
-        class: Positibe\Bundle\ContentBundle\Block\Cache\BlockJsCache
+        class: Positibe\Bundle\CmsBundle\Block\Cache\BlockJsCache
         arguments: ["@router", "@sonata.block.renderer", "@sonata.block.loader.chain", "@sonata.block.context_manager", true]
         tags:
             - { name: sonata.cache }
 
     positibe_block.block.cache.js_async:
-        class: Positibe\Bundle\ContentBundle\Block\Cache\BlockJsCache
+        class: Positibe\Bundle\CmsBundle\Block\Cache\BlockJsCache
         arguments: ["@router", "@sonata.block.renderer", "@sonata.block.loader.chain", "@sonata.block.context_manager", false]
         tags:
             - { name: sonata.cache }

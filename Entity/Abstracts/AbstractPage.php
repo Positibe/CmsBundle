@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
+namespace Positibe\Bundle\CmsBundle\Entity\Abstracts;
 
-use Positibe\Bundle\ContentBundle\Model\ContentType;
+use Positibe\Bundle\CmsBundle\Model\ContentType;
 use Positibe\Bundle\CmfRoutingExtraBundle\Model\CustomRouteInformation;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
@@ -24,20 +24,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Positibe\Bundle\MediaBundle\Entity\Media;
-use Positibe\Bundle\ContentBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class AbstractPage
- * @package Positibe\Bundle\ContentBundle\Entity
+ * @package Positibe\Bundle\CmsBundle\Entity
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\CmsBundle\Repository\PageRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\EntityListeners({"Positibe\Bundle\CmfRoutingExtraBundle\EventListener\RoutingAutoEntityListener"})
  * @ORM\HasLifecycleCallbacks
  *
- * @Gedmo\TranslationEntity(class="Positibe\Bundle\ContentBundle\Entity\PageTranslation")
+ * @Gedmo\TranslationEntity(class="Positibe\Bundle\CmsBundle\Entity\PageTranslation")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
@@ -109,7 +109,7 @@ abstract class AbstractPage extends BaseContent implements
     /**
      * @var MenuNode[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Positibe\Bundle\ContentBundle\Entity\MenuNode", cascade={"persist", "remove"}, fetch="EXTRA_LAZY", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="Positibe\Bundle\CmsBundle\Entity\MenuNode", cascade={"persist", "remove"}, fetch="EXTRA_LAZY", mappedBy="page")
      */
     protected $menuNodes;
 

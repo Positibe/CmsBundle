@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Loader;
+namespace Positibe\Bundle\CmsBundle\Block\Loader;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\ContentBundle\Block\Model\ContainerBlock;
-use Positibe\Bundle\ContentBundle\Entity\Block;
+use Positibe\Bundle\CmsBundle\Block\Model\ContainerBlock;
+use Positibe\Bundle\CmsBundle\Entity\Block;
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
 use Sonata\BlockBundle\Model\EmptyBlock;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * Class OrmBlockLoader
- * @package Positibe\Bundle\ContentBundle\Block
+ * @package Positibe\Bundle\CmsBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
@@ -42,7 +42,7 @@ class OrmBlockLoader implements BlockLoaderInterface
      */
     private $authorizationSecurityChecker;
 
-    protected $blockClass = 'PositibeContentBundle:Block';
+    protected $blockClass = 'PositibeCmsBundle:Block';
 
     /**
      * @param EntityManager $entityManager
@@ -189,7 +189,7 @@ class OrmBlockLoader implements BlockLoaderInterface
 
     /**
      * @param string $blockClassName
-     * @return \Positibe\Bundle\ContentBundle\Entity\BlockRepositoryInterface|\Doctrine\ORM\EntityRepository
+     * @return \Positibe\Bundle\CmsBundle\Entity\BlockRepositoryInterface|\Doctrine\ORM\EntityRepository
      */
     public function getRepository($blockClassName = null)
     {

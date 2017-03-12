@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Factory;
+namespace Positibe\Bundle\CmsBundle\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
-use Positibe\Bundle\ContentBundle\Entity\MenuNode;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\ContentBundle\Entity\Page;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\MediaBundle\Entity\Media;
 use Positibe\Bundle\MediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
@@ -25,13 +25,13 @@ use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 
 /**
  * Class PageFactory
- * @package Positibe\Bundle\ContentBundle\Factory
+ * @package Positibe\Bundle\CmsBundle\Factory
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class PageFactory implements FactoryInterface
 {
-    const DEFAULT_CONTROLLER = 'PositibeContentBundle:Default:index';
+    const DEFAULT_CONTROLLER = 'PositibeCmsBundle:Default:index';
     private $menuFactory;
     private $routeFactory;
     private $em;
@@ -69,7 +69,7 @@ class PageFactory implements FactoryInterface
     public function createNewByParentName($name)
     {
         /** @var Page $category */
-        $category = $this->em->createQueryBuilder()->select('c')->from('PositibeContentBundle:Page', 'c')
+        $category = $this->em->createQueryBuilder()->select('c')->from('PositibeCmsBundle:Page', 'c')
           ->where('c.name = :name')
           ->setParameter('name', $name)->getQuery()->getOneOrNullResult();
 
@@ -177,7 +177,7 @@ class PageFactory implements FactoryInterface
           $parentMenu,
           $locale,
           $imagePath,
-          'Positibe\Bundle\ContentBundle\Entity\Category'
+          'Positibe\Bundle\CmsBundle\Entity\Category'
         );
 
         return $page;

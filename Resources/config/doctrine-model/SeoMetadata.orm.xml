@@ -22,7 +22,7 @@
         <field name="extraProperties" type="array" nullable="true"/>
         <field name="extraHttp" type="array" nullable="true"/>
 
-        <gedmo:translation entity="Positibe\Bundle\ContentBundle\Entity\SeoMetadataTranslation" locale="locale"/>
+        <gedmo:translation entity="Positibe\Bundle\CmsBundle\Entity\SeoMetadataTranslation" locale="locale"/>
 
     </entity>
 </doctrine-mapping>

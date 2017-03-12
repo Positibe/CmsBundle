@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
-use Positibe\Bundle\ContentBundle\Entity\Block;
+use Positibe\Bundle\CmsBundle\Entity\Block;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -21,13 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class AbstractBlockService
- * @package Positibe\Bundle\ContentBundle\Block\Service
+ * @package Positibe\Bundle\CmsBundle\Block\Service
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 abstract class AbstractBlockService extends BaseBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_simple.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_simple.html.twig';
     protected $requestStack;
 
     /**

@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
+namespace Positibe\Bundle\CmsBundle\Entity\Blocks;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
+use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock;
 use Positibe\Bundle\MediaBundle\Entity\Media;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
@@ -21,7 +21,7 @@ use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
  * @ORM\Entity
  *
  * Class ContentBlock
- * @package Positibe\Bundle\ContentBundle\Entity
+ * @package Positibe\Bundle\CmsBundle\Entity
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

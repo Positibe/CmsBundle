@@ -1,14 +1,14 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle;
+namespace Positibe\Bundle\CmsBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Positibe\Bundle\ContentBundle\DependencyInjection\Compiler\ContentCompilerPass;
-use Positibe\Bundle\ContentBundle\DependencyInjection\Compiler\ResourceServicesCompilerPass;
+use Positibe\Bundle\CmsBundle\DependencyInjection\Compiler\ContentCompilerPass;
+use Positibe\Bundle\CmsBundle\DependencyInjection\Compiler\ResourceServicesCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PositibeContentBundle extends Bundle
+class PositibeCmsBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

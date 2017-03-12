@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\ContentBundle\Repository\PageRepository;
+use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +20,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class CategoryBlockService
- * @package Positibe\Bundle\ContentBundle\Block
+ * @package Positibe\Bundle\CmsBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class CategoryBlockService extends BaseBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_contents.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_contents.html.twig';
     protected $em;
 
     /**
@@ -102,7 +102,7 @@ class CategoryBlockService extends BaseBlockService
      */
     public function getContentRepository()
     {
-        return $this->em->getRepository('PositibeContentBundle:Page');
+        return $this->em->getRepository('PositibeCmsBundle:Page');
     }
 
     /**
@@ -110,6 +110,6 @@ class CategoryBlockService extends BaseBlockService
      */
     public function getCategoryRepository()
     {
-        return $this->em->getRepository('PositibeContentBundle:Category');
+        return $this->em->getRepository('PositibeCmsBundle:Category');
     }
 } 

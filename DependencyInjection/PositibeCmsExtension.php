@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\DependencyInjection;
+namespace Positibe\Bundle\CmsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -27,7 +27,7 @@ class PositibeContentExtension extends Extension
         $loader->load('block_services.yml');
         $loader->load('cmf_seo_extractor_services.yml');
 
-        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\ContentBundle\Entity\MenuNode');
+        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\CmsBundle\Entity\MenuNode');
 
         $container->getDefinition('positibe_content.form.visibility_block_type')
             ->addMethodCall('setRoles', array($config['roles']))

@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 /**
  * Class GalleryBlockService
- * @package Positibe\Bundle\ContentBundle\Block
+ * @package Positibe\Bundle\CmsBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class GalleryBlockService extends AbstractBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_gallery.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_gallery.html.twig';
 } 

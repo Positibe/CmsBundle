@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Block\Service;
+namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
 use Sonata\BlockBundle\Block\BaseBlockService;
@@ -20,13 +20,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class FeaturedBlockService
- * @package Positibe\Bundle\ContentBundle\Block
+ * @package Positibe\Bundle\CmsBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 class FeaturedBlockService extends BaseBlockService
 {
-    protected $template = 'PositibeContentBundle:Block:block_content.html.twig';
+    protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
     protected $em;
 
     /**
@@ -77,7 +77,7 @@ class FeaturedBlockService extends BaseBlockService
         $resolver->setDefaults(
             array(
                 'template' => $this->template,
-                'class' => 'Positibe\Bundle\ContentBundle\Entity\Page'
+                'class' => 'Positibe\Bundle\CmsBundle\Entity\Page'
             )
         );
     }

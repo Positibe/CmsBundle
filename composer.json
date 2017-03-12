@@ -1,14 +1,14 @@
 {
-    "name": "positibe/content-bundle",
+    "name": "positibe/cms-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony PositibeContentBundle",
+    "description": "Symfony PositibeCmsBundle",
     "keywords": [
         "content",
         "content management framework",
         "positibe",
         "positibelabs"
     ],
-    "homepage": "http://positibelabs.blogspot.com/bundles/content",
+    "homepage": "http://positibelabs.blogspot.com/bundles/cms",
     "license": "MIT",
     "version": "1.0.0-alpha1",
     "authors": [
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Positibe\\Bundle\\ContentBundle\\": ""
+            "Positibe\\Bundle\\CmsBundle\\": ""
         }
     },
     "extra": {

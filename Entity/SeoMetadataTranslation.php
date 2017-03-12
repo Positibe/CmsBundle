@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Positibe\Bundle\ContentBundle\Entity;
+namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractTranslation;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class SeoMetadataTranslation
- * @package Positibe\Bundle\ContentBundle\Entity
+ * @package Positibe\Bundle\CmsBundle\Entity
  *
  * @ORM\Table(name="positibe_seo_metadata_translations", indexes={
  *      @ORM\Index(name="positibe_seo_metadata_translation_idx", columns={"locale", "object_class", "field", "foreign_key"})

@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\ContentBundle\DependencyInjection;
+namespace Positibe\Bundle\CmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
