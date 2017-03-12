@@ -15,11 +15,10 @@ use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\ContentBundle\Entity\MenuNode;
 use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\ContentBundle\Entity\Page;
-use Positibe\Bundle\OrmMediaBundle\Entity\Media;
-use Positibe\Bundle\OrmMediaBundle\Provider\ImageProvider;
-use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
-use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
-use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
+use Positibe\Bundle\MediaBundle\Entity\Media;
+use Positibe\Bundle\MediaBundle\Provider\ImageProvider;
+use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
+use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 

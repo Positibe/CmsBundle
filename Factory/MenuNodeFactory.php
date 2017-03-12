@@ -12,9 +12,9 @@ namespace Positibe\Bundle\ContentBundle\Factory;
 
 use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\ContentBundle\Entity\MenuNode;
-use Positibe\Bundle\ContentBundle\Entity\Repository\MenuNodeRepository;
-use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
-use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
+use Positibe\Bundle\ContentBundle\Repository\MenuNodeRepository;
+use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
+use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 

@@ -12,7 +12,7 @@ namespace Positibe\Bundle\ContentBundle\Block\Service;
 
 /**
  * Class ContentBlockService
- * @package Positibe\Bundle\OrmMediaBundle\Block
+ * @package Positibe\Bundle\MediaBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

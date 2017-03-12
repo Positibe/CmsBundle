@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class MenuBlockService
- * @package Positibe\Bundle\CmfBundle\Block
+ * @package Positibe\Bundle\CoreBundle\Block
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

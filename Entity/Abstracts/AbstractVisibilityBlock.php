@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * Class AbstractVisibilityBlock
  * @package Positibe\Bundle\ContentBundle\Entity\Abstracts
  *
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\BlockRepository")
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

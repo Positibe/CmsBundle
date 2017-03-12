@@ -10,7 +10,7 @@
 
 namespace Positibe\Bundle\ContentBundle\Form\Type;
 
-use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
+use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

@@ -8,39 +8,39 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Page
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\PageRepository
         positibe.category:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Category
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\CategoryRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\CategoryRepository
         positibe.menu:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\MenuNode
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\MenuNodeRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\MenuNodeRepository
         positibe.block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\BlockRepository
         positibe.menu_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Blocks\MenuBlock
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\BlockRepository
         positibe.content_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Blocks\ContentBlock
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\BlockRepository
         positibe.page_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Blocks\PageBlock
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\BlockRepository
         positibe.gallery_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\ContentBundle\Entity\Blocks\GalleryBlock
-                repository: Positibe\Bundle\ContentBundle\Entity\Repository\BlockRepository
+                repository: Positibe\Bundle\ContentBundle\Repository\BlockRepository

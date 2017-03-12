@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\PageRepository")
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

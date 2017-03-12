@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
-use Positibe\Bundle\OrmMenuBundle\Menu\Factory\ContentAwareFactory;
+use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class MenuBlockType
- * @package Positibe\Bundle\CmfBundle\Form\Type
+ * @package Positibe\Bundle\CoreBundle\Form\Type
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

@@ -13,9 +13,9 @@ namespace Positibe\Bundle\ContentBundle\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\OrmMenuBundle\Entity\MenuNodeBase;
+use Positibe\Bundle\MenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
+use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @package Positibe\Bundle\ContentBundle\Entity
  *
  * @ORM\Table(name="positibe_menu")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\MenuNodeRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\MenuNodeRepository")
  *
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
@@ -55,7 +55,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     protected $page;
 
     /**
-     * @param \Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface $content
+     * @param \Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface $content
      */
     public function setContent($content)
     {

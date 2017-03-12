@@ -20,7 +20,7 @@ use Positibe\Bundle\ContentBundle\Entity\MenuNode;
  * @ORM\Entity
  *
  * Class MenuBlock
- * @package Positibe\Bundle\CmfBundle\Block\Entity\Menu
+ * @package Positibe\Bundle\CoreBundle\Block\Entity\Menu
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

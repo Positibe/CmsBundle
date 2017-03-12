@@ -11,8 +11,8 @@
 namespace Positibe\Bundle\ContentBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Positibe\Bundle\OrmContentBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
+use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as SyliusResourceController;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;

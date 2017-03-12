@@ -11,7 +11,6 @@
 namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Positibe\Component\Publishable\Entity\PublishableTrait;
 use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
 use Positibe\Component\Seo\Entity\SeoAwareEntityTrait;
@@ -79,7 +78,7 @@ class BaseContent implements
     /**
      * @var ArrayCollection|RouteObjectInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route", orphanRemoval=TRUE, cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
      *
      */
     protected $routes;

@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\ContentBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository;
+use Positibe\Bundle\ContentBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;

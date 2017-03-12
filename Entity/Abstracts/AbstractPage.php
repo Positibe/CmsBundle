@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\ContentBundle\Entity\Abstracts;
 
 use Positibe\Bundle\ContentBundle\Model\ContentType;
-use Positibe\Bundle\OrmRoutingBundle\Model\CustomRouteInformation;
+use Positibe\Bundle\CmfRoutingExtraBundle\Model\CustomRouteInformation;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
@@ -22,10 +22,9 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Menu\NodeInterface;
-use Positibe\Bundle\OrmMenuBundle\Model\MenuNodeReferrersInterface;
-use Positibe\Bundle\OrmMediaBundle\Entity\Media;
+use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
+use Positibe\Bundle\MediaBundle\Entity\Media;
 use Positibe\Bundle\ContentBundle\Entity\MenuNode;
-use Positibe\Bundle\OrmRoutingBundle\Entity\Route;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -33,9 +32,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class AbstractPage
  * @package Positibe\Bundle\ContentBundle\Entity
  * @ORM\Table(name="positibe_page")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\PageRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\EntityListeners({"Positibe\Bundle\OrmRoutingBundle\EventListener\AutoRoutingEntityListener"})
+ * @ORM\EntityListeners({"Positibe\Bundle\CmfRoutingExtraBundle\EventListener\RoutingAutoEntityListener"})
  * @ORM\HasLifecycleCallbacks
  *
  * @Gedmo\TranslationEntity(class="Positibe\Bundle\ContentBundle\Entity\PageTranslation")
@@ -71,7 +70,7 @@ abstract class AbstractPage extends BaseContent implements
     /**
      * @var Media
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmMediaBundle\Entity\Media", cascade="all")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\MediaBundle\Entity\Media", cascade="all")
      */
     protected $image;
 
@@ -99,7 +98,7 @@ abstract class AbstractPage extends BaseContent implements
     /**
      * @var ArrayCollection|RouteObjectInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\OrmRoutingBundle\Entity\Route", orphanRemoval=TRUE, cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route", orphanRemoval=TRUE, cascade={"persist", "remove"}, fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="positibe_page_routes",
      *      joinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="cascade")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="route_id", referencedColumnName="id", unique=true, onDelete="cascade")}

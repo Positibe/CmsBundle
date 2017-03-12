@@ -1,17 +1,17 @@
 parameters:
-    stof_doctrine_extensions.event_listener.locale.class: Positibe\Bundle\CmfBundle\EventListener\LocaleListener
+    stof_doctrine_extensions.event_listener.locale.class: Positibe\Bundle\CoreBundle\EventListener\LocaleListener
 
 services:
 #### Forms Type ####
     positibe_content.abstract_page_form_type:
         class: Positibe\Bundle\ContentBundle\Form\Type\AbstractPageType
-        arguments: [@positibe_orm_routing.route_factory, %locales%, %locale%]
+        arguments: ["@positibe_routing.route_factory", "%locales%", "%locale%"]
         tags:
           - { name: form.type , alias: positibe_abstract_page }
 
     positibe_content.page_form_type:
         class: Positibe\Bundle\ContentBundle\Form\Type\PageType
-        arguments: [@doctrine.orm.entity_manager, @positibe_orm_routing.route_factory, %locales%, %locale%]
+        arguments: ["@doctrine.orm.entity_manager", '@positibe_routing.route_factory', %locales%, %locale%]
         tags:
           - { name: form.type , alias: positibe_page }
 
@@ -49,50 +49,49 @@ services:
 #### Block Services ####
     positibe_content.block_category:
             class: Positibe\Bundle\ContentBundle\Block\Service\CategoryBlockService
-            arguments: ['positibe_content.block_category', @templating, @doctrine.orm.entity_manager]
+            arguments: ['positibe_content.block_category', "@templating", "@doctrine.orm.entity_manager"]
             tags:
               - { name: sonata.block }
 
     positibe_content.block_page:
         class: Positibe\Bundle\ContentBundle\Block\Service\PageBlockService
-        arguments: ['positibe_content.block_page', @templating, @request_stack]
+        arguments: ['positibe_content.block_page', "@templating", "@request_stack"]
         tags:
             - {name: sonata.block }
         calls:
-            - [ setEm, [@doctrine.orm.entity_manager]]
+            - [ setEm, ["@doctrine.orm.entity_manager"]]
 
     positibe_content.block_featured_page:
         class: Positibe\Bundle\ContentBundle\Block\Service\FeaturedBlockService
-        arguments: ['positibe_content.block_featured_page', @templating, @doctrine.orm.entity_manager]
+        arguments: ['positibe_content.block_featured_page', "@templating", "@doctrine.orm.entity_manager"]
         tags:
             - {name: sonata.block }
 
     positibe_content.block_content:
         class: Positibe\Bundle\ContentBundle\Block\Service\ContentBlockService
-        arguments: ['positibe_content.block_content', @templating, @request_stack]
+        arguments: ['positibe_content.block_content', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 
     positibe_content.block_gallery:
         class: Positibe\Bundle\ContentBundle\Block\Service\GalleryBlockService
-        arguments: ['positibe_content.block_gallery', @templating, @request_stack]
+        arguments: ['positibe_content.block_gallery', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 
     positibe_content.block_menu:
         class: Positibe\Bundle\ContentBundle\Block\Service\MenuBlockService
-        arguments: ['positibe_content.block_menu', @templating, @request_stack]
+        arguments: ['positibe_content.block_menu', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 
 #### Services and Utils ####
     positibe.factory.page:
         class: Positibe\Bundle\ContentBundle\Factory\PageFactory
-        arguments: ["@positibe.factory.menu", "@positibe_orm_routing.route_factory", @doctrine.orm.entity_manager, %locale%]
+        arguments: ["@positibe.factory.menu", "@positibe_routing.route_factory", "@doctrine.orm.entity_manager", %locale%]
 
     positibe.factory.menu:
         class: Positibe\Bundle\ContentBundle\Factory\MenuNodeFactory
-        arguments: ["@positibe.repository.menu"
-        ]
+        arguments: ["@positibe.repository.menu"]
         tags:
             - { name: sylius.factory ,alias: positibe.factory.menu}

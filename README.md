@@ -15,7 +15,7 @@ You must see the configuration of:
 * PositibeOrmMenuBundle
 * PositibeContentBundle
 * PositibeOrmMediaBundle
-* PositibeOrmRoutingBundle
+* PositibeCmfRoutingExtraBundle
 
 Next, be sure to enable the bundles in your application kernel:
 
@@ -41,5 +41,5 @@ Import all necessary configurations to your app/config/config.yml the basic conf
         - { resource: @PositibeContentBundle/Resources/config/config.yml }
 
 **Caution:**: This bundle use the timestampable, sluggable, softdeleteable, translatable and sortable extension of GedmoDoctrineExtension. Be sure that you have the listeners for this extensions enable. You can also to use StofDoctrineExtensionBundle.
-
+**Caution:**: If you have the parameter ``positibe.menu_node.class: Positibe\Bundle\MenuBundle\Doctrine\Orm\MenuNode`` configured in your config.yml please erase it.
 

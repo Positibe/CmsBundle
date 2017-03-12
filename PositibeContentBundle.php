@@ -24,5 +24,12 @@ class PositibeContentBundle extends Bundle
                 array('CmfSeoBundle' => 'Symfony\Cmf\Bundle\SeoBundle\Model')
             )
         );
+
+        $container->addCompilerPass(
+            DoctrineOrmMappingsPass::createAnnotationMappingDriver(
+                [realpath(__DIR__.'/Entity') => 'Positibe\Bundle\MenuBundle\Doctrine\Orm'],
+                [realpath(__DIR__.'/Entity')]
+            )
+        );
     }
 }

@@ -25,6 +25,7 @@ class PositibeContentExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('block_services.yml');
+        $loader->load('cmf_seo_extractor_services.yml');
 
         $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\ContentBundle\Entity\MenuNode');
 

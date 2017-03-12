@@ -18,7 +18,7 @@ use Positibe\Bundle\ContentBundle\Model\ContentType;
 
 /**
  * @ORM\Table(name="positibe_page_category")
- * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository")
+ * @ORM\Entity(repositoryClass="Positibe\Bundle\ContentBundle\Repository\PageRepository")
  *
  * Class Category
  * @package Positibe\Bundle\ContentBundle\Entity

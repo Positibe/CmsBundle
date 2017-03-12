@@ -3,8 +3,8 @@
 namespace Positibe\Bundle\ContentBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
-use Positibe\Bundle\ContentBundle\Entity\Repository\PageRepository;
-use Positibe\Bundle\OrmRoutingBundle\Factory\RouteFactory;
+use Positibe\Bundle\ContentBundle\Repository\PageRepository;
+use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

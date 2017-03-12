@@ -26,7 +26,7 @@
         "symfony/framework-bundle": "~2.8|~3.0",
         "positibe/menu-bundle": "~1.0.0-beta1",
         "positibe/media-bundle": "~1.0.0-beta1",
-        "positibe/orm-routing-bundle": "~1.0.0-beta1",
+        "positibe/cmf-routing-extra-bundle": "~1.0.0-beta2",
         "positibe/seo": "~0.1",
         "gedmo/doctrine-extensions": "~2.4",
         "sonata-project/block-bundle": "~3.0",

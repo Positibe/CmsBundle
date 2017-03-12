@@ -13,7 +13,7 @@ namespace Positibe\Bundle\ContentBundle\Entity\Blocks;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Positibe\Bundle\ContentBundle\Entity\Abstracts\AbstractVisibilityBlock;
-use Positibe\Bundle\OrmMediaBundle\Entity\Media;
+use Positibe\Bundle\MediaBundle\Entity\Media;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
 /**
@@ -39,7 +39,7 @@ class ContentBlock extends AbstractVisibilityBlock implements TranslatableInterf
     /**
      * @var Media
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\OrmMediaBundle\Entity\Media", cascade="all")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\MediaBundle\Entity\Media", cascade="all")
      */
     private $image;
 

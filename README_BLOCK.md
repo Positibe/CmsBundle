@@ -15,7 +15,7 @@ You must see the configuration of:
 * PositibeOrmMenuBundle
 * PositibeContentBundle
 * PositibeOrmMediaBundle
-* PositibeOrmRoutingBundle
+* PositibeCmfRoutingExtraBundle
 
 Next, be sure to enable the bundles in your application kernel:
 
@@ -26,7 +26,7 @@ Next, be sure to enable the bundles in your application kernel:
         return array(
             // ...
             // All dependencies of all Positibe bundles
-            new Positibe\Bundle\OrmContentBundle\PositibeOrmContentBundle(),
+            new Positibe\Bundle\ContentBundle\PositibeOrmContentBundle(),
 
             // ...
         );
