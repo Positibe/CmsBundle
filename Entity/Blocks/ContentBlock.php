@@ -74,7 +74,7 @@ class ContentBlock extends AbstractVisibilityBlock implements TranslatableInterf
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_content.block_content';
+        $this->type = 'positibe_cms.block_content';
     }
 
     public function __toString()

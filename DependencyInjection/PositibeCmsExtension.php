@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class PositibeContentExtension extends Extension
+class PositibeCmsExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class PositibeContentExtension extends Extension
 
         $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\CmsBundle\Entity\MenuNode');
 
-        $container->getDefinition('positibe_content.form.visibility_block_type')
+        $container->getDefinition('positibe_cms.form.visibility_block_type')
             ->addMethodCall('setRoles', array($config['roles']))
             ->addMethodCall('setPublicRoutes', array($config['public_routes']));
 

@@ -30,7 +30,7 @@
 
                     <ul class="dropdown-menu pull-right">
                         <li>
-                            <a href="{{ path('positibe_content_block_create') }}"><i class="fa fa fa-photo"></i> Simple</a>
+                            <a href="{{ path('positibe_cms_block_create') }}"><i class="fa fa fa-photo"></i> Simple</a>
                             <a href="{{ path('positibe_gallery_block_create') }}"><i class="fa fa-file-movie-o"></i>
                                 Galería</a>
                             <a href="{{ path('positibe_page_block_create') }}"><i class="fa fa-file-text"></i>
@@ -58,16 +58,16 @@
                 </tr>
                 {% set count = blocks.maxPerPage * (blocks.currentPage - 1) %}
                 {% for block in blocks %}
-                    {% if block.type == 'positibe_content.block_page' %}
+                    {% if block.type == 'positibe_cms.block_page' %}
                         {% set path_update = path('positibe_page_block_update', {'name': block.name}) %}
                         {% set path_show = path('positibe_page_block_show', {'name': block.name}) %}
-                    {% elseif block.type == 'positibe_content.block_content' %}
-                        {% set path_update = path('positibe_content_block_update', {'name': block.name}) %}
-                        {% set path_show = path('positibe_content_block_show', {'name': block.name}) %}
-                    {% elseif block.type == 'positibe_content.block_gallery' %}
+                    {% elseif block.type == 'positibe_cms.block_content' %}
+                        {% set path_update = path('positibe_cms_block_update', {'name': block.name}) %}
+                        {% set path_show = path('positibe_cms_block_show', {'name': block.name}) %}
+                    {% elseif block.type == 'positibe_cms.block_gallery' %}
                         {% set path_update = path('positibe_gallery_block_update', {'name': block.name}) %}
                         {% set path_show = path('positibe_gallery_block_show', {'name': block.name}) %}
-                    {% elseif block.type == 'positibe_content.block_menu' %}
+                    {% elseif block.type == 'positibe_cms.block_menu' %}
                         {% set path_update = path('positibe_menu_block_update', {'name': block.name}) %}
                         {% set path_show = path('positibe_menu_block_show', {'name': block.name}) %}
                     {% else %}

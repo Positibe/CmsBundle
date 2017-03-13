@@ -9,7 +9,7 @@
 {% block breadcrumb_list %}
     <li>
         <i class="fa fa-angle-right"></i>
-        <a href="{{ path('positibe_content_block_index') }}">Bloques simples</a>
+        <a href="{{ path('positibe_cms_block_index') }}">Bloques simples</a>
     </li>
     <li>
         <i class="fa fa-angle-right"></i>
@@ -24,15 +24,15 @@
     {{ include('@PositibeContent/ContentBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_content_block_remove', path('positibe_content_block_delete', {'name': content_block.name})) }}
+    {{ delete_confirm('positibe_cms_block_remove', path('positibe_cms_block_delete', {'name': content_block.name})) }}
 {% endblock %}
 
 
 {% block javascripts %}
     {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
     <script>
-        jQuery('#positibe_content_block_locale').on('change', function (e) {
-            location.replace('{{ path('positibe_content_block_update', {'name': content_block.name}) }}?data_locale='
+        jQuery('#positibe_cms_block_locale').on('change', function (e) {
+            location.replace('{{ path('positibe_cms_block_update', {'name': content_block.name}) }}?data_locale='
             + $
             (this)
                     .val

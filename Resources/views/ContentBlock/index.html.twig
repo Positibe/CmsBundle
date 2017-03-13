@@ -11,7 +11,7 @@
 {% block breadcrumb_list %}
     <li>
         <i class="fa fa-angle-right"></i>
-        <a href="{{ path('positibe_content_block_index') }}">Bloques simples</a>
+        <a href="{{ path('positibe_cms_block_index') }}">Bloques simples</a>
     </li>
 {% endblock %}
 
@@ -22,7 +22,7 @@
                 <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-image"></i> Bloques simples</p>
             </div>
             <div class="actions">
-                <a href="{{ path('positibe_content_block_create') }}" class="btn btn-sm btn-default btn-circle"><i class="fa
+                <a href="{{ path('positibe_cms_block_create') }}" class="btn btn-sm btn-default btn-circle"><i class="fa
         fa-plus"></i> Nuevo bloque simple</a>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 {% for content_block in content_blocks %}
                     <tr>
                         <td>{{ count + loop.index }}</td>
-                        <td><a href="{{ path('positibe_content_block_update',
+                        <td><a href="{{ path('positibe_cms_block_update',
                             {'name': content_block.name}) }}"
                                title="{{ content_block.name }}">{{ content_block.name | truncate(30) }}</a></td>
                         <td>{{ content_block.title }}</td>
@@ -55,10 +55,10 @@
                         </td>
                         <td>
                             <a class="btn btn-default btn-xs"
-                               href="{{ path('positibe_content_block_show', {'name': content_block.name}) }}"><i
+                               href="{{ path('positibe_cms_block_show', {'name': content_block.name}) }}"><i
                                         class="fa fa-search"></i> Detalles</a>
                             <a class="btn btn-default btn-xs"
-                               href="{{ path('positibe_content_block_update', {'name': content_block.name}) }}"><i
+                               href="{{ path('positibe_cms_block_update', {'name': content_block.name}) }}"><i
                                         class="fa fa-edit"></i> Editar</a>
                         </td>
                     </tr>

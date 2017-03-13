@@ -1,20 +1,20 @@
-positibe_content_block_create:
+positibe_cms_block_create:
     path: /content_block/new
     methods: [GET, POST]
     defaults:
         _controller: positibe.controller.content_block:createAction
         _sylius:
             redirect:
-                route: positibe_content_block_show
+                route: positibe_cms_block_show
                 parameters: { name: resource.name }
 
-positibe_content_block_index:
+positibe_cms_block_index:
    path: /content_block
    methods: [GET]
    defaults:
        _controller: positibe.controller.content_block:indexAction
 
-positibe_content_block_show:
+positibe_cms_block_show:
     path: /content_block/{name}
     methods: [GET]
     defaults:
@@ -23,7 +23,7 @@ positibe_content_block_show:
             criteria:
                 name: $name
 
-positibe_content_block_update:
+positibe_cms_block_update:
     path: /content_block/{name}/edit
     methods: [GET, PUT]
     defaults:
@@ -32,10 +32,10 @@ positibe_content_block_update:
             criteria:
                 name: $name
             redirect:
-                route: positibe_content_block_show
+                route: positibe_cms_block_show
                 parameters: { name: resource.name }
 
-positibe_content_block_delete:
+positibe_cms_block_delete:
     path: /content_block/{name}
     methods: [DELETE]
     defaults:

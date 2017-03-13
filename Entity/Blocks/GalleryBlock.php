@@ -35,7 +35,7 @@ class GalleryBlock extends AbstractVisibilityBlock
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_content.block_gallery';
+        $this->type = 'positibe_cms.block_gallery';
         $this->gallery = new Gallery();
     }
 

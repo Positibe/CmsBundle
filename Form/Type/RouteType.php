@@ -69,6 +69,6 @@ class RouteType extends AbstractType {
      */
     public function getBlockPrefix()
     {
-        return 'positibe_content_route';
+        return 'positibe_cms_route';
     }
 } 

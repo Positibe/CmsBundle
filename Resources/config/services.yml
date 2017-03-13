@@ -3,24 +3,24 @@ parameters:
 
 services:
 #### Forms Type ####
-    positibe_content.abstract_page_form_type:
+    positibe_cms.abstract_page_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\AbstractPageType
         arguments: ["@positibe_routing.route_factory", "%locales%", "%locale%"]
         tags:
           - { name: form.type , alias: positibe_abstract_page }
 
-    positibe_content.page_form_type:
+    positibe_cms.page_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\PageType
         arguments: ["@doctrine.orm.entity_manager", '@positibe_routing.route_factory', %locales%, %locale%]
         tags:
           - { name: form.type , alias: positibe_page }
 
-    positibe_content.category_form_type:
+    positibe_cms.category_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\CategoryType
         tags:
           - { name: form.type , alias: positibe_category }
 
-    positibe_content.form.visibility_block_type:
+    positibe_cms.form.visibility_block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\AbstractVisibilityBlockType
         tags:
             - {name: form.type, alias: positibe_block_visibility }
@@ -30,58 +30,58 @@ services:
         tags:
             - {name: form.type, alias: positibe_page_block }
 
-    positibe_content.form.content_block_type:
+    positibe_cms.form.content_block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\ContentBlockType
         arguments: [%locales%]
         tags:
-            - {name: form.type, alias: positibe_content_block }
+            - {name: form.type, alias: positibe_cms_block }
 
-    positibe_content.form.gallery_block_type:
+    positibe_cms.form.gallery_block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\GalleryBlockType
         tags:
             - {name: form.type, alias: positibe_gallery_block }
 
-    positibe_content.form.menu_block_type:
+    positibe_cms.form.menu_block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\MenuBlockType
         tags:
             - {name: form.type, alias: positibe_menu_block }
 
 #### Block Services ####
-    positibe_content.block_category:
+    positibe_cms.block_category:
             class: Positibe\Bundle\CmsBundle\Block\Service\CategoryBlockService
-            arguments: ['positibe_content.block_category', "@templating", "@doctrine.orm.entity_manager"]
+            arguments: ['positibe_cms.block_category', "@templating", "@doctrine.orm.entity_manager"]
             tags:
               - { name: sonata.block }
 
-    positibe_content.block_page:
+    positibe_cms.block_page:
         class: Positibe\Bundle\CmsBundle\Block\Service\PageBlockService
-        arguments: ['positibe_content.block_page', "@templating", "@request_stack"]
+        arguments: ['positibe_cms.block_page', "@templating", "@request_stack"]
         tags:
             - {name: sonata.block }
         calls:
             - [ setEm, ["@doctrine.orm.entity_manager"]]
 
-    positibe_content.block_featured_page:
+    positibe_cms.block_featured_page:
         class: Positibe\Bundle\CmsBundle\Block\Service\FeaturedBlockService
-        arguments: ['positibe_content.block_featured_page', "@templating", "@doctrine.orm.entity_manager"]
+        arguments: ['positibe_cms.block_featured_page', "@templating", "@doctrine.orm.entity_manager"]
         tags:
             - {name: sonata.block }
 
-    positibe_content.block_content:
+    positibe_cms.block_content:
         class: Positibe\Bundle\CmsBundle\Block\Service\ContentBlockService
-        arguments: ['positibe_content.block_content', "@templating", "@request_stack"]
+        arguments: ['positibe_cms.block_content', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 
-    positibe_content.block_gallery:
+    positibe_cms.block_gallery:
         class: Positibe\Bundle\CmsBundle\Block\Service\GalleryBlockService
-        arguments: ['positibe_content.block_gallery', "@templating", "@request_stack"]
+        arguments: ['positibe_cms.block_gallery', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 
-    positibe_content.block_menu:
+    positibe_cms.block_menu:
         class: Positibe\Bundle\CmsBundle\Block\Service\MenuBlockService
-        arguments: ['positibe_content.block_menu', "@templating", "@request_stack"]
+        arguments: ['positibe_cms.block_menu', "@templating", "@request_stack"]
         tags:
             - { name: sonata.block }
 

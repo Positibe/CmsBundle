@@ -98,6 +98,6 @@ class ContentBlockType extends AbstractType
      */
     public function getName()
     {
-        return 'positibe_content_block';
+        return 'positibe_cms_block';
     }
 } 

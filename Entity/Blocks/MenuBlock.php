@@ -45,7 +45,7 @@ class MenuBlock extends AbstractVisibilityBlock
     public function __construct()
     {
         parent::__construct();
-        $this->type = 'positibe_content.block_menu';
+        $this->type = 'positibe_cms.block_menu';
     }
 
     public function getType()
