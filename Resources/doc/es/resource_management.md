@@ -18,7 +18,7 @@ poniendo los siguientes comandos en la consola vemos los servicios y los paráme
     app.controller.post              container      Sylius\Bundle\ResourceBundle\Controller\ResourceController
     app.form.type.post               container      AppBundle\Form\Type\PostType
     app.manager.post                 n/a            alias for doctrine.orm.default_entity_manager
-    app.repository.post              container      Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+    app.repository.post              container      Positibe\Bundle\CoreBundle\repository\EntityRepository
     //...
 
     $ php app/console container:debug --parameters | grep my_entity

@@ -52,7 +52,7 @@ positibe_submenu_child_delete:
                 parameters: { parent: $parent, name: $name }
 
 positibe_submenu_child_move_up:
-    pattern: /menus/{parent}/{name}/children/{child_name}/move-up
+    path: /menus/{parent}/{name}/children/{child_name}/move-up
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveUpAction
@@ -62,7 +62,7 @@ positibe_submenu_child_move_up:
             redirect: referer
 
 positibe_submenu_child_move_down:
-    pattern: /menus/{parent}/{name}/children/{child_name}/move-down
+    path: /menus/{parent}/{name}/children/{child_name}/move-down
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveDownAction

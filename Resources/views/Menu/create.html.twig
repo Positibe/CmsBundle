@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 {% block title %}Menús{% endblock %}
 {% block subtitle %}Crear nuevo menú{% endblock %}
@@ -6,18 +6,18 @@
 {% set content_menu = 'menu' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         Nuevo menú
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
-    {{ include('@PositibeContent/Menu/_form.html.twig') }}
+    {{ include('@PositibeCms/Menu/_form.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}

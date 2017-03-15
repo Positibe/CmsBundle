@@ -1,7 +1,7 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import pagination %}
-{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+{% from '@PositibeCore/_macros.html.twig' import pagination %}
+{% import '@PositibeCore/_buttons.html.twig' as buttons %}
 
 {% block title %}Menús{% endblock %}
 {% block subtitle %}Listado de menús{% endblock %}
@@ -9,8 +9,8 @@
 {% set content_menu = 'menu' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
 {% endblock %}
@@ -22,7 +22,7 @@
                 <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-sitemap"></i> Menu</p>
             </div>
             <div class="actions">
-                <a href="{{ path('positibe_menu_create') }}" class="btn btn-sm btn-default btn-circle"><i class="fa
+                <a href="{{ path('positibe_menu_create') }}" class="btn btn-sm btn-default"><i class="fa
         fa-plus"></i> Nuevo menú</a>
             </div>
         </div>

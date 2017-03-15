@@ -1,7 +1,7 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import pagination %}
-{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+{% from '@PositibeCore/_macros.html.twig' import pagination %}
+{% import '@PositibeCore/_buttons.html.twig' as buttons %}
 
 {% block title %}Menús{% endblock %}
 {% block subtitle %}Listado de submenús{% endblock %}
@@ -9,16 +9,16 @@
 {% set content_menu = 'menu' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"> {{ app.request.get('parent') }}</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         {{ app.request.get('name') }}
     </li>
 {% endblock %}
@@ -31,7 +31,7 @@
             </div>
             <div class="actions">
                 <a href="{{ path('positibe_submenu_child_create', {'parent':app.request.get('parent'), 'name': app.request.get('name')}) }}"
-                   class="btn btn-sm btn-default btn-circle"><i class="fa
+                   class="btn btn-sm btn-default"><i class="fa
         fa-plus"></i> Anidar nuevo menú</a>
             </div>
         </div>
@@ -60,7 +60,7 @@
                             {% if menu.linkType == 'uri' %}
                                 <strong>Url</strong> ({{ menu.uri }})
                             {% elseif menu.linkType == 'content' %}
-                                <strong>{{ menu.contentClass | trans({}, 'PositibeCmfBundle') }}</strong> ({{ menu.content }})
+                                <strong>{{ menu.contentClass | trans({}, 'PositibeCoreBundle') }}</strong> ({{ menu.content }})
                             {% elseif menu.linkType == 'route' %}
                                 <strong>Ruta</strong> ({{ menu.route }})
                             {% else %}

@@ -1,18 +1,18 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+{% from '@PositibeCore/_buttons.html.twig' import delete_confirm %}
 {% block title %}Bloques simples{% endblock %}
 {% block subtitle %}Editar bloque simples{% endblock %}
 {% set menu_active = 'block' %}
 {% set content_menu = 'image' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_cms_block_index') }}">Bloques simples</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         {{ content_block.title }}
         <small>({{ content_block.name }})</small>
     </li>
@@ -21,7 +21,7 @@
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeContent/ContentBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/ContentBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_cms_block_remove', path('positibe_cms_block_delete', {'name': content_block.name})) }}
@@ -29,7 +29,7 @@
 
 
 {% block javascripts %}
-    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeCms/Block/_form_always_select.html.twig') }}
     <script>
         jQuery('#positibe_cms_block_locale').on('change', function (e) {
             location.replace('{{ path('positibe_cms_block_update', {'name': content_block.name}) }}?data_locale='

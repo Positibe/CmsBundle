@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
@@ -43,14 +44,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
 abstract class AbstractPage extends BaseContent implements
-  ResourceInterface,
-  PublishableInterface,
-  PublishTimePeriodInterface,
-  RouteReferrersInterface,
-  MenuNodeReferrersInterface,
-  SeoAwareInterface,
-  TranslatableInterface,
-  CustomRouteInformation
+    ResourceInterface,
+    PublishableInterface,
+    PublishTimePeriodInterface,
+    RouteReferrersInterface,
+    MenuNodeReferrersInterface,
+    SeoAwareInterface,
+    TranslatableInterface,
+    CustomRouteInformation
 {
     /**
      * @var integer
@@ -287,4 +288,11 @@ abstract class AbstractPage extends BaseContent implements
         return null;
     }
 
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 } 

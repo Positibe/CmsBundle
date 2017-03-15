@@ -13,6 +13,7 @@ namespace Positibe\Bundle\CmsBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Cmf\Bundle\SeoBundle\Form\Type\SeoMetadataType as CmfSeoMetadataType;
 
 /**
  * Class SeoMetadataType
@@ -28,15 +29,15 @@ class SeoMetadataType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->remove(
-            'extraProperties'
-          )
-          ->remove(
-            'extraNames'
-          )
-          ->remove(
-            'extraHttp'
-          );
+            ->remove(
+                'extraProperties'
+            )
+            ->remove(
+                'extraNames'
+            )
+            ->remove(
+                'extraHttp'
+            );
     }
 
     /**
@@ -51,15 +52,11 @@ class SeoMetadataType extends AbstractType
 
     public function getParent()
     {
-        return 'seo_metadata';
+        return CmfSeoMetadataType::class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_seo_metadata';
     }
-
 } 

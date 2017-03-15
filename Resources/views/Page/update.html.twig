@@ -1,41 +1,35 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+{% from '@PositibeCore/_buttons.html.twig' import delete_confirm %}
 
 {% block title %}Páginas{% endblock %}
 {% block subtitle %}Editar páginas{% endblock %}
-{% set menu_active  = 'content'%}
+{% set menu_active  = 'content' %}
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_page_index') }}">Páginas</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
         {{ page.title }}
-        <small>({{ page.name }})</small>
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'form-horizontal inbox-compose' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeContent/Page/_form.html.twig') }}
+    {{ include('@PositibeCms/Page/_form.html.twig') }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_page_remove', path('positibe_page_delete', {'name': page.name})) }}
+    {{ delete_confirm('positibe_page_remove', path('positibe_page_delete', {'id': page.id})) }}
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        jQuery('#positibe_page_locale').on('change', function (e) {
-            location.replace('{{ path('positibe_page_update', {'name': page.name}) }}?data_locale='
-            + $
-            (this)
-                    .val
-            ());
+        jQuery('.change_locale').on('change', function (e) {
+            location.replace('{{ path('positibe_page_update', {'id': page.id}) }}?data_locale=' + $(this).val());
         });
     </script>
 {% endblock %}

@@ -46,7 +46,7 @@ positibe_menu_delete:
 #                linkType: 'route'
 
 positibe_menu_move_up:
-    pattern: /menu/{name}/move-up
+    path: /menu/{name}/move-up
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveUpAction
@@ -57,7 +57,7 @@ positibe_menu_move_up:
             redirect: referer
 
 positibe_menu_move_down:
-    pattern: /menu/{name}/move-down
+    path: /menu/{name}/move-down
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveDownAction

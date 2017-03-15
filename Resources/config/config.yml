@@ -6,7 +6,9 @@ parameters:
 
 cmf_core:
     persistence:
-        orm:
+        orm: ~
+    publish_workflow:
+        request_listener: true
 
 cmf_seo:
     title: %%content_title%%
@@ -41,6 +43,30 @@ cmf_routing:
 sonata_block:
     default_contexts: ~
 
+framework:
+    workflows:
+        publishable:
+            type: 'state_machine' # or 'workflow'
+            marking_store:
+                type: 'single_state' # or 'multiple_state'
+                arguments:
+                    - 'state'
+            supports:
+                - Positibe\Bundle\CmsBundle\Entity\Page
+            places:
+                - draft
+                - published
+                - unpublished
+            transitions:
+                publish:
+                    from: draft
+                    to:   published
+                unpublish:
+                    from: published
+                    to:   unpublished
+                republish:
+                    from: unpublished
+                    to:   published
 #ivory_ck_editor:
 #    configs:
 #        default:

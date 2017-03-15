@@ -13,7 +13,7 @@ namespace Positibe\Bundle\CmsBundle\Repository;
 use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\CmsBundle\Entity\BlockRepositoryInterface;
 use Positibe\Bundle\CmsBundle\Entity\Page;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Positibe\Bundle\CoreBundle\repository\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 

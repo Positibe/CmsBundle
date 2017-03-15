@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 {% block title %}Páginas{% endblock %}
 {% block subtitle %}Crear nueva páginas{% endblock %}
@@ -6,18 +6,18 @@
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_page_index') }}">Páginas</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         Nueva página
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'form-horizontal inbox-compose' }}) }}
-    {{ include('@PositibeContent/Page/_form.html.twig') }}
+    {{ include('@PositibeCms/Page/_form.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}

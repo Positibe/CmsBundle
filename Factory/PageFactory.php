@@ -20,6 +20,7 @@ use Positibe\Bundle\MediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
 use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 
 
@@ -44,10 +45,10 @@ class PageFactory implements FactoryInterface
      * @param $locale
      */
     public function __construct(
-      MenuNodeFactory $menuFactory,
-      RouteFactory $routeFactory,
-      EntityManager $entityManager,
-      $locale
+        MenuNodeFactory $menuFactory,
+        RouteFactory $routeFactory,
+        EntityManager $entityManager,
+        $locale
     ) {
         $this->menuFactory = $menuFactory;
         $this->routeFactory = $routeFactory;
@@ -70,8 +71,8 @@ class PageFactory implements FactoryInterface
     {
         /** @var Page $category */
         $category = $this->em->createQueryBuilder()->select('c')->from('PositibeCmsBundle:Page', 'c')
-          ->where('c.name = :name')
-          ->setParameter('name', $name)->getQuery()->getOneOrNullResult();
+            ->where('c.name = :name')
+            ->setParameter('name', $name)->getQuery()->getOneOrNullResult();
 
         /** @var Page $staticContent */
         $staticContent = $this->createNew();
@@ -110,18 +111,19 @@ class PageFactory implements FactoryInterface
 //                $route->setDefault('_controller', self::DEFAULT_CONTROLLER);
             }
 
-            if ($auto && $needRoute && $route->getLocale() === $currentLocale) {
+            if ($auto && $needRoute && $route->getDefault('_locale') === $currentLocale) {
                 $needRoute = false;
             }
         }
 
         if ($auto && $needRoute) {
             $route = $this->routeFactory->createContentRoute(
-              $this->fixStaticPrefix(null, $page),
-              $page,
-              null
+                $this->fixStaticPrefix(null, $page),
+                $page,
+                null
             );
-            $route->setLocale($currentLocale);
+            $route->setDefault('_locale', $currentLocale);
+            $route->setRequirement('_locale', $currentLocale);
             $page->addRoute($route);
         }
     }
@@ -151,7 +153,7 @@ class PageFactory implements FactoryInterface
         } else {
             $staticPrefix = Urlizer::urlize($staticPrefix);
             if (!preg_match('/^\//', $staticPrefix)) {
-                $staticPrefix = '/' . $staticPrefix;
+                $staticPrefix = '/'.$staticPrefix;
             }
         }
 
@@ -165,19 +167,19 @@ class PageFactory implements FactoryInterface
      */
     private function insertPartBeforePath($part, $path = '')
     {
-        return '/' . Urlizer::urlize($part) . $path;
+        return '/'.Urlizer::urlize($part).$path;
     }
 
     public function createPageCategory($title, $body, $path, $parentMenu, $locale = null, $imagePath = null)
     {
         $page = $this->createPage(
-          $title,
-          $body,
-          $path,
-          $parentMenu,
-          $locale,
-          $imagePath,
-          'Positibe\Bundle\CmsBundle\Entity\Category'
+            $title,
+            $body,
+            $path,
+            $parentMenu,
+            $locale,
+            $imagePath,
+            'Positibe\Bundle\CmsBundle\Entity\Category'
         );
 
         return $page;
@@ -192,7 +194,7 @@ class PageFactory implements FactoryInterface
         $page->setBody($body);
 
         $seoMetadata = $this->updateSeoMetadata($page);
-        $route = $this->createRoute($path, $page);
+        $route = $this->createRoute($path, $page, null, $locale);
         $menu = $this->createMenuNode($page, $parentMenu, $locale);
 
         if ($locale !== null) {
@@ -249,9 +251,16 @@ class PageFactory implements FactoryInterface
      * @param AbstractPage $page
      * @return Route
      */
-    public function createRoute($path, AbstractPage $page)
+    /**
+     * @param $path
+     * @param AbstractPage $page
+     * @param null $controller
+     * @param null $locale
+     * @return \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route
+     */
+    public function createRoute($path, AbstractPage $page, $controller = null, $locale = null)
     {
-        return $this->routeFactory->createContentRoute($path, $page, null);
+        return $this->routeFactory->createContentRoute($path, $page, $controller, $locale);
     }
 
     /**

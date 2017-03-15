@@ -1,11 +1,11 @@
-{% extends '@PositibeOrmBlock/Block/block_base.html.twig' %}
+{% extends '@PositibeCms/Block/block_base.html.twig' %}
 
 {% block block %}
     {% set page = content %}
     <h1>{{ page.title|raw }}</h1>
     {% if page.image is not null %}
         <p>
-            <img src="{{ cmf_media_display_url(page.image) }}" alt="{{ page.title }}" class="img-responsive">
+            <img src="{{ display_image(page.image) }}" alt="{{ page.title }}" class="img-responsive">
         </p>
     {% endif %}
     <p>{{ page.body|raw }}</p>

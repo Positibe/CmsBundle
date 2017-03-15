@@ -30,51 +30,24 @@ class ResourceServicesCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition('positibe.repository.menu')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-        $container->getDefinition('positibe.repository.block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
+        $repositories = [
+            'positibe.repository.menu',
+            'positibe.repository.block',
+            'positibe.repository.content_block',
+            'positibe.repository.gallery_block',
+            'positibe.repository.menu_block',
+            'positibe.repository.page_block',
+            'positibe.repository.block',
+            'positibe.repository.page',
+        ];
 
-        $container->getDefinition('positibe.repository.content_block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-
-        $container->getDefinition('positibe.repository.gallery_block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-
-        $container->getDefinition('positibe.repository.menu_block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-        $container->getDefinition('positibe.repository.page_block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-
-        $container->getDefinition('positibe.repository.block')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
-
-        $container->getDefinition('positibe.repository.page')
-          ->addMethodCall(
-            'setRequestStack',
-            [new Reference('request_stack')]
-          );
+        foreach ($repositories as $repository) {
+            $container->getDefinition($repository)
+                ->addMethodCall(
+                    'setRequestStack',
+                    [new Reference('request_stack')]
+                );
+        }
     }
 
 } 

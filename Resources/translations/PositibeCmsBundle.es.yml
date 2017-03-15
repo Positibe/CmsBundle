@@ -5,6 +5,9 @@ homepage: Página de inicio
 es: Español
 en: Inglés
 fr: Frances
+unpublish: Despublicar
+publish: Publicar
+republish: Re-Publicar
 static_content:
     form:
         name_label: Nombre:

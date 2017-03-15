@@ -1,5 +1,3 @@
-{% form_theme form '@PositibeCmf/_metronic_material_theme.html.twig' %}
-
 <div class="portlet light ">
     <div class="portlet-title tabbable-line">
         <div class="caption">
@@ -8,12 +6,12 @@
         </div>
         <div class="actions btn-set">
             <a href="{{ path('positibe_category_index') }}"
-               name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-circle "><i
+               name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default "><i
                         class="fa fa-reply"></i> Resetear</a>
-            <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Guardar</button>
+            <button class="btn green-haze" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if category is defined and category.id is not null %}
-                <a class="btn red-haze btn-circle" data-toggle="modal" href="#positibe_category_remove">
+                <a class="btn red-haze" data-toggle="modal" href="#positibe_category_remove">
                     <i class="fa fa-trash"></i> Remover
                 </a>
             {% endif %}
@@ -41,7 +39,7 @@
                     <a href="#form_category_tab_custom" data-toggle="tab" aria-expanded="false">Personalización</a>
                 </li>
                 <li class="pull-right">
-                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn btn-circle' }}) }}
+                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn' }}) }}
                 </li>
             </ul>
             <div class="tab-content">

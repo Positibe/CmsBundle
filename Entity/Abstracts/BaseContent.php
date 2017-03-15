@@ -13,10 +13,12 @@ namespace Positibe\Bundle\CmsBundle\Entity\Abstracts;
 use Doctrine\Common\Collections\ArrayCollection;
 use Positibe\Component\Publishable\Entity\PublishableTrait;
 use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
+use Positibe\Component\Publishable\Entity\StatePublishableTrait;
 use Positibe\Component\Seo\Entity\SeoAwareEntityTrait;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableReadInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodReadInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
 use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
@@ -40,7 +42,7 @@ class BaseContent implements
   SeoAwareInterface,
   TranslatableInterface
 {
-    use PublishableTrait;
+    use StatePublishableTrait;
     use PublishTimePeriodTrait;
     use SeoAwareEntityTrait;
 
@@ -195,7 +197,6 @@ class BaseContent implements
     public function addRoute($route)
     {
         $this->routes->add($route);
-        $route->setContent($this);
 
         return $this;
     }

@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 {% block title %}Tipos de página{% endblock %}
 {% block subtitle %}Crear nuevo tipo de página{% endblock %}
@@ -6,18 +6,18 @@
 {% set content_menu = 'category' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_category_index') }}">Tipos de página</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         Nuevo tipo de página
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'form-horizontal inbox-compose' }}) }}
-    {{ include('@PositibeContent/Category/_form.html.twig') }}
+    {{ include('@PositibeCms/Category/_form.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}

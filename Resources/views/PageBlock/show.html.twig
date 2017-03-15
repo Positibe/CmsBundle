@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 {% block title %}Bloques de página{% endblock %}
 {% block subtitle %}Detalles de bloque de página{% endblock %}
@@ -6,12 +6,12 @@
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_page_block_index') }}">Bloques de página</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         {{ page_block.name }}
     </li>
 {% endblock %}
@@ -31,9 +31,9 @@
             </div>
             <div class="actions">
                 <a href="{{ path('positibe_block_index') }}"
-                   name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+                   name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
 
-                <a href="{{ path('positibe_page_block_update', {'name': page_block.name}) }}" class="btn btn-default btn-circle">
+                <a href="{{ path('positibe_page_block_update', {'name': page_block.name}) }}" class="btn btn-default">
                     <i class="fa fa-edit"></i> Editar
                 </a>
             </div>

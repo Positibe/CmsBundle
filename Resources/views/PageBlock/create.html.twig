@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 {% block title %}Bloques de página{% endblock %}
 {% block subtitle %}Crear nuevo bloque de página{% endblock %}
@@ -6,22 +6,22 @@
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_block_index') }}">Bloques de página</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         Nuevo bloque de página
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
-    {{ include('@PositibeContent/PageBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/PageBlock/_form.html.twig') }}
     {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeCms/Block/_form_always_select.html.twig') }}
 {% endblock %}

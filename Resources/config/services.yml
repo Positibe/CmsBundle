@@ -2,6 +2,13 @@ parameters:
     stof_doctrine_extensions.event_listener.locale.class: Positibe\Bundle\CoreBundle\EventListener\LocaleListener
 
 services:
+
+    positibe_cms.guard_listener:
+        class: Positibe\Bundle\CmsBundle\Workflow\GuardListener
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: kernel.event_subscriber }
+
 #### Forms Type ####
     positibe_cms.abstract_page_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\AbstractPageType
@@ -13,7 +20,7 @@ services:
         class: Positibe\Bundle\CmsBundle\Form\Type\PageType
         arguments: ["@doctrine.orm.entity_manager", '@positibe_routing.route_factory', %locales%, %locale%]
         tags:
-          - { name: form.type , alias: positibe_page }
+          - { name: form.type }
 
     positibe_cms.category_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\CategoryType

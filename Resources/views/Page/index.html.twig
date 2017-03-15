@@ -1,7 +1,7 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import pagination %}
-{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+{% from '@PositibeCore/Grid/_pagination.html.twig' import pagination %}
+{% from '@PositibeCore/Grid/_pagination.html.twig' import filter %}
 
 {% block title %}Páginas{% endblock %}
 {% block subtitle %}Listado de páginas{% endblock %}
@@ -9,99 +9,87 @@
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
         <a href="{{ path('positibe_page_index') }}">Páginas</a>
     </li>
 {% endblock %}
 
 {% block content %}
     <form action="" method="get" id="form_page_filter" name="criteria"></form>
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <p class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-files-o"></i> Páginas</p>
+    <div class="card-header white">
+        <div class="card-title text-muted text-uppercase text-right">
+            <div class="card-title-caption">
+                <h4><i class="fa fa-files-o"></i> Páginas
+                    <small>Lista de páginas</small>
+                </h4>
             </div>
-            <div class="actions">
-                <a href="{{ path('positibe_page_create') }}" class="btn btn-default btn-circle"><i class="fa
-        fa-plus"></i> Nueva página</a>
+            <div class="card-title-actions">
+                <a href="{{ path('app_user_create') }}" class="btn btn-sm btn-default">
+                    <i class="fa fa-plus-circle"></i> Crear nuevo página
+                </a>
             </div>
         </div>
-        <div class="portlet-body">
-            {{ pagination(pages) }}
-            <table class="table table-striped table-bordered table-hover">
+    </div>
+    <div class="card-block">
+        {{ pagination(pages) }}
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>No.</th>
+                <th>{{ grid_render_sorting('title', 'Título') }}</th>
+                <th>Cuerpo</th>
+                <th>Estado</th>
+                <th>{{ grid_render_sorting('featured', 'Destacado') }}</th>
+                <th>Categorías</th>
+                <th>Acciones</th>
+            </tr>
+            <tr class="table-field-filter">
+                <th></th>
+                <th>{{ filter('title', 'form_page_filter') }}</th>
+                <th>{{ filter('body', 'form_page_filter') }}</th>
+                <th></th>
+                <th>{{ filter('featured', 'form_page_filter', 'boolean') }}</th>
+                <th></th>
+                <th>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-default" type="submit"
+                                form="form_page_filter"><i class="fa fa-search"></i> {{ 'action.filter' | trans }}
+                        </button>
+                    </div>
+                </th>
+            </tr>
+
+            {% set count = pages.maxPerPage * (pages.currentPage - 1) %}
+            {% for page in pages %}
                 <tr>
-                    <th>{{ 'No.' }}</th>
-                    <th class="col-sm-1">{{ sylius_resource_sort('title', 'Título') }}</th>
-                    <th class="col-sm-5">Cuerpo</th>
-                    <th>Estado</th>
-                    <th style="width: 10%">{{ sylius_resource_sort('featured', 'Destacado') }}</th>
-                    <th>Categorías</th>
-                    <th style="width: 170px">Acciones</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th>
-                        <input aria-valuetext="" type="text" name="criteria[title]" id="criteria_title"
-                               class="form-control input-sm" form="form_page_filter"
-                               value="{{ app.request.get('criteria').title | default() }}">
-                    </th>
-                    <th>
-                        <input type="text" name="criteria[body]" id="criteria_body"
-                               class="form-control input-sm" form="form_page_filter"
-                               value="{{ app.request.get('criteria').body | default() }}">
-                    </th>
-                    <th></th>
-                    <th></th>
-                    <th>
-                        <select form="form_page_filter" name="criteria[category]" id="criteria_category"
-                                class="form-control input-sm">
-                            {% set field_selected = app.request.get('criteria').category | default(null) %}
-                            {{ sonata_block_render({'type': 'positibe.action_block_service'}, {'action': 'PositibeCmfBundle:Filter:getEntityFilter', 'parameters': {'class':'PositibeCmsBundle:Category', 'selected': field_selected, 'field': 'name'}}) }}
-                        </select>
-                    </th>
-                    <th>
-                        <div class="input-group-btn">
-                            <button class="btn btn-sm yellow filter-submit margin-bottom" type="submit"
-                                    form="form_page_filter"><i
-                                        class="fa fa-search"></i> Filtrar
-                            </button>
+                    <td>{{ count + loop.index }}</td>
+                    <td>
+                        <a href="{{ path('positibe_page_show',
+                        {'id': page.id}) }}" title="{{ page.title }}">{{ page.title }}</a>
+                    </td>
+                    <td>{{ page.body | striptags | truncate(150) }}</td>
+                    <td>{% if is_granted('VIEW', page) %}
+                            <div class="label label-sm label-success">Publicado</div>{% else %}
+                            <div class="label label-sm label-warning">No publicado</div>{% endif %}
+                    </td>
+                    <td class="font-yellow">{% if page.featured %}<i class="fa fa-star "></i> {% endif %}</td>
+                    <td>
+                        {{ page.parent }}
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-outline-default btn-sm"
+                               href="{{ path('positibe_page_update', { 'id': page.id }) }}">
+                                <i class="fa fa-edit"></i> Editar
+                            </a>
                         </div>
-                    </th>
-
+                    </td>
                 </tr>
-                {% set count = pages.maxPerPage * (pages.currentPage - 1) %}
-                {% for page in pages %}
-                    <tr>
-                        <td>{{ count + loop.index }}</td>
-                        <td><a href="{{ path('positibe_page_update',
-                            {'name': page.name}) }}" title="{{ page.name }}">{{ page.title }}</a></td>
-                        <td>{{ page.body | striptags | truncate(150) }}</td>
-                        <td>{% if is_granted('VIEW', page) %}
-                                <div class="label label-sm label-success">Publicado</div>{% else %}
-                                <div class="label label-sm label-warning">No publicado</div>{% endif %}
-                        </td>
-                        <td class="font-yellow">{% if page.featured %}<i class="fa fa-star "></i> {% endif %}</td>
-                        <td>
-                            {{ page.parent }}
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <a class="btn btn-default btn-xs"
-                                   href="{{ path('positibe_page_show', {'name': page.name}) }}"><i
-                                            class="fa fa-search"></i> Detalles</a>
-                                <a class="btn btn-default btn-xs"
-                                   href="{{ path('positibe_page_update', {'name': page.name}) }}"><i
-                                            class="fa fa-edit"></i> Editar</a>
-
-                            </div>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr><td colspan="7">No hay páginas</td></tr>
-                {% endfor %}
-            </table>
-            {{ pagination(pages) }}
-        </div>
+            {% else %}
+                <tr>
+                    <td colspan="5">No hay elementos</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {{ pagination(pages) }}
     </div>
 {% endblock %}

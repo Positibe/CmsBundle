@@ -12,10 +12,10 @@ namespace Positibe\Bundle\CmsBundle\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Positibe\Bundle\CoreBundle\Repository\EntityRepository;
 use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\MenuBundle\Repository\HasMenuRepositoryInterface;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Class PageRepository
@@ -73,20 +73,6 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
 
     public function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
     {
-        if (!empty($criteria['title'])) {
-            $queryBuilder
-                ->andWhere('o.title LIKE :title')
-                ->setParameter('title', '%'.$criteria['title'].'%');
-            unset($criteria['title']);
-        }
-
-        if (!empty($criteria['body'])) {
-            $queryBuilder
-                ->andWhere('o.body LIKE :body')
-                ->setParameter('body', '%'.$criteria['body'].'%');
-            unset($criteria['body']);
-        }
-
         if (!empty($criteria['category'])) {
             $queryBuilder
                 ->leftJoin('o.parent', 'category')
@@ -161,6 +147,19 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
             ->leftJoin('o.image', 'image')
             ->leftJoin('o.routes', 'routes')
             ->setParameter('name', $name);
+
+        return $this->getQuery($qb)->getOneOrNullResult();
+    }
+
+    public function find($id)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->addSelect('image', 'routes', 'seo')
+            ->where('o.id = :id')
+            ->leftJoin('o.image', 'image')
+            ->leftJoin('o.routes', 'routes')
+            ->leftJoin('o.seoMetadata', 'seo')
+            ->setParameter('id', $id);
 
         return $this->getQuery($qb)->getOneOrNullResult();
     }

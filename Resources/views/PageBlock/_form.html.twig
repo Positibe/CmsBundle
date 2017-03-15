@@ -1,6 +1,6 @@
-{% form_theme form '@PositibeCmf/_metronic_material_theme.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import delete_button %}
+
+{% from '@PositibeCore/_buttons.html.twig' import delete_button %}
 
 <div class="portlet light ">
     <div class="portlet-title tabbable-line">
@@ -10,10 +10,10 @@
         </div>
         <div class="actions btn-set">
             <a href="{{ path('positibe_block_index') }}"
-               name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-circle "><i
+               name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default "><i
                         class="fa fa-reply"></i> Resetear</a>
-            <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Guardar</button>
+            <button class="btn green-haze" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if page_block is defined and page_block.id is not null %}
                 {{ delete_button('positibe_page_block_remove') }}
             {% endif %}
@@ -43,7 +43,7 @@
                     {% endif %}
                     {{ form_row(form.page) }}
                 </div>
-                {{ include('@PositibeContent/Block/_form_extra_configuration.html.twig') }}
+                {{ include('@PositibeCms/Block/_form_extra_configuration.html.twig') }}
             </div>
         </div>
         <div class="form-actions text-right">

@@ -1,4 +1,4 @@
-{% extends '@PositibeOrmBlock/Block/block_base.html.twig' %}
+{% extends '@PositibeCms/Block/block_base.html.twig' %}
 
 {% block block %}
     {% set galleryHasMedias = content.gallery.galleryHasMedias %}
@@ -13,7 +13,7 @@
             {% for media in galleryHasMedias %}
 
                 <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <img src="{{ cmf_media_display_url(media.media) }}" alt="{{ media.title }}" class="img-responsive">
+                    <img src="{{ display_image(media.media) }}" alt="{{ media.title }}" class="img-responsive">
 
                     <div class="carousel-caption">
                         {{ media.body | raw | striptags | truncate(150) }}

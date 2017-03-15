@@ -12,7 +12,7 @@ namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class MenuBlockService
@@ -87,7 +87,7 @@ class MenuBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function setDefaultSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(

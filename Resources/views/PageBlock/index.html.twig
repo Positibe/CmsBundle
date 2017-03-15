@@ -1,7 +1,7 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import pagination %}
-{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+{% from '@PositibeCore/_macros.html.twig' import pagination %}
+{% import '@PositibeCore/_buttons.html.twig' as buttons %}
 
 {% block title %}Bloques de página{% endblock %}
 {% block subtitle %}Listado de bloques{% endblock %}
@@ -9,8 +9,8 @@
 {% set content_menu = 'page' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_menu_index') }}">Bloques de página</a>
     </li>
 {% endblock %}
@@ -25,7 +25,7 @@
             </div>
             <div class="actions">
                 <a href="{{ path('positibe_page_block_create') }}"
-                   class="btn btn-sm btn-default btn-circle"><i class="fa fa-plus"></i> Nuevo bloque de página</a>
+                   class="btn btn-sm btn-default"><i class="fa fa-plus"></i> Nuevo bloque de página</a>
             </div>
         </div>
         <div class="portlet-body">

@@ -3,11 +3,17 @@
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\CmfRoutingExtraBundle\Form\Type\RoutePermalinkType;
 use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
+use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class PageType
@@ -40,84 +46,85 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add(
-            'title',
-            null,
-            array(
-              'label' => 'static_content.form.title_label',
-              'required' => true
+            ->add(
+                'title',
+                null,
+                array(
+                    'label' => 'static_content.form.title_label',
+                    'required' => true,
+                )
             )
-          )
-          ->add(
-            'body',
-            null,
-            array(
-              'label' => 'static_content.form.body_label',
-              'attr' => array(
-                'rows' => 12,
-                'class' => 'ckeditor'
-              )
+            ->add(
+                'body',
+                null,
+                array(
+                    'label' => 'static_content.form.body_label',
+                    'attr' => array(
+                        'rows' => 12,
+                        'class' => 'ckeditor',
+                    ),
+                )
             )
-          )
-          ->add(
-            'locale',
-            'choice',
-            array(
-              'label' => 'static_content.form.locale_label',
-              'choices' => array_combine($this->locales, $this->locales)
+            ->add(
+                'locale',
+                ChoiceType::class,
+                array(
+                    'label' => 'static_content.form.locale_label',
+                    'choices' => array_combine($this->locales, $this->locales),
+                    'attr' => ['class' => 'change_locale form-control-sm']
+                )
             )
-          )
-          ->add(
-            'customController',
-            'choice',
-            array(
-              'label' => 'static_content.form.custom_controller_label',
-              'choices' => array_combine(
-                array_keys($this->routeBuilder->getController()),
-                array_keys($this->routeBuilder->getController())
-              ),
-              'required' => false,
+            ->add(
+                'customController',
+                ChoiceType::class,
+                array(
+                    'label' => 'static_content.form.custom_controller_label',
+                    'choices' => array_combine(
+                        array_keys($this->routeBuilder->getController()),
+                        array_keys($this->routeBuilder->getController())
+                    ),
+                    'required' => false,
+                )
             )
-          )
-          ->add(
-            'publishable',
-            null,
-            array(
-              'label' => 'static_content.form.publishable_label',
-              'required' => false
+            ->add(
+                'publishable',
+                CheckboxType::class,
+                array(
+                    'label' => 'static_content.form.publishable_label',
+                    'required' => false,
+                )
             )
-          )
-          ->add(
-            'publishStartDate',
-            'datetime',
-            array(
-              'required' => false,
-              'label' => 'static_content.form.publish_start_label',
-              'widget' => 'single_text',
-              'attr' => array('class' => 'datetime-picker'),
-              'format' => 'dd/MM/yyyy HH:mm'
+            ->add(
+                'publishStartDate',
+                DateTimeType::class,
+                array(
+                    'required' => false,
+                    'label' => 'static_content.form.publish_start_label',
+                    'widget' => 'single_text',
+                    'attr' => array('class' => 'datetime-picker'),
+                    'format' => 'dd/MM/yyyy HH:mm',
+                )
             )
-          )
-          ->add(
-            'publishEndDate',
-            'datetime',
-            array(
-              'required' => false,
-              'label' => 'static_content.form.publish_end_label',
-              'widget' => 'single_text',
-              'attr' => array('class' => 'datetime-picker'),
-              'format' => 'dd/MM/yyyy HH:mm'
+            ->add(
+                'publishEndDate',
+                DateTimeType::class,
+                array(
+                    'required' => false,
+                    'label' => 'static_content.form.publish_end_label',
+                    'widget' => 'single_text',
+                    'attr' => array('class' => 'datetime-picker'),
+                    'format' => 'dd/MM/yyyy HH:mm',
+                )
             )
-          )
-          ->add(
-            'routes',
-            'positibe_route_permalink',
-            array(
-              'label' => 'static_content.form.routes_label',
-              'content_has_routes' => $options['data'],
-              'current_locale' => $options['data']->getLocale()
+            ->add(
+                'routes',
+                RoutePermalinkType::class,
+                array(
+                    'label' => 'static_content.form.routes_label',
+                    'content_has_routes' => $options['data'],
+                    'current_locale' => $options['data']->getLocale(),
+                )
             )
-          )
 //            ->add(
 //                'menuNodes',
 //                'collection',
@@ -133,38 +140,38 @@ class PageType extends AbstractType
 //                    'label' => 'static_content.form.menus_label',
 //                )
 //            )
-          ->add(
-            'seoMetadata',
-            new SeoMetadataType(),
-            array(
-              'label' => 'static_content.form.seo_label',
+            ->add(
+                'seoMetadata',
+                SeoMetadataType::class,
+                array(
+                    'label' => 'static_content.form.seo_label',
+                )
             )
-          )
-          ->add(
-            'image',
-            'positibe_image_type',
-            array(
-              'provider' => 'positibe_orm_media.image_provider',
-              'required' => false
+            ->add(
+                'image',
+                ImageType::class,
+                array(
+                    'provider' => 'positibe_orm_media.image_provider',
+                    'required' => false,
+                )
             )
-          )
-          ->add(
-            'parent',
-            'entity',
-            array(
-              'label' => 'static_content.form.parent_label',
-              'class' => 'Positibe\Bundle\CmsBundle\Entity\Category',
-              'choices' => $this->getCategoryTranslated($options)
+            ->add(
+                'parent',
+                EntityType::class,
+                array(
+                    'label' => 'static_content.form.parent_label',
+                    'class' => 'Positibe\Bundle\CmsBundle\Entity\Category',
+                    'choices' => $this->getCategoryTranslated($options),
+                )
             )
-          )
-          ->add(
-            'featured',
-            null,
-            array(
-              'label' => 'static_content.form.featured_label',
-              'required' => false
-            )
-          );
+            ->add(
+                'featured',
+                null,
+                array(
+                    'label' => 'static_content.form.featured_label',
+                    'required' => false,
+                )
+            );
     }
 
     /**
@@ -194,15 +201,15 @@ class PageType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-          array(
-            'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
-            'translation_domain' => 'PositibeCmsBundle'
-          )
+            array(
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
+                'translation_domain' => 'PositibeCmsBundle',
+            )
         );
     }
 

@@ -45,7 +45,7 @@ positibe_block_delete:
                 name: $name
 
 positibe_block_move_up:
-    pattern: /block/{name}/move-up
+    path: /block/{name}/move-up
     methods: [PUT]
     defaults:
         _controller: positibe.controller.block:moveUpAction
@@ -55,7 +55,7 @@ positibe_block_move_up:
             redirect: referer
 
 positibe_block_move_down:
-    pattern: /block/{name}/move-down
+    path: /block/{name}/move-down
     methods: [PUT]
     defaults:
         _controller: positibe.controller.block:moveDownAction

@@ -1,4 +1,4 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
 
 {% block title %}Tipos de página{% endblock %}
@@ -7,12 +7,12 @@
 {% set content_menu = 'category' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_category_index') }}">Tipos de página</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         {{ category.title }}
     </li>
 {% endblock %}
@@ -27,9 +27,9 @@
             </div>
             <div class="actions">
                 <a href="{{ path('positibe_category_index') }}"
-                   name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
+                   name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
 
-                <a href="{{ path('positibe_category_update', {'name': category.name}) }}" class="btn btn-default btn-circle">
+                <a href="{{ path('positibe_category_update', {'name': category.name}) }}" class="btn btn-default">
                     <i class="fa fa-edit"></i> Editar
                 </a>
             </div>
@@ -62,7 +62,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
                         <p>
-                            <img src="{% if category.image is not null %}{{ cmf_media_display_url(content.image, {'imagine_filter': 'page_big'}) }}{% endif %}" class="img-thumbnail pull-left" style="margin-right: 20px;">
+                            <img src="{% if category.image is not null %}{{ display_image(content.image, {'imagine_filter': 'page_big'}) }}{% endif %}" class="img-thumbnail pull-left" style="margin-right: 20px;">
                             {{ category.body | default('-')| raw }}
                         </p>
 

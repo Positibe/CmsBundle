@@ -47,7 +47,7 @@ positibe_page_block_delete:
                 route: positibe_block_index
 
 positibe_page_block_move_up:
-        pattern: /{name}/move-up
+        path: /{name}/move-up
         methods: [PUT]
         defaults:
             _controller: positibe.controller.page_block:moveUpAction
@@ -57,7 +57,7 @@ positibe_page_block_move_up:
                 redirect: referer
 
 positibe_page_block_move_down:
-    pattern: /{name}/move-down
+    path: /{name}/move-down
     methods: [PUT]
     defaults:
         _controller: positibe.controller.page_block:moveDownAction

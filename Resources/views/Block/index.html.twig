@@ -1,7 +1,7 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import pagination %}
-{% import '@PositibeCmf/_buttons.html.twig' as buttons %}
+{% from '@PositibeCore/_macros.html.twig' import pagination %}
+{% import '@PositibeCore/_buttons.html.twig' as buttons %}
 
 {% block title %}Bloques{% endblock %}
 {% block subtitle %}Listado de bloques{% endblock %}
@@ -9,8 +9,8 @@
 {% set content_menu = 'block' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_block_index') }}">Bloques</a>
     </li>
 {% endblock %}
@@ -23,7 +23,7 @@
             </div>
             <div class="actions">
                 <div class="btn-group">
-                    <a class="btn btn-sm btn-default btn-circle" href="javascript:;" data-toggle="dropdown"
+                    <a class="btn btn-sm btn-default" href="javascript:;" data-toggle="dropdown"
                        aria-expanded="false">
                         <i class="fa fa-plus"></i> Nuevo bloque <i class="fa fa-angle-down"></i>
                     </a>
@@ -79,7 +79,7 @@
                         <td>
                             <a href="{{ path_update }}">{{ block.name }}</a></td>
                         <td>{{ block.templatePosition | default('-') }} ({{ block.position }})</td>
-                        <td><strong>{{ block.type | trans({}, 'PositibeCmfBundle') }}</strong></td>
+                        <td><strong>{{ block.type | trans({}, 'PositibeCoreBundle') }}</strong></td>
                         <td>
                             <div class="badge text-muted">
                                 {% set visibility = [] %}

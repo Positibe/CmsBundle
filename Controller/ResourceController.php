@@ -20,6 +20,7 @@ use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Workflow\Exception\ExceptionInterface;
 
 /**
  * Class TranslatableController
@@ -27,7 +28,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class TranslatableController extends SyliusResourceController
+class ResourceController extends SyliusResourceController
 {
     /**
      * Load the correct locale for seo and menus depend of data_locale http parameter
@@ -92,5 +93,25 @@ class TranslatableController extends SyliusResourceController
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function applyTransitionAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $resource = $this->findOr404($configuration);
+
+        try {
+            $this->get('workflow.registry')->get($resource)
+                ->apply($resource, $request->request->get('transition'));
+
+            $this->get('doctrine')->getManager()->flush();
+        } catch (ExceptionInterface $e) {
+            $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
+        }
+
+        return $this->redirectHandler->redirectToResource($configuration, $resource);
+    }
 
 } 

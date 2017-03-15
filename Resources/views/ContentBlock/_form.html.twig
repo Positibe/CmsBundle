@@ -1,6 +1,4 @@
-{% form_theme form '@PositibeCmf/_metronic_material_theme.html.twig' %}
-
-{% from '@PositibeCmf/_macros.html.twig' import delete_button %}
+{% from '@PositibeCore/_buttons.html.twig' import delete_button %}
 <div class="portlet light ">
     <div class="portlet-title tabbable-line">
         <div class="caption caption-md">
@@ -10,10 +8,12 @@
         </div>
         <div class="actions btn-set">
             <a href="{{ path('positibe_block_index') }}"
-               name="back" class="btn btn-default btn-circle"><i class="fa fa-angle-left"></i> Atras</a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-circle "><i
-                        class="fa fa-reply"></i> Resetear</a>
-            <button class="btn green-haze btn-circle" type="submit"><i class="fa fa-check"></i> Guardar</button>
+               name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default "><i
+                        class="fa fa-reply"></i> Resetear
+            </a>
+            <button class="btn green-haze" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if content_block is defined and content_block.id is not null %}
                 {{ delete_button('positibe_cms_block_remove') }}
             {% endif %}
@@ -25,15 +25,17 @@
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#form_static_content_block_tab_basic" data-toggle="tab" aria-expanded="true">Información
-                        básica</a>
+                        básica
+                    </a>
                 </li>
-                <li class=""><a href="#form_block_tab_location" data-toggle="tab" aria-expanded="false">Ubicación</a>
+                <li class="">
+                    <a href="#form_block_tab_location" data-toggle="tab" aria-expanded="false">Ubicación</a>
                 </li>
                 <li class="">
                     <a href="#form_block_tab_configuration" data-toggle="tab" aria-expanded="false">Configuración</a>
                 </li>
                 <li class="pull-right">
-                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn btn-circle' }}) }}
+                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn' }}) }}
                 </li>
             </ul>
             <div class="tab-content">
@@ -45,7 +47,7 @@
                     {{ form_row(form.body) }}
                     {{ form_row(form.image) }}
                 </div>
-                {{ include('@PositibeContent/Block/_form_extra_configuration.html.twig') }}
+                {{ include('@PositibeCms/Block/_form_extra_configuration.html.twig') }}
             </div>
         </div>
         <div class="form-actions text-right">

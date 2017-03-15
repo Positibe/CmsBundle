@@ -9,38 +9,47 @@ sylius_resource:
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Page
                 repository: Positibe\Bundle\CmsBundle\Repository\PageRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\PageType
         positibe.category:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Category
                 repository: Positibe\Bundle\CmsBundle\Repository\CategoryRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.menu:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\MenuNode
                 repository: Positibe\Bundle\CmsBundle\Repository\MenuNodeRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.menu_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Blocks\MenuBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.content_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Blocks\ContentBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.page_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.gallery_block:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Blocks\GalleryBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController

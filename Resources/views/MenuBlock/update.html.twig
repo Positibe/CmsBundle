@@ -1,6 +1,6 @@
-{% extends '@PositibeCmf/layout.html.twig' %}
+{% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCmf/_macros.html.twig' import delete_confirm %}
+{% from '@PositibeCore/_buttons.html.twig' import delete_confirm %}
 
 {% block title %}Bloques de menu{% endblock %}
 {% block subtitle %}Editar bloque de menu{% endblock %}
@@ -8,12 +8,12 @@
 {% set content_menu = 'menu' %}
 
 {% block breadcrumb_list %}
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         <a href="{{ path('positibe_menu_block_index') }}">Bloques de menu</a>
     </li>
-    <li>
-        <i class="fa fa-angle-right"></i>
+    <li class="breadcrumb-item">
+
         {{ menu_block.name }}
         <small>({{ menu_block.menu }})</small>
     </li>
@@ -22,12 +22,12 @@
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeContent/MenuBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/MenuBlock/_form.html.twig') }}
     {{ form_end(form) }}
 
     {{ delete_confirm('positibe_menu_block_remove', path('positibe_menu_block_delete', {'name': menu_block.name})) }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ include('@PositibeContent/Block/_form_always_select.html.twig') }}
+    {{ include('@PositibeCms/Block/_form_always_select.html.twig') }}
 {% endblock %}
