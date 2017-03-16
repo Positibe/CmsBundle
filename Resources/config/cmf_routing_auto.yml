@@ -1,0 +1,12 @@
+Positibe\Bundle\CmsBundle\Entity\Page:
+    definitions:
+        _default:
+            uri_schema: /{title}
+    token_providers:
+        title: [content_method, { method: getTitle }]
+Positibe\Bundle\CmsBundle\Entity\Category:
+    definitions:
+        _default:
+            uri_schema: /{title}
+    token_providers:
+        title: [content_method, { method: getTitle }]

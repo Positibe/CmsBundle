@@ -41,7 +41,7 @@ class ResourceController extends SyliusResourceController
         /** @var AbstractPage $page */
         $page = parent::findOr404($configuration);
 
-        if ($page instanceof TranslatableInterface && $dataLocale = $configuration->getRequest()->get('data_locale')) {
+        if ($page instanceof TranslatableInterface && $dataLocale = $configuration->getRequest()->get('data_locale', $this->getParameter('locale'))) {
             $page->setLocale($dataLocale);
 
             if ($page instanceof SeoAwareInterface && $seoMetadata = $page->getSeoMetadata()) {

@@ -1,8 +1,4 @@
-parameters:
-    stof_doctrine_extensions.event_listener.locale.class: Positibe\Bundle\CoreBundle\EventListener\LocaleListener
-
 services:
-
     positibe_cms.guard_listener:
         class: Positibe\Bundle\CmsBundle\Workflow\GuardListener
         arguments: ["@security.token_storage"]

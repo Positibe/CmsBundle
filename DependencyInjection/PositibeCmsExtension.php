@@ -41,6 +41,10 @@ class PositibeCmsExtension extends Extension
             array(
                 'Symfony\\Cmf\\Bundle\\CoreBundle\\EventListener\\PublishWorkflowListener',
                 'Symfony\\Cmf\\Bundle\\SeoBundle\\EventListener\\ContentListener',
+                'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
+                'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
+                'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
+                'Gedmo\\Translatable\\TranslatableListener'
             )
         );
 

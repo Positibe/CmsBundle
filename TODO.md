@@ -16,3 +16,4 @@ Importante:::
 
 Documentar:
 Uso del Publishable Component con el Workflow
+Uso y configuración del ckeditor y el content.css con bootstrap, además del uso del upload y el finder del ckeditor

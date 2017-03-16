@@ -3,6 +3,7 @@
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Positibe\Bundle\CmfRoutingExtraBundle\Form\Type\RoutePermalinkType;
 use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
@@ -56,13 +57,10 @@ class PageType extends AbstractType
             )
             ->add(
                 'body',
-                null,
+                CKEditorType::class,
                 array(
                     'label' => 'static_content.form.body_label',
-                    'attr' => array(
-                        'rows' => 12,
-                        'class' => 'ckeditor',
-                    ),
+                    'config_name' => 'content'
                 )
             )
             ->add(

@@ -4,6 +4,12 @@ imports:
 parameters:
     positibe.menu_node.class: Positibe\Bundle\CmsBundle\Entity\MenuNode
 
+assetic:
+    debug: '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
 cmf_core:
     persistence:
         orm: ~
@@ -11,26 +17,13 @@ cmf_core:
         request_listener: true
 
 cmf_seo:
-    title: %%content_title%%
-    description: %%content_description%%
+    title: "%%content_title%%"
+    description: "%%content_description%%"
     persistence:
         orm:
 
 positibe_menu:
     content_class: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category ]
-
-positibe_cmf_routing_extra:
-    auto_routing:
-        Positibe\Bundle\CmsBundle\Entity\Page:
-#            uri_schema: /{category}/{title}
-            uri_schema: /{title}
-            token_providers:
-#                category: [content_method, { method: getCategoryName }]
-                title: [content_method, { method: getTitle }]
-        Positibe\Bundle\CmsBundle\Entity\Category:
-            uri_schema: /{title}
-            token_providers:
-                title: [content_method, { method: getTitle }]
 
 cmf_routing:
     dynamic:
@@ -42,6 +35,13 @@ cmf_routing:
 
 sonata_block:
     default_contexts: ~
+
+lunetics_locale:
+    allowed_locales: "%locales%"
+    guessing_excluded_pattern: ^/css|^/js|^/admin|^/_wdt|^/_profiler|^/_error
+    guessing_order:
+        - query
+        - router
 
 framework:
     workflows:
@@ -67,27 +67,27 @@ framework:
                 republish:
                     from: unpublished
                     to:   published
-#ivory_ck_editor:
-#    configs:
-#        default:
-#            toolbar: standard
-#            filebrowserUploadRoute: "cmf_media_upload"
-#            filebrowserBrowseRoute: "elfinder"
-#            skin: "../../positibecmf/ckeditor/skins/office2013"
+ivory_ck_editor:
+    configs:
+        content:
+            toolbar: standard
+            filebrowserUploadRoute: "positibe_media_upload"
+            filebrowserBrowseRoute: "elfinder"
+            contentsCss: "css/compiled/main.css"
 
-#fm_elfinder:
-#    locale: %locale% # defaults to current request locale
-#    editor: ckeditor # other choices are tinymce or simple
-#    showhidden: false # defaults to false
-#    fullscreen: true # defaults true, applies to simple and ckeditor editors
-#    include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
-#    compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
-#    connector:
-#        debug: false # defaults to false
-#        roots:       # at least one root must be defined
-#            uploads:
-#                driver: LocalFileSystem
-#                path: uploads
-#                upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
-#                upload_deny: ['all']
-#                upload_max_size: 2M
+fm_elfinder:
+    instances:
+        default:
+            locale: "%locale%" # defaults to current request locale
+            editor: ckeditor # other choices are tinymce or simple
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/gif','image/gif','image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 8M

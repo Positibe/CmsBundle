@@ -24,6 +24,7 @@
     ],
     "require": {
         "symfony/framework-bundle": "~2.8|~3.0",
+        "symfony/assetic-bundle": "^2.8",
         "positibe/menu-bundle": "^1.0@beta",
         "positibe/media-bundle": "^1.0@beta",
         "positibe/cmf-routing-extra-bundle": "^1.0@beta",
@@ -31,8 +32,13 @@
         "gedmo/doctrine-extensions": "~2.4",
         "sonata-project/block-bundle": "~3.0",
         "sylius/resource-bundle": "^1.0@beta",
-        "symfony-cmf/seo-bundle": "~2.0"
+        "symfony-cmf/seo-bundle": "~2.0",
+        "lunetics/locale-bundle": "~2.5",
+        "helios-ag/fm-elfinder-bundle": "~6"
     },
+    "config": {
+        "component-dir": "web/assets"
+    }
     "autoload": {
         "psr-4": {
             "Positibe\\Bundle\\CmsBundle\\": ""
