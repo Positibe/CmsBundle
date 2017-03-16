@@ -38,7 +38,7 @@
     },
     "config": {
         "component-dir": "web/assets"
-    }
+    },
     "autoload": {
         "psr-4": {
             "Positibe\\Bundle\\CmsBundle\\": ""
