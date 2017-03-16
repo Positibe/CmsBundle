@@ -35,6 +35,7 @@
         "sylius/resource-bundle": "^1.0@beta",
         "symfony-cmf/seo-bundle": "~2.0",
         "lunetics/locale-bundle": "~2.5",
+        "egeloen/ckeditor-bundle": "~4.0",
         "helios-ag/fm-elfinder-bundle": "~6"
     },
     "config": {
