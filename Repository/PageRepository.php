@@ -27,6 +27,23 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
 {
     use LocaleRepositoryTrait;
 
+    /**
+     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
+     *
+     * @param string $alias
+     * @param string $indexBy The index for the from.
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $qb = parent::createQueryBuilder($alias, $indexBy);
+
+        $qb->andWhere($alias .' INSTANCE OF ' . $this->_entityName);
+        return $qb;
+    }
+
+
     public function findOneByMenuNodes(MenuNodeInterface $menuNode)
     {
         $qb = $this->createQueryBuilder('o')
@@ -58,7 +75,7 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
     public function findByFeatured()
     {
         $qb = $this->createQueryBuilder('o')
-            ->addSelect('seo', 'image')
+            ->addSelect('seo', 'image', 'r')
             ->leftJoin('o.image', 'image')
             ->leftJoin('o.seoMetadata', 'seo')
             ->join('o.routes', 'r')
@@ -75,7 +92,7 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
     {
         if (!empty($criteria['category'])) {
             $queryBuilder
-                ->leftJoin('o.parent', 'category')
+                ->leftJoin('o.category', 'category')
                 ->andWhere('category.name = :category')
                 ->setParameter('category', $criteria['category']);
             unset($criteria['category']);
@@ -108,21 +125,19 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
         return $query->getOneOrNullResult();
     }
 
-    public function findContentByParent($parent, $count = 2, $sort = 'publishStartDate', $order = 'DESC')
+    public function findContentByCategory($category, $count = 2, $sort = 'publishStartDate', $order = 'DESC')
     {
         $qb = $this->createQueryBuilder('o')
 //          ->addSelect('p', 'routes', 'image')
 //          ->leftJoin('o.routes', 'routes')
 //          ->leftJoin('o.image', 'image')
-            ->innerJoin('o.parent', 'p');
-        if (is_string($parent)) {
-            $qb->where('p.name = :parent');
+            ->innerJoin('o.category', 'c');
+        if (is_string($category)) {
+            $qb->where('c.name = :category');
         } else {
-            $qb->where('p = :parent');
+            $qb->where('c = :category');
         }
-        $qb->setParameter('parent', $parent)
-            ->setMaxResults($count)
-            ->orderBy(sprintf('o.%s', $sort), $order);
+        $qb->setParameter('category', $category)->setMaxResults($count)->orderBy(sprintf('o.%s', $sort), $order);
 
         return $this->getQuery($qb)->getResult();
     }

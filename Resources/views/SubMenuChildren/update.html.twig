@@ -8,21 +8,17 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"> {{ app.request.get('parent') }}</a>
     </li>
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_submenu_child_index', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}">
             {{ app.request.get('name') }}
         </a>
     </li>
     <li class="breadcrumb-item">
-
         {{ menu.label | default(menu.name) }}
     </li>
 {% endblock %}
@@ -32,10 +28,9 @@
     {{ form_errors(form) }}
     <input type="hidden" name="_method" value="PUT"/>
     {{ include('@PositibeCms/SubMenuChildren/_form.html.twig') }}
-    {{ form_rest(form) }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_menu_node_remove', path('positibe_submenu_child_delete', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name })) }}
+    {{ delete_confirm('positibe_menu_node_remove', path('positibe_submenu_child_delete', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }), menu) }}
 {% endblock %}
 
 {% block javascripts %}

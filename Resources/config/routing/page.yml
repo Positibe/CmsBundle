@@ -4,7 +4,7 @@ positibe_page_crud:
         alias: positibe.page
         templates: PositibeCmsBundle:Page
 #        except: ['show']
-#        redirect: update
+        redirect: update
     type: sylius.resource
 
 positibe_page_create_by_category:

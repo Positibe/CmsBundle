@@ -12,9 +12,6 @@ namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
-use Positibe\Bundle\CmsBundle\Model\ContentType;
 
 /**
  * @ORM\Table(name="positibe_page_category")
@@ -25,19 +22,18 @@ use Positibe\Bundle\CmsBundle\Model\ContentType;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class Category extends AbstractPage
+class Category extends Page
 {
     /**
      * @var Page[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Page", mappedBy="parent", cascade={"persist"}, fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="category", cascade={"persist"}, fetch="EXTRA_LAZY")
      */
     protected $children;
 
     public function __construct()
     {
         parent::__construct();
-        $this->contentType = ContentType::TYPE_CATEGORY;
         $this->children = new ArrayCollection();
     }
 

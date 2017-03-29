@@ -6,55 +6,53 @@ services:
             - { name: kernel.event_subscriber }
 
 #### Forms Type ####
-    positibe_cms.abstract_page_form_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\AbstractPageType
-        arguments: ["@positibe_routing.route_factory", "%locales%", "%locale%"]
-        tags:
-          - { name: form.type , alias: positibe_abstract_page }
-
-    positibe_cms.page_form_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\PageType
-        arguments: ["@doctrine.orm.entity_manager", '@positibe_routing.route_factory', %locales%, %locale%]
+    positibe_cms.base_content_form_type:
+        class: Positibe\Bundle\CmsBundle\Form\Type\BaseContentType
+        arguments: ["%locales%", "%locale%"]
         tags:
           - { name: form.type }
 
-    positibe_cms.category_form_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\CategoryType
+    positibe_cms.page_form_type:
+        class: Positibe\Bundle\CmsBundle\Form\Type\PageType
+        arguments: ["@doctrine.orm.entity_manager", "%positibe_cms.available_controllers%",  "%positibe_cms.available_templates%"]
         tags:
-          - { name: form.type , alias: positibe_category }
+          - { name: form.type }
 
-    positibe_cms.form.visibility_block_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\AbstractVisibilityBlockType
+    positibe_menu.menu_form_type:
+        class: Positibe\Bundle\CmsBundle\Form\Type\MenuType
+        arguments: ["%positibe.menu_node.class%"]
         tags:
-            - {name: form.type, alias: positibe_block_visibility }
+          - { name: form.type }
 
-    positibe_block.form.page_block_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\PageBlockType
+    positibe_menu.menu_node_form_type:
+        class: Positibe\Bundle\CmsBundle\Form\Type\MenuNodeType
+        arguments: ["%positibe.menu_node.class%", "%locales%"]
         tags:
-            - {name: form.type, alias: positibe_page_block }
+          - { name: form.type }
+
+    positibe_cms.form.block_type:
+        class: Positibe\Bundle\CmsBundle\Form\Type\AbstractBlockType
+        tags:
+            - {name: form.type }
 
     positibe_cms.form.content_block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\ContentBlockType
-        arguments: [%locales%]
+        arguments: ["%locales%"]
         tags:
-            - {name: form.type, alias: positibe_cms_block }
-
-    positibe_cms.form.gallery_block_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\GalleryBlockType
-        tags:
-            - {name: form.type, alias: positibe_gallery_block }
-
-    positibe_cms.form.menu_block_type:
-        class: Positibe\Bundle\CmsBundle\Form\Type\MenuBlockType
-        tags:
-            - {name: form.type, alias: positibe_menu_block }
+            - {name: form.type }
 
 #### Block Services ####
-    positibe_cms.block_category:
-            class: Positibe\Bundle\CmsBundle\Block\Service\CategoryBlockService
-            arguments: ['positibe_cms.block_category', "@templating", "@doctrine.orm.entity_manager"]
+    positibe_cms.pages_by_category:
+            class: Positibe\Bundle\CmsBundle\Block\Service\PagesByCategoryBlockService
+            arguments: ['positibe_cms.pages_by_category', "@templating", "@doctrine.orm.entity_manager"]
             tags:
               - { name: sonata.block }
+
+    positibe_cms.featured_page:
+        class: Positibe\Bundle\CmsBundle\Block\Service\FeaturedBlockService
+        arguments: ['positibe_cms.featured_page', "@templating", "@doctrine.orm.entity_manager"]
+        tags:
+            - {name: sonata.block }
 
     positibe_cms.block_page:
         class: Positibe\Bundle\CmsBundle\Block\Service\PageBlockService
@@ -64,11 +62,6 @@ services:
         calls:
             - [ setEm, ["@doctrine.orm.entity_manager"]]
 
-    positibe_cms.block_featured_page:
-        class: Positibe\Bundle\CmsBundle\Block\Service\FeaturedBlockService
-        arguments: ['positibe_cms.block_featured_page', "@templating", "@doctrine.orm.entity_manager"]
-        tags:
-            - {name: sonata.block }
 
     positibe_cms.block_content:
         class: Positibe\Bundle\CmsBundle\Block\Service\ContentBlockService
@@ -91,7 +84,7 @@ services:
 #### Services and Utils ####
     positibe.factory.page:
         class: Positibe\Bundle\CmsBundle\Factory\PageFactory
-        arguments: ["@positibe.factory.menu", "@positibe_routing.route_factory", "@doctrine.orm.entity_manager", %locale%]
+        arguments: ["@positibe.factory.menu", "@positibe_routing.route_factory", "@doctrine.orm.entity_manager", "%locale%"]
 
     positibe.factory.menu:
         class: Positibe\Bundle\CmsBundle\Factory\MenuNodeFactory

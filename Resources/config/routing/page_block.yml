@@ -1,67 +1,21 @@
 positibe_page_block_create:
-    path: /page_blocks/new
+    path: /blocks/page/new
     methods: [GET, POST]
     defaults:
         _controller: positibe.controller.page_block:createAction
         _sylius:
+            template: PositibeCmsBundle:PageBlock:create.html.twig
             redirect:
-                route: positibe_page_block_show
-                parameters: { name: resource.name }
-
-positibe_page_block_index:
-   path: /page_blocks
-   methods: [GET]
-   defaults:
-       _controller: positibe.controller.page_block:indexAction
-
-positibe_page_block_show:
-    path: /page_blocks/{name}
-    methods: [GET]
-    defaults:
-        _controller: positibe.controller.page_block:showAction
-        _sylius:
-            criteria:
-                name: $name
+                route: positibe_page_block_update
+                parameters: { id: resource.id }
 
 positibe_page_block_update:
-    path: /page_blocks/{name}/edit
+    path: /blocks/page/{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: positibe.controller.page_block:updateAction
         _sylius:
-            criteria:
-                name: $name
+            template: PositibeCmsBundle:PageBlock:update.html.twig
             redirect:
-                route: positibe_page_block_show
-                parameters: { name: resource.name }
-
-positibe_page_block_delete:
-    path: /page_blocks/{name}
-    methods: [DELETE]
-    defaults:
-        _controller: positibe.controller.page_block:deleteAction
-        _sylius:
-            criteria:
-                name: $name
-            redirect:
-                route: positibe_block_index
-
-positibe_page_block_move_up:
-        path: /{name}/move-up
-        methods: [PUT]
-        defaults:
-            _controller: positibe.controller.page_block:moveUpAction
-            _sylius:
-                criteria:
-                    name: $name
-                redirect: referer
-
-positibe_page_block_move_down:
-    path: /{name}/move-down
-    methods: [PUT]
-    defaults:
-        _controller: positibe.controller.page_block:moveDownAction
-        _sylius:
-            criteria:
-                name: $name
-            redirect: referer
+                route: positibe_page_block_update
+                parameters: { id: resource.id }

@@ -42,7 +42,7 @@ class LocaleController extends Controller
         $this->get('event_dispatcher')->dispatch(LocaleBundleEvents::onLocaleChange, $localeSwitchEvent);
 
         $redirectRoute = $request->get('redirectRoute');
-        if ($redirectRoute !== null && $route = $this->get('positibe_routing.route.provider')->getRouteByName(
+        if ($redirectRoute !== null && $route = $this->get('cmf_routing.route_provider')->getRouteByName(
                 $redirectRoute
             )
         ) {

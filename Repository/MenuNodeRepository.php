@@ -95,7 +95,7 @@ class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryI
     {
         if (isset($criteria['parent'])) {
             $queryBuilder
-              ->join($this->getAlias() . '.parent', 'p')
+              ->join('o.parent', 'p')
               ->andWhere('p.name = :parent_name')
               ->setParameter(
                 'parent_name',

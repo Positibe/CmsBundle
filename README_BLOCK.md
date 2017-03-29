@@ -33,7 +33,7 @@ Next, be sure to enable the bundles in your application kernel:
     }
 
 Configuration
-=============
+-------------
 
 Import all necessary configurations to your app/config/config.yml the basic configuration.
     # app/config/config.yml
@@ -42,4 +42,27 @@ Import all necessary configurations to your app/config/config.yml the basic conf
 
 **Caution:**: This bundle use the timestampable, sluggable, softdeleteable, translatable and sortable extension of GedmoDoctrineExtension. Be sure that you have the listeners for this extensions enable. You can also to use StofDoctrineExtensionBundle.
 
+Available Blocks
+----------------
 
+Pages by category:
+~~~~~~~~~~~~~~~~~~
+
+This display 3 pages from ``services`` category like normal list:
+
+    {{ sonata_block_render({'type': 'positibe_cms.pages_by_category'}, {'category': 'services'}) }}
+
+If you want a grid layer displaying use a custom template:
+
+    {{ sonata_block_render({'type': 'positibe_cms.pages_by_category'}, {'category': 'services', 'template':'PositibeCmsBundle:Block:grid_contents.html.twig'}) }}
+
+Featured page
+~~~~~~~~~~~~~
+
+This display a featured page:
+
+    {{ sonata_block_render({'type': 'positibe_cms.featured_page'}) }}
+
+You can use the ``data_class`` option to use a custom class ``Positibe\Bundle\CmsBundle\Entity\Page`` is used by default:
+
+    {{ sonata_block_render({'type': 'positibe_cms.featured_page'}, {'data_class': 'Positibe\Bundle\CmsBundle\Entity\Category'}) }}

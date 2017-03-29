@@ -1,55 +1,45 @@
-
-
-{% from '@PositibeCore/_buttons.html.twig' import delete_button %}
-
-<div class="portlet light ">
-    <div class="portlet-title tabbable-line">
-        <div class="caption caption-md">
-            <i class="icon-globe theme-font hide"></i>
-            <span class="caption-subject font-green-sharp bold uppercase"><i class="fa fa-file-text"></i> Datos del bloque</span>
+<div class="card-header white">
+    <div class="card-title text-muted text-uppercase text-right">
+        <div class="card-title-caption">
+            <h4><i class="fa fa-cubes"></i> Formulario de bloque
+            </h4>
         </div>
-        <div class="actions btn-set">
-            <a href="{{ path('positibe_block_index') }}"
-               name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default "><i
-                        class="fa fa-reply"></i> Resetear</a>
-            <button class="btn green-haze" type="submit"><i class="fa fa-check"></i> Guardar</button>
+        <div class="card-title-actions">
+            <a href="{{ go_back('positibe_block_index') }}"
+               name="back" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm"><i
+                        class="fa fa-reply"></i> Resetear
+            </a>
+            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if page_block is defined and page_block.id is not null %}
-                {{ delete_button('positibe_page_block_remove') }}
+                <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_page_block_remove">
+                    <i class="fa fa-trash"></i> Remover
+                </a>
             {% endif %}
         </div>
-
     </div>
-    <div class="portlet-body">
-        <div class="tabbable-line tabbable-full-width">
-
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#form_page_block_tab_basic" data-toggle="tab" aria-expanded="true">Información
-                        básica</a>
-                </li>
-                <li class="">
-                    <a href="#form_block_tab_location" data-toggle="tab"
-                       aria-expanded="false">Ubicación</a>
-                </li>
-                <li class="">
-                    <a href="#form_block_tab_configuration" data-toggle="tab" aria-expanded="false">Configuración</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="form_page_block_tab_basic">
-                    {% if form.name is defined %}
-                        {{ form_row(form.name) }}
-                    {% endif %}
-                    {{ form_row(form.page) }}
-                </div>
-                {{ include('@PositibeCms/Block/_form_extra_configuration.html.twig') }}
-            </div>
+</div>
+<div class="card-block">
+    <div class="row">
+        <div class="col-md-9">
+            {% if isNew is defined and isNew %}
+                {% if form.name is defined %}
+                    {{ form_row(form.name) }}
+                {% endif %}
+            {% endif %}
+            {{ form_row(form.page) }}
         </div>
-        <div class="form-actions text-right">
-            <hr>
-            <a href="{{ path('positibe_block_index') }}" class="btn btn-default">Cancelar</a>
-            <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
+        <div class="col-md-3">
+            {{ include('@PositibeCms/Block/_form_extra_configuration.html.twig') }}
         </div>
+    </div>
+</div>
+<div class="card-footer text-right">
+    <div class="card-block">
+        <a href="{{ go_back('positibe_block_index') }}"
+           class="btn btn-default">Cancelar
+        </a>
+        <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
     </div>
 </div>

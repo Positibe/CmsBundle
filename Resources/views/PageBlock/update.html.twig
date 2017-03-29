@@ -9,11 +9,9 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
-        <a href="{{ path('positibe_page_block_index') }}">Bloques de página</a>
+        <a href="{{ path('positibe_block_index') }}">Bloques</a>
     </li>
     <li class="breadcrumb-item">
-
         {{ page_block.name }}
     </li>
 {% endblock %}
@@ -21,10 +19,10 @@
 {% block content %}
     {{ form_start(form, {'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeCms/PageBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/PageBlock/_form.html.twig', {'isNew': false}) }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_page_block_remove', path('positibe_page_block_delete', {'name': page_block.name})) }}
+    {{ delete_confirm('positibe_page_block_remove', path('positibe_block_delete', {'id': page_block.id}), page_block) }}
 {% endblock %}
 
 {% block javascripts %}

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class MenuBlockService extends AbstractBlockService
+class MenuBlockService extends CmsBlockService
 {
     /**
      * {@inheritdoc}
@@ -87,7 +87,7 @@ class MenuBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(

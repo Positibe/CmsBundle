@@ -68,6 +68,12 @@ Import all necessary configurations to your app/config/config.yml the basic conf
         - { resource: '@PositibeMenuBundle/Resources/config/config.yml'}
         - { resource: '@PositibeCmfRoutingExtraBundle/Resources/config/config.yml' }
 
+
+    #If you want some advanced configuration
+    positibe_cms:
+        public_routes: # e.g. [homepage, my-company]  List of public symfony routes available.
+        content_class: # e.g. [ AppBundle\Entity\Post, AppBundle\Entity\Category ] List of content that extend of MenuNodeReferralInterface.
+
 **Caution:**: This bundle use the timestampable, sluggable, softdeleteable, translatable and sortable extension of GedmoDoctrineExtension. Be sure that you have the listeners for this extensions enable. You can also to use StofDoctrineExtensionBundle.
 **Caution:**: If you have the parameter ``positibe.menu_node.class: Positibe\Bundle\MenuBundle\Doctrine\Orm\MenuNode`` configured in your config.yml please erase it.
 

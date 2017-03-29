@@ -1,156 +1,85 @@
 {% extends '@PositibeCms/layout.html.twig' %}
 
-
-{% block title %}Tipos de página{% endblock %}
+{% block title %}Categorías{% endblock %}
 {% block subtitle %}{{ category.title }} {% endblock %}
-{% set menu_active = 'content' %}
+{% set menu_active  = 'content' %}
 {% set content_menu = 'category' %}
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
-        <a href="{{ path('positibe_category_index') }}">Tipos de página</a>
+        <a href="{{ path('positibe_category_index') }}">Categorías</a>
     </li>
     <li class="breadcrumb-item">
-
         {{ category.title }}
     </li>
 {% endblock %}
 
 {% block content %}
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <p class="caption-subject font-green-sharp bold uppercase">
-                    <i class="fa fa-folder-open-o"></i> Tipos de página: {{ category.title }}
-                </p>
+    <div class="card-header white">
+        <div class="card-title text-muted text-uppercase text-right">
+            <div class="card-title-caption">
+                <h4><i class="fa fa-folder-open-o"></i> Categoría
+                    <small>{{ category.name }}</small>
+                </h4>
             </div>
-            <div class="actions">
-                <a href="{{ path('positibe_category_index') }}"
-                   name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
+            <div class="card-title-actions">
 
-                <a href="{{ path('positibe_category_update', {'name': category.name}) }}" class="btn btn-default">
+                <a href="{{ path('positibe_category_index') }}"
+                   name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
+                </a>
+
+                <a href="{{ path('positibe_category_update', {'id': category.id}) }}" class="btn btn-default btn-sm">
                     <i class="fa fa-edit"></i> Editar
                 </a>
             </div>
         </div>
-        <div class="portlet-body">
-            <div class="tabbable-line tabbable-full-width">
-                <ul class="nav nav-tabs nav-tabs-lg">
-                    <li class="active">
-                        <a href="#tab_1" data-toggle="tab" aria-expanded="true">
-                            Detalles </a>
-                    </li>
-                    <li class="">
-                        <a href="#tab_2" data-toggle="tab" aria-expanded="false">
-                            Páginas <span
-                                    class="badge badge-{% if category.children | length > 0 %}success{% else %}warning{% endif %}"> {{ category.children | length }} </span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#tab_3" data-toggle="tab" aria-expanded="false"> Rutas <span
-                                    class="badge badge-{% if category.routes | length > 0 %}success{% else %}warning{% endif %}"> {{ category.routes | length }} </span></a>
-                    </li>
-                    <li class="">
-                        <a href="#tab_4" data-toggle="tab" aria-expanded="false">
-                            Menus <span
-                                    class="badge badge-{% if category.menuNodes | length > 0 %}success{% else %}warning{% endif %}"> {{ category.menuNodes | length }} </span>
-                        </a>
-                    </li>
 
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
-                        <p>
-                            <img src="{% if category.image is not null %}{{ display_image(content.image, {'imagine_filter': 'page_big'}) }}{% endif %}" class="img-thumbnail pull-left" style="margin-right: 20px;">
-                            {{ category.body | default('-')| raw }}
-                        </p>
 
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="tab-pane" id="tab_2">
-                        <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover no-footer">
-                                <tr role="row" class="heading">
-                                    <th class="sorting_asc">
-                                        Título
-                                    </th>
-                                    <th class="sorting">
-                                        Cuerpo
-                                    </th>
-                                    <th class="sorting">
-                                        Estado
-                                    </th>
-                                    <th>Accciones</th>
-                                </tr>
-                                {% for page in category.children %}
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">{{ page.title }}</td>
-                                        <td>{{ page.body | striptags | truncate(150) }}</td>
-                                        <td>{{ is_granted(page) }}</td>
-                                        <td>
-                                            <a href="{{ path('positibe_page_show', {'name': page.name}) }}" class="btn btn-default btn-xs">
-                                                <i class="fa fa-files-o"></i> Ver página
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% else %}
-                                    <tr>
-                                        <td colspan="4">No posee páginas asociadas</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4>Vista previa</h4>
+                    <table class="table table-striped table-bordered table-hover no-footer">
+                        {% for route in category.routes %}
+                            <tr>
+                                <td>
+                                    <a href="{{ relative_path(route.getPath()) }}">{{ route.getPath() }}</a>
+                                </td>
+                                <td>{{ route.getDefault('_controller') | trans }}</td>
+                                <td>{{ (route.getDefault('_locale') | default('es')) | trans }}</td>
+                            </tr>
+
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Esta categoría no posee rutas</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <iframe style="width: 100%; min-height: 500px"
+                            src="{{ path('positibe_admin_page_iframe', {'id': category.id}) }}"></iframe>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Configuración</h4>
+                            <strong><i class="fa {% if category.state == 'published' %}fa-check text-info{% else %}fa-minus-circle text-danger{% endif %}"></i> {{ (category.state) | trans }}</strong>
+                            <div class="pl-3 bg-faded">
+                                <ul>
+                                    {% if category.publishStartDate %}
+                                        <li><strong>A partir del:</strong> {{ category.publishStartDate | localizeddate('medium', 'short') }} </li>
+                                    {% endif %}
+                                    {% if category.publishEndDate %}
+                                        <li><strong>Despublicar el:</strong> {{ category.publishEndDate | localizeddate('medium', 'short') }} </li>
+                                    {% endif %}
+                                </ul>
+
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tab_3">
-                        <table class="table table-striped table-bordered table-hover no-footer">
-                            <tr class="heading">
-                                <th>Nombre</th>
-                                <th>Link permanente</th>
-                                <th>Controlador</th>
-                                <th>Idioma</th>
-                            </tr>
-                            {% for route in category.routes %}
-                                <tr>
-                                    <td>{{ route.name }}</td>
-                                    <td>{{ route.getPath() }}</td>
-                                    <td>{{ route.getDefault('_controller') }}</td>
-                                    <td>{{ route.getDefault('_locale')| default('es' | trans({},'PositibeCmsBundle')) }}</td>
-                                </tr>
-
-                            {% else %}
-                                <tr>
-                                    <td colspan="4">Esta página no posee rutas</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </div>
-                    <div class="tab-pane" id="tab_4">
-                        <table class="table table-striped table-bordered table-hover no-footer">
-                            <tr class="heading">
-                                <th>Nombre</th>
-                                <th>Etiqueta</th>
-                                <th>Menu contenedor</th>
-                                <th>Mostrado</th>
-                            </tr>
-                            {% for menu in category.menuNodes %}
-                                <tr>
-                                    <td>{{ menu.name }}</td>
-                                    <td>{{ menu.label }}</td>
-                                    <td>{{ menu.parent }}</td>
-                                    <td>{% if menu.display %}<i class="fa fa-check"></i>{% else %}<i class="fa
-                        fa-times"></i>{% endif %} </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="3">Esta página está asignada a ningún menú</td>
-                                </tr>
-
-                            {% endfor %}
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

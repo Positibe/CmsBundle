@@ -16,7 +16,7 @@ namespace Positibe\Bundle\CmsBundle\Block\Service;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class ContentBlockService extends AbstractBlockService
+class ContentBlockService extends CmsBlockService
 {
     protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
 } 

@@ -17,12 +17,12 @@ cmf_core:
         request_listener: true
 
 cmf_seo:
-    title: "%%content_title%%"
-    description: "%%content_description%%"
+    title: seo.title
+    description: seo.description
     persistence:
         orm:
 
-positibe_menu:
+positibe_cms:
     content_class: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category ]
 
 cmf_routing:
@@ -35,6 +35,9 @@ cmf_routing:
 
 sonata_block:
     default_contexts: ~
+    blocks:
+        positibe_cms.pages_by_category: ~
+        positibe_cms.featured_page: ~
 
 lunetics_locale:
     allowed_locales: "%locales%"

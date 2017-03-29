@@ -2,30 +2,33 @@
 
 {% block block %}
     {% set galleryHasMedias = content.gallery.galleryHasMedias %}
-    <div id="{{ content.gallery.name }}" class="carousel slide">
+    <div id="{{ content.gallery.name }}" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             {% for i in 0..(galleryHasMedias | length) - 1  %}
                 <li data-target="#{{ content.gallery.name }}" data-slide-to="{{ loop.index0 }}"
                     {% if loop.index0 == 0 %}class="active"{% endif %}></li>
             {% endfor %}
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner" role="listbox">
             {% for media in galleryHasMedias %}
+                <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                    <img src="{{ display_image(media.media) }}" alt="{{ media.title }}">
 
-                <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <img src="{{ display_image(media.media) }}" alt="{{ media.title }}" class="img-responsive">
-
-                    <div class="carousel-caption">
-                        {{ media.body | raw | striptags | truncate(150) }}
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="h1-responsive wow fadeInDown" data-wow-delay="0.2s"
+                            style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">{{ media.title }}</h3>
+                        {{ media.body | raw  }}
                     </div>
                 </div>
 
             {% endfor %}
         </div>
-        <a class="left carousel-control" href="#{{ content.gallery.name }}" data-slide="prev">
+        <a class="carousel-control-prev" href="#{{ content.gallery.name }}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="icon-prev"></span>
         </a>
-        <a class="right carousel-control" href="#{{ content.gallery.name }}" data-slide="next">
+        <a class="carousel-control-next" href="#{{ content.gallery.name }}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="icon-next"></span>
         </a>
     </div>

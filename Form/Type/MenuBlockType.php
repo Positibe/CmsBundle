@@ -11,7 +11,9 @@
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,9 +31,9 @@ class MenuBlockType extends AbstractType
     {
         $builder->add(
             'menu',
-            null,
+            EntityType::class,
             array(
-                'property' => 'name',
+                'class' => MenuNode::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')->where('o.linkType = :rootType')->setParameter(
                         'rootType',
@@ -50,15 +52,14 @@ class MenuBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\MenuBlock',
-                'translation_domain' => 'PositibeCmsBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\MenuBlock'
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_block_visibility';
+        return AbstractBlockType::class;
     }
 
     /**
@@ -66,7 +67,7 @@ class MenuBlockType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_menu_block';
     }

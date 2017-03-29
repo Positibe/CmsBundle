@@ -11,8 +11,9 @@
 namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
-use Sonata\BlockBundle\Block\BaseBlockService;
+use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class FeaturedBlockService extends BaseBlockService
+class FeaturedBlockService extends AbstractBlockService
 {
     protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
     protected $em;
@@ -50,7 +51,7 @@ class FeaturedBlockService extends BaseBlockService
             $response = new Response();
         }
 
-        $class = $blockContext->getSetting('class');
+        $class = $blockContext->getSetting('content_class');
         $contents = $this->getContentRepository($class)->findByFeatured();
 
         if (count($contents) > 0) {
@@ -72,12 +73,12 @@ class FeaturedBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'template' => $this->template,
-                'class' => 'Positibe\Bundle\CmsBundle\Entity\Page'
+                'content_class' => 'Positibe\Bundle\CmsBundle\Entity\Page'
             )
         );
     }
@@ -92,7 +93,7 @@ class FeaturedBlockService extends BaseBlockService
 
     /**
      * @param $class
-     * @return \Doctrine\ORM\EntityRepository
+     * @return \Doctrine\ORM\EntityRepository|PageRepository
      */
     public function getContentRepository($class)
     {

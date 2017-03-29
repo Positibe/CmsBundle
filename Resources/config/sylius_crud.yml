@@ -17,39 +17,45 @@ sylius_resource:
                 model:      Positibe\Bundle\CmsBundle\Entity\Category
                 repository: Positibe\Bundle\CmsBundle\Repository\CategoryRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\CategoryType
         positibe.menu:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\MenuNode
                 repository: Positibe\Bundle\CmsBundle\Repository\MenuNodeRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\MenuType
         positibe.block:
             driver: doctrine/orm
             classes:
-                model:      Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock
-                repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
-                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
-        positibe.menu_block:
-            driver: doctrine/orm
-            classes:
-                model:      Positibe\Bundle\CmsBundle\Entity\Blocks\MenuBlock
+                model:      Positibe\Bundle\CmsBundle\Entity\Block
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
         positibe.content_block:
             driver: doctrine/orm
             classes:
-                model:      Positibe\Bundle\CmsBundle\Entity\Blocks\ContentBlock
+                model:      Positibe\Bundle\CmsBundle\Entity\ContentBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
-        positibe.page_block:
-            driver: doctrine/orm
-            classes:
-                model:      Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock
-                repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
-                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\ContentBlockType
         positibe.gallery_block:
             driver: doctrine/orm
             classes:
-                model:      Positibe\Bundle\CmsBundle\Entity\Blocks\GalleryBlock
+                model:      Positibe\Bundle\CmsBundle\Entity\GalleryBlock
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\GalleryBlockType
+        positibe.menu_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\CmsBundle\Entity\MenuBlock
+                repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\MenuBlockType
+        positibe.page_block:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\CmsBundle\Entity\PageBlock
+                repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
+                controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
+                form:       Positibe\Bundle\CmsBundle\Form\Type\PageBlockType

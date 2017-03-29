@@ -8,23 +8,20 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
-        <a href="{{ path('positibe_cms_block_index') }}">Bloques simples</a>
+        <a href="{{ path('positibe_block_index') }}">Bloques simples</a>
     </li>
     <li class="breadcrumb-item">
-
-        {{ content_block.title }}
-        <small>({{ content_block.name }})</small>
+        {{ content_block.name }}
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeCms/ContentBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/ContentBlock/_form.html.twig', {'isNew': false}) }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_cms_block_remove', path('positibe_cms_block_delete', {'name': content_block.name})) }}
+    {{ delete_confirm('positibe_content_block_remove', path('positibe_block_delete', {'id': content_block.id}), content_block) }}
 {% endblock %}
 
 
@@ -32,11 +29,7 @@
     {{ include('@PositibeCms/Block/_form_always_select.html.twig') }}
     <script>
         jQuery('#positibe_cms_block_locale').on('change', function (e) {
-            location.replace('{{ path('positibe_cms_block_update', {'name': content_block.name}) }}?data_locale='
-            + $
-            (this)
-                    .val
-            ());
+            location.replace('{{ path('positibe_content_block_update', {'id': content_block.id}) }}?data_locale='+ $(this).val());
         });
     </script>
 {% endblock %}

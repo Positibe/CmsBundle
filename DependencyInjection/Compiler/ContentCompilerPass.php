@@ -12,7 +12,6 @@ namespace Positibe\Bundle\CmsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 
 /**
@@ -32,10 +31,10 @@ class ContentCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition('positibe_block.block_loader')
-            ->addMethodCall(
-                'setBlockClass',
-                array('Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock')
-            );
+//        $container->getDefinition('positibe_block.block_loader')
+//            ->addMethodCall(
+//                'setBlockClass',
+//                array('Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractVisibilityBlock')
+//            );
     }
 } 

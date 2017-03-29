@@ -12,13 +12,13 @@ namespace Positibe\Bundle\CmsBundle\Factory;
 
 use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
+use Positibe\Bundle\CmfRoutingExtraBundle\Entity\AutoRoute;
+use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Positibe\Bundle\CmsBundle\Entity\MenuNode;
-use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\MediaBundle\Entity\Media;
 use Positibe\Bundle\MediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
-use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
@@ -76,15 +76,15 @@ class PageFactory implements FactoryInterface
 
         /** @var Page $staticContent */
         $staticContent = $this->createNew();
-        $staticContent->setParent($category);
+        $staticContent->setCategory($category);
 
         return $staticContent;
     }
 
     /**
-     * @param AbstractPage $page
+     * @param Page $page
      */
-    public function updateNodeMenus(AbstractPage $page)
+    public function updateNodeMenus(Page $page)
     {
         /** @var MenuNode $menu */
         foreach ($page->getMenuNodes()->toArray() as $menu) {
@@ -96,10 +96,10 @@ class PageFactory implements FactoryInterface
     }
 
     /**
-     * @param AbstractPage $page
+     * @param Page $page
      * @param bool $auto
      */
-    public function updateRoutes(AbstractPage $page, $auto = true)
+    public function updateRoutes(Page $page, $auto = true)
     {
         $currentLocale = $this->getLocale($page);
         $needRoute = true;
@@ -117,7 +117,7 @@ class PageFactory implements FactoryInterface
         }
 
         if ($auto && $needRoute) {
-            $route = $this->routeFactory->createContentRoute(
+            $route = $this->routeFactory->createContentAutoRoute(
                 $this->fixStaticPrefix(null, $page),
                 $page,
                 null
@@ -128,27 +128,27 @@ class PageFactory implements FactoryInterface
         }
     }
 
-    public function getLocale(AbstractPage $page)
+    public function getLocale(Page $page)
     {
         return $page->getLocale() ? $page->getLocale() : $this->locale;
     }
 
-    public function fixStaticPrefix($staticPrefix, AbstractPage $page)
+    public function fixStaticPrefix($staticPrefix, Page $page)
     {
         if (empty($staticPrefix)) {
             $staticPrefix = $this->insertPartBeforePath($page->getTitle());
 
             $locale = $page->getLocale();
             $pageWithParent = $page;
-            while ($pageWithParent instanceof Page && $pageWithParent->getParent() !== null) {
-                $parent = $pageWithParent->getParent();
+            while ($pageWithParent instanceof Page && $pageWithParent->getCategory() !== null) {
+                $category = $pageWithParent->getCategory();
 
                 if (!empty($locale)) {
-                    $parent->setLocale($locale);
-                    $this->em->refresh($parent);
+                    $category->setLocale($locale);
+                    $this->em->refresh($category);
                 }
-                $staticPrefix = $this->insertPartBeforePath($parent->getTitle(), $staticPrefix);
-                $pageWithParent = $parent;
+                $staticPrefix = $this->insertPartBeforePath($category->getTitle(), $staticPrefix);
+                $pageWithParent = $category;
             }
         } else {
             $staticPrefix = Urlizer::urlize($staticPrefix);
@@ -192,6 +192,7 @@ class PageFactory implements FactoryInterface
         $page->setName(Urlizer::urlize($title));
         $page->setTitle($title);
         $page->setBody($body);
+        $page->setPublishable(true);
 
         $seoMetadata = $this->updateSeoMetadata($page);
         $route = $this->createRoute($path, $page, null, $locale);
@@ -223,10 +224,10 @@ class PageFactory implements FactoryInterface
     /**
      * Create the seo metadata information for the content
      *
-     * @param AbstractPage $page
-     * @return AbstractPage
+     * @param Page $page
+     * @return Page
      */
-    public function updateSeoMetadata(AbstractPage $page)
+    public function updateSeoMetadata(Page $page)
     {
         $seoMetadata = $page->getSeoMetadata();
         if ($seoMetadata === null) {
@@ -248,30 +249,30 @@ class PageFactory implements FactoryInterface
      * Get the route for the content
      *
      * @param $path
-     * @param AbstractPage $page
+     * @param Page $page
      * @return Route
      */
     /**
      * @param $path
-     * @param AbstractPage $page
+     * @param Page $page
      * @param null $controller
      * @param null $locale
-     * @return \Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route
+     * @return AutoRoute
      */
-    public function createRoute($path, AbstractPage $page, $controller = null, $locale = null)
+    public function createRoute($path, Page $page, $controller = null, $locale = null)
     {
-        return $this->routeFactory->createContentRoute($path, $page, $controller, $locale);
+        return $this->routeFactory->createContentAutoRoute($path, $page, $controller, $locale);
     }
 
     /**
      * Get the menu for the content if have a parent menu
      *
-     * @param AbstractPage $page
+     * @param Page $page
      * @param MenuNode $parentMenu
      * @param null $locale
      * @return null|MenuNode
      */
-    public function createMenuNode(AbstractPage $page, MenuNode $parentMenu = null, $locale = null)
+    public function createMenuNode(Page $page, MenuNode $parentMenu = null, $locale = null)
     {
         if ($parentMenu !== null) {
             $menu = $this->menuFactory->createContentMenuNode($page, $page->getTitle(), $parentMenu);

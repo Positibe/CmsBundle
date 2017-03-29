@@ -1,14 +1,14 @@
 {
     "name": "positibe/cms-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony PositibeCmsBundle",
+    "description": "Symfony Positibe Cms Bundle",
     "keywords": [
         "content",
         "content management framework",
         "positibe",
         "positibelabs"
     ],
-    "homepage": "http://positibelabs.blogspot.com/bundles/cms",
+    "homepage": "http://positibelabs.com/bundles/cms",
     "license": "MIT",
     "version": "1.0.0-alpha1",
     "authors": [
@@ -19,7 +19,7 @@
         },
         {
             "name": "PositibeLabs",
-            "homepage": "https://github.com/Positibe"
+            "homepage": "http://www.positibelabs.com"
         }
     ],
     "minimum-stability": "beta",

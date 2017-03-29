@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,7 +32,7 @@ class PageBlockType extends AbstractType
         $builder
             ->add(
                 'page',
-                'entity',
+                EntityType::class,
                 array(
                     'class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
                     'attr' => array('class' => 'chosen-select form-control'),
@@ -48,15 +49,14 @@ class PageBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock',
-                'translation_domain' => 'PositibeCmsBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\PageBlock',
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_block_visibility';
+        return AbstractBlockType::class;
     }
 
     /**
@@ -64,7 +64,7 @@ class PageBlockType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_page_block';
     }

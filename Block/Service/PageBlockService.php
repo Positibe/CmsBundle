@@ -10,7 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Block\Service;
 
-use Positibe\Bundle\CmsBundle\Entity\Blocks\PageBlock;
+use Positibe\Bundle\CmsBundle\Entity\PageBlock;
 use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageBlockService extends AbstractBlockService
+class PageBlockService extends CmsBlockService
 {
     protected $template = 'PositibeCmsBundle:Block:block_content.html.twig';
     /**

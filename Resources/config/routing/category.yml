@@ -1,45 +1,14 @@
-positibe_category_create:
-    path: /category/new
-    methods: [GET, POST]
+positibe_category_crud:
+    resource: |
+        alias: positibe.category
+        templates: PositibeCmsBundle:Category
+        redirect: update
+    type: sylius.resource
+    
+positibe_category_transition:
+    path: /category/{id}/apply_transition
+    methods: [POST]
     defaults:
-        _controller: positibe.controller.category:createAction
+        _controller: positibe.controller.category:applyTransitionAction
         _sylius:
-            redirect:
-                route: positibe_category_update
-                parameters: { name: resource.name }
-
-positibe_category_index:
-   path: /category
-   methods: [GET]
-   defaults:
-       _controller: positibe.controller.category:indexAction
-
-positibe_category_show:
-    path: /category/{name}
-    methods: [GET]
-    defaults:
-        _controller: positibe.controller.category:showAction
-        _sylius:
-            criteria:
-                name: $name
-
-positibe_category_update:
-    path: /category/{name}/edit
-    methods: [GET, PUT]
-    defaults:
-        _controller: positibe.controller.category:updateAction
-        _sylius:
-            criteria:
-                name: $name
-            redirect:
-                route: positibe_category_update
-                parameters: { name: resource.name }
-
-positibe_category_delete:
-    path: /category/{name}
-    methods: [DELETE]
-    defaults:
-        _controller: positibe.controller.category:deleteAction
-        _sylius:
-            criteria:
-                name: $name
+            redirect: referer

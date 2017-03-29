@@ -26,10 +26,9 @@
     {{ form_errors(form) }}
     <input type="hidden" name="_method" value="PUT"/>
     {{ include('@PositibeCms/SubMenu/_form.html.twig') }}
-    {{ form_rest(form) }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_menu_node_remove', path('positibe_submenu_delete', {'parent': menu.parent.name, 'name': menu.name})) }}
+    {{ delete_confirm('positibe_menu_node_remove', path('positibe_submenu_delete', {'parent': menu.parent.name, 'name': menu.name}), menu) }}
 {% endblock %}
 
 {% block javascripts %}

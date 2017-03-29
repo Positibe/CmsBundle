@@ -16,7 +16,7 @@ namespace Positibe\Bundle\CmsBundle\Block\Service;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class GalleryBlockService extends AbstractBlockService
+class GalleryBlockService extends CmsBlockService
 {
     protected $template = 'PositibeCmsBundle:Block:block_gallery.html.twig';
 } 

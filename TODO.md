@@ -12,7 +12,7 @@ Mantener la funcionalidad de CustomControllerInformation
 
 Importante:::
 1. Usar el WorkflowBundle the Symfony para los estados de las páginas
-
+2. Cuando se elimina las páginas pasan a papelera de reciclaje, ver como quedan las rutas.
 
 Documentar:
 Uso del Publishable Component con el Workflow

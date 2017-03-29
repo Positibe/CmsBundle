@@ -5,7 +5,7 @@ positibe_submenu_child_create:
         _controller: positibe.controller.menu:createAction
         _sylius:
             template: PositibeCmsBundle:SubMenuChildren:create.html.twig
-            form: positibe_menu_node
+            form: Positibe\Bundle\CmsBundle\Form\Type\MenuNodeType
             factory:
                 method: createNewChildByParentName
                 arguments: [$parent, $name]
@@ -32,7 +32,7 @@ positibe_submenu_child_update:
         _controller: positibe.controller.menu:updateAction
         _sylius:
             template: PositibeCmsBundle:SubMenuChildren:update.html.twig
-            form: positibe_menu_node
+            form: Positibe\Bundle\CmsBundle\Form\Type\MenuNodeType
             criteria:
                 name: $child_name
             redirect:

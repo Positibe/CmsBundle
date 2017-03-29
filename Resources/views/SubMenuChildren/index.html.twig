@@ -1,6 +1,7 @@
 {% extends '@PositibeCms/layout.html.twig' %}
 
-{% from '@PositibeCore/_macros.html.twig' import pagination %}
+{% from '@PositibeCore/Grid/_pagination.html.twig' import pagination %}
+{% from '@PositibeCore/Grid/_pagination.html.twig' import filter %}
 {% import '@PositibeCore/_buttons.html.twig' as buttons %}
 
 {% block title %}Menús{% endblock %}
@@ -10,92 +11,114 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"> {{ app.request.get('parent') }}</a>
     </li>
     <li class="breadcrumb-item">
-
         {{ app.request.get('name') }}
     </li>
 {% endblock %}
 
 {% block content %}
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <p class="caption-subject font-green-sharp bold uppercase">Menu anidados: {{ app.request.get('name') }}</p>
+    <form action="" method="get" id="form_menu_filter" name="criteria"></form>
+    <div class="card-header white">
+        <div class="card-title text-muted text-uppercase text-right">
+            <div class="card-title-caption">
+                <h4><i class="fa fa-sitemap"></i> Menu anidados:
+                    <small>{{ app.request.get('name') }}</small>
+                </h4>
             </div>
-            <div class="actions">
+            <div class="card-title-actions">
+                <a href="{{ path('positibe_submenu_update', {'parent': app.request.get('parent'), 'name': app.request.get('name') }) }}"
+                   class="btn btn-default btn-sm"><i class="fa fa-edit"></i> Editar
+                </a>
                 <a href="{{ path('positibe_submenu_child_create', {'parent':app.request.get('parent'), 'name': app.request.get('name')}) }}"
-                   class="btn btn-sm btn-default"><i class="fa
-        fa-plus"></i> Anidar nuevo menú</a>
+                   class="btn btn-sm btn-default">
+                    <i class="fa fa-plus-circle"></i> Crear nuevo menu anidado
+                </a>
             </div>
-        </div>
-        <div class="portlet-body">
-            {{ pagination(menus) }}
-            <table class="table table-striped table-bordered table-hover">
-                <tr>
-                    <th>No.</th>
-                    <th class="col-lg-1">{{ sylius_resource_sort('name', 'Nombre') }}</th>
-                    <th class="col-lg-3">{{ sylius_resource_sort('label', 'Etiqueta') }}</th>
-                    <th class="col-lg-3">Link</th>
-                    <th>Orden</th>
-                    <th style="min-width: 95px;">Ordenar</th>
-                    <th>Mostrado</th>
-                    <th>Acciones</th>
-                </tr>
-                {% set count = menus.maxPerPage * (menus.currentPage - 1) %}
-                {% for menu in menus %}
-                    <tr>
-                        <td>{{ count + loop.index }}</td>
-                        <td>
-                            <a href="{{ path('positibe_submenu_child_update', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}">{{ menu.name }}</a>
-                        </td>
-                        <td>{{ menu.label }}</td>
-                        <td>
-                            {% if menu.linkType == 'uri' %}
-                                <strong>Url</strong> ({{ menu.uri }})
-                            {% elseif menu.linkType == 'content' %}
-                                <strong>{{ menu.contentClass | trans({}, 'PositibeCoreBundle') }}</strong> ({{ menu.content }})
-                            {% elseif menu.linkType == 'route' %}
-                                <strong>Ruta</strong> ({{ menu.route }})
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td>{{ menu.position }}</td>
-                        <td>
-                            <div class="btn-group btn-sm">
-                                {# Los orden estan invertidos en funcion de la lógica visual para lista ascendente #}
-                                {{ buttons.move(path('positibe_submenu_child_move_up', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }), 'down',
-                                loop.first and not menus.hasPreviousPage, loop.last and not menus.hasNextPage) }}
-                                {{ buttons.move(path('positibe_submenu_child_move_down', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }), 'up',
-                                loop.first and not menus.hasPreviousPage, loop.last and not menus.hasNextPage) }}
-                            </div>
-
-                        </td>
-                        <td>{% if menu.display == false or menu.publishable == false %}
-                                <i class="fa fa-times text-danger"></i>
-                            {% else %}
-                                <i class="fa fa-check-square text-success"></i>
-                            {% endif %}</td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="{{ path('positibe_submenu_child_update', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}"
-                                   class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                            </div>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr><td colspan="8">No hay menus</td></tr>
-                {% endfor %}
-            </table>
-            {{ pagination(menus) }}
         </div>
     </div>
+    <div class="card-block">
+        {{ pagination(menus) }}
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>No.</th>
+                <th>{{ grid_render_sorting('name', 'Nombre') }}</th>
+                <th>{{ grid_render_sorting('label', 'Etiqueta') }}</th>
+                <th>Vínculo</th>
+                <th>Orden</th>
+                <th style="min-width: 95px;">Ordenar</th>
+                <th>Mostrado</th>
+                <th>Acciones</th>
+            </tr>
+            <tr class="table-field-filter">
+                <th></th>
+                <th>{{ filter('name', 'form_menu_filter') }}</th>
+                <th>{{ filter('label', 'form_menu_filter') }}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>{{ filter('publishable', 'form_menu_filter', 'boolean') }}</th>
+                <th>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-default" type="submit"
+                                form="form_menu_filter"><i class="fa fa-search"></i> {{ 'action.filter' | trans }}
+                        </button>
+                    </div>
+                </th>
+            </tr>
+            {% set count = menus.maxPerPage * (menus.currentPage - 1) %}
+            {% for menu in menus %}
+                <tr>
+                    <td>{{ count + loop.index }}</td>
+                    <td>
+                        <a href="{{ path('positibe_submenu_child_update', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}">{{ menu.name }}</a>
+                    </td>
+                    <td>{{ menu.label }}</td>
+                    <td>
+                        {% if menu.linkType == 'uri' %}
+                            <strong>Url</strong> ({{ menu.uri }})
+                        {% elseif menu.linkType == 'content' %}
+                            <strong>{{ menu.contentClass | trans }}</strong> ({{ menu.content }})
+                        {% elseif menu.linkType == 'route' %}
+                            <strong>Ruta</strong> ({{ menu.route }})
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ menu.position }}</td>
+                    <td>
+                        <div class="btn-group btn-sm">
+                            {# Los orden estan invertidos en funcion de la lógica visual para lista ascendente #}
+                            {{ buttons.move(path('positibe_submenu_child_move_up', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }), 'down',
+                            loop.first and not menus.hasPreviousPage, loop.last and not menus.hasNextPage) }}
+                            {{ buttons.move(path('positibe_submenu_child_move_down', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }), 'up',
+                            loop.first and not menus.hasPreviousPage, loop.last and not menus.hasNextPage) }}
+                        </div>
 
+                    </td>
+                    <td>{% if menu.display == false or menu.publishable == false %}
+                            <i class="fa fa-times text-danger"></i>
+                        {% else %}
+                            <i class="fa fa-check-square text-success"></i>
+                        {% endif %}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ path('positibe_submenu_child_update', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}"
+                               class="btn btn-outline-default btn-sm"><i class="fa fa-edit"></i> Editar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No hay menus</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {{ pagination(menus) }}
+    </div>
 {% endblock %}

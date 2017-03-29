@@ -9,23 +9,20 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
-        <a href="{{ path('positibe_menu_block_index') }}">Bloques de menu</a>
+        <a href="{{ path('positibe_block_index') }}">Bloques</a>
     </li>
     <li class="breadcrumb-item">
-
         {{ menu_block.name }}
-        <small>({{ menu_block.menu }})</small>
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
     <input type="hidden" name="_method" value="PUT"/>
-    {{ include('@PositibeCms/MenuBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/MenuBlock/_form.html.twig', {'isNew': false}) }}
     {{ form_end(form) }}
 
-    {{ delete_confirm('positibe_menu_block_remove', path('positibe_menu_block_delete', {'name': menu_block.name})) }}
+    {{ delete_confirm('positibe_menu_block_remove', path('positibe_block_delete', {'id': menu_block.id}), menu_block) }}
 {% endblock %}
 
 {% block javascripts %}

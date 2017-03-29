@@ -12,10 +12,8 @@ namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\MenuBundle\Entity\MenuNodeBase;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -50,7 +48,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage", inversedBy="menuNodes")
+     * @ORM\ManyToOne(targetEntity="Positibe\Bundle\CmsBundle\Entity\Page", inversedBy="menuNodes")
      */
     protected $page;
 
@@ -61,7 +59,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     {
         parent::setContent($content);
 
-        if ($this->content instanceof AbstractPage) {
+        if ($this->content instanceof Page) {
             $this->page = $content;
         }
     }
@@ -83,7 +81,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     }
 
     /**
-     * @return Page|AbstractPage|MenuNodeReferrersInterface
+     * @return Page
      */
     public function getContent()
     {
@@ -95,7 +93,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     }
 
     /**
-     * @return AbstractPage
+     * @return Page
      */
     public function getPage()
     {
@@ -103,7 +101,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     }
 
     /**
-     * @param AbstractPage $page
+     * @param Page $page
      */
     public function setPage($page)
     {

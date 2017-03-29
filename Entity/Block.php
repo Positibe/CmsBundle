@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Positibe\Component\Publishable\Entity\PublishableTrait;
 use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
@@ -19,7 +20,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Positibe\Bundle\CmsBundle\Repository\BlockRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-class Block implements BlockInterface, PublishableInterface, PublishTimePeriodInterface, ChildInterface
+class Block implements BlockInterface, PublishableInterface, PublishTimePeriodInterface, ChildInterface, ResourceInterface
 {
     use PublishTimePeriodTrait;
     use PublishableTrait;
@@ -108,6 +109,35 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
     protected $type;
 
     protected $parent;
+
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\CmsBundle\Entity\Category", fetch="EXTRA_LAZY")
+     * @ORM\JoinTable(name="positibe_block_visibility_category",
+     *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $categories;
+
+    /**
+     * @var Page
+     *
+     * @ORM\ManyToMany(targetEntity="Positibe\Bundle\CmsBundle\Entity\Page", fetch="EXTRA_LAZY")
+     * @ORM\JoinTable(name="positibe_block_visibility_pages",
+     *      joinColumns={@ORM\JoinColumn(name="block_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $pages;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="routes", type="array")
+     */
+    protected $routes;
 
     public function __construct()
     {
@@ -477,5 +507,53 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
     public function hasChildren()
     {
         return false;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param Category $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param Page $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * @param array $routes
+     */
+    public function setRoutes($routes)
+    {
+        $this->routes = $routes;
     }
 }

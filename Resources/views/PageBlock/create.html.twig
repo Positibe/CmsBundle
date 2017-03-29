@@ -7,18 +7,16 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
-        <a href="{{ path('positibe_block_index') }}">Bloques de página</a>
+        <a href="{{ path('positibe_block_index') }}">Bloques</a>
     </li>
     <li class="breadcrumb-item">
-
         Nuevo bloque de página
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
-    {{ include('@PositibeCms/PageBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/PageBlock/_form.html.twig', {'isNew': true}) }}
     {{ form_end(form) }}
 {% endblock %}
 

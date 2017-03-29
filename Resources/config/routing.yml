@@ -35,5 +35,13 @@ positibe_admin_content_block:
 positibe_admin_page_block:
     resource: "@PositibeCmsBundle/Resources/config/routing/page_block.yml"
 
+positibe_admin_page_iframe:
+    path: /page_iframe/{id}
+    defaults: {_controller: "PositibeCmsBundle:Default:iframe" }
+
+positibe_admin_menu_content_class:
+    path: /positibe-menu-content-class
+    defaults: {_controller: PositibeCmsBundle:Menu:getContentForm }
+
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"

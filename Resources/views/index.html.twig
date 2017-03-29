@@ -1,97 +1,73 @@
 {% extends '@PositibeCms/layout.html.twig' %}
 
+{% block title %}Dashboard{% endblock %}
+{% block subtitle %}Administración{% endblock %}
 {% set menu_active = null %}
 {% set content_menu = null %}
 
-{% block breadcrumb %}
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="fa fa-home"></i>
-                <a href="{{ path('admin_cms') }}">{{ 'Inicio'|trans }}</a>
-            </li>
-        </ul>
-    </div>
-{% endblock %}
+{% block content %}
+    <div class="card-block">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <a href="{{ path('positibe_page_index') }}" class="red lighten-3 white-text">
+                        <div class="card-block">
+                            <div class="card-title">
+                                <h2><i class="fa fa-files-o"></i> {{ 'Páginas'|trans }}</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-{% block body %}
-    <h3>Contenidos</h3>
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-light red-soft" href="{{ path('positibe_page_index') }}?status=1">
-                <div class="visual">
-                    <i class="fa fa-folder-open-o"></i>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="card">
+                    <a href="{{ path('positibe_category_index') }}" class="green lighten-3 white-text">
+                        <div class="card-block">
+                            <div class="card-title">
+                                <h2><i class="fa fa-folder"></i> {{ 'Categorías'|trans }}</h2>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="details">
-                    <div class="number">
-                        {#{{ abiertas }}#}
-                    </div>
-                    <div class="desc">
-                        {{ 'Páginas'|trans }}
-                    </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="card">
+                    <a href="{{ path('positibe_menu_index') }}" class="blue lighten-3 white-text">
+                        <div class="card-block">
+                            <div class="card-title">
+                                <h2><i class="fa fa-sitemap"></i> {{ 'Menús'|trans }}</h2>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="card">
+                    <a href="{{ path('positibe_block_index') }}" class="purple lighten-3 white-text">
+                        <div class="card-block">
+                            <div class="card-title">
+                                <h2><i class="fa fa-cubes"></i> {{ 'Bloques'|trans }}</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
+        <hr>
+        <h3>Tareas</h3>
 
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-light green-soft"
-               href="{{ path('positibe_category_index') }}?status=2">
-                <div class="visual">
-                    <i class="fa fa-"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        {#{{ en_proceso }}#}
-                    </div>
-                    <div class="desc">
-                        {{ 'Categoría de páginas'|trans }}
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-light blue-soft" href="{{ path('positibe_menu_index') }}?status=3">
-                <div class="visual">
-                    <i class="fa fa-sitemap"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        {#{{ resueltas }}#}
-                    </div>
-                    <div class="desc">
-                        {{ 'Menús'|trans }}
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="dashboard-stat dashboard-stat-light purple-soft"
-               href="{{ path('positibe_block_index') }}?status=3">
-                <div class="visual">
-                    <i class="fa fa-cubes"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
-                        {#{{ resueltas }}#}
-                    </div>
-                    <div class="desc">
-                        {{ 'Bloques de contenido'|trans }}
-                    </div>
-                </div>
-            </a>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <a class="btn btn-lg btn-primary apc-cache-clear" href="">
+                    Limpiar cache
+                </a>
+            </div>
         </div>
     </div>
-    <hr>
-    <h3>Tareas</h3>
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <a class="btn btn-lg btn-primary apc-cache-clear" href="">
-                Limpiar cache
-            </a>
-        </div>
-    </div>
+
 {% endblock %}
 
 {% block javascripts %}

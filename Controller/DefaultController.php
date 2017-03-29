@@ -1,12 +1,21 @@
 <?php
+/**
+ * This file is part of the PositibeLabs Projects.
+ *
+ * (c) Pedro Carlos Abreu <pcabreus@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Positibe\Bundle\CmsBundle\Controller;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
-use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
 use Positibe\Bundle\CmsBundle\Entity\Category;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,8 +33,8 @@ class DefaultController extends Controller
      * We don't need an explicit check in this method.
      *
      * @param Request $request
-     * @param AbstractPage  $contentDocument
-     * @param string  $contentTemplate Symfony path of the template to render
+     * @param RouteReferrersReadInterface $contentDocument
+     * @param string $contentTemplate Symfony path of the template to render
      *                                 the content document. If omitted, the
      *                                 default template is used.
      *
@@ -62,13 +71,17 @@ class DefaultController extends Controller
             $contentTemplate
         );
 
-//        $children = $this->get('doctrine.orm.entity_manager')->getRepository('PositibeCmsBundle:StaticContent')->createPagination($contentDocument);
-        $children = new Pagerfanta(new ArrayAdapter($contentDocument->getChildren()->toArray(), true, null));
+        $children = $this->get('doctrine.orm.entity_manager')->getRepository('PositibeCmsBundle:Page')->createPaginator(['category' => $contentDocument->getName()]);
         $children->setCurrentPage($request->get('page', 1), true, true);
         $children->setMaxPerPage(5);
 
-        $params = array('content' => $contentDocument,'children' => $children );
+        $params = array('content' => $contentDocument, 'children' => $children);
 
         return $this->render($contentTemplate, $params);
+    }
+
+    public function iframeAction(Page $page)
+    {
+        return $this->render('@PositibeCms/Page/_iframe.html.twig', ['content' => $page]);
     }
 }

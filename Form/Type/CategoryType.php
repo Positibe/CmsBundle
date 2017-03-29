@@ -22,20 +22,13 @@ class CategoryType extends AbstractType
     {
         $builder
             ->remove(
-                'parent'
-            )
-            ->remove(
-                'contentType'
+                'category'
             )
             ->remove(
                 'featured'
             );
     }
 
-    public function getParent()
-    {
-        return 'positibe_page';
-    }
 
     /**
      * @param OptionsResolver $resolver
@@ -45,16 +38,23 @@ class CategoryType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Category',
-                'translation_domain' => 'PositibeCmsBundle'
             )
         );
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_category';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return PageType::class;
     }
 }

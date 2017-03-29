@@ -1,18 +1,18 @@
 {% extends '@PositibeCms/layout.html.twig' %}
 
-{% block title %}Tipos de página{% endblock %}
-{% block subtitle %}Crear nuevo tipo de página{% endblock %}
-{% set menu_active = 'content' %}
+{% block title %}Categorías{% endblock %}
+{% block subtitle %}Crear nueva categorías{% endblock %}
+{% set menu_active  = 'content'%}
 {% set content_menu = 'category' %}
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
 
-        <a href="{{ path('positibe_category_index') }}">Tipos de página</a>
+        <a href="{{ path('positibe_category_index') }}">Categorías</a>
     </li>
     <li class="breadcrumb-item">
 
-        Nuevo tipo de página
+        Nueva categoría
     </li>
 {% endblock %}
 

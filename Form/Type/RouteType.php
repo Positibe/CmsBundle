@@ -60,7 +60,6 @@ class RouteType extends AbstractType {
     {
         $resolver->setDefaults(array(
                 'data_class' => 'Symfony\Cmf\Bundle\CmfRoutingBundle\Doctrine\Orm\Route',
-                'translation_domain' => 'PositibeCmsBundle'
             ));
     }
 

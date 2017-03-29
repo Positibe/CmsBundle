@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use Positibe\Bundle\MediaBundle\Form\Type\GalleryType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,11 +33,10 @@ class GalleryBlockType extends AbstractType
         $builder
             ->add(
                 'gallery',
-                'positibe_gallery_type',
+                GalleryType::class,
                 array(
                     'required' => false,
-                    'label' => 'gallery_block.form.gallery_label',
-                    'translation_domain' => 'PositibeCmsBundle'
+                    'label' => 'gallery_block.form.gallery_label'
                 )
             );
     }
@@ -48,15 +48,14 @@ class GalleryBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\GalleryBlock',
-                'translation_domain' => 'PositibeCmsBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\GalleryBlock'
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_block_visibility';
+        return AbstractBlockType::class;
     }
 
     /**
@@ -64,7 +63,7 @@ class GalleryBlockType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_gallery_block';
     }

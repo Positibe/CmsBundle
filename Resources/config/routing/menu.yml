@@ -1,5 +1,5 @@
 positibe_menu_create:
-    path: /menu/new
+    path: /menus/new
     methods: [GET, POST]
     defaults:
         _controller: positibe.controller.menu:createAction
@@ -12,7 +12,7 @@ positibe_menu_create:
                 parameters: { name: resource.name }
 
 positibe_menu_index:
-   path: /menu
+   path: /menus
    methods: [GET]
    defaults:
        _controller: positibe.controller.menu:indexAction
@@ -22,7 +22,7 @@ positibe_menu_index:
                linkType: 'root'
 
 positibe_menu_update:
-    path: /menu/{name}/edit
+    path: /menus/{name}/edit
     methods: [GET, PUT]
     defaults:
         _controller: positibe.controller.menu:updateAction
@@ -36,7 +36,7 @@ positibe_menu_update:
                 parameters: { name: resource.name }
 
 positibe_menu_delete:
-    path: /menu/{name}
+    path: /menus/{name}
     methods: [DELETE]
     defaults:
         _controller: positibe.controller.menu:deleteAction
@@ -46,7 +46,7 @@ positibe_menu_delete:
 #                linkType: 'route'
 
 positibe_menu_move_up:
-    path: /menu/{name}/move-up
+    path: /menus/{name}/move-up
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveUpAction
@@ -57,7 +57,7 @@ positibe_menu_move_up:
             redirect: referer
 
 positibe_menu_move_down:
-    path: /menu/{name}/move-down
+    path: /menus/{name}/move-down
     methods: [PUT]
     defaults:
         _controller: positibe.controller.menu:moveDownAction

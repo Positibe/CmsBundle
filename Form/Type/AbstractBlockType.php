@@ -12,9 +12,8 @@ namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Positibe\Bundle\CmsBundle\Entity\Block;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -26,18 +25,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AbstractBlockType extends AbstractType
 {
     protected $templatePositions;
+    protected $publicRoutes;
+    protected $roles;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'abstract_block.form.name_label'
+                )
+            )
+            ->add(
                 'templatePosition',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'abstract_block.form.block_location_label',
                     'choices' => array_combine($this->templatePositions, $this->templatePositions),
-                    'translation_domain' => 'PositibeCmsBundle',
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -46,71 +53,108 @@ class AbstractBlockType extends AbstractType
                 array(
                     'label' => 'abstract_block.form.publishable_label',
                     'required' => false,
-                    'translation_domain' => 'PositibeCmsBundle'
                 )
             )
-          ->add(
-            'publishStartDate',
-            'datetime',
-            array(
-              'required' => false,
-              'label' => 'abstract_block.form.publish_start_label',
-              'translation_domain' => 'PositibeCmsBundle',
-              'widget' => 'single_text',
-              'attr' => array('class' => 'datetime-picker'),
-              'format' => 'dd/MM/yyyy HH:mm'
+            ->add(
+                'publishStartDate',
+                null,
+                array(
+                    'required' => false,
+                    'label' => 'abstract_block.form.publish_start_label',
+                    'widget' => 'single_text',
+                    'attr' => array('class' => 'datetime-picker'),
+                    'format' => 'dd/MM/yyyy HH:mm',
+                )
             )
-          )
-          ->add(
-            'publishEndDate',
-            'datetime',
-            array(
+            ->add(
+                'publishEndDate',
+                null,
+                array(
 
-              'label' => 'abstract_block.form.publish_end_label',
-              'translation_domain' => 'PositibeCmsBundle',
-              'widget' => 'single_text',
-              'attr' => array('class' => 'datetime-picker'),
-              'format' => 'dd/MM/yyyy HH:mm',
-              'required' => false,
+                    'label' => 'abstract_block.form.publish_end_label',
+                    'widget' => 'single_text',
+                    'attr' => array('class' => 'datetime-picker'),
+                    'format' => 'dd/MM/yyyy HH:mm',
+                    'required' => false,
+                )
             )
-          );
-
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) {
-                /** @var Block $block */
-                $block = $event->getData();
-                $form = $event->getForm();;
-                if (!$block || null === $block->getId()) {
-                    $form->add(
-                        'name',
-                        null,
-                        array(
-                            'label' => 'abstract_block.form.name_label',
-                            'translation_domain' => 'PositibeCmsBundle'
-                        )
-                    );
-                }
-            }
-        );
+            ->add(
+                'always',
+                null,
+                array(
+                    'label' => 'visibility_block.form.always_label',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'categories',
+                null,
+                array(
+                    'label' => 'visibility_block.form.categories_label',
+                    'multiple' => true,
+                    'expanded' => true,
+                )
+            )
+            ->add(
+                'pages',
+                null,
+                array(
+                    'required' => false,
+                    'label' => 'visibility_block.form.pages_label',
+                    'class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
+                    'multiple' => true,
+                    'attr' => array('class' => 'chosen-select form-control'),
+                )
+            )
+            ->add(
+                'routes',
+                ChoiceType::class,
+                array(
+                    'label' => 'visibility_block.form.routes_label',
+                    'choices' => array_combine($this->publicRoutes, $this->publicRoutes),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
+                )
+            );
+        if ($this->roles) {
+            $builder->add(
+                'roles',
+                ChoiceType::class,
+                array(
+                    'label' => 'visibility_block.form.roles_label',
+                    'choices' => array_combine($this->roles, $this->roles),
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
+                )
+            );
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Block'
+                'data_class' => Block::class,
             )
         );
     }
 
+    /**
+     * @param mixed $publicRoutes
+     */
+    public function setPublicRoutes($publicRoutes)
+    {
+        $this->publicRoutes = $publicRoutes;
+    }
 
     /**
-     * @return mixed
+     * @param mixed $roles
      */
-    public function getTemplatePositions()
+    public function setRoles($roles)
     {
-        return $this->templatePositions;
+        $this->roles = $roles;
     }
 
     /**
@@ -121,13 +165,12 @@ class AbstractBlockType extends AbstractType
         $this->templatePositions = $templatePositions;
     }
 
-
     /**
      * Returns the name of this type.
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_abstract_block';
     }

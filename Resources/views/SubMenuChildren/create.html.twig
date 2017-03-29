@@ -7,21 +7,17 @@
 
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"> {{ app.request.get('parent') }}</a>
     </li>
     <li class="breadcrumb-item">
-
         <a href="{{ path('positibe_submenu_child_index', {'parent':app.request.get('parent'), 'name': app.request.get('name'), 'child_name': menu.name }) }}">
             {{ app.request.get('name') }}
         </a>
     </li>
     <li class="breadcrumb-item">
-
         Anidar menú
     </li>
 {% endblock %}

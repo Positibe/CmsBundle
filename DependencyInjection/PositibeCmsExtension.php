@@ -27,21 +27,22 @@ class PositibeCmsExtension extends Extension
         $loader->load('block_services.yml');
         $loader->load('cmf_seo_extractor_services.yml');
 
-        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\CmsBundle\Entity\MenuNode');
-
-        $container->getDefinition('positibe_cms.form.visibility_block_type')
-            ->addMethodCall('setRoles', array($config['roles']))
+        $container->getDefinition('positibe_menu.menu_node_form_type')
+            ->addMethodCall('setContentClass', array($config['content_class']))
             ->addMethodCall('setPublicRoutes', array($config['public_routes']));
 
 
-        $container->getDefinition('positibe_block.abstract_simple_form')
+        $container->setParameter('positibe.menu_node.class', 'Positibe\Bundle\CmsBundle\Entity\MenuNode');
+
+        $container->getDefinition('positibe_cms.form.block_type')
+            ->addMethodCall('setRoles', array($config['roles']))
+            ->addMethodCall('setPublicRoutes', array($config['public_routes']))
             ->addMethodCall('setTemplatePositions', array($config['template_positions']));
 
         $this->addClassesToCompile(
             array(
                 'Symfony\\Cmf\\Bundle\\CoreBundle\\EventListener\\PublishWorkflowListener',
                 'Symfony\\Cmf\\Bundle\\SeoBundle\\EventListener\\ContentListener',
-                'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
                 'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
                 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
                 'Gedmo\\Translatable\\TranslatableListener'

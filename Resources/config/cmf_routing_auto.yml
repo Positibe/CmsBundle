@@ -1,10 +1,13 @@
 Positibe\Bundle\CmsBundle\Entity\Page:
+    conflict_resolver: auto_increment
     definitions:
         _default:
-            uri_schema: /{title}
+            uri_schema: /{category}/{title}
     token_providers:
         title: [content_method, { method: getTitle }]
+        category: [content_method, { method: getCategoryName , allow_empty: true}]
 Positibe\Bundle\CmsBundle\Entity\Category:
+    conflict_resolver: auto_increment
     definitions:
         _default:
             uri_schema: /{title}

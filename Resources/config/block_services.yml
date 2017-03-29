@@ -1,10 +1,4 @@
 services:
-#### Form Types ####
-    positibe_block.abstract_simple_form:
-        class: Positibe\Bundle\CmsBundle\Form\Type\AbstractBlockType
-        tags:
-            - { name: form.type, alias: positibe_abstract_block }
-
 #### Block Service ####
     positibe_block.action_block_service:
         class: Positibe\Bundle\CmsBundle\Block\Service\ActionBlockService
@@ -17,7 +11,7 @@ services:
 #### Services and Utils ####
     positibe_block.block_loader:
         class: Positibe\Bundle\CmsBundle\Block\Loader\OrmBlockLoader
-        arguments: ["@doctrine.orm.entity_manager", "@cmf_core.publish_workflow.checker", "@security.authorization_checker"]
+        arguments: ["@doctrine.orm.entity_manager", "@cmf_core.publish_workflow.checker", "@security.authorization_checker", "@request_stack"]
         tags:
             - { name: sonata.block.loader }
 

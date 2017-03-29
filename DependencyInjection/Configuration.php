@@ -37,6 +37,14 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(array())
                     ->prototype('scalar')->end()
                 ->end()
+                ->arrayNode('public_routes')
+                    ->defaultValue(array())
+                    ->prototype('scalar')->end()
+                ->end()
+                ->arrayNode('content_class')
+                    ->defaultValue(array())
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
 
         ;

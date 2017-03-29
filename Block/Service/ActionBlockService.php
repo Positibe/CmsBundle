@@ -96,7 +96,7 @@ class ActionBlockService extends BaseBlockService
         return array($controller, $method);
     }
 
-    public function setDefaultSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(

@@ -1,74 +1,97 @@
+{% form_theme form '@PositibeCore/FormThemes/mdb_form_theme_md.html.twig' %}
 <div class="card-header white">
     <div class="card-title text-muted text-uppercase text-right">
         <div class="card-title-caption">
-            <h4><i class="fa fa-users"></i> Datos de la página
+            <h4><i class="fa fa-users"></i> Formulario de páginas
             </h4>
         </div>
         <div class="card-title-actions">
             <a href="{{ go_back('positibe_page_index') }}"
-            name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
+               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
             </a>
             <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
                         class="fa fa-reply"></i> Resetear
             </a>
             <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if page is defined and page.id is not null %}
+                {% if workflow_can(page, 'republish') -%}
+                    <button type="submit" name="transition" value="{{ 'republish' }}" class="btn btn-primary btn-sm"><i
+                                class="fa fa-eye"></i> {{ 'republish' | trans }} y guardar
+                    </button>
+                {%- elseif workflow_can(page, 'unpublish') -%}
+                    <button type="submit" name="transition" value="{{ 'unpublish' }}" class="btn btn-sm"><i
+                                class="fa fa-eye-slash"></i> {{ 'unpublish' | trans }} y guardar
+                    </button>
+                {%- elseif workflow_can(page, 'publish') -%}
+                    <button type="submit" name="transition" value="{{ 'publish' }}" class="btn btn-info"><i
+                                class="fa fa-eye"></i> {{ 'publish' | trans }} y guardar
+                    </button>
+                {%- endif -%}
+
                 <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_page_remove">
                     <i class="fa fa-trash"></i> Remover
                 </a>
             {% endif %}
-            <div class="form-group">
-                {{ form_widget(form.locale) }}
-            </div>
         </div>
     </div>
 </div>
 <div class="card-block">
-    <ul class="nav nav-tabs">
-        <li  class="nav-item">
-            <a href="#form_page_tab_basic" data-toggle="tab" aria-expanded="true" class="nav-link active">Información
-                básica
-            </a>
-        </li>
-        <li  class="nav-item">
-            <a href="#form_page_tab_image" data-toggle="tab" aria-expanded="false" class="nav-link">Imagen</a>
-        </li>
-        <li class="nav-item">
-            <a href="#form_page_tab_configuration" data-toggle="tab" aria-expanded="false" class="nav-link">Configuración</a>
-        </li>
-        <li class="nav-item">
-            <a href="#form_page_tab_seo" data-toggle="tab" aria-expanded="false" class="nav-link">Meta</a>
-        </li>
-        <li class="nav-item">
-            <a href="#form_page_tab_custom" data-toggle="tab" aria-expanded="false"  class="nav-link">Personalización</a>
-        </li>
-        <li class="pull-right">
+    <div class="row">
+        <div class="col-md-9 mb-1">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-title"><h4 class="card-title">Datos de la página</h4></li>
+                <li class="nav-item">
+                    <a href="#form_page_tab_basic" data-toggle="tab" aria-expanded="true"
+                       class="nav-link active">
+                        Contenido
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#form_page_tab_seo" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        Meta
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content mt-2">
+                <div class="tab-pane active" id="form_page_tab_basic">
+                    {{ form_row(form.title) }}
+                    {{ form_widget(form.body) }}
+                </div>
+                <div class="tab-pane" id="form_page_tab_seo">
+                    {{ form_widget(form.routes) }}
+                    {{ form_errors(form.seoMetadata) }}
+                    {{ form_widget(form.seoMetadata) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Configuración</h4>
 
-        </li>
-    </ul>
-    <div class="tab-content">
-
-        <div class="tab-pane active" id="form_page_tab_basic">
-            {{ form_row(form.title) }}
-            {{ form_row(form.body) }}
-            {{ form_row(form.parent) }}
-        </div>
-        <div class="tab-pane" id="form_page_tab_image">
-            {{ form_widget(form.image) }}
-        </div>
-        <div class="tab-pane" id="form_page_tab_configuration">
-            {{ form_row(form.featured) }}
-            {{ form_row(form.publishable) }}
-            {{ form_row(form.publishStartDate) }}
-            {{ form_row(form.publishEndDate) }}
-        </div>
-        <div class="tab-pane" id="form_page_tab_seo">
-            {{ form_widget(form.routes) }}
-            {{ form_errors(form.seoMetadata) }}
-            {{ form_widget(form.seoMetadata) }}
-        </div>
-        <div class="tab-pane" id="form_page_tab_custom">
-            {{ form_row(form.customController) }}
+                    <p class="badge badge-info">{{ (page.state) | trans }}</p>
+                    {{ form_row(form.locale) }}
+                    {{ form_row(form.category) }}
+                    {% if form.customController is defined %}{{ form_row(form.customController) }}{% endif %}
+                    {% if form.customTemplate is defined %}{{ form_row(form.customTemplate) }}{% endif %}
+                    {{ form_widget(form.image) }}
+                    {% if form.name is defined %}
+                        <div class="md-form md-form-vertical has-warning">
+                            {{ form_widget(form.name, {'help': 'Puede que este valor esté en uso'}) }}
+                            {{ form_errors(form.name) }}
+                            {{ form_label(form.name) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card mt-1">
+                <div class="card-block">
+                    <h4 class="card-title">Publicar</h4>
+                    {{ form_row(form.featured) }}
+                    {{ form_row(form.publishStartDate, {'icon': 'fa fa-calendar'}) }}
+                    {{ form_row(form.publishEndDate, {'icon': 'fa fa-calendar'}) }}
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -8,22 +8,20 @@
 {% block breadcrumb_list %}
     <li class="breadcrumb-item">
 
-        <a href="{{ path('positibe_gallery_block_index') }}">Bloques de galería de imágenes</a>
+        <a href="{{ path('positibe_block_index') }}">Bloques</a>
     </li>
     <li class="breadcrumb-item">
-
         Nuevo bloque de galería de imágenes
     </li>
 {% endblock %}
 
 {% block content %}
     {{ form_start(form,{'attr': {'class': 'inbox-compose form-horizontal' }}) }}
-    {{ include('@PositibeCms/GalleryBlock/_form.html.twig') }}
+    {{ include('@PositibeCms/GalleryBlock/_form.html.twig', {'isNew': true}) }}
     {{ form_end(form) }}
 {% endblock %}
 
 
 {% block javascripts %}
     {{ include('@PositibeCms/Block/_form_always_select.html.twig') }}
-    {{ include('@PositibeCore/_form_collections.html.twig') }}
 {% endblock %}

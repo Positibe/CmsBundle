@@ -10,7 +10,10 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,37 +44,33 @@ class ContentBlockType extends AbstractType
                 'title',
                 null,
                 array(
-                    'label' => 'content_block.form.title_label'
+                    'label' => 'content_block.form.title_label',
                 )
             )
             ->add(
                 'body',
-                null,
+                CKEditorType::class,
                 array(
                     'label' => 'content_block.form.body_label',
-//                    'config_name' => 'default',
-                    'attr' => array(
-                        'rows' => 12,
-                        'class' => 'ckeditor'
-                    ),
-                    'required' => false
+                    'required' => false,
+                    'config_name' => 'content',
                 )
             )
             ->add(
                 'image',
-                'positibe_image_type',
+                ImageType::class,
                 array(
                     'provider' => 'positibe_orm_media.image_provider',
                     'required' => false,
-                    'label' => 'content_block.form.image_label'
+                    'label' => 'content_block.form.image_label',
                 )
             )
             ->add(
                 'locale',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'content_block.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales)
+                    'choices' => array_combine($this->locales, $this->locales),
                 )
             );
     }
@@ -80,15 +79,14 @@ class ContentBlockType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Blocks\ContentBlock',
-                'translation_domain' => 'PositibeCmsBundle'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\ContentBlock'
             )
         );
     }
 
     public function getParent()
     {
-        return 'positibe_block_visibility';
+        return AbstractBlockType::class;
     }
 
     /**
@@ -96,7 +94,7 @@ class ContentBlockType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_cms_block';
     }

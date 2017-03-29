@@ -37,7 +37,7 @@
             option.addClass('disabled');
         }
         $.ajax({
-            url: ('{{ path('positibe_orm_menu_content_class') }}?contentClass=' + contentClass),
+            url: ('{{ path('positibe_admin_menu_content_class') }}?contentClass=' + contentClass),
             success: function (data) {
                 var select = $(data);
                 select.attr('id', 'positibe_menu_node_content');
@@ -56,6 +56,7 @@
                 var option = jQuery('#positibe_menu_node_content_chosen');
                 option.find('.chosen-single').removeClass('btn disabled');
                 option.find('.chosen-single > span').removeClass('text-left');
+                app.initChosen();
             }
         });
     }

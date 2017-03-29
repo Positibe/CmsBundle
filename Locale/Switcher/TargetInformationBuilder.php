@@ -70,35 +70,35 @@ class TargetInformationBuilder
      *
      * @return array           Informations for the switcher template
      */
-    public function getTargetInformations($targetRoute = null, $parameters = array())
-    {
-        $request = $this->request;
-        $router = $this->router;
-
-        $infos = array();
-
-        $infos['current_locale'] = $request->getLocale();
-        $infos['current_route'] = $request->attributes->get('_route');
-        $infos['locales'] = array();
-
-        foreach ($this->allowedLocales as $locale) {
-
-            $targetLocaleTargetLang = \Locale::getDisplayLanguage($locale, $locale);
-            $targetLocaleCurrentLang = \Locale::getDisplayLanguage($locale, $request->getLocale());
-
-            $switchRoute = $router->generate(
-                'positibe_change_locale',
-                array('newLocale' => $locale, 'redirectRoute' => $targetRoute)
-            );
-
-            $infos['locales'][$locale] = array(
-                'locale_current_language' => $targetLocaleCurrentLang,
-                'locale_target_language' => $targetLocaleTargetLang,
-                'link' => $switchRoute,
-                'locale' => $locale,
-            );
-        }
-
-        return $infos;
-    }
+//    public function getTargetInformations($targetRoute = null, $parameters = array())
+//    {
+//        $request = $this->request;
+//        $router = $this->router;
+//
+//        $infos = array();
+//
+//        $infos['current_locale'] = $request->getLocale();
+//        $infos['current_route'] = $request->attributes->get('_route');
+//        $infos['locales'] = array();
+//
+//        foreach ($this->allowedLocales as $locale) {
+//
+//            $targetLocaleTargetLang = \Locale::getDisplayLanguage($locale, $locale);
+//            $targetLocaleCurrentLang = \Locale::getDisplayLanguage($locale, $request->getLocale());
+//
+//            $switchRoute = $router->generate(
+//                'positibe_change_locale',
+//                array('newLocale' => $locale, 'redirectRoute' => $targetRoute)
+//            );
+//
+//            $infos['locales'][$locale] = array(
+//                'locale_current_language' => $targetLocaleCurrentLang,
+//                'locale_target_language' => $targetLocaleTargetLang,
+//                'link' => $switchRoute,
+//                'locale' => $locale,
+//            );
+//        }
+//
+//        return $infos;
+//    }
 }

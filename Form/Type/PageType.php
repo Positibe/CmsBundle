@@ -3,16 +3,12 @@
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Positibe\Bundle\CmfRoutingExtraBundle\Form\Type\RoutePermalinkType;
-use Positibe\Bundle\CmsBundle\Repository\PageRepository;
-use Positibe\Bundle\CmfRoutingExtraBundle\Factory\RouteFactory;
+use Positibe\Bundle\CmsBundle\Entity\Category;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,20 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PageType extends AbstractType
 {
-    private $locales;
-    private $defaultLocale;
-    private $routeBuilder;
-    /**
-     * @var EntityManager
-     */
-    private $em;
+    private $entityManager;
+    private $availableControllers;
+    private $availableTemplates;
 
-    public function __construct(EntityManager $entityManager, RouteFactory $routeBuilder, $locales, $defaultLocale)
+    public function __construct(EntityManager $entityManager, $availableControllers, $availableTemplates)
     {
-        $this->locales = $locales;
-        $this->defaultLocale = $defaultLocale;
-        $this->routeBuilder = $routeBuilder;
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
+        $this->availableControllers = $availableControllers;
+        $this->availableTemplates = $availableTemplates;
     }
 
     /**
@@ -46,105 +37,36 @@ class PageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add(
-                'title',
-                null,
-                array(
-                    'label' => 'static_content.form.title_label',
-                    'required' => true,
-                )
-            )
-            ->add(
-                'body',
-                CKEditorType::class,
-                array(
-                    'label' => 'static_content.form.body_label',
-                    'config_name' => 'content'
-                )
-            )
-            ->add(
-                'locale',
-                ChoiceType::class,
-                array(
-                    'label' => 'static_content.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales),
-                    'attr' => ['class' => 'change_locale form-control-sm']
-                )
-            )
-            ->add(
+        $categories = $this->getCategoryTranslated($options['data'], $options['default_locale']);
+        if ($this->availableControllers) {
+            $builder->add(
                 'customController',
                 ChoiceType::class,
                 array(
-                    'label' => 'static_content.form.custom_controller_label',
+                    'label' => 'page.form.custom_controller_label',
                     'choices' => array_combine(
-                        array_keys($this->routeBuilder->getController()),
-                        array_keys($this->routeBuilder->getController())
+                        $this->availableControllers,
+                        $this->availableControllers
                     ),
                     'required' => false,
                 )
-            )
-            ->add(
-                'publishable',
-                CheckboxType::class,
+            );
+        }
+        if ($this->availableTemplates) {
+            $builder->add(
+                'customTemplate',
+                ChoiceType::class,
                 array(
-                    'label' => 'static_content.form.publishable_label',
+                    'label' => 'page.form.custom_template_label',
+                    'choices' => array_combine(
+                        $this->availableTemplates,
+                        $this->availableTemplates
+                    ),
                     'required' => false,
                 )
-            )
-            ->add(
-                'publishStartDate',
-                DateTimeType::class,
-                array(
-                    'required' => false,
-                    'label' => 'static_content.form.publish_start_label',
-                    'widget' => 'single_text',
-                    'attr' => array('class' => 'datetime-picker'),
-                    'format' => 'dd/MM/yyyy HH:mm',
-                )
-            )
-            ->add(
-                'publishEndDate',
-                DateTimeType::class,
-                array(
-                    'required' => false,
-                    'label' => 'static_content.form.publish_end_label',
-                    'widget' => 'single_text',
-                    'attr' => array('class' => 'datetime-picker'),
-                    'format' => 'dd/MM/yyyy HH:mm',
-                )
-            )
-            ->add(
-                'routes',
-                RoutePermalinkType::class,
-                array(
-                    'label' => 'static_content.form.routes_label',
-                    'content_has_routes' => $options['data'],
-                    'current_locale' => $options['data']->getLocale(),
-                )
-            )
-//            ->add(
-//                'menuNodes',
-//                'collection',
-//                array(
-//                    'type' => new MenuNodeType($this->locales),
-//                    'allow_add' => true,
-//                    'allow_delete' => true,
-//                    'options' => array(
-//                        'required' => false,
-//                        'attr' => array('class' => 'route')
-//                    ),
-//                    'required' => false,
-//                    'label' => 'static_content.form.menus_label',
-//                )
-//            )
-            ->add(
-                'seoMetadata',
-                SeoMetadataType::class,
-                array(
-                    'label' => 'static_content.form.seo_label',
-                )
-            )
+            );
+        }
+        $builder
             ->add(
                 'image',
                 ImageType::class,
@@ -154,36 +76,39 @@ class PageType extends AbstractType
                 )
             )
             ->add(
-                'parent',
+                'category',
                 EntityType::class,
                 array(
-                    'label' => 'static_content.form.parent_label',
+                    'label' => 'page.form.parent_label',
                     'class' => 'Positibe\Bundle\CmsBundle\Entity\Category',
-                    'choices' => $this->getCategoryTranslated($options),
+                    'choices' => $categories,
+                    'required' => false,
                 )
             )
             ->add(
                 'featured',
                 null,
                 array(
-                    'label' => 'static_content.form.featured_label',
+                    'label' => 'page.form.featured_label',
                     'required' => false,
                 )
             );
     }
 
     /**
-     * @param $options
-     * @return mixed
+     * @param Page $content
+     * @param $defaultLocale
+     * @return \Positibe\Bundle\CmsBundle\Entity\Category[]
      */
-    private function getCategoryTranslated($options)
+    private function getCategoryTranslated(Page $content, $defaultLocale)
     {
-        $locale = $options['data']->getLocale();
-        $categories = $this->getCategoryRepository()->findAll();
-        if ($locale !== $this->defaultLocale) {
+        $locale = $content->getLocale();
+        /** @var Category[] $categories */
+        $categories = $this->entityManager->getRepository('PositibeCmsBundle:Category')->findAll();
+        if ($locale !== $defaultLocale) {
             foreach ($categories as $category) {
                 $category->setLocale($locale);
-                $this->em->refresh($category);
+                $this->entityManager->refresh($category);
             }
         }
 
@@ -191,31 +116,30 @@ class PageType extends AbstractType
     }
 
     /**
-     * @return PageRepository
-     */
-    private function getCategoryRepository()
-    {
-        return $this->em->getRepository('PositibeCmsBundle:Category');
-    }
-
-    /**
-     * @param OptionsResolver $resolver
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Page',
-                'translation_domain' => 'PositibeCmsBundle',
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\Page'
             )
         );
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'positibe_page';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return BaseContentType::class;
     }
 }

@@ -1,77 +1,102 @@
-<div class="portlet light ">
-    <div class="portlet-title tabbable-line">
-        <div class="caption">
-            <i class="icon-globe theme-font hide"></i>
-            <span class="caption-subject font-green-sharp bold uppercase"><i class="fa  fa-folder-open-o"></i> Datos de lo tipo de página{% if category.title is not null %}: {{ category.title | truncate(25) }}{% endif %}</span>
+{% form_theme form '@PositibeCore/FormThemes/mdb_form_theme_md.html.twig' %}
+<div class="card-header white">
+    <div class="card-title text-muted text-uppercase text-right">
+        <div class="card-title-caption">
+            <h4><i class="fa fa-users"></i> Formulario de categorías
+            </h4>
         </div>
-        <div class="actions btn-set">
-            <a href="{{ path('positibe_category_index') }}"
-               name="back" class="btn btn-default"><i class="fa fa-angle-left"></i> Atras</a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default "><i
-                        class="fa fa-reply"></i> Resetear</a>
-            <button class="btn green-haze" type="submit"><i class="fa fa-check"></i> Guardar</button>
+        <div class="card-title-actions">
+            <a href="{{ go_back('positibe_category_index') }}"
+               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
+                        class="fa fa-reply"></i> Resetear
+            </a>
+            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if category is defined and category.id is not null %}
-                <a class="btn red-haze" data-toggle="modal" href="#positibe_category_remove">
+                {% if workflow_can(category, 'republish') -%}
+                    <button type="submit" name="transition" value="{{ 'republish' }}" class="btn btn-primary btn-sm"><i
+                                class="fa fa-eye"></i> {{ 'republish' | trans }} y guardar
+                    </button>
+                {%- elseif workflow_can(category, 'unpublish') -%}
+                    <button type="submit" name="transition" value="{{ 'unpublish' }}" class="btn btn-sm"><i
+                                class="fa fa-eye-slash"></i> {{ 'unpublish' | trans }} y guardar
+                    </button>
+                {%- elseif workflow_can(category, 'publish') -%}
+                    <button type="submit" name="transition" value="{{ 'publish' }}" class="btn btn-info"><i
+                                class="fa fa-eye"></i> {{ 'publish' | trans }} y guardar
+                    </button>
+                {%- endif -%}
+
+                <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_category_remove">
                     <i class="fa fa-trash"></i> Remover
                 </a>
             {% endif %}
         </div>
-
     </div>
-    <div class="portlet-body">
-        <div class="tabbable-line tabbable-full-width">
-
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#form_category_tab_basic" data-toggle="tab" aria-expanded="true">Información
-                        básica</a>
+</div>
+<div class="card-block">
+    <div class="row">
+        <div class="col-md-9 mb-1">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-title"><h4 class="card-title">Datos de la categoría</h4></li>
+                <li class="nav-item">
+                    <a href="#form_category_tab_basic" data-toggle="tab" aria-expanded="true"
+                       class="nav-link active">
+                        Contenido
+                    </a>
                 </li>
-                <li class="">
-                    <a href="#form_category_tab_image" data-toggle="tab" aria-expanded="false">Imagen</a>
-                </li>
-                <li class="">
-                    <a href="#form_category_tab_configuration" data-toggle="tab" aria-expanded="false">Configuración</a>
-                </li>
-                <li class="">
-                    <a href="#form_category_tab_seo" data-toggle="tab" aria-expanded="false">Meta</a>
-                </li>
-                <li class="">
-                    <a href="#form_category_tab_custom" data-toggle="tab" aria-expanded="false">Personalización</a>
-                </li>
-                <li class="pull-right">
-                    {{ form_widget(form.locale, {'attr': {'class': 'dropdown pull-right btn' }}) }}
+                <li class="nav-item">
+                    <a href="#form_category_tab_seo" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        Meta
+                    </a>
                 </li>
             </ul>
-            <div class="tab-content">
-
+            <div class="tab-content mt-2">
                 <div class="tab-pane active" id="form_category_tab_basic">
                     {{ form_row(form.title) }}
-                    {{ form_row(form.body) }}
+                    {{ form_widget(form.body) }}
                 </div>
                 <div class="tab-pane" id="form_category_tab_seo">
+                    {{ form_widget(form.routes) }}
                     {{ form_errors(form.seoMetadata) }}
                     {{ form_widget(form.seoMetadata) }}
                 </div>
-                <div class="tab-pane" id="form_category_tab_configuration">
-                    {{ form_row(form.publishable) }}
-                    {{ form_row(form.publishStartDate) }}
-                    {{ form_row(form.publishEndDate) }}
-                </div>
-                <div class="tab-pane" id="form_category_tab_image">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Configuración</h4>
+
+                    <p class="badge badge-info">{{ (category.state) | trans }}</p>
+                    {{ form_row(form.locale) }}
+                    {% if form.customController is defined %}{{ form_row(form.customController) }}{% endif %}
+                    {% if form.customTemplate is defined %}{{ form_row(form.customTemplate) }}{% endif %}
                     {{ form_widget(form.image) }}
+                    {% if form.name is defined %}
+                        <div class="md-form md-form-vertical has-warning">
+                            {{ form_widget(form.name, {'help': 'Puede que este valor esté en uso'}) }}
+                            {{ form_errors(form.name) }}
+                            {{ form_label(form.name) }}
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="tab-pane" id="form_category_tab_custom">
-                    {{ form_widget(form.routes) }}
-                    {{ form_row(form.customController) }}
+            </div>
+            <div class="card mt-1">
+                <div class="card-block">
+                    <h4 class="card-title">Publicar</h4>
+                    {{ form_row(form.publishStartDate, {'icon': 'fa fa-calendar'}) }}
+                    {{ form_row(form.publishEndDate, {'icon': 'fa fa-calendar'}) }}
                 </div>
             </div>
         </div>
-        <div class="form-actions text-right">
-            <hr>
-            <a href="{{ path('positibe_category_index') }}" class="btn btn-default">Cancelar</a>
-            <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
-        </div>
+
     </div>
 </div>
-
-
+<div class="card-footer text-right">
+    <div class="card-block">
+        <a href="{{ go_back('positibe_category_index') }}" class="btn btn-default">Cancelar</a>
+        <button class="btn btn-primary"><i class="fa fa-check"></i> Guardar</button>
+    </div>
+</div>

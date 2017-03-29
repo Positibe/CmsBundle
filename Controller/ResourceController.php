@@ -11,7 +11,8 @@
 namespace Positibe\Bundle\CmsBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Positibe\Bundle\CmsBundle\Entity\Abstracts\AbstractPage;
+use Positibe\Bundle\CmsBundle\Entity\BaseContent;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController as SyliusResourceController;
@@ -34,14 +35,18 @@ class ResourceController extends SyliusResourceController
      * Load the correct locale for seo and menus depend of data_locale http parameter
      *
      * @param RequestConfiguration $configuration
-     * @return AbstractPage|\Sylius\Component\Resource\Model\ResourceInterface
+     * @return BaseContent|\Sylius\Component\Resource\Model\ResourceInterface
      */
     public function findOr404(RequestConfiguration $configuration)
     {
-        /** @var AbstractPage $page */
+        /** @var BaseContent|Page $page */
         $page = parent::findOr404($configuration);
 
-        if ($page instanceof TranslatableInterface && $dataLocale = $configuration->getRequest()->get('data_locale', $this->getParameter('locale'))) {
+        if ($page instanceof TranslatableInterface && $dataLocale = $configuration->getRequest()->get(
+                'data_locale',
+                $this->getParameter('locale')
+            )
+        ) {
             $page->setLocale($dataLocale);
 
             if ($page instanceof SeoAwareInterface && $seoMetadata = $page->getSeoMetadata()) {
@@ -59,7 +64,25 @@ class ResourceController extends SyliusResourceController
             $this->get('doctrine.orm.entity_manager')->refresh($page);
         }
 
+        if ($transition = $configuration->getRequest()->request->get('transition')) {
+            try {
+                $this->get('workflow.registry')->get($page)
+                    ->apply($page, $transition);
+            } catch (ExceptionInterface $e) {
+            }
+        }
+
         return $page;
+    }
+
+    public function moveUpAction(Request $request)
+    {
+        return $this->move($request, 1);
+    }
+
+    public function moveDownAction(Request $request)
+    {
+        return $this->move($request, -1);
     }
 
     /**
@@ -76,9 +99,9 @@ class ResourceController extends SyliusResourceController
         $position = $configuration->getSortablePosition();
         $accessor = PropertyAccess::createPropertyAccessor();
         $accessor->setValue(
-          $resource,
-          $position,
-          $accessor->getValue($resource, $position) + $movement
+            $resource,
+            $position,
+            $accessor->getValue($resource, $position) + $movement
         );
 
         $this->manager->persist($resource);
@@ -100,15 +123,14 @@ class ResourceController extends SyliusResourceController
     public function applyTransitionAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $resource = $this->findOr404($configuration);
 
         try {
-            $this->get('workflow.registry')->get($resource)
-                ->apply($resource, $request->request->get('transition'));
+            $resource = $this->findOr404($configuration);
 
             $this->get('doctrine')->getManager()->flush();
         } catch (ExceptionInterface $e) {
             $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
+            $resource = null;
         }
 
         return $this->redirectHandler->redirectToResource($configuration, $resource);

@@ -13,9 +13,11 @@ namespace Positibe\Bundle\CmsBundle\Block\Loader;
 use Doctrine\ORM\EntityManager;
 use Positibe\Bundle\CmsBundle\Block\Model\ContainerBlock;
 use Positibe\Bundle\CmsBundle\Entity\Block;
+use Positibe\Bundle\CmsBundle\Repository\BlockRepository;
 use Sonata\BlockBundle\Block\BlockLoaderInterface;
 use Sonata\BlockBundle\Model\EmptyBlock;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 
@@ -27,36 +29,28 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
  */
 class OrmBlockLoader implements BlockLoaderInterface
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
-     * @var PublishWorkflowChecker
-     */
-    private $authorizationChecker;
-
-    /**
-     * @var AuthorizationChecker
-     */
-    private $authorizationSecurityChecker;
-
+    protected $em;   
+    protected $authorizationChecker;
+    protected $authorizationSecurityChecker;
+    protected $requestStack;
     protected $blockClass = 'PositibeCmsBundle:Block';
 
     /**
      * @param EntityManager $entityManager
      * @param PublishWorkflowChecker $authorizationChecker
      * @param AuthorizationChecker $authorizationSecurityChecker
+     * @param RequestStack $requestStack
      */
     public function __construct(
         EntityManager $entityManager,
         PublishWorkflowChecker $authorizationChecker,
-        AuthorizationChecker $authorizationSecurityChecker
+        AuthorizationChecker $authorizationSecurityChecker,
+        RequestStack $requestStack
     ) {
         $this->em = $entityManager;
         $this->authorizationChecker = $authorizationChecker;
         $this->authorizationSecurityChecker = $authorizationSecurityChecker;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -91,7 +85,7 @@ class OrmBlockLoader implements BlockLoaderInterface
     {
         if (isset($configuration['name'])) {
             return $this->findBlockByName($configuration);
-        } elseif ($configuration['template_position']) {
+        } elseif (isset($configuration['template_position'])) {
             return $this->findBlockByTemplatePosition($configuration);
         } else {
             return null;
@@ -128,7 +122,7 @@ class OrmBlockLoader implements BlockLoaderInterface
      */
     public function findBlockByTemplatePosition($configuration)
     {
-        $blocks = $this->getRepository()->findByTemplatePosition($configuration);
+        $blocks = $this->getRepository()->findByTemplatePosition($configuration, $this->requestStack->getMasterRequest());
 
         if (isset($configuration['multiple']) && $configuration['multiple']) {
             $containerBlock = new ContainerBlock();
@@ -172,24 +166,8 @@ class OrmBlockLoader implements BlockLoaderInterface
     }
 
     /**
-     * @return string
-     */
-    public function getBlockClass()
-    {
-        return $this->blockClass;
-    }
-
-    /**
-     * @param string $blockClass
-     */
-    public function setBlockClass($blockClass)
-    {
-        $this->blockClass = $blockClass;
-    }
-
-    /**
      * @param string $blockClassName
-     * @return \Positibe\Bundle\CmsBundle\Entity\BlockRepositoryInterface|\Doctrine\ORM\EntityRepository
+     * @return BlockRepository
      */
     public function getRepository($blockClassName = null)
     {
