@@ -30,6 +30,7 @@
         "positibe/cmf-routing-extra-bundle": "^1.0",
         "positibe/seo": "~0.1",
         "symfony-cmf/seo-bundle": "^2.0",
+        "sonata-project/seo-bundle": "^2.1",
         "gedmo/doctrine-extensions": "~2.4",
         "sylius/resource-bundle": "^1.0",
         "lunetics/locale-bundle": "^2.5",
