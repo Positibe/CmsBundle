@@ -1,0 +1,16 @@
+{% extends '@PositibeCms/Block/block_base.html.twig' %}
+
+{% block block %}
+    <h3 class="text-center">
+        <a class="" href="{{ path(category) }}"> {{ category.title | upper }}</a>
+    </h3>
+    <div class="row">
+        {% for content in contents %}
+        <div class="col-md-{{ 12 / (contents | length) }}">
+            <a href="{{ path(content) }}" class="content-title">{{ content.title|raw }}</a>
+            <p class="content-body">{{ content.body | raw | striptags | truncate(150) }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

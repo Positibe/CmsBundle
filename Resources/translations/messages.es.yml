@@ -1,0 +1,116 @@
+Positibe\Bundle\CmsBundle\Entity\Page: Página
+Positibe\Bundle\CmsBundle\Entity\Category: Categoría
+content_title: PositibeLabs
+es: Español
+en: Inglés
+fr: Francés
+pagina_simple: Página
+categoria: Categoría
+contacto: Contactos
+homepage: Página de inicio
+unpublish: Despublicar
+publish: Publicar
+republish: Publicar
+draft: Borrador
+published: Publicado
+unpublished: Despublicado
+PositibeCmsBundle:Default:index: Página simple
+PositibeCmsBundle:Default:categoryIndex: Listado de páginas
+ROLE_USER: Autenticado
+IS_AUTHENTICATED_ANONYMOUSLY: Anónimo
+abstract_block:
+    form:
+        name_label: Nombre:
+        block_location_label: Ubicación:
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+menu_node:
+    form:
+        attributes_label: Atributos:
+        label_label: Etiqueta:
+        link_type_label: Tipo de vínculo:
+        link_type_choices:
+            uri: URI
+            content: Contenido
+            route: Ruta
+        locale_label: Idioma:
+        name_label: Nombre:
+        parent_label: Menu padre:
+        uri_label: URI:
+        route_label: Ruta:
+        content_label: Contenido:
+        content_class_label: Tipo de contenido:
+        icon_class_label: Icono
+        icon_class_class_label: Ícono class=""
+        display_label: Mostrar menu
+        display_children_label: Mostrar submenús
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+        children_attributes_label: Attributos de lista:
+        link_attributes_label: Attributos de vínculo
+        label_attributes_label: Attributos de etiqueta
+content_block:
+    form:
+        title_label: Título:
+        body_label: Contenido:
+        image_label: Imagen:
+        locale_label: Idioma:
+chosen:
+    form:
+        select_option: Seleccione un contenido
+page:
+    form:
+        name_label: Código:
+        title_label: Título:
+        body_label: Contenido:
+        routes_label: Rutas:
+        publishable_label: Publicado siempre
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+        seo_label: SEO
+        menus_label: Menus:
+        locale_label: Idioma:
+        parent_label: Categoría:
+        content_type_label: Tipo de contenido:
+        content_type_category: Categoría
+        content_type_page: Página
+        custom_controller_label: Tipo de contenido:
+        custom_template_label: Tipo de plantilla:
+        featured_label: Destacado
+route:
+  form:
+      locale_label: Idioma:
+      controller_label: Controlador:
+      static_prefix_label: Link permanente:
+
+block:
+    form:
+        name_label: Nombre
+        block_location_label: Ubicación
+        publishable_label: Publicado
+        publish_start_label: Publicar a partir de:
+        publish_end_label: Despublicar en:
+
+static_content_block:
+    form:
+        static_content_label: Página:
+gallery_block:
+    form:
+        gallery_label: Galería:
+visibility_block:
+    form:
+        always_label: Siempre visible
+        categories_label: Categoría:
+        pages_label: Páginas:
+        routes_label: Rutas:
+        roles_label: Roles:
+positibe_cms:
+    block_content: Bloque simple
+    block_gallery: Galería
+    block_page: Página
+    block_menu: Menú
+seo:
+    title:       "%content_title% | PositibeLabs"
+    description: "%content_description%"

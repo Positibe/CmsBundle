@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+    <link href="{{ asset('css/compiled/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/backend.css') }}" rel="stylesheet">
+</head>
+<body class="blue-grey lighten-5">
+<main>
+    <h1><a href="{{ path(content) }}">{{ content.title }}</a> </h1>
+    {% if content.image is defined and content.image is not null %}
+        <img src="{{ display_image(content.image, {'imagine_filter': 'thumbnail_image'}) }}" alt="{{ content.title }}">
+    {% endif %}
+    <p>{{ content.body | raw }}</p>
+</main>
+
+<script src="{{ asset('js/compiled/main.js') }}"></script>
+</body>
