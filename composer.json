@@ -31,7 +31,6 @@
         "positibe/seo": "~0.1",
         "symfony-cmf/seo-bundle": "^2.0",
         "gedmo/doctrine-extensions": "~2.4",
-        "sonata-project/block-bundle": "~3.0",
         "sylius/resource-bundle": "^1.0",
         "lunetics/locale-bundle": "^2.5",
         "egeloen/ckeditor-bundle": "^4.0",
