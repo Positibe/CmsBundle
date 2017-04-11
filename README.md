@@ -8,7 +8,7 @@ Installation
 
 To install the bundle just add the dependent bundles:
 
-    php composer.phar require positibe/orm-content-bundle
+    php composer.phar require positibe/cms-bundle
 
 This bundle set the required configuration of other Positibe Bundles for you like:
 * PositibeMenuBundle

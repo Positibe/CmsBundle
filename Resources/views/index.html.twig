@@ -62,7 +62,12 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <a class="btn btn-lg btn-primary apc-cache-clear" href="">
-                    Limpiar cache
+                    Limpiar APC
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <a class="btn btn-lg btn-primary symfony-cache-clear" href="">
+                    Limpiar Symfony Cache
                 </a>
             </div>
         </div>
@@ -75,7 +80,7 @@
         $(document).ready(function () {
             $('.apc-cache-clear').on('click', function (e) {
                 e.preventDefault();
-                $(this).text('{{ 'Limpiando cache' }}');
+                $(this).text('{{ 'Limpiando APC' }}');
                 $(this).addClass('disabled');
 
                 $.ajax({
@@ -88,8 +93,30 @@
                     },
                     complete: function () {
                         setTimeout(function () {
-                            $('.apc-cache-clear').text('{{ 'Limpiar cache' }}');
+                            $('.apc-cache-clear').text('{{ 'Limpiar APC' }}');
                             $('.apc-cache-clear').removeClass('disabled');
+                        }, 2000);
+
+                    }
+                })
+            });
+            $('.symfony-cache-clear').on('click', function (e) {
+                e.preventDefault();
+                $(this).text('{{ 'Limpiando Symfony Cache' }}');
+                $(this).addClass('disabled');
+
+                $.ajax({
+                    url: "{{ path('sonata_cache_symfony', {'token': 's3cur3', 'type': 'all'}) }}",
+                    success: function (data, textStatus, jqXHR) {
+                        $('.symfony-cache-clear').text('{{ 'Cache limpiada' }}');
+                    },
+                    error: function (error) {
+                        $('.symfony-cache-clear').text('{{ 'No se pudo limpiar la cache' }}');
+                    },
+                    complete: function () {
+                        setTimeout(function () {
+                            $('.symfony-cache-clear').text('{{ 'Limpiar Symfony Cache' }}');
+                            $('.symfony-cache-clear').removeClass('disabled');
                         }, 2000);
 
                     }

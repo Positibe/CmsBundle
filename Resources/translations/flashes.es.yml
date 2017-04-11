@@ -1,0 +1,37 @@
+positibe:
+    menu:
+       create: El Menu se ha creado con éxito.
+       update: El Menu se ha actualizado con éxito.
+       delete: El Menu se ha eliminado con éxito.
+    menu_node:
+       create: El Menu se ha creado con éxito.
+       update: El Menu se ha actualizado con éxito.
+       delete: El Menu se ha eliminado con éxito.
+    block:
+       create: El bloque se ha creado con éxito.
+       update: El bloque se ha actualizado con éxito.
+       delete: El bloque se ha eliminado con éxito.
+    content_block:
+       create: El bloque se ha creado con éxito.
+       update: El bloque se ha actualizado con éxito.
+       delete: El bloque se ha eliminado con éxito.
+    page_block:
+       create: El bloque se ha creado con éxito.
+       update: El bloque se ha actualizado con éxito.
+       delete: El bloque se ha eliminado con éxito.
+    menu_block:
+       create: El bloque se ha creado con éxito.
+       update: El bloque se ha actualizado con éxito.
+       delete: El bloque se ha eliminado con éxito.
+    gallery_block:
+       create: El bloque se ha creado con éxito.
+       update: El bloque se ha actualizado con éxito.
+       delete: El bloque se ha eliminado con éxito.
+    category:
+       create: La categoría se ha creado con éxito.
+       update: La categoría se ha actualizado con éxito.
+       delete: La categoría se ha eliminado con éxito.
+    page:
+       create: La página se ha creado con éxito.
+       update: La página se ha actualizado con éxito.
+       delete: La página se ha eliminado con éxito.

@@ -66,7 +66,7 @@
                         <a href="{{ path('positibe_page_show',
                         {'id': page.id}) }}" title="{{ page.title }}">{{ page.title }}</a>
                     </td>
-                    <td>{{ page.body | striptags | truncate(150) }}</td>
+                    <td>{{ page.body | striptags | decode_html | truncate(150) }}</td>
                     <td>{% if is_granted('VIEW', page) %}
                             <div class="label label-sm label-success">Publicado</div>{% else %}
                             <div class="label label-sm label-warning">No publicado</div>{% endif %}

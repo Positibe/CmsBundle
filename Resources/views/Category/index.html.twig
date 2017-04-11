@@ -64,7 +64,7 @@
                         <a href="{{ path('positibe_category_show',
                         {'id': category.id}) }}" title="{{ category.title }}">{{ category.title }}</a>
                     </td>
-                    <td>{{ category.body | striptags | truncate(150) }}</td>
+                    <td>{{ category.body | striptags | decode_html | truncate(150) }}</td>
                     <td>{% if is_granted('VIEW', category) %}
                             <div class="label label-sm label-success">Publicado</div>{% else %}
                             <div class="label label-sm label-warning">No publicado</div>{% endif %}

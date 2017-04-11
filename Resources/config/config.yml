@@ -43,6 +43,7 @@ lunetics_locale:
     allowed_locales: "%locales%"
     guessing_excluded_pattern: ^/css|^/js|^/admin|^/_wdt|^/_profiler|^/_error
     guessing_order:
+        - session
         - query
         - router
 

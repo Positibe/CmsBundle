@@ -3,7 +3,6 @@
 namespace Positibe\Bundle\CmsBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Positibe\Bundle\CmsBundle\DependencyInjection\Compiler\ContentCompilerPass;
 use Positibe\Bundle\CmsBundle\DependencyInjection\Compiler\ResourceServicesCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -12,7 +11,6 @@ class PositibeCmsBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new ContentCompilerPass());
         $container->addCompilerPass(new ResourceServicesCompilerPass());
         $container->addCompilerPass(
             DoctrineOrmMappingsPass::createXmlMappingDriver(

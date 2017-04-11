@@ -8,7 +8,7 @@
         {% for content in contents %}
         <div class="col-md-{{ 12 / (contents | length) }}">
             <a href="{{ path(content) }}" class="content-title">{{ content.title|raw }}</a>
-            <p class="content-body">{{ content.body | raw | striptags | truncate(150) }}</p>
+            <p class="content-body">{{ content.body | striptags | decode_html | truncate(150) }}</p>
             </div>
         {% endfor %}
     </div>
