@@ -5,6 +5,12 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    positibe_cms.cms_extension:
+        class: Positibe\Bundle\CmsBundle\Twig\Extension\PositibeCmsExtension
+        arguments: ["@service_container"]
+        tags:
+            - { name: twig.extension }
+
 #### Forms Type ####
     positibe_cms.base_content_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\BaseContentType

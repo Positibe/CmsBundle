@@ -90,10 +90,6 @@ abstract class CmsBlockService extends AbstractBlockService
      */
     public function getCacheKeys(BlockInterface $block)
     {
-        return array(
-            'block_id' => $block->getName(),
-            'request_uri' => $this->requestStack->getMasterRequest()->getRequestUri(),
-            'request_locale' => $this->requestStack->getMasterRequest()->getLocale()
-        );
+        return ['type' => $block->getType(), 'block_name' => $block->getName()];
     }
 } 

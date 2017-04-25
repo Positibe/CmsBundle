@@ -73,10 +73,10 @@ class PageBlockService extends CmsBlockService
     public function getContentRepository(PageBlock $pageBlock)
     {
         $repository = $this->em->getRepository(get_class($pageBlock->getPage()));
-
-        if (method_exists($repository, 'setLocale')) {
-            $repository->setLocale($this->requestStack->getMasterRequest()->getLocale());
-        }
+//
+//        if (method_exists($repository, 'setLocale')) {
+//            $repository->setLocale($this->requestStack->getMasterRequest()->getLocale());
+//        }
 
         return $repository;
     }

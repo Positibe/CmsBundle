@@ -42,16 +42,18 @@ class LocaleController extends Controller
         $this->get('event_dispatcher')->dispatch(LocaleBundleEvents::onLocaleChange, $localeSwitchEvent);
 
         $redirectRoute = $request->get('redirectRoute');
-        if ($redirectRoute !== null && $route = $this->get('cmf_routing.route_provider')->getRouteByName(
+        $content = $request->get('redirectContent');
+        if ($redirectRoute && $route = $this->get('cmf_routing.route_provider')->getRouteByName(
                 $redirectRoute
             )
         ) {
             if ($content = $this->get('positibe.repository.page')->findOneByRoutes($route)) {
-                $redirect = $this->get('router')->generate($content, array('_locale' => $locale));
-            }
-            else {
+                $redirect = $this->get('router')->generate($content, ['_locale' => $locale]);
+            } else {
                 $redirect = $this->get('router')->generate($route);
             }
+        } elseif ($content && $content = $this->get('positibe.repository.page')->findOneByName($content)) {
+            $redirect = $this->get('router')->generate($content, ['_locale' => $locale]);
         } else {
             $redirect = $request->server->get('HTTP_REFERER') ? $request->server->get('HTTP_REFERER') : '/';
         }

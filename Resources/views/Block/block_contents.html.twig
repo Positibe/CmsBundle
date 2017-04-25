@@ -1,11 +1,10 @@
-{% extends '@PositibeCms/Block/block_base.html.twig' %}
-
 {% block block %}
-    <h3><a class="" href="{{ path(category) }}"> {{ category.title | trans | upper }}</a></h3>
-    {% for content in contents %}
-        {% set page = content %}
-        <a href="{{ path(page) }}" class="content-title">{{ page.title|raw }}</a>
-        <p class="content-body">{{ page.body| striptags | decode_html | truncate(150) }}</p>
-        <hr>
-    {% endfor %}
+    <div class="card-text">
+        {% for content in contents %}
+            {% set page = content %}
+            <a href="{{ path(page) }}">{{ page.title|raw }}</a>
+            <p class="small text-muted">{{ page.body| striptags | decode_html | truncate(150) }}</p>
+            <hr>
+        {% endfor %}
+    </div>
 {% endblock %}

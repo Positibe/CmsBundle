@@ -35,4 +35,14 @@ class CategoryRepository extends PageRepository
         return $this->getQuery($qb)->getOneOrNullResult();
     }
 
+    public function findPublished()
+    {
+        $qb = $this->createQueryBuilder('o');
+        $criteria = ['can_publish_on_date' => new \DateTime('now')];
+        BaseContentRepositoryUtil::canPublishOnDate($qb, $criteria);
+        BaseContentRepositoryUtil::joinRoutes($qb);
+
+        return $this->getQuery($qb)->getResult();
+    }
+
 } 

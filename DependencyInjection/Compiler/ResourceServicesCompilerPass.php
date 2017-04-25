@@ -48,6 +48,9 @@ class ResourceServicesCompilerPass implements CompilerPassInterface
                     [new Reference('request_stack')]
                 );
         }
+
+        //@fixme Remove when Sonata Cache support cache apcu
+        $container->getDefinition('sonata.cache.apc')->setClass('Positibe\Bundle\CmsBundle\Cache\Sonata\ApcCache');
     }
 
 } 

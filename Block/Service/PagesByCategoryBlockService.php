@@ -11,9 +11,12 @@
 namespace Positibe\Bundle\CmsBundle\Block\Service;
 
 use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\CmsBundle\Entity\Category;
+use Positibe\Bundle\CmsBundle\Repository\CategoryRepository;
 use Positibe\Bundle\CmsBundle\Repository\PageRepository;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -53,24 +56,35 @@ class PagesByCategoryBlockService extends AbstractBlockService
             $response = new Response();
         }
 
-        $parentName = $blockContext->getSetting('category');
+        $parent = $blockContext->getSetting('category');
         $count = $blockContext->getSetting('count');
 
-        if ($parent = $this->getCategoryRepository()->findOneByName($parentName)) {
+        if ($parent instanceof Category || $parent = $this->getCategoryRepository()->findOneByName($parent)) {
             if ($contents = $this->getContentRepository()->findContentByCategory($parent, $count)) {
                 $response = $this->renderResponse(
                     $blockContext->getTemplate(),
                     array(
                         'block' => $blockContext->getBlock(),
                         'contents' => $contents,
-                        'category' => $parent
+                        'category' => $parent,
                     ),
                     $response
                 );
             }
+        } elseif($contents = $this->getCategoryRepository()->findPublished()) {
+            $response = $this->renderResponse(
+                $blockContext->getTemplate(),
+                array(
+                    'block' => $blockContext->getBlock(),
+                    'contents' => $contents,
+                    'category' => null,
+                ),
+                $response
+            );
         }
 
         $response->setTtl($blockContext->getSetting('ttl'));
+
         return $response;
     }
 
@@ -83,7 +97,7 @@ class PagesByCategoryBlockService extends AbstractBlockService
             array(
                 'template' => $this->template,
                 'category' => null,
-                'count' => 3
+                'count' => 3,
             )
         );
     }
@@ -106,10 +120,16 @@ class PagesByCategoryBlockService extends AbstractBlockService
     }
 
     /**
-     * @return PageRepository
+     * @return CategoryRepository
      */
     public function getCategoryRepository()
     {
         return $this->em->getRepository('PositibeCmsBundle:Category');
+    }
+
+
+    public function getCacheKeys(BlockInterface $block)
+    {
+        return ['type' => $block->getType()];
     }
 } 

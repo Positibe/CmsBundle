@@ -39,10 +39,28 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
     {
         $qb = parent::createQueryBuilder($alias, $indexBy);
 
-        $qb->andWhere($alias .' INSTANCE OF ' . $this->_entityName);
+        $qb->andWhere($alias.' INSTANCE OF '.$this->_entityName);
+
         return $qb;
     }
 
+    public function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
+    {
+        if (!empty($criteria['category'])) {
+            $queryBuilder
+                ->leftJoin('o.category', 'category')
+                ->andWhere('category.name = :category')
+                ->setParameter('category', $criteria['category']);
+            unset($criteria['category']);
+        }
+
+        BaseContentRepositoryUtil::canPublishOnDate($queryBuilder, $criteria);
+        BaseContentRepositoryUtil::joinRoutes($queryBuilder);
+
+        parent::applyCriteria($queryBuilder, $criteria);
+
+        return $queryBuilder;
+    }
 
     public function findOneByMenuNodes(MenuNodeInterface $menuNode)
     {
@@ -88,27 +106,6 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
         return $query->getResult();
     }
 
-    public function applyCriteria(QueryBuilder $queryBuilder, array $criteria = array())
-    {
-        if (!empty($criteria['category'])) {
-            $queryBuilder
-                ->leftJoin('o.category', 'category')
-                ->andWhere('category.name = :category')
-                ->setParameter('category', $criteria['category']);
-            unset($criteria['category']);
-        }
-
-        if (!empty($criteria['publish_start_since'])) {
-            $queryBuilder
-                ->andWhere('o.publishStartDate > :publish_start_since')
-                ->setParameter('publish_start_since', $criteria['publish_start_since']);
-            unset($criteria['publish_start_since']);
-        }
-
-        parent::applyCriteria($queryBuilder, $criteria);
-
-        return $queryBuilder;
-    }
 
     public function findOneByRoutes($route)
     {

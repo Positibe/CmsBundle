@@ -1,3 +1,4 @@
+ROLE_EDITOR: Editor
 Positibe\Bundle\CmsBundle\Entity\Page: Página
 Positibe\Bundle\CmsBundle\Entity\Category: Categoría
 content_title: PositibeLabs
@@ -92,7 +93,8 @@ block:
         publishable_label: Publicado
         publish_start_label: Publicar a partir de:
         publish_end_label: Despublicar en:
-
+    pages_by_categories:
+        categories: Categorías
 static_content_block:
     form:
         static_content_label: Página:

@@ -6,7 +6,7 @@
         {% for locale in locales %}
             {% if current_locale != locale.locale %}
                 <li>
-                    <a href="{{ locale.link }}"
+                    <a href="{{ path('positibe_change_locale', {'_locale': locale.locale, 'redirectContent': app.request.get('contentDocument').name |default(null)}) }}"
                        title="{{ locale.locale_target_language }}"><img src="{{ asset('img/flags/' ~ locale.locale ~ '.png') }}"> {{ locale.locale_current_language }}</a>
                 </li>
             {% endif %}

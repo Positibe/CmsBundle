@@ -1,6 +1,6 @@
 <?php
 
-namespace Positibe\Bundle\CmsBundle\Block\Cache;
+namespace Positibe\Bundle\CmsBundle\Cache\Block;
 
 use Sonata\BlockBundle\Block\BlockContextManagerInterface;
 use Sonata\BlockBundle\Block\BlockLoaderInterface;

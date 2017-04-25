@@ -84,7 +84,7 @@
                 $(this).addClass('disabled');
 
                 $.ajax({
-                    url: "{{ path('sonata_cache_apc', {'token': 's3cur3'}) }}",
+                    url: "{{ path('positibe_cache_apc_clear', {'token': 's3cur3'}) }}",
                     success: function (data, textStatus, jqXHR) {
                         $('.apc-cache-clear').text('{{ 'Cache limpiada' }}');
                     },

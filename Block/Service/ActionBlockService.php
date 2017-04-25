@@ -10,8 +10,8 @@
 
 namespace Positibe\Bundle\CmsBundle\Block\Service;
 
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class ActionBlockService extends BaseBlockService
+class ActionBlockService extends AbstractBlockService
 {
     /**
      * @var ContainerInterface

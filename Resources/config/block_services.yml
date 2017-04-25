@@ -16,13 +16,13 @@ services:
             - { name: sonata.block.loader }
 
     positibe_block.block.cache.js_sync:
-        class: Positibe\Bundle\CmsBundle\Block\Cache\BlockJsCache
+        class: Positibe\Bundle\CmsBundle\Cache\Block\BlockJsCache
         arguments: ["@router", "@sonata.block.renderer", "@sonata.block.loader.chain", "@sonata.block.context_manager", true]
         tags:
             - { name: sonata.cache }
 
     positibe_block.block.cache.js_async:
-        class: Positibe\Bundle\CmsBundle\Block\Cache\BlockJsCache
+        class: Positibe\Bundle\CmsBundle\Cache\Block\BlockJsCache
         arguments: ["@router", "@sonata.block.renderer", "@sonata.block.loader.chain", "@sonata.block.context_manager", false]
         tags:
             - { name: sonata.cache }

@@ -11,6 +11,7 @@
 namespace Positibe\Bundle\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Pcabreus\Utils\Html\NamedCharacterConverter;
 use Positibe\Bundle\CmfRoutingExtraBundle\Entity\AutoRoute;
 use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
 use Positibe\Component\Publishable\Entity\StatePublishableTrait;
@@ -125,7 +126,7 @@ class BaseContent implements
         $this->body = $body;
 
         if (!$this->seoMetadata->getMetaDescription() && $this->getBody()) {
-            $description = substr(trim(strip_tags($this->getBody())), 0, 150);
+            $description = NamedCharacterConverter::convert(substr(trim(strip_tags($this->getBody())), 0, 150));
             $this->seoMetadata->setMetaDescription($description);
         }
     }

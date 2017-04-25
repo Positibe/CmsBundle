@@ -10,7 +10,9 @@
 
 namespace Positibe\Bundle\CmsBundle\Block\Service;
 
+use Positibe\Bundle\CmsBundle\Entity\Block;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,7 +49,11 @@ class MenuBlockService extends CmsBlockService
 
     protected function getMenu(BlockContextInterface $blockContext)
     {
-        if (method_exists($blockContext->getBlock(), 'getMenu') && method_exists($blockContext->getBlock()->getMenu(), 'getName') ) {
+        if (method_exists($blockContext->getBlock(), 'getMenu') && method_exists(
+                $blockContext->getBlock()->getMenu(),
+                'getName'
+            )
+        ) {
             $menuName = $blockContext->getBlock()->getMenu()->getName();
         } else {
             $menuName = $blockContext->getSetting('menu_name');
@@ -91,17 +97,31 @@ class MenuBlockService extends CmsBlockService
     {
         $resolver->setDefaults(
             array(
-                'template' => 'SonataBlockBundle:Block:block_core_menu.html.twig',
+                'template' => 'PositibeCmsBundle:Block:block_menu.html.twig',
                 'request' => false,
                 'menu_name' => null,
-                'current_class'  => 'active',
-                'first_class'    => false,
-                'last_class'     => false,
-                'current_uri'    => null,
-                'menu_class'     => "list-group",
+                'current_class' => 'active',
+                'first_class' => false,
+                'last_class' => false,
+                'current_uri' => null,
+                'menu_class' => "list-group",
                 'children_class' => "list-group-item",
-                'menu_template'  => null,
+                'menu_template' => null,
             )
         );
     }
+
+    /**
+     * @param BlockInterface|Block $block
+     * @return array
+     */
+    public function getCacheKeys(BlockInterface $block)
+    {
+        return [
+            'type' => $block->getType(),
+            'request_uri' => $this->requestStack->getMasterRequest()->getRequestUri(),
+        ];
+    }
+
+
 } 

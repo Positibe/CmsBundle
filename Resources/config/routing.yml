@@ -45,3 +45,7 @@ positibe_admin_menu_content_class:
 
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+positibe_cache_apc_clear:
+    path: /positibe/clear_cache/{token}
+    defaults: { _controller: positibe.cache.apc:cacheAction }

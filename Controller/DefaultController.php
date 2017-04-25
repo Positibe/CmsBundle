@@ -10,8 +10,6 @@
 
 namespace Positibe\Bundle\CmsBundle\Controller;
 
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
 use Positibe\Bundle\CmsBundle\Entity\Category;
 use Positibe\Bundle\CmsBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,11 +69,16 @@ class DefaultController extends Controller
             $contentTemplate
         );
 
-        $children = $this->get('doctrine.orm.entity_manager')->getRepository('PositibeCmsBundle:Page')->createPaginator(['category' => $contentDocument->getName()]);
-        $children->setCurrentPage($request->get('page', 1), true, true);
-        $children->setMaxPerPage(5);
+        $children = $this->get('positibe.repository.page')->createPaginator(
+            [
+                'category' => $contentDocument->getName(),
+                'state' => 'published',
+                'can_publish_on_date' => new \DateTime('now'),
+            ],
+            ['publishStartDate' => 'DESC']
+        );
 
-        $params = array('content' => $contentDocument, 'children' => $children);
+        $params = ['content' => $contentDocument, 'children' => $children];
 
         return $this->render($contentTemplate, $params);
     }

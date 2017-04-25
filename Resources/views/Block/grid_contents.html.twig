@@ -1,5 +1,3 @@
-{% extends '@PositibeCms/Block/block_base.html.twig' %}
-
 {% block block %}
     <h3 class="text-center">
         <a class="" href="{{ path(category) }}"> {{ category.title | upper }}</a>
@@ -12,5 +10,4 @@
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}

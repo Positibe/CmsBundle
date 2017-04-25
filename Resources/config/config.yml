@@ -1,6 +1,9 @@
 imports:
     - resource: "sylius_crud.yml"
 
+positibe_user:
+    roles: [ROLE_EDITOR]
+
 parameters:
     positibe.menu_node.class: Positibe\Bundle\CmsBundle\Entity\MenuNode
 
@@ -32,6 +35,8 @@ cmf_routing:
             Positibe\Bundle\CmsBundle\Entity\Category: PositibeCmsBundle:Default:categoryIndex
             Positibe\Bundle\CmsBundle\Entity\Page: PositibeCmsBundle:Default:index
 #            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute:  cmf_routing.redirect_controller:redirectAction
+        limit_candidates: 1
+        match_implicit_locale: false
 
 sonata_block:
     default_contexts: ~
@@ -43,9 +48,14 @@ lunetics_locale:
     allowed_locales: "%locales%"
     guessing_excluded_pattern: ^/css|^/js|^/admin|^/_wdt|^/_profiler|^/_error
     guessing_order:
-        - session
         - query
+        - session
         - router
+#    switcher:
+#        use_controller: true                # Must be set to true if you want to use the controller. Defaults to false
+#        use_referrer: true                  # Redirect to the origin url from where the switcher was used. Defaults to true
+#        redirect_to_route: homepage   # This parameter MUST be set. Fallback route if no referrer could be found.
+#        redirect_statuscode: 302            # Redirect HTTP status code. Options:  300, 301, 302, 303, 307. Defaults to 302
 
 framework:
     workflows:
