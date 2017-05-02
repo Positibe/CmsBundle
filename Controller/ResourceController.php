@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Controller;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use FOS\RestBundle\View\View;
 use Positibe\Bundle\CmsBundle\Entity\BaseContent;
 use Positibe\Bundle\CmsBundle\Entity\Page;
@@ -74,6 +75,24 @@ class ResourceController extends SyliusResourceController
 
         return $page;
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function deleteAction(Request $request)
+    {
+        try {
+            return parent::deleteAction($request);
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+            $this->flashHelper->addErrorFlash($configuration, 'not_deleted');
+
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
+    }
+
 
     public function moveUpAction(Request $request)
     {
