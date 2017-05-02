@@ -6,20 +6,16 @@
             </h4>
         </div>
         <div class="card-title-actions">
-            <a href="{{ go_back('positibe_category_index') }}"
-               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
-            </a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
-                        class="fa fa-reply"></i> Resetear
-            </a>
-            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if category is defined and category.id is not null %}
+                <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_category_remove">
+                    <i class="fa fa-trash"></i> Remover
+                </a>
                 {% if workflow_can(category, 'republish') -%}
                     <button type="submit" name="transition" value="{{ 'republish' }}" class="btn btn-primary btn-sm"><i
                                 class="fa fa-eye"></i> {{ 'republish' | trans }} y guardar
                     </button>
                 {%- elseif workflow_can(category, 'unpublish') -%}
-                    <button type="submit" name="transition" value="{{ 'unpublish' }}" class="btn btn-sm"><i
+                    <button type="submit" name="transition" value="{{ 'unpublish' }}" class="btn btn-sm btn-warning"><i
                                 class="fa fa-eye-slash"></i> {{ 'unpublish' | trans }} y guardar
                     </button>
                 {%- elseif workflow_can(category, 'publish') -%}
@@ -27,11 +23,15 @@
                                 class="fa fa-eye"></i> {{ 'publish' | trans }} y guardar
                     </button>
                 {%- endif -%}
-
-                <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_category_remove">
-                    <i class="fa fa-trash"></i> Remover
-                </a>
             {% endif %}
+            <a href="{{ go_back('positibe_category_index') }}"
+               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
+                        class="fa fa-refresh"></i> Resetear
+            </a>
+            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
+
         </div>
     </div>
 </div>

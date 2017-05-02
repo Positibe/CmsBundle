@@ -11,6 +11,16 @@ services:
         tags:
             - { name: twig.extension }
 
+    positibe_cms.sitemaps_page_provider:
+        class: Positibe\Bundle\CmsBundle\Sitemap\SitemapPageProvider
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: cmf_seo.sitemap.loader }
+
+    positibe_cms.alternate_locale_provider:
+        class: Positibe\Bundle\CmsBundle\Sitemap\AlternateLocaleProvider
+        arguments: ["@cmf_routing.generator", "@request_stack"]
+
 #### Forms Type ####
     positibe_cms.base_content_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\BaseContentType

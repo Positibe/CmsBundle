@@ -48,3 +48,13 @@ internacionalización mediante Gedmo Doctrine Extension.
 **Importante:** Recuerde registrar primero el CoreSeoBundle y después el PositibeCoreSeoBundle para poder sobreescribir
  el mapeo de la entidad.
 
+Sitemaps
+--------
+
+Importar la ruta:
+
+    # app/config/routing.yml
+
+    _positibe_cms_sitemaps:
+        resource: "@PositibeCmsBundle/Resources/config/sitemaps_routing.yml"
+        prefix: /public

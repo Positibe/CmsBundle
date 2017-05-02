@@ -19,6 +19,9 @@ PositibeCmsBundle:Default:index: Página simple
 PositibeCmsBundle:Default:categoryIndex: Listado de páginas
 ROLE_USER: Autenticado
 IS_AUTHENTICATED_ANONYMOUSLY: Anónimo
+sylius:
+    resource:
+        not_delected: No se ha podido eliminar el %resource%
 abstract_block:
     form:
         name_label: Nombre:

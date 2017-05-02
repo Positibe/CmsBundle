@@ -8,18 +8,18 @@
             </h4>
         </div>
         <div class="card-title-actions">
-            <a href="{{ go_back('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"
-               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
-            </a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
-                        class="fa fa-reply"></i> Resetear
-            </a>
-            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if menu is defined and menu.id is not null %}
                 <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_menu_node_remove">
                     <i class="fa fa-trash"></i> Remover
                 </a>
             {% endif %}
+            <a href="{{ go_back('positibe_submenu_index', {'parent': app.request.get('parent')}) }}"
+               name="back" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm "><i
+                        class="fa fa-refresh"></i> Resetear
+            </a>
+            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Guardar</button>
         </div>
     </div>
 </div>

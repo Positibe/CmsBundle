@@ -24,6 +24,10 @@ cmf_seo:
     description: seo.description
     persistence:
         orm:
+    sitemap:
+        enabled: true
+    alternate_locale:
+        provider_id: positibe_cms.alternate_locale_provider
 
 positibe_cms:
     content_class: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category ]

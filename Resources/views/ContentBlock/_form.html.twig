@@ -7,18 +7,19 @@
             </h4>
         </div>
         <div class="card-title-actions">
-            <a href="{{ path('positibe_block_index') }}"
-               name="back" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i> Atras
-            </a>
-            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm"><i
-                        class="fa fa-reply"></i> Resetear
-            </a>
-            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-check"></i> Guardar</button>
             {% if content_block is defined and content_block.id is not null %}
                 <a class="btn btn-warning btn-sm" data-toggle="modal" href="#positibe_content_block_remove">
                     <i class="fa fa-trash"></i> Remover
                 </a>
             {% endif %}
+            <a href="{{ path('positibe_block_index') }}"
+               name="back" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i> Atras
+            </a>
+            <a href="{{ app.request.server.get('REQUEST_URI') }}" class="btn btn-default btn-sm"><i
+                        class="fa fa-refresh"></i> Resetear
+            </a>
+            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-check"></i> Guardar</button>
+
         </div>
     </div>
 </div>

@@ -3,35 +3,44 @@ positibe:
        create: El Menu se ha creado con éxito.
        update: El Menu se ha actualizado con éxito.
        delete: El Menu se ha eliminado con éxito.
+       not_deleted: El Menu no se ha podido eliminar porque está siendo usado por otro contenido.
     menu_node:
        create: El Menu se ha creado con éxito.
        update: El Menu se ha actualizado con éxito.
        delete: El Menu se ha eliminado con éxito.
+       not_deleted: El Menu no se ha podido eliminar porque está siendo usada por otro contenido.
     block:
        create: El bloque se ha creado con éxito.
        update: El bloque se ha actualizado con éxito.
        delete: El bloque se ha eliminado con éxito.
+       not_deleted: El bloque no se ha podido eliminar porque está siendo usada por otro contenido.
     content_block:
        create: El bloque se ha creado con éxito.
        update: El bloque se ha actualizado con éxito.
        delete: El bloque se ha eliminado con éxito.
+       not_deleted: El bloque no se ha podido eliminar porque está siendo usada por otro contenido.
     page_block:
        create: El bloque se ha creado con éxito.
        update: El bloque se ha actualizado con éxito.
        delete: El bloque se ha eliminado con éxito.
+       not_deleted: El bloque no se ha podido eliminar porque está siendo usada por otro contenido.
     menu_block:
        create: El bloque se ha creado con éxito.
        update: El bloque se ha actualizado con éxito.
        delete: El bloque se ha eliminado con éxito.
+       not_deleted: El bloque no se ha podido eliminar porque está siendo usada por otro contenido.
     gallery_block:
        create: El bloque se ha creado con éxito.
        update: El bloque se ha actualizado con éxito.
        delete: El bloque se ha eliminado con éxito.
+       not_deleted: El bloque no se ha podido eliminar porque está siendo usada por otro contenido.
     category:
        create: La categoría se ha creado con éxito.
        update: La categoría se ha actualizado con éxito.
        delete: La categoría se ha eliminado con éxito.
+       not_deleted: La categoría no se ha podido eliminar porque está siendo usada por otro contenido.
     page:
        create: La página se ha creado con éxito.
        update: La página se ha actualizado con éxito.
        delete: La página se ha eliminado con éxito.
+       not_deleted: La página no se ha podido eliminar porque está siendo usada por otro contenido.
