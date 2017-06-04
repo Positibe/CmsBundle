@@ -1,5 +1,6 @@
 {% form_theme form.locale '@PositibeCore/FormThemes/mdb_form_theme_md.html.twig' %}
 {% form_theme form.iconClass '@PositibeCore/FormThemes/mdb_form_theme_md.html.twig' %}
+{% form_theme form.position '@PositibeCore/FormThemes/mdb_form_theme_md.html.twig' %}
 
 <div class="card-header white">
     <div class="card-title text-muted text-uppercase text-right">
@@ -51,6 +52,7 @@
                     {{ form_row(form.iconClass) }}
                     {{ form_row(form.display) }}
                     {{ form_row(form.displayChildren) }}
+                    {{ form_row(form.position) }}
                 </div>
             </div>
         </div>

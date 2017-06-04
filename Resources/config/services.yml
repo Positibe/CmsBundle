@@ -21,10 +21,14 @@ services:
         class: Positibe\Bundle\CmsBundle\Sitemap\AlternateLocaleProvider
         arguments: ["@cmf_routing.generator", "@request_stack"]
 
+    positibe_cms.website_session_manager:
+            class: Positibe\Bundle\CmsBundle\Website\WebsiteSessionManager
+            arguments: ["@session"]
+
 #### Forms Type ####
     positibe_cms.base_content_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\BaseContentType
-        arguments: ["%locales%", "%locale%"]
+        arguments: ["@security.token_storage", "@session", "%locales%", "%locale%"]
         tags:
           - { name: form.type }
 

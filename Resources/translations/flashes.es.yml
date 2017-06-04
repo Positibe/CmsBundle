@@ -44,3 +44,8 @@ positibe:
        update: La página se ha actualizado con éxito.
        delete: La página se ha eliminado con éxito.
        not_deleted: La página no se ha podido eliminar porque está siendo usada por otro contenido.
+    website:
+      create: El sitio se ha creado con éxito.
+      update: El sitio se ha actualizado con éxito.
+      delete: El sitio se ha eliminado con éxito.
+      not_deleted: El sitio no se ha podido eliminar porque está siendo usada por otro contenido.

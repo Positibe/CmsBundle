@@ -1,3 +1,7 @@
+parameters:
+    positibe_page_form_class: Positibe\Bundle\CmsBundle\Form\Type\PageType
+    positibe_category_form_class: Positibe\Bundle\CmsBundle\Form\Type\CategoryType
+
 sylius_resource:
     settings:
         sortable: true
@@ -10,14 +14,14 @@ sylius_resource:
                 model:      Positibe\Bundle\CmsBundle\Entity\Page
                 repository: Positibe\Bundle\CmsBundle\Repository\PageRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
-                form:       Positibe\Bundle\CmsBundle\Form\Type\PageType
+                form:       "%positibe_page_form_class%"
         positibe.category:
             driver: doctrine/orm
             classes:
                 model:      Positibe\Bundle\CmsBundle\Entity\Category
                 repository: Positibe\Bundle\CmsBundle\Repository\CategoryRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
-                form:       Positibe\Bundle\CmsBundle\Form\Type\CategoryType
+                form:       "%positibe_category_form_class%"
         positibe.menu:
             driver: doctrine/orm
             classes:
@@ -59,3 +63,10 @@ sylius_resource:
                 repository: Positibe\Bundle\CmsBundle\Repository\BlockRepository
                 controller: Positibe\Bundle\CmsBundle\Controller\ResourceController
                 form:       Positibe\Bundle\CmsBundle\Form\Type\PageBlockType
+        positibe.website:
+            driver: doctrine/orm
+            classes:
+                model:      Positibe\Bundle\CmsBundle\Entity\Website
+                controller: Positibe\Bundle\CmsBundle\Controller\WebsiteController
+                repository: Positibe\Bundle\CmsBundle\Repository\WebsiteRepository
+                form:       Positibe\Bundle\CmsBundle\Form\Type\WebsiteFormType

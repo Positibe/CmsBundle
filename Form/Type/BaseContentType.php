@@ -10,14 +10,21 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use AppBundle\Entity\User;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Positibe\Bundle\CmfRoutingExtraBundle\Form\Type\RoutePermalinkType;
 use Positibe\Bundle\CmsBundle\Entity\BaseContent;
+use Positibe\Bundle\CmsBundle\Entity\Website;
+use Positibe\Bundle\CmsBundle\Website\WebsiteSessionManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 
 /**
@@ -28,13 +35,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class BaseContentType extends AbstractType
 {
+    /** @var  TokenStorage */
+    protected $tokenStorage;
+    /** @var  Session */
+    protected $session;
     private $locales;
     private $defaultLocale;
 
-    public function __construct($locales, $defaultLocale)
+    public function __construct(TokenStorage $tokenStorage, Session $session, $locales, $defaultLocale)
     {
         $this->locales = $locales;
         $this->defaultLocale = $defaultLocale;
+        $this->tokenStorage = $tokenStorage;
+        $this->session = $session;
     }
 
     /**
@@ -60,15 +73,6 @@ class BaseContentType extends AbstractType
                 array(
                     'label' => 'page.form.body_label',
                     'config_name' => 'content',
-                )
-            )
-            ->add(
-                'locale',
-                ChoiceType::class,
-                array(
-                    'label' => 'page.form.locale_label',
-                    'choices' => array_combine($this->locales, $this->locales),
-                    'attr' => ['class' => 'change_locale'],
                 )
             )
             ->add(
@@ -112,6 +116,51 @@ class BaseContentType extends AbstractType
         if ($options['data'] && $options['data']->getName()) {
             $builder->add('name', null, ['label' => 'page.form.name_label']);
         }
+
+        if (count($this->locales) > 1) {
+            $builder->add(
+                'locale',
+                ChoiceType::class,
+                array(
+                    'label' => 'page.form.locale_label',
+                    'choices' => array_combine($this->locales, $this->locales),
+                    'attr' => ['class' => 'change_locale'],
+                )
+            );
+        }
+
+        /** @var User $user */
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (method_exists($user, 'getWebsites')) {
+            $websites = [];
+            foreach ($user->getWebsites() as $website) {
+                if ($website->isEnabled()) {
+                    $websites[$website->getDomain()] = $website->getDomain();
+                }
+            }
+
+            if (count($websites) > 0) {
+                $builder->add(
+                    'host',
+                    ChoiceType::class,
+                    [
+                        'choices' => $websites,
+                        'required' => false,
+                        'label' => 'form.host.host_label',
+                    ]
+                );
+
+                $builder->addEventListener(
+                    FormEvents::PRE_SET_DATA,
+                    function (FormEvent $event) {
+                        if (!$event->getData()->getHost()) {
+                            $event->getData()->setHost($this->session->get(WebsiteSessionManager::WEBSITE_KEY));
+                        }
+                    }
+                );
+            }
+        }
+
 
     }
 

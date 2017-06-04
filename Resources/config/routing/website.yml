@@ -1,0 +1,59 @@
+positibe_websites_active:
+    path: /websites/active_website/{domain}
+    methods: [GET]
+    requirements:
+        domain: .+
+    defaults:
+        _controller: positibe.controller.website:activeAction
+
+positibe_websites:
+    resource: |
+        alias: positibe.website
+        templates: PositibeCmsBundle:Website
+        redirect: update
+    type: sylius.resource
+
+
+#positibe_websites_show:
+#    path: /{id}
+#    methods: [GET]
+#    defaults:
+#        _controller: positibe.controller.website:showAction
+#        _sylius:
+#            template: :website:show.html.twig
+#            criteria:
+#                id: $id
+
+#positibe_websites_update:
+#    path: /{id}/edit
+#    methods: [GET, PUT]
+#    defaults:
+#        _controller: positibe.controller.website:updateAction
+#        _sylius:
+#            template: :website:update.html.twig
+#            criteria:
+#                id: $id
+#            redirect:
+#                route: positibe_websites_show
+#                parameters: {id: resource.id}
+
+#positibe_websites_delete:
+#    path: /{id}
+#    methods: [DELETE]
+#    defaults:
+#        _controller: positibe.controller.website:deleteAction
+#        _sylius:
+#            criteria:
+#                id: $id
+#            redirect:
+#                route: positibe_websites_index
+#                parameters: {}
+
+#positibe_websites_index:
+#    path: /
+#    methods: [GET]
+#    defaults:
+#        _controller: positibe.controller.website:indexAction
+#        _sylius:
+#            template: :website:index.html.twig
+#            sortable: true

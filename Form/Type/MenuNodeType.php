@@ -177,6 +177,7 @@ class MenuNodeType extends AbstractType
                     'label' => 'menu_node.form.children_attributes_label',
                 )
             )
+            ->add('position', null, ['label' =>  'menu_node.form.position_label', 'required' => false])
 //            ->add('routeParameters')
 //            ->add('extras')
 //            ->add('routeAbsolute')

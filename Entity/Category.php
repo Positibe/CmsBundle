@@ -37,6 +37,10 @@ class Category extends Page
         $this->children = new ArrayCollection();
     }
 
+    public function getType()
+    {
+        return 'Category';
+    }
 
     public function addChild($page)
     {

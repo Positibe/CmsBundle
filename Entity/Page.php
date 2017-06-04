@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Entity;
 
+use Positibe\Bundle\CmfRoutingExtraBundle\Entity\Traits\CustomRouteInformationTrait;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -38,6 +39,8 @@ use Symfony\Cmf\Component\RoutingAuto\Model\AutoRouteInterface;
  */
 class Page extends BaseContent implements ResourceInterface, MenuNodeReferrersInterface, CustomRouteInformationInterface
 {
+    use CustomRouteInformationTrait;
+
     /**
      * @var integer
      *
@@ -66,19 +69,6 @@ class Page extends BaseContent implements ResourceInterface, MenuNodeReferrersIn
      * @ORM\Column(name="featured", type="boolean")
      */
     protected $featured;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="custom_controller", type="string", length=100, nullable=TRUE)
-     */
-    protected $customController;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="custom_template", type="string", length=100, nullable=TRUE)
-     */
-    protected $customTemplate;
 
     /**
      * @var ArrayCollection|RouteObjectInterface[]|AutoRouteInterface[]
@@ -110,7 +100,11 @@ class Page extends BaseContent implements ResourceInterface, MenuNodeReferrersIn
         parent::__construct();
         $this->menuNodes = new ArrayCollection();
         $this->featured = false;
-        $this->publishStartDate = new \DateTime('now');
+    }
+
+    public function getType()
+    {
+        return 'Page';
     }
 
     public function getCategoryName()
@@ -259,38 +253,5 @@ class Page extends BaseContent implements ResourceInterface, MenuNodeReferrersIn
     public function setFeatured($featured)
     {
         $this->featured = $featured;
-    }
-
-
-    /**
-     * @return string|null
-     */
-    public function getCustomController()
-    {
-        return $this->customController;
-    }
-
-    /**
-     * @param string $customController
-     */
-    public function setCustomController($customController)
-    {
-        $this->customController = $customController;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomTemplate()
-    {
-        return $this->customTemplate;
-    }
-
-    /**
-     * @param string $customTemplate
-     */
-    public function setCustomTemplate($customTemplate)
-    {
-        $this->customTemplate = $customTemplate;
     }
 } 

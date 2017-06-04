@@ -246,13 +246,6 @@ class PageFactory implements FactoryInterface
     }
 
     /**
-     * Get the route for the content
-     *
-     * @param $path
-     * @param Page $page
-     * @return Route
-     */
-    /**
      * @param $path
      * @param Page $page
      * @param null $controller

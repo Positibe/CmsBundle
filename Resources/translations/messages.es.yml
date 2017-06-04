@@ -53,6 +53,7 @@ menu_node:
         publish_start_label: Publicar a partir de:
         publish_end_label: Despublicar en:
         children_attributes_label: Attributos de lista:
+        position_label: Orden
         link_attributes_label: Attributos de vínculo
         label_attributes_label: Attributos de etiqueta
 content_block:
@@ -119,3 +120,35 @@ positibe_cms:
 seo:
     title:       "%content_title% | PositibeLabs"
     description: "%content_description%"
+
+website:
+    list:
+        page_title: Sitios
+        page_subtitle: Lista de sitios
+        create_new: Crear nuevo sitio
+        list_empty: No hay sitios
+    create:
+        page_title: Nuevo sitio
+        page_subtitle: Crear sitio
+    update:
+        page_title: Sitios
+        page_subtitle: Editar sitio
+    show:
+        page_title: Sitio
+    form:
+        legend: Formulario
+        tab_1: Datos generales
+    app_website:
+        description_label: Descripción
+        domain_label: Dominio
+        template_label: Plantilla
+        enabled_label: Habilitado
+    breadcrumbs:
+        index: Sitios
+        create: Nuevo sitio
+    table:
+        description: Descripción
+        domain: Dominio
+        template: Plantilla
+        id: Id
+        enabled: Habilitado

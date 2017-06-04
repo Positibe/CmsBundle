@@ -43,7 +43,7 @@
                         {% for route in page.routes %}
                             <tr>
                                 <td>
-                                    <a href="{{ relative_path(route.getPath()) }}">{{ route.getPath() }}</a>
+                                    <a href="{{ path(route) }}">{{ (route.host ?: '') ~ route.getPath() }}</a>
                                 </td>
                                 <td>{{ route.getDefault('_controller') | trans }}</td>
                                 <td>{{ (route.getDefault('_locale') | default('es')) | trans }}</td>

@@ -77,7 +77,8 @@ class MenuType extends AbstractType
                 array(
                     'data' => ContentAwareFactory::LINK_TYPE_ROOT
                 )
-            );
+            )
+        ;
     }
 
     /**

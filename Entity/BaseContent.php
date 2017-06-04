@@ -88,6 +88,7 @@ class BaseContent implements
     {
         $this->routes = new ArrayCollection();
         $this->seoMetadata = new SeoMetadata();
+        $this->publishStartDate = new \DateTime('now');
     }
 
     /**

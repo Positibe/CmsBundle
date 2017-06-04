@@ -1,0 +1,16 @@
+{% set menu_active = 'website' %}
+{% set extends = 'admin.html.twig' %}
+{% set icon = 'fa fa-window-maximize' %}
+
+{% embed '@PositibeCore/Grid/show.html.twig' %}
+    {% block content_body %}
+        <h4>{{ 'website.table.description' | trans }}</h4>
+        <p>{{ website.description }}</p>
+        <h4>{{ 'website.table.domain' | trans }}</h4>
+        <p>{{ website.domain }}</p>
+        <h4>{{ 'website.table.template' | trans }}</h4>
+        <p>{{ website.template }}</p>
+        <h4>{{ 'website.table.enabled' | trans }}</h4>
+        <p>{{ website.enabled }}</p>
+    {% endblock %}
+{% endembed %}

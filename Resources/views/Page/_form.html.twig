@@ -70,7 +70,8 @@
                     <h4 class="card-title">Configuración</h4>
 
                     <p class="badge badge-info">{{ (page.state) | trans }}</p>
-                    {{ form_row(form.locale) }}
+                    {% if form.locale is defined %}{{ form_row(form.locale) }}{% endif %}
+                    {% if form.host is defined %}{{ form_row(form.host) }}{% endif %}
                     {{ form_row(form.category) }}
                     {% if form.customController is defined %}{{ form_row(form.customController) }}{% endif %}
                     {% if form.customTemplate is defined %}{{ form_row(form.customTemplate) }}{% endif %}

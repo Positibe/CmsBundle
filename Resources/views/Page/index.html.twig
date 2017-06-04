@@ -24,6 +24,9 @@
                 </h4>
             </div>
             <div class="card-title-actions">
+                <a href="{{ path('positibe_category_create') }}" class="btn btn-sm btn-default">
+                    <i class="fa fa-plus-circle"></i> Crear nueva categoría
+                </a>
                 <a href="{{ path('positibe_page_create') }}" class="btn btn-sm btn-default">
                     <i class="fa fa-plus-circle"></i> Crear nueva página
                 </a>
@@ -39,7 +42,7 @@
                 <th>Cuerpo</th>
                 <th>Estado</th>
                 <th>{{ grid_render_sorting('featured', 'Destacado') }}</th>
-                <th>Categorías</th>
+                <th>Tipo</th>
                 <th>Acciones</th>
             </tr>
             <tr class="table-field-filter">
@@ -63,22 +66,26 @@
                 <tr>
                     <td>{{ count + loop.index }}</td>
                     <td>
-                        <a href="{{ path('positibe_page_show',
+                        <a href="{{ path((page.getType() == 'Page' ? 'positibe_page_show' : 'positibe_category_show'),
                         {'id': page.id}) }}" title="{{ page.title }}">{{ page.title }}</a>
                     </td>
                     <td>{{ page.body | striptags | decode_html | truncate(150) }}</td>
-                    <td>{% if is_granted('VIEW', page) %}
-                            <div class="label label-sm label-success">Publicado</div>{% else %}
-                            <div class="label label-sm label-warning">No publicado</div>{% endif %}
+                    <td>
+                        {% if is_granted('VIEW', page) %}
+                            <div class="badge badge-sm badge-success">Publicado</div>
+                        {% else %}
+                            <div class="badge badge-sm badge-default">No publicado</div>
+                        {% endif %}
                     </td>
                     <td class="font-yellow">{% if page.featured %}<i class="fa fa-star "></i> {% endif %}</td>
                     <td>
-                        {{ page.category }}
+                        {{ page.getType() ==  "Page" ? "Página" : "Categoría" }} {% if page.category %} de
+                            <strong>{{ page.category }}</strong> {% endif %}
                     </td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-outline-default btn-sm"
-                               href="{{ path('positibe_page_update', { 'id': page.id }) }}">
+                               href="{{ path((page.getType() == 'Page' ? 'positibe_page_update' : 'positibe_category_update'), { 'id': page.id }) }}">
                                 <i class="fa fa-edit"></i> Editar
                             </a>
                         </div>
