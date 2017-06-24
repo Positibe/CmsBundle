@@ -71,6 +71,14 @@ class MenuNodeType extends AbstractType
 
         $builder
             ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'menu_node.form.name_label',
+                    'required' => true,
+                )
+            )
+            ->add(
                 'label',
                 null,
                 array(

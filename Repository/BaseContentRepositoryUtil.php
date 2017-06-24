@@ -40,9 +40,12 @@ class BaseContentRepositoryUtil
 
     /**
      * @param QueryBuilder $queryBuilder
+     * @param string $locale
      */
-    public static function joinRoutes(QueryBuilder $queryBuilder)
+    public static function joinRoutes(QueryBuilder $queryBuilder, $locale = 'es')
     {
-        $queryBuilder->join('o.routes', 'routes')->addSelect('routes');
+        $queryBuilder->leftJoin('o.routes', 'routes')->andWhere('routes.defaults LIKE :locale')->addSelect(
+            'routes'
+        )->setParameter('locale', "%".sprintf('"%s"', $locale ?: 'es')."%");
     }
 }

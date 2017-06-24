@@ -40,7 +40,7 @@ class CategoryRepository extends PageRepository
         $qb = $this->createQueryBuilder('o');
         $criteria = ['can_publish_on_date' => new \DateTime('now')];
         BaseContentRepositoryUtil::canPublishOnDate($qb, $criteria);
-        BaseContentRepositoryUtil::joinRoutes($qb);
+        BaseContentRepositoryUtil::joinRoutes($qb, $this->locale);
 
         return $this->getQuery($qb)->getResult();
     }

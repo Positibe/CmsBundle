@@ -6,6 +6,8 @@ This bundle provide a AbstractPage, Page and Category entity and integrate some 
 Installation
 ------------
 
+Before
+
 To install the bundle just add the dependent bundles:
 
     php composer.phar require positibe/cms-bundle

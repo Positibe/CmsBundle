@@ -55,7 +55,7 @@ class PageRepository extends EntityRepository implements HasMenuRepositoryInterf
         }
 
         BaseContentRepositoryUtil::canPublishOnDate($queryBuilder, $criteria);
-        BaseContentRepositoryUtil::joinRoutes($queryBuilder);
+        BaseContentRepositoryUtil::joinRoutes($queryBuilder, $this->locale);
 
         parent::applyCriteria($queryBuilder, $criteria);
 
