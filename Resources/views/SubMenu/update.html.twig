@@ -16,8 +16,9 @@
         <a href="{{ path('positibe_submenu_index', {'parent': app.request.get('parent')}) }}">{{ app.request.get('parent') }}</a>
     </li>
     <li class="breadcrumb-item">
+        <a href="{{ path('positibe_submenu_child_index', {'parent': app.request.get('parent'), 'name': menu.name}) }}"> {{ menu.name }}
 
-        {{ menu.label | default(menu.name) }}
+        </a>
     </li>
 {% endblock %}
 

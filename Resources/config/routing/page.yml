@@ -1,9 +1,17 @@
+positibe_page_index:
+    path: /pages/
+    defaults:
+        _controller: "positibe.controller.page:indexAction"
+        _sylius:
+            template: PositibeCmsBundle:Page:index.html.twig
+            criteria:
+                host: "expr:service('session').has('active_website') ? [service('session').get('active_website')] : service('security.token_storage').getToken().getUser().getHosts()"
+
 positibe_page_crud:
-#    prefix:
     resource: |
         alias: positibe.page
         templates: PositibeCmsBundle:Page
-#        except: ['show']
+        except: ['index']
         redirect: update
     type: sylius.resource
 

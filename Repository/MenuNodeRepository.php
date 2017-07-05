@@ -12,6 +12,7 @@ namespace Positibe\Bundle\CmsBundle\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
 use Positibe\Bundle\CoreBundle\Repository\EntityRepository;
 use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\MenuBundle\Repository\MenuNodeRepositoryInterface;
@@ -33,7 +34,7 @@ class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryI
     /**
      * @param $name
      * @param int $level
-     * @return mixed
+     * @return MenuNode
      * @throws \Doctrine\ORM\NonUniqueResultException|MenuNodeInterface
      */
     public function findOneByName($name, $level = 1)
@@ -44,6 +45,13 @@ class MenuNodeRepository extends EntityRepository implements MenuNodeRepositoryI
         return $this->getQuery($qb)->getOneOrNullResult();
     }
 
+    /**
+     * @param $name
+     * @param $parent
+     * @param int $level
+     * @return MenuNode
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function findOneByNameAndParent($name, $parent, $level = 1)
     {
         $alias = 'mc';

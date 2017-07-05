@@ -78,6 +78,11 @@ class DefaultController extends Controller
             ['publishStartDate' => 'DESC']
         );
 
+        $children->setCurrentPage($request->query->get('page', 1));
+
+        // This prevents Pagerfanta from querying database from a template
+        $children->getCurrentPageResults();
+
         $params = ['content' => $contentDocument, 'children' => $children];
 
         return $this->render($contentTemplate, $params);

@@ -1,8 +1,19 @@
+positibe_category_index:
+    path: /categories/
+    defaults:
+        _controller: "positibe.controller.category:indexAction"
+        _sylius:
+            template: PositibeCmsBundle:Category:index.html.twig
+            criteria:
+                host: "expr:service('session').has('active_website') ? [service('session').get('active_website')] : service('security.token_storage').getToken().getUser().getHosts()"
+
+
 positibe_category_crud:
     resource: |
         alias: positibe.category
         templates: PositibeCmsBundle:Category
         redirect: update
+        except: [index]
     type: sylius.resource
     
 positibe_category_transition:

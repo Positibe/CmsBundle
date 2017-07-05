@@ -127,7 +127,7 @@ class BaseContent implements
         $this->body = $body;
 
         if (!$this->seoMetadata->getMetaDescription() && $this->getBody()) {
-            $description = NamedCharacterConverter::convert(substr(trim(strip_tags($this->getBody())), 0, 150));
+            $description = substr(NamedCharacterConverter::convert(trim(strip_tags($this->getBody()))), 0, 150);
             $this->seoMetadata->setMetaDescription($description);
         }
     }
