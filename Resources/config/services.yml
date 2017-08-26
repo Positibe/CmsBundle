@@ -5,6 +5,11 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    positibe_cms.website_entity_listener:
+        class: Positibe\Bundle\CmsBundle\Doctrine\EventListener\WebsiteEntityListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
     positibe_cms.cms_extension:
         class: Positibe\Bundle\CmsBundle\Twig\Extension\PositibeCmsExtension
         tags:

@@ -21,6 +21,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="positibe_website")
  * @ORM\Entity()
+ * @ORM\EntityListeners({"Positibe\Bundle\CmsBundle\Doctrine\EventListener\WebsiteEntityListener"})
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

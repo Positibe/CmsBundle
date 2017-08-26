@@ -39,13 +39,18 @@ class PositibeCmsExtension extends Extension
             ->addMethodCall('setPublicRoutes', array($config['public_routes']))
             ->addMethodCall('setTemplatePositions', array($config['template_positions']));
 
+        $container->getDefinition('positibe_cms.website_entity_listener')->addMethodCall(
+            'setEntities',
+            [$config['entities_with_host']]
+        );
+
         $this->addClassesToCompile(
             array(
                 'Symfony\\Cmf\\Bundle\\CoreBundle\\EventListener\\PublishWorkflowListener',
                 'Symfony\\Cmf\\Bundle\\SeoBundle\\EventListener\\ContentListener',
                 'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
                 'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
-                'Gedmo\\Translatable\\TranslatableListener'
+                'Gedmo\\Translatable\\TranslatableListener',
             )
         );
 
