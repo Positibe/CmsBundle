@@ -10,10 +10,11 @@
 
 namespace Positibe\Bundle\CmsBundle\Factory;
 
+use Doctrine\ORM\EntityManager;
 use Gedmo\Sluggable\Util\Urlizer;
 use Positibe\Bundle\CmsBundle\Entity\MenuNode;
-use Positibe\Bundle\CmsBundle\Repository\MenuNodeRepository;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
+use Positibe\Bundle\MenuBundle\Model\ContentIdUtil;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -26,11 +27,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class MenuNodeFactory implements FactoryInterface
 {
-    protected $menuNodeRepository;
+    protected $em;
+    protected $menuClass;
 
-    public function __construct(MenuNodeRepository $menuNodeRepository)
+    public function __construct(EntityManager $entityManager, $menuClass)
     {
-        $this->menuNodeRepository = $menuNodeRepository;
+        $this->em = $entityManager;
+        $this->menuClass = $menuClass;
     }
 
     /**
@@ -47,7 +50,7 @@ class MenuNodeFactory implements FactoryInterface
      */
     public function createNewByParentName($name)
     {
-        $parent = $this->menuNodeRepository->findOneByName($name);
+        $parent = $this->em->getRepository($this->menuClass)->findOneByName($name);
 
         $menu = $this->createNew();
         $menu->setParent($parent);
@@ -63,12 +66,12 @@ class MenuNodeFactory implements FactoryInterface
      */
     public function createNewChildByParentName($parent, $name)
     {
-        $parent = $this->menuNodeRepository->createQueryBuilder('o')
-          ->join('o.parent', 'parent')
-          ->where('o.name = :name AND parent.name = :parent')
-          ->setParameter('name', $name)
-          ->setParameter('parent', $parent)
-          ->getQuery()->getOneOrNullResult();
+        $parent = $this->em->getRepository($this->menuClass)->createQueryBuilder('o')
+            ->join('o.parent', 'parent')
+            ->where('o.name = :name AND parent.name = :parent')
+            ->setParameter('name', $name)
+            ->setParameter('parent', $parent)
+            ->getQuery()->getOneOrNullResult();
 
         $menu = $this->createNew();
         $menu->setParent($parent);
@@ -82,7 +85,7 @@ class MenuNodeFactory implements FactoryInterface
      */
     public function createNewByParentId($id)
     {
-        $parent = $this->menuNodeRepository->find($id);
+        $parent = $this->em->getRepository($this->menuClass)->find($id);
 
         $menu = new MenuNode();
         $menu->setParent($parent);
@@ -148,16 +151,17 @@ class MenuNodeFactory implements FactoryInterface
      * @return MenuNode
      */
     public function createContentMenuNode(
-      MenuNodeReferrersInterface $content,
-      $label,
-      $parentMenu = null,
-      $position = 0
+        MenuNodeReferrersInterface $content,
+        $label,
+        $parentMenu = null,
+        $position = 0
     ) {
         $menu = new MenuNode();
         $menu->setLabel($label);
         $menu->setName(Urlizer::urlize($label));
         $menu->setLinkType(ContentAwareFactory::LINK_TYPE_CONTENT);
         $menu->setContent($content);
+        $menu->setContentId(ContentIdUtil::getContentId($content, $this->em));
         $menu->setPosition($position);
         $this->setParentMenu($menu, $parentMenu);
 

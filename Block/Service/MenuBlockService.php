@@ -119,7 +119,7 @@ class MenuBlockService extends CmsBlockService
     {
         return [
             'type' => $block->getType(),
-            'request_uri' => $this->requestStack->getMasterRequest()->getRequestUri(),
+            'request_uri' => $this->requestStack->getMasterRequest()->getUri()
         ];
     }
 

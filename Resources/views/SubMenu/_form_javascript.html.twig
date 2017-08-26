@@ -1,14 +1,18 @@
 <script>
     jQuery(document).ready(function (e) {
-        var linkTypeInput = jQuery('#positibe_menu_node_linkType');
+        var linkTypeInput = jQuery('.menu_link_type');
         linkTypeChoices(linkTypeInput.val());
         linkTypeInput.on('change', function (e) {
             var linkType = jQuery(this).val();
             linkTypeChoices(linkType);
         });
-        jQuery('#positibe_menu_node_contentClass').on('change', function (e) {
+        var contentClassInput = jQuery('#positibe_menu_node_contentClass');
+        contentClassInput.on('change', function (e) {
             loadContentByClass(jQuery('#positibe_menu_node_contentClass').val());
         });
+        if (contentClassInput.val()) {
+            loadContentByClass(contentClassInput.val(), $('#positibe_menu_node_contentId').val());
+        }
     });
     function linkTypeChoices(linkType) {
         if (linkType === 'uri') {
@@ -26,7 +30,7 @@
         }
     }
 
-    function loadContentByClass(contentClass) {
+    function loadContentByClass(contentClass, value) {
         var option = jQuery('#positibe_menu_node_content_chosen');
         if (option.length > 0) {
             option.find('.chosen-single').addClass('btn disabled');
@@ -38,14 +42,17 @@
         }
         $.ajax({
             url: ('{{ path('positibe_admin_menu_content_class') }}?contentClass=' + contentClass),
+            data: {
+                'selectedById': value
+            },
             success: function (data) {
                 var select = $(data);
-                select.attr('id', 'positibe_menu_node_content');
-                select.attr('name', 'positibe_menu_node[content]');
+                select.attr('id', 'positibe_menu_node_contentId');
+                select.attr('name', 'positibe_menu_node[contentId]');
 
-                var option = jQuery('#positibe_menu_node_content_chosen');
+                var option = jQuery('#positibe_menu_node_contentId_chosen');
                 if (option.length === 0) {
-                    option = jQuery('#positibe_menu_node_content');
+                    option = jQuery('#positibe_menu_node_contentId');
                 }
                 var formGroup = option.parent();
 
@@ -53,7 +60,7 @@
                 formGroup.append(select);
             },
             complete: function () {
-                var option = jQuery('#positibe_menu_node_content_chosen');
+                var option = jQuery('#positibe_menu_node_contentId_chosen');
                 option.find('.chosen-single').removeClass('btn disabled');
                 option.find('.chosen-single > span').removeClass('text-left');
                 app.initChosen();

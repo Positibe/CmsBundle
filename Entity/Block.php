@@ -62,7 +62,7 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
      *
      * @ORM\Column(name="always", type="boolean")
      */
-    protected $always;
+    protected $always = true;
 
     /**
      * @var array

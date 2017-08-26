@@ -14,7 +14,6 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Positibe\Bundle\CoreBundle\Repository\EntityRepository;
 use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
-use Positibe\Bundle\MenuBundle\Repository\HasMenuRepositoryInterface;
 use Positibe\Bundle\MenuBundle\Model\MenuNodeInterface;
 
 /**
@@ -23,7 +22,7 @@ use Positibe\Bundle\MenuBundle\Model\MenuNodeInterface;
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */
-class PageRepository extends EntityRepository implements HasMenuRepositoryInterface
+class PageRepository extends EntityRepository
 {
     use LocaleRepositoryTrait;
 

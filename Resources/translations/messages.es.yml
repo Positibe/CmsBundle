@@ -61,6 +61,7 @@ content_block:
         title_label: Título:
         body_label: Contenido:
         image_label: Imagen:
+        media_label: Multimedia
         locale_label: Idioma:
 chosen:
     form:

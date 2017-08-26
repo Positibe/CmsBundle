@@ -19,6 +19,7 @@ use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\MediaBundle\Entity\Media;
 use Positibe\Bundle\MediaBundle\Provider\ImageProvider;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
+use Positibe\Bundle\MenuBundle\Model\ContentIdUtil;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata;
@@ -91,6 +92,7 @@ class PageFactory implements FactoryInterface
             if (!$menu->getId()) {
                 $menu->setLinkType(ContentAwareFactory::LINK_TYPE_CONTENT);
                 $menu->setContent($page);
+                $menu->setContentId(ContentIdUtil::getContentId($page, $this->em));
             }
         }
     }

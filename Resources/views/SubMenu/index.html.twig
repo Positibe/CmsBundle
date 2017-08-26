@@ -85,7 +85,7 @@
                         {% if menu.linkType == 'uri' %}
                             <strong>Url</strong> ({{ menu.uri }})
                         {% elseif menu.linkType == 'content' %}
-                            <strong>{{ menu.contentClass | trans({}, 'PositibeCoreBundle') }}</strong> ({{ menu.content }})
+                            <strong>{{ menu.contentClass | trans }}</strong> ({{ menu.content }})
                         {% elseif menu.linkType == 'route' %}
                             <strong>Ruta</strong> ({{ menu.route }})
                         {% else %}

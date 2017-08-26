@@ -10,8 +10,6 @@
 
 namespace Positibe\Bundle\CmsBundle\Twig\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Class PositibeCmsExtension
  * @package Positibe\Bundle\PositibeCmsBundle\Twig\Extension
@@ -20,21 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class PositibeCmsExtension extends \Twig_Extension
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * Constructor
-     *
-     * @param ContainerInterface $container
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
     /**
      * Returns a list of filters to add to the existing list.
      *

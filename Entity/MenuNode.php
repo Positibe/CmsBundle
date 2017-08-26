@@ -64,19 +64,33 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
         }
     }
 
+    public function getContentClass()
+    {
+        try {
+            return trim(explode(':', $this->contentId)[0]);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    public function setContentClass($class)
+    {
+        //this method is empty by choice, to prevent error on form and use the mapped = true
+    }
+
     /**
      * {@inheritDoc}
      */
     public function getOptions()
     {
         return array_merge(
-          parent::getOptions(),
-          array(
-            'linkType' => $this->linkType,
-            'content' => $this->getContent(),
-            'contentClass' => $this->getContentClass(),
-            'iconClass' => $this->getIconClass()
-          )
+            parent::getOptions(),
+            array(
+                'linkType' => $this->linkType,
+                'content' => $this->getContent(),
+                'contentId' => $this->getContentId(),
+                'iconClass' => $this->getIconClass(),
+            )
         );
     }
 

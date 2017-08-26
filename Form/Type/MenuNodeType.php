@@ -10,12 +10,15 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
-use Positibe\Bundle\CmsBundle\Form\EventListener\ContentFieldListener;
+use Positibe\Bundle\CmsBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Form\DataTransformer\ContentIdDataTransformer;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
 use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -67,8 +70,6 @@ class MenuNodeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new ContentFieldListener());
-
         $builder
             ->add(
                 'name',
@@ -138,6 +139,7 @@ class MenuNodeType extends AbstractType
                         'menu_node.form.link_type_choices.content' => ContentAwareFactory::LINK_TYPE_CONTENT,
                     ),
                     'label' => 'menu_node.form.link_type_label',
+                    'attr' => ['class' => 'menu_link_type'],
                 )
             )
             ->add(
@@ -185,35 +187,35 @@ class MenuNodeType extends AbstractType
                     'label' => 'menu_node.form.children_attributes_label',
                 )
             )
-            ->add('position', null, ['label' =>  'menu_node.form.position_label', 'required' => false])
-//            ->add('routeParameters')
-//            ->add('extras')
-//            ->add('routeAbsolute')
-//            ->add(
-//                'attributes',
-//                'sonata_type_immutable_array',
-//                array(
-//                    'label' => 'menu_node.form.attributes_label',
-//                    'keys' => array(
-//                        array('id',      'text', array('required' => false)),
-//                        array('class',   'text',  array('required' => false)),
-//                    )
-//                )
-//            )
-//            ->add(
-//                'childrenAttributes',
-//                'sonata_type_immutable_array',
-//                array(
-//                    'keys' => array(
-//                        array('id', 'text', array('required' => false)),
-//                        array('class', 'text', array('required' => false)),
-//                    ),
-//                    'label' => 'menu_node.form.children_attributes_label',
-//                )
-//            )
-        ;
+            ->add('position', null, ['label' => 'menu_node.form.position_label', 'required' => false]);
+
+        $builder->add(
+            'contentId',
+            null,
+            array(
+                'required' => false,
+                'label' => 'menu_node.form.content_label',
+            )
+        );
+
+        $builder->get('contentId')->addModelTransformer(new ContentIdDataTransformer());
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                /** @var MenuNode $menu */
+                $menu = $event->getData();
+                if ($menu->getLinkType() === ContentAwareFactory::LINK_TYPE_CONTENT) {
+                    $menu->setContentId(
+                        $event->getForm()->get('contentClass')->getData().':'.$event->getForm()->get(
+                            'contentId'
+                        )->getData()
+                    );
+                }
 
 
+            }
+        );
     }
 
     /**

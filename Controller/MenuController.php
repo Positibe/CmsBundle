@@ -10,6 +10,7 @@
 
 namespace Positibe\Bundle\CmsBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,27 +25,54 @@ class MenuController extends Controller
 {
     public function getContentFormAction(Request $request)
     {
-        $class = $request->get('contentClass');
+        $contentClass = $request->get('contentClass');
+        $data = null;
+        if ($path = $request->get('selectedByPath')) {
+            try {
+                $route = $this->get('router')->match(str_replace(['/app.php', '/app_dev.php'], '', $path));
+                if (isset($route['_content_id'])) {
+                    list($class, $id) = explode(':', $route['_content_id']);
+                    $data = $this->get('doctrine.orm.entity_manager')->getRepository($class)->find($id);
+                }
+            } catch (\Exception $e) {
+            }
+        } elseif ($id = $request->get('selectedById')) {
+            $data = $this->get('doctrine.orm.entity_manager')->getRepository($contentClass)->find($id);
+        }
+
+        $queryBuilderCallback = null;
+
+        $metadata = $this->get('doctrine.orm.entity_manager')->getClassMetadata($contentClass);
+        if ($metadata->hasField('host')) {
+            $host = $this->get('session')->get('active_website');
+            $queryBuilderCallback = function (EntityRepository $er) use ($host) {
+                return $er->createQueryBuilder('o')->where('o.host = :host')->setParameter(
+                    'host',
+                    $host
+                );
+            };
+        }
         $form = $this->createForm(
             'entity',
-            null,
+            $data,
             array(
                 'attr' => array(
-                    'id' =>'positibe_menu_node_content',
-                    'name' =>'positibe_menu_node[content]',
-                    'class' => 'chosen-select'
+                    'id' => 'positibe_menu_node_content',
+                    'name' => 'positibe_menu_node[content]',
+                    'class' => 'chosen-select',
                 ),
-                'class' => $class,
+                'class' => $contentClass,
                 'required' => false,
-                'label'=> 'menu_node.form.content_label',
-                'placeholder' => 'chosen.form.select_option'
+                'label' => 'menu_node.form.content_label',
+                'placeholder' => 'chosen.form.select_option',
+                'query_builder' => $queryBuilderCallback,
             )
         );
 
         return $this->render(
             'PositibeMenuBundle::_form_widget.html.twig',
             array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
             )
         );
     }

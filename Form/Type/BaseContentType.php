@@ -14,7 +14,6 @@ use AppBundle\Entity\User;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Positibe\Bundle\CmfRoutingExtraBundle\Form\Type\RoutePermalinkType;
 use Positibe\Bundle\CmsBundle\Entity\BaseContent;
-use Positibe\Bundle\CmsBundle\Entity\Website;
 use Positibe\Bundle\CmsBundle\Website\WebsiteSessionManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

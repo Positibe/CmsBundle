@@ -12,6 +12,8 @@ namespace Positibe\Bundle\CmsBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Positibe\Bundle\MediaBundle\Form\Type\ImageType;
+use Positibe\Bundle\MediaBundle\Form\Type\MediaType;
+use Positibe\Bundle\MediaBundle\Provider\MediaProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,7 +62,7 @@ class ContentBlockType extends AbstractType
                 'image',
                 ImageType::class,
                 array(
-                    'provider' => 'positibe_orm_media.image_provider',
+                    'provider' => MediaProvider::IMAGE_PROVIDER,
                     'required' => false,
                     'label' => 'content_block.form.image_label',
                 )
@@ -72,7 +74,17 @@ class ContentBlockType extends AbstractType
                     'label' => 'content_block.form.locale_label',
                     'choices' => array_combine($this->locales, $this->locales),
                 )
-            );
+            )
+            ->add(
+                'media',
+                MediaType::class,
+                array(
+                    'provider' => MediaProvider::MEDIA_PROVIDER,
+                    'required' => false,
+                    'label' => 'content_block.form.media_label',
+                )
+            )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -7,7 +7,6 @@ services:
 
     positibe_cms.cms_extension:
         class: Positibe\Bundle\CmsBundle\Twig\Extension\PositibeCmsExtension
-        arguments: ["@service_container"]
         tags:
             - { name: twig.extension }
 
@@ -108,6 +107,6 @@ services:
 
     positibe.factory.menu:
         class: Positibe\Bundle\CmsBundle\Factory\MenuNodeFactory
-        arguments: ["@positibe.repository.menu"]
+        arguments: ["@doctrine.orm.entity_manager", "%positibe.menu_node.class%"]
         tags:
             - { name: sylius.factory ,alias: positibe.factory.menu}
