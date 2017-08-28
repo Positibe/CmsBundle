@@ -31,9 +31,7 @@ use Symfony\Cmf\Component\RoutingAuto\Model\AutoRouteInterface;
  * @ORM\Entity(repositoryClass="Positibe\Bundle\CmsBundle\Repository\PageRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\EntityListeners({"Positibe\Bundle\CmfRoutingExtraBundle\EventListener\RoutingAutoEntityListener"})
- * @ORM\HasLifecycleCallbacks
  * @Gedmo\TranslationEntity(class="Positibe\Bundle\CmsBundle\Entity\PageTranslation")
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  *
  * @author Pedro Carlos Abreu <pcabreus@gmail.com>
  */

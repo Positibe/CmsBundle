@@ -55,7 +55,7 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
      *
      * @ORM\Column(name="template_position", type="string", length=255, nullable=TRUE)
      */
-    private $templatePosition;
+    protected $templatePosition;
 
     /**
      * @var boolean
@@ -147,9 +147,16 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
      */
     protected $routes;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="host", type="string", length=255, nullable=TRUE)
+     */
+    protected $host;
+
     public function __construct()
     {
-        $this->settings = array();
+        $this->settings = [];
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
@@ -563,5 +570,21 @@ class Block implements BlockInterface, PublishableInterface, PublishTimePeriodIn
     public function setRoutes($routes)
     {
         $this->routes = $routes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * @param string $host
+     */
+    public function setHost($host)
+    {
+        $this->host = $host;
     }
 }

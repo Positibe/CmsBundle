@@ -40,8 +40,7 @@ class BlockRepository extends EntityRepository
         }
         /** @var Request $request */
         if ($request = isset($configuration['request']) ? $configuration['request'] : $request) {
-            $route = $request->get('_route');
-            $stringQuery = 'o.always = :always OR o.routes LIKE :route';
+            $stringQuery = 'o.routes = :route OR o.host = :host';
             if ($content = $request->get('contentDocument')) {
                 $stringQuery .= ' OR pages = :page';
                 $qb->leftJoin('o.pages', 'pages')->setParameter('page', $content);
@@ -52,9 +51,10 @@ class BlockRepository extends EntityRepository
                 }
             }
             $qb
-                ->andWhere($stringQuery)
+                ->andWhere(sprintf('o.always = :always OR (%s)', $stringQuery))
                 ->setParameter('always', true)
-                ->setParameter('route', '%'.$route.'%');
+                ->setParameter('route', $request->get('_route'))
+                ->setParameter('host', $request->getHost());
         }
         $query = $this->getQuery($qb);
 

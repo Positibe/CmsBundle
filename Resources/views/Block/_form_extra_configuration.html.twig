@@ -10,6 +10,7 @@
         {% endif %}
         {{ form_row(form.always, {'attr': {'class': 'form_block_always' }}) }}
         <div class="form_block_visibility">
+            {{ form_row(form.host) }}
             <ul class="nav nav-tabs justify-content-end">
                 <li class="nav-item">
                     <a class="nav-link active" href="#form_visibility_block_tab_category" data-toggle="tab"

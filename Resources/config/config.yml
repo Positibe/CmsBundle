@@ -31,7 +31,14 @@ cmf_seo:
 
 positibe_cms:
     content_class: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category ]
-    entities_with_host: [Positibe\Bundle\CmsBundle\Entity\Page, Positibe\Bundle\CmsBundle\Entity\Category, Positibe\Bundle\CmfRoutingExtraBundle\Entity\AutoRoute]
+    entities_with_host:
+        - Positibe\Bundle\CmsBundle\Entity\Page
+        - Positibe\Bundle\CmsBundle\Entity\Category
+        - Positibe\Bundle\CmfRoutingExtraBundle\Entity\AutoRoute
+        - Positibe\Bundle\CmsBundle\Entity\ContentBlock
+        - Positibe\Bundle\CmsBundle\Entity\GalleryBlock
+        - Positibe\Bundle\CmsBundle\Entity\MenuBlock
+        - Positibe\Bundle\CmsBundle\Entity\PageBlock
 
 cmf_routing:
     dynamic:

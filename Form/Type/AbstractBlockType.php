@@ -10,11 +10,17 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use AppBundle\Entity\User;
 use Positibe\Bundle\CmsBundle\Entity\Block;
+use Positibe\Bundle\CmsBundle\Website\WebsiteSessionManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * Class AbstractBlockType
@@ -24,9 +30,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class AbstractBlockType extends AbstractType
 {
+    /** @var  TokenStorage */
+    protected $tokenStorage;
+    /** @var  Session */
+    protected $session;
     protected $templatePositions;
     protected $publicRoutes;
     protected $roles;
+
+    public function __construct(TokenStorage $tokenStorage, Session $session)
+    {
+        $this->tokenStorage = $tokenStorage;
+        $this->session = $session;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,7 +51,7 @@ class AbstractBlockType extends AbstractType
                 'name',
                 null,
                 array(
-                    'label' => 'abstract_block.form.name_label'
+                    'label' => 'abstract_block.form.name_label',
                 )
             )
             ->add(
@@ -129,6 +145,38 @@ class AbstractBlockType extends AbstractType
                     'required' => false,
                 )
             );
+        }
+
+        /** @var User $user */
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (method_exists($user, 'getWebsites')) {
+            $websites = [];
+            foreach ($user->getWebsites() as $website) {
+                if ($website->isEnabled()) {
+                    $websites[$website->getDomain()] = $website->getDomain();
+                }
+            }
+
+            if (count($websites) > 0) {
+                $builder->add(
+                    'host',
+                    ChoiceType::class,
+                    [
+                        'choices' => $websites,
+                        'required' => false,
+                        'label' => 'form.host.host_label',
+                    ]
+                );
+
+                $builder->addEventListener(
+                    FormEvents::PRE_SET_DATA,
+                    function (FormEvent $event) {
+                        if (!$event->getData()->getHost()) {
+                            $event->getData()->setHost($this->session->get(WebsiteSessionManager::WEBSITE_KEY));
+                        }
+                    }
+                );
+            }
         }
     }
 

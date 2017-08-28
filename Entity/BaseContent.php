@@ -43,7 +43,6 @@ class BaseContent implements
 {
     use StatePublishableTrait;
     use PublishTimePeriodTrait;
-    use SeoAwareEntityTrait;
 
     /**
      * @var string
@@ -83,6 +82,14 @@ class BaseContent implements
      *
      */
     protected $routes;
+
+    /**
+     * @var SeoMetadata
+     *
+     * @ORM\ManyToOne(targetEntity="Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadata", cascade={"persist", "remove"})
+     */
+    protected $seoMetadata;
+
 
     public function __construct()
     {
@@ -214,5 +221,24 @@ class BaseContent implements
     public function hasRoutes()
     {
         return count($this->routes) > 0;
+    }
+
+    /**
+     * @return SeoMetadata
+     */
+    public function getSeoMetadata()
+    {
+        return $this->seoMetadata;
+    }
+
+    /**
+     * @param $metadata
+     * @return $this
+     */
+    public function setSeoMetadata($metadata)
+    {
+        $this->seoMetadata = $metadata;
+
+        return $this;
     }
 } 

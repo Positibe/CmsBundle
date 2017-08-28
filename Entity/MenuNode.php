@@ -61,6 +61,8 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
 
         if ($this->content instanceof Page) {
             $this->page = $content;
+        } else {
+            $this->page = null;
         }
     }
 

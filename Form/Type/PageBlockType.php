@@ -31,6 +31,14 @@ class PageBlockType extends AbstractType
     {
         $builder
             ->add(
+                'title',
+                null,
+                array(
+                    'label' => 'content_block.form.title_label',
+                    'required' => false,
+                )
+            )
+            ->add(
                 'page',
                 EntityType::class,
                 array(

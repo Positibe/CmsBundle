@@ -74,24 +74,14 @@ class ContentBlockType extends AbstractType
                     'label' => 'content_block.form.locale_label',
                     'choices' => array_combine($this->locales, $this->locales),
                 )
-            )
-            ->add(
-                'media',
-                MediaType::class,
-                array(
-                    'provider' => MediaProvider::MEDIA_PROVIDER,
-                    'required' => false,
-                    'label' => 'content_block.form.media_label',
-                )
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\ContentBlock'
+                'data_class' => 'Positibe\Bundle\CmsBundle\Entity\ContentBlock',
             )
         );
     }

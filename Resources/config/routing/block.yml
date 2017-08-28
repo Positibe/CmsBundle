@@ -8,6 +8,9 @@ positibe_block_index:
             sortable: true
             sorting:
                 position: asc
+            criteria:
+                host: "expr:service('session').has('active_website') ? [service('session').get('active_website')] : service('security.token_storage').getToken().getUser().getHosts()"
+
 
 positibe_block_delete:
     path: /blocks/delete/{id}

@@ -50,12 +50,13 @@ services:
 
     positibe_menu.menu_node_form_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\MenuNodeType
-        arguments: ["%positibe.menu_node.class%", "%locales%"]
+        arguments: ["@doctrine.orm.entity_manager", "%positibe.menu_node.class%", "%locales%"]
         tags:
           - { name: form.type }
 
     positibe_cms.form.block_type:
         class: Positibe\Bundle\CmsBundle\Form\Type\AbstractBlockType
+        arguments: ["@security.token_storage", "@session"]
         tags:
             - {name: form.type }
 

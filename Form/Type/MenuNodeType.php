@@ -10,7 +10,10 @@
 
 namespace Positibe\Bundle\CmsBundle\Form\Type;
 
+use Doctrine\ORM\EntityManager;
+use Positibe\Bundle\CmsBundle\Entity\Category;
 use Positibe\Bundle\CmsBundle\Entity\MenuNode;
+use Positibe\Bundle\CmsBundle\Entity\Page;
 use Positibe\Bundle\CmsBundle\Form\DataTransformer\ContentIdDataTransformer;
 use Positibe\Bundle\MenuBundle\Menu\Factory\ContentAwareFactory;
 use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
@@ -33,9 +36,11 @@ class MenuNodeType extends AbstractType
     private $publicRoutes;
     private $contentClass;
     private $menuNodeClass;
+    protected $em;
 
-    public function __construct($menuNodeClass, $locales)
+    public function __construct(EntityManager $entityManager, $menuNodeClass, $locales)
     {
+        $this->em = $entityManager;
         $this->menuNodeClass = $menuNodeClass;
         $this->locales = $locales;
     }
@@ -187,30 +192,33 @@ class MenuNodeType extends AbstractType
                     'label' => 'menu_node.form.children_attributes_label',
                 )
             )
-            ->add('position', null, ['label' => 'menu_node.form.position_label', 'required' => false]);
-
-        $builder->add(
-            'contentId',
-            null,
-            array(
-                'required' => false,
-                'label' => 'menu_node.form.content_label',
-            )
-        );
+            ->add('position', null, ['label' => 'menu_node.form.position_label', 'required' => false])
+            ->add(
+                'contentId',
+                null,
+                array(
+                    'required' => false,
+                    'label' => 'menu_node.form.content_label',
+                )
+            );
 
         $builder->get('contentId')->addModelTransformer(new ContentIdDataTransformer());
 
+        $em = $this->em;
         $builder->addEventListener(
             FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
+            function (FormEvent $event) use ($em) {
                 /** @var MenuNode $menu */
                 $menu = $event->getData();
                 if ($menu->getLinkType() === ContentAwareFactory::LINK_TYPE_CONTENT) {
-                    $menu->setContentId(
-                        $event->getForm()->get('contentClass')->getData().':'.$event->getForm()->get(
-                            'contentId'
-                        )->getData()
-                    );
+                    $class = $event->getForm()->get('contentClass')->getData();
+                    $id = $event->getForm()->get('contentId')->getData();
+                    $menu->setContentId($class.':'.$id);
+                    if ($class === Page::class || $class === Category::class) {
+                        $menu->setPage($em->getRepository($class)->find($id));
+                    } else {
+                        $menu->setPage(null);
+                    }
                 }
 
 

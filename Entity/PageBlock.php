@@ -24,6 +24,13 @@ use Doctrine\ORM\Mapping as ORM;
 class PageBlock extends Block
 {
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=TRUE)
+     */
+    private $title;
+
+    /**
      * @var Page
      *
      * @ORM\ManyToOne(targetEntity="Positibe\Bundle\CmsBundle\Entity\Page")
@@ -50,5 +57,21 @@ class PageBlock extends Block
     public function setPage($page)
     {
         $this->page = $page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 } 
