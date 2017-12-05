@@ -41,6 +41,7 @@ class MenuNode extends MenuNodeBase implements ResourceInterface
     /**
      * @var MenuNode[]|Collection
      *
+     * @ORM\OrderBy({"position": "ASC"})
      * @ORM\OneToMany(targetEntity="MenuNode", mappedBy="parent", cascade={"persist"}, orphanRemoval=TRUE, fetch="EXTRA_LAZY")
      */
     protected $children;

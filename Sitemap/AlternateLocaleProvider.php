@@ -56,6 +56,7 @@ class AlternateLocaleProvider implements AlternateLocaleProviderInterface
 
         $currentLocale = $content->getLocale() ?: $this->requestStack->getMasterRequest()->getLocale();
         /** @var AutoRoute $route */
+        /* @todo Ver como no ejecutar este script en cada request
         foreach ($content->getRoutes() as $route) {
             if ($route->getLocale() === $currentLocale) {
                 continue;
@@ -71,7 +72,7 @@ class AlternateLocaleProvider implements AlternateLocaleProviderInterface
                     $route->getLocale()
                 )
             );
-        }
+        }*/
 
         return $alternateLocaleCollection;
     }

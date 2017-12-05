@@ -35,6 +35,9 @@ positibe_admin_content_block:
 positibe_admin_page_block:
     resource: "@PositibeCmsBundle/Resources/config/routing/page_block.yml"
 
+positibe_admin_multimedia:
+    resource: "@PositibeMediaBundle/Resources/config/multimedia_routing.yml"
+
 positibe_website:
     resource: "@PositibeCmsBundle/Resources/config/routing/website.yml"
 

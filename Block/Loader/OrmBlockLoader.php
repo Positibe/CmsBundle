@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
  */
 class OrmBlockLoader implements BlockLoaderInterface
 {
-    protected $em;   
+    protected $em;
     protected $authorizationChecker;
     protected $authorizationSecurityChecker;
     protected $requestStack;
@@ -122,7 +122,10 @@ class OrmBlockLoader implements BlockLoaderInterface
      */
     public function findBlockByTemplatePosition($configuration)
     {
-        $blocks = $this->getRepository()->findByTemplatePosition($configuration, $this->requestStack->getMasterRequest());
+        if (!isset($configuration['request'])) {
+            $configuration['request'] = $this->requestStack->getMasterRequest();
+        }
+        $blocks = $this->getRepository()->findByTemplatePosition($configuration);
 
         if (isset($configuration['multiple']) && $configuration['multiple']) {
             $containerBlock = new ContainerBlock();
@@ -151,7 +154,6 @@ class OrmBlockLoader implements BlockLoaderInterface
 
         //There is not Block for the template_position '%s' published"
         return null;
-
     }
 
     /**

@@ -146,6 +146,7 @@ class BaseContentType extends AbstractType
                         'choices' => $websites,
                         'required' => false,
                         'label' => 'form.host.host_label',
+                        'attr' => ['class' => 'content_host']
                     ]
                 );
 

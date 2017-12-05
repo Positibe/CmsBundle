@@ -44,12 +44,19 @@ class MenuController extends Controller
 
         $metadata = $this->get('doctrine.orm.entity_manager')->getClassMetadata($contentClass);
         if ($metadata->hasField('host')) {
-            $host = $this->get('session')->get('active_website');
+            $host = $this->get('session')->get('active_website') ?: $request->get('host', null);
             $queryBuilderCallback = function (EntityRepository $er) use ($host) {
-                return $er->createQueryBuilder('o')->where('o.host = :host')->setParameter(
-                    'host',
-                    $host
-                );
+                $qbCallback = $er->createQueryBuilder('o');
+                if($host) {
+                    $qbCallback->where('o.host = :host')->setParameter(
+                        'host',
+                        $host
+                    );
+                }else {
+                    $qbCallback->where('o.host IS NULL');
+                }
+
+                return ;
             };
         }
         $form = $this->createForm(

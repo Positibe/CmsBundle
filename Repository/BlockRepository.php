@@ -26,7 +26,7 @@ class BlockRepository extends EntityRepository
 {
     use LocaleRepositoryTrait;
 
-    public function findByTemplatePosition($configuration, Request $request = null)
+    public function findByTemplatePosition($configuration)
     {
         $qb = $this->createQueryBuilder('o')
             ->orderBy('o.position', 'ASC')
@@ -38,8 +38,9 @@ class BlockRepository extends EntityRepository
                 $configuration['template_position']
             );
         }
-        /** @var Request $request */
-        if ($request = isset($configuration['request']) ? $configuration['request'] : $request) {
+        if (isset($configuration['request'])) {
+            /** @var Request $request */
+            $request = $configuration['request'];
             $stringQuery = 'o.routes = :route OR o.host = :host';
             if ($content = $request->get('contentDocument')) {
                 $stringQuery .= ' OR pages = :page';

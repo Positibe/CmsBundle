@@ -15,7 +15,6 @@ use Pcabreus\Utils\Html\NamedCharacterConverter;
 use Positibe\Bundle\CmfRoutingExtraBundle\Entity\AutoRoute;
 use Positibe\Component\Publishable\Entity\PublishTimePeriodTrait;
 use Positibe\Component\Publishable\Entity\StatePublishableTrait;
-use Positibe\Component\Seo\Entity\SeoAwareEntityTrait;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
@@ -67,6 +66,22 @@ class BaseContent implements
      * @ORM\Column(name="body", type="text", nullable=TRUE)
      */
     protected $body;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    protected $updatedAt;
 
     /**
      * @var string
@@ -240,5 +255,37 @@ class BaseContent implements
         $this->seoMetadata = $metadata;
 
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 } 

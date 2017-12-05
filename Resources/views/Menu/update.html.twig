@@ -12,7 +12,7 @@
         <a href="{{ path('positibe_menu_index') }}">Menús</a>
     </li>
     <li class="breadcrumb-item">
-        {{ menu.label | default(menu.name) }}
+        <a href="{{ path('positibe_submenu_index', {'parent': menu.name}) }}">{{ menu.label | default(menu.name) }}</a>
     </li>
 {% endblock %}
 
