@@ -56,7 +56,7 @@ class MenuController extends Controller
                     $qbCallback->where('o.host IS NULL');
                 }
 
-                return ;
+                return $qbCallback;
             };
         }
         $form = $this->createForm(
