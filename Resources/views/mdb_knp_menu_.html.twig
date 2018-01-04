@@ -1,0 +1,117 @@
+{% extends 'knp_menu_base.html.twig' %}
+
+{% macro attributes(attributes) %}
+    {% for name, value in attributes %}
+        {%- if value is not none and value is not same as(false) -%}
+            {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% block compressed_root %}
+    {% spaceless %}
+        {{ block('root') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('list') -}}
+{% endblock %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% import _self as knp_menu %}
+        <ul{{ knp_menu.attributes(listAttributes) }}>
+            {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block list_level_2 %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% import _self as knp_menu %}
+        <div class="dropdown-menu dropdown-primary">
+            {% set currentItem = item %}
+            {% for item in currentItem.children %}
+                {% set linkClasses = 'dropdown-item' %}
+                {{ block('linkElement') }}
+
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {# save current variables #}
+    {% set currentOptions = options %}
+    {% set currentItem = item %}
+    {# update the depth for children #}
+    {% if options.depth is not none %}
+        {% set options = options|merge({'depth': currentOptions.depth - 1}) %}
+    {% endif %}
+    {# update the matchingDepth for children #}
+    {% if options.matchingDepth is not none and options.matchingDepth > 0 %}
+        {% set options = options|merge({'matchingDepth': currentOptions.matchingDepth - 1}) %}
+    {% endif %}
+    {% for item in currentItem.children %}
+        {{ block('item') }}
+    {% endfor %}
+    {# restore current variables #}
+    {% set item = currentItem %}
+    {% set options = currentOptions %}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {# @pcabreus cleaned all unnecesary functions  #}
+        {% set classes = 'nav-item' %}
+        {%- if matcher.isCurrent(item) %}
+            {%- set classes = classes ~ ' ' ~ options.currentClass %}
+        {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+            {%- set classes = classes ~ ' ' ~ options.ancestorClass %}
+        {%- endif %}
+
+        {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
+        {% if item.hasChildren and options.depth is not same as(0) %}
+            {% if item.displayChildren %}
+                {%- set classes = classes  ~ ' btn-group dropdown' %}
+            {% endif %}
+        {% elseif options.leaf_class is not empty %}
+            {%- set classes = classes ~ ' ' ~ options.leaf_class %}
+        {%- endif %}
+
+        {# displaying the item #}
+        {% import _self as knp_menu %}
+        <li class="{{ classes }}">
+            {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+                {% set linkClasses = item.linkAttributes['class'] is defined ? item.linkAttributes['class'] ~ ' nav-link' : ' nav-link' %}
+                {% set linkAttributes = item.linkAttributes|merge({'class': linkClasses}) %}
+                {{ block('linkElement') }}
+            {%- else %}
+                {{ block('spanElement') }}
+            {%- endif %}
+            {# render the list of children#}
+            {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+            {%- set childrenClasses = childrenClasses|merge(['menu_level_' ~ item.level]) %}
+            {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+            {{ block('list_level_2') }}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import _self as knp_menu %}
+    <a href="{{ item.uri }}" class="{{ linkClasses }}" {% if item.hasChildren %}data-toggle="dropdown" role="button"
+       aria-expanded="false"{% endif %}>
+        {% if item.extras['iconClass'] is defined and item.extras['iconClass'] is not null %}<i
+            class="{{ item.extras['iconClass'] }}"></i> {% endif %} {{ block('label') }} {% if item.hasChildren %}<span
+                class="caret"></span>{% endif %}
+    </a>
+{% endblock %}
+
+{% block spanElement %}{% import _self as knp_menu %}
+    <span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('label') }}</span>{% endblock %}
+
+{% block label %}{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|raw }}{% else %}{{ item.label }}{% endif %}{% endblock %}
+

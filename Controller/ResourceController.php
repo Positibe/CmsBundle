@@ -156,4 +156,19 @@ class ResourceController extends SyliusResourceController
         return $this->redirectHandler->redirectToResource($configuration, $resource);
     }
 
+    public function deleteMultipleAction(Request $request)
+    {
+        $resources = $request->get('app_comment_delete_multiple');
+
+        $repository = $this->getDoctrine()->getRepository($this->metadata->getClass('model'));
+        $manager = $this->getDoctrine()->getManager();
+        foreach ($resources as $id) {
+            if ($resource = $repository->find($id)) {
+                $manager->remove($resource);
+            }
+        }
+        $manager->flush();
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
 } 
