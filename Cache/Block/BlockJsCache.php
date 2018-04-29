@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
+
 /**
- * Cache a block through Javascript code
+ * Cache a block through Javascript code.
  */
 class BlockJsCache implements CacheAdapterInterface
 {
@@ -81,11 +82,13 @@ class BlockJsCache implements CacheAdapterInterface
      * @throws \RuntimeException
      *
      * @param array $keys
-     *
-     * @return void
      */
     private function validateKeys(array $keys)
     {
+        if (isset($keys['type'])) {
+            return;
+        }
+
         foreach (array('block_id', 'updated_at') as $key) {
             if (!isset($keys[$key])) {
                 throw new \RuntimeException(sprintf('Please define a `%s` key', $key));
@@ -100,11 +103,11 @@ class BlockJsCache implements CacheAdapterInterface
      */
     protected function getSync(array $keys)
     {
-        $dashifiedId = $this->dashify($keys['block_id']);
+        $dashifiedId = $this->dashify(isset($keys['type']) ? $keys['type'] : $keys['block_id']);
 
         return sprintf(
-            <<<CONTENT
-            <div id="block%s" >
+            <<<'CONTENT'
+<div id="block%s" >
     <script type="text/javascript">
         /*<![CDATA[*/
             (function () {
@@ -149,14 +152,15 @@ CONTENT
     }
 
     /**
-     * @param  array $keys
+     * @param array $keys
+     *
      * @return string
      */
     protected function getAsync(array $keys)
     {
         return sprintf(
-            <<<CONTENT
-            <div id="block%s" >
+            <<<'CONTENT'
+<div id="block%s" >
     <script type="text/javascript">
         /*<![CDATA[*/
 
@@ -196,7 +200,11 @@ CONTENT
      */
     public function cacheAction(Request $request)
     {
-        $block = $this->blockLoader->load(array('name' => $request->get('block_id'), 'type' => $request->get('type')));
+        if ($request->query->has('type')) {
+            $block = $this->blockLoader->load(['type' => $request->query->get('type')]);
+        } else {
+            $block = $this->blockLoader->load(array('name' => $request->get('block_id')));
+        }
 
         if (!$block) {
             return new Response('', 404);
@@ -212,11 +220,6 @@ CONTENT
                 )
             );
         }
-        //Set the original request when is cached
-        $requestUri = explode('http://' . $request->server->get('HTTP_HOST'), $request->server->get('HTTP_REFERER'));
-        if (count($requestUri) > 1) {
-            $request->attributes->set('_fromRequestUri', $requestUri[1]);
-        }
 
         $response = $this->blockRenderer->render(
             $this->blockContextManager->get($block, $settings)
@@ -229,8 +232,8 @@ CONTENT
 
         $response->setContent(
             sprintf(
-                <<<JS
-                    (function () {
+                <<<'JS'
+    (function () {
         var block = document.getElementById('block%s'),
             div = document.createElement("div"),
             parentNode = block.parentNode,
@@ -252,7 +255,7 @@ CONTENT
     })();
 JS
                 ,
-                $this->dashify($block->getName()),
+                $this->dashify($block->getId()),
                 json_encode($response->getContent())
             )
         );
