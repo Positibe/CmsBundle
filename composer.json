@@ -10,7 +10,7 @@
     ],
     "homepage": "http://positibelabs.com/bundles/cms",
     "license": "MIT",
-    "version": "1.0.4",
+    "version": "1.0.3",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -29,7 +29,6 @@
         "positibe/menu-bundle": "^1.0",
         "positibe/media-bundle": "^1.0",
         "positibe/cmf-routing-extra-bundle": "^1.0",
-        "positibe/seo": "~0.1",
         "symfony-cmf/seo-bundle": "^2.0",
         "symfony/options-resolver": "^3.0",
         "sonata-project/block-bundle": "^3.1.1",
