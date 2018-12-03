@@ -24,12 +24,12 @@
     ],
     "require": {
         "symfony/framework-bundle": "^3.4||^4.0",
+        "symfony/options-resolver": "^3.4||^4.0",
         "positibe/filter-bundle": "^1.1",
         "positibe/menu-bundle": "^1.1",
         "positibe/media-bundle": "^1.1",
         "positibe/cmf-routing-extra-bundle": "^1.1",
         "symfony-cmf/seo-bundle": "^2.0",
-        "symfony/options-resolver": "^3.0",
         "sonata-project/block-bundle": "^3.1.1",
         "lunetics/locale-bundle": "^2.5"
     },
