@@ -11,7 +11,7 @@
 namespace Positibe\Bundle\CmsBundle\Repository;
 
 use Positibe\Bundle\CmsBundle\Entity\Page;
-use Positibe\Bundle\CoreBundle\Repository\LocaleRepositoryTrait;
+use Positibe\Bundle\CmsBundle\Repository\LocaleRepositoryTrait;
 use Positibe\Bundle\CoreBundle\Repository\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 

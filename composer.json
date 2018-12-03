@@ -10,7 +10,7 @@
     ],
     "homepage": "http://positibelabs.com/bundles/cms",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.1.0",
     "authors": [
         {
             "name": "Pedro Carlos Abreu Jiménez",
@@ -23,12 +23,11 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "~2.8|~3.0",
-        "symfony/assetic-bundle": "^2.8",
-        "positibe/core-bundle": "^1.0",
-        "positibe/menu-bundle": "^1.0",
-        "positibe/media-bundle": "^1.0",
-        "positibe/cmf-routing-extra-bundle": "^1.0",
+        "symfony/framework-bundle": "^3.4||^4.0",
+        "positibe/filter-bundle": "^1.1",
+        "positibe/menu-bundle": "^1.1",
+        "positibe/media-bundle": "^1.1",
+        "positibe/cmf-routing-extra-bundle": "^1.1",
         "symfony-cmf/seo-bundle": "^2.0",
         "symfony/options-resolver": "^3.0",
         "sonata-project/block-bundle": "^3.1.1",

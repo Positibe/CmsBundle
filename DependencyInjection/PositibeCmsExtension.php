@@ -54,6 +54,19 @@ class PositibeCmsExtension extends Extension
             )
         );
 
+        if(isset($bundles['LuneticsLocalebundle']))
+        {
+            $this->addClassesToCompile(array(
+                'Lunetics\\LocaleBundle\\EventListener\\LocaleListener',
+                'Lunetics\\LocaleBundle\\LocaleGuesser\\LocaleGuesserManager',
+                'Lunetics\\LocaleBundle\\Matcher\\DefaultBestLocaleMatcher',
+                'Lunetics\\LocaleBundle\\EventListener\\LocaleUpdateListener',
+                'Lunetics\\LocaleBundle\\Cookie\\LocaleCookie',
+                'Lunetics\\LocaleBundle\\Session\\LocaleSession',
+                'Stof\\DoctrineExtensionsBundle\\EventListener\\LocaleListener',
+                'Positibe\\Bundle\\CoreBundle\\EventListener\\LocaleListener',
+            ));
+        }
 
     }
 }
