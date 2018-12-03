@@ -31,8 +31,7 @@
         "symfony-cmf/seo-bundle": "^2.0",
         "symfony/options-resolver": "^3.0",
         "sonata-project/block-bundle": "^3.1.1",
-        "lunetics/locale-bundle": "^2.5",
-        "helios-ag/fm-elfinder-bundle": "~6"
+        "lunetics/locale-bundle": "^2.5"
     },
     "config": {
         "component-dir": "public/assets"
